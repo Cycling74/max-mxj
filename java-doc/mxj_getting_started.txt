@@ -1,0 +1,114 @@
+GETTING STARTED WITH MXJ                    2004.06.30
+------- ------- ---- ---
+
+The aim of this document is to get you up and running
+with mxj as quickly as possible.  Instructions for 
+Windows XP and Mac OS X are in separate sections below,
+followed by some general comments that apply to both 
+platforms.
+
+
+WINDOWS XP
+
+By default, Windows XP does not have a version of the 
+Java Virtual Machine (JVM) installed.  As of the writing
+of this document the most recent version of the JVM can
+be downloaded from this link:
+
+http://java.sun.com/j2se/1.4.2/download.html
+
+Max 4.5 features a new directory called "java" which is 
+installed at Cycling '74\java.  We'll talk more about its 
+contents below.
+
+
+
+OS X 
+
+To ensure that you have the most up-to-date version of 
+the Java Virtual Machine (JVM) installed, we recommend 
+running Software Update from the System Preferences window.
+If no Java update is offered, you have the most up-to-date
+version that is compatible with your OS.  mxj supports 
+both Mac OS 10.2.x and 10.3.x.
+
+Max 4.5 features a new directory called "java" which is 
+installed at Cycling '74/java.  We'll talk more about its 
+contents below.
+
+
+
+GENERAL COMMENTS FOR BOTH PLATFORMS
+
+Inside the java directory you'll find the following 
+important subdirectories and files:
+
+classes - this directory contains the source code 
+and class files for the mxj-compatible Java classes.
+A list of the classes provided is at the end of this
+document.
+
+help - this directory contains the help files that 
+are associated with the mxj-compatible Java classes. 
+Exploring these patches is a good, quick way to see how 
+mxj extends the Max universe.
+
+lib - this directory contains the code libraries 
+that mxj uses to bridge the worlds of Max and Java.  
+
+max.java.config.txt - this file allows specification of
+Java's classpath.  The Java classpath is a concept roughly 
+analogous to the Max search path - by including a directory 
+foo in the classpath the mxj object will be able to find 
+and load the class files within foo.
+
+
+In your Max application directory there is a subdirectory
+called java-doc.  It has three subfolders:
+
+java-doc/tutorial - the tutorial leads you step-by-step 
+through the process of creating your first Java class to 
+the application of advanced mxj programming techniques.  
+The tutorial is in html format.  Click on index.html to start.
+
+java-doc/api - this directory contains html files that describe 
+mxj's Application Programming Interface (API).  These pages
+will serve as an invaluable resource when you are coding
+your own Java classes.
+
+java-doc/ide - this directory contains some example projects
+for some of the Integrated Development Environments (IDEs)
+we think you may want to use to create Java classes.
+
+
+EXAMPLE CLASSES
+
+buf.op - buffer~ operations
+classpath - reports mxj's current classpath
+echo - super midi echo
+fibonacci - arbitrary precision arithmetic
+Flies - implementation of a 3D swarming algorithm
+gaussian - random number generator with a gaussian distribution
+GMDrums - internal general midi triggering
+hotbits - "real" random numbers culled from a web source
+jseditlauncher - helper for editing .js files in java editor
+keep - simple data propogation across patching sessions
+list.* - set of list operators.  no 256 element limit
+maxversion - reports version of max application in use
+MetroSeq - bang generator with user-settable non-uniform periods
+MorseGen - morse code generator
+net.domain - given IP address reports domain name
+net.ip - given domain name reports IP address
+net.local - report information about your computer's active IP addresses
+net.mail.send/recv - send and receive email
+net.maxhole - simple max networking
+net.multi.send/recv - send and receive multicast packets
+net.tcp.send/recv - send and receive tcp packets
+net.udp.send/recv - send and receive udp packets
+now - detailed date and time
+plinko - random bang routing
+quickie - helper for in-Max editing
+sbuf - string manipulation
+SpeakTest - mapping text to sound
+StockWatch - a stock ticker
+WhichThread - thread identification

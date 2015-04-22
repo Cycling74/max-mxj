@@ -1,0 +1,141 @@
+<html>
+<head>
+<title>Tutorial05</title>
+</head>
+<body bgcolor=#F7F7F7 link=#000000 vlink=#000000>
+<table><tr><td><a href="index.html"><img src="images/mxj_smallest.jpg" border=0></a><br></td></tr></table>
+<table border=0 width=100%>
+<tr>
+<td bgcolor=#DCAF6A width=30% valign=bottom>
+<font size=+3 face="Times"><b>Tutorial05</b></font>
+</td>
+<td bgcolor=#EBCDB1 width=70% align=right><font size=+1 face="Times">
+
+Plus2 - Atom methods and Instantiation arguments
+</font>
+</td>
+</tr>
+</table>
+</p>
+<font face="Times">
+
+<p>
+<b>Plus1</b> has the basic behaviour of Max's built-in plus (+) object, 
+but there are several differences.  To truly duplicate the functionality 
+of the built-in plus object our class must have the ability to accept an 
+instantiation argument that sets the addend.  Also, our class has to 
+operate both in integer and floating-point modes: if there is an 
+instantiation argument and it is a float, the object should operate in 
+floating-point mode.  Otherwise it should operate in integer mode and 
+truncate any incoming floats.  If this functionality doesn't sound 
+familiar, open up the help file for the + object and play with it for a 
+minute before you read the code below.
+</p>
+<blockquote><code><pre>
+import com.cycling74.max.*;
+
+public class Plus2 extends MaxObject {
+
+	private Atom addend = Atom.newAtom(0);
+	
+	public Plus2(Atom[] args) {
+		declareIO(2,1);
+		if (args.length > 0) {
+			if (args[0].isInt() || args[0].isFloat()) {
+				addend = args[0];
+			}
+		} 
+	}
+	
+	public void inlet(int i) {
+		if (getInlet() == 0) {
+			if (addend.isInt()) {
+				outlet(0, i + addend.getInt());
+			} else {
+				outlet(0, (float)i + addend.getFloat());
+			}
+		} else {
+			if (addend.isInt()) {
+				addend = Atom.newAtom(i);
+			} else {
+				addend = Atom.newAtom((float)i);
+			}
+		}
+	}
+	
+	public void inlet(float f) {
+		if (getInlet() == 0) {
+			if (addend.isInt()) {
+				outlet(0, (int)f + addend.getInt());
+			} else {
+				outlet(0, f + addend.getFloat());
+			}
+		} else {
+			if (addend.isInt()) {
+				addend = Atom.newAtom((int)f);
+			} else {
+				addend = Atom.newAtom(f);
+			}
+		}
+	}
+}</pre></code></blockquote>
+
+<p>
+The first change to note is that the <font face="Courier" size=-1>addend</font> variable used to be an <font face="Courier" size=-1>int</font> 
+and is now an <b>Atom</b>.  We use an <b>Atom</b> because it can represent either an 
+integer or a floating-point number, which will be convenient for the dual-mode 
+operation of this object.  Unlike classes which allow you to create instances 
+of the class by calling a constructor method directly, the <b>Atom</b> class requires 
+that you call one of the <font face="Courier">Atom.newAtom</font> <b>factory</b> methods provided by the API.  
+The <font face="Courier">Atom.newAtom(int)</font> method is used to initialize <font face="Courier" size=-1>addend</font> to represent 
+the integer 0 by default.  
+</p><p>
+The next change to note is that constructor method takes an array of 
+<b>Atom</b>s as an argument.  Any instantiation arguments appended after the classname 
+in the Max object box will be passed to this constructor as an array of <b>Atom</b>s.  
+So if a user creates a new object box in Max and types "mxj Plus2 74", the 
+<font face="Courier" size=-1>args</font> array would contain a single integer <b>Atom</b> with the value 74.  
+</p><p>
+Note that the method used to declare the inlets and outlets is different: 
+<font face="Courier">declareIO(int, int)</font> takes two integers and creates that many inlets and outlets,
+all of type <font face="Courier" size=-1>DataTypes.ALL</font>.  After declaring these inlets and outlets the 
+<b>Plus2</b> class's constructor method tests to see if the length of the 
+<font face="Courier" size=-1>args</font> array is bigger than 0.  In Java the length of an array can be 
+determined by treating the array like an object and accessing its <font face="Courier" size=-1>length</font> 
+field as we do above.  If no instantiation arguments have been supplied the 
+length of the <font face="Courier" size=-1>args</font> array will be zero and the program flow will exit the constructor 
+method with the default <font face="Courier" size=-1>addend</font> of the integer 0 intact.  
+<p></p>
+However, if there is at least one <b>Atom</b> in the array a further test takes place.   
+The <font face="Courier">isInt()</font> and <font face="Courier">isFloat()</font> methods are used to find out if the first 
+element of <font face="Courier" size=-1>args</font> represents either an integer or floating-point number, and 
+if so this first element is assigned to <font face="Courier" size=-1>addend</font>.
+</p><p>
+Two <font face="Courier">inlet</font> methods are necessary because our class is now able to accept both 
+types of numeric input.  The if-else logic splits the flow of execution according to 
+the inlet that received input.  If a number comes in the right inlet, a new 
+<b>Atom</b> is created and assigned to <font face="Courier" size=-1>addend</font>.  If a number comes in the left 
+inlet, the <font face="Courier">outlet</font> method sends the addition of <font face="Courier" size=-1>addend</font> and the incoming 
+value out the left outlet.  Both <font face="Courier">inlet</font> methods use <font face="Courier">isInt</font> to determine 
+whether <font face="Courier" size=-1>addend</font> represents an integer or a floating-point number, and if 
+neceessary the input is cast to the proper type before addition or storage 
+in <font face="Courier" size=-1>addend</font>.
+</p><p>
+C programmers might find it unusual that a new <b>Atom</b> must be created every time 
+we want to change the value represented by <font face="Courier" size=-1>addend</font>.  The <b>Atom</b> class is 
+<b>immutable</b>, which means that once an instance has been created the value that 
+it represents cannot change.  To learn about the good reasons to design a class to 
+be immutable, we refer you to Joshua Bloch's excellent book 
+<a href="http://java.sun.com/docs/books/effective/">Effective Java</a>.
+</p><p>
+There is still some minor functionality in the built-in plus (+) object that is not 
+in our <b>Plus2</b> class.  If an instance of <b>Plus2</b> receives a bang in the left 
+inlet it should output the last result again, and if it receives a list the object 
+responds as if the second element had been sent in the right inlet and the first 
+element in the left inlet.  To test your understanding you may want to edit the 
+<b>Plus2</b> class to support this missing functionality.
+</p>
+</font>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<html>
+<head>
+<title>quickie</title>
+</head>
+<body bgcolor=#F7F7F7 link=#000000 vlink=#000000>
+<table><tr><td><a href="index.html"><img src="images/mxj_smallest.jpg" border=0></a><br></td></tr></table>
+<table border=0 width=100%>
+<tr>
+<td bgcolor=#DCAF6A width=30% valign=bottom>
+<font size=+3 face="Times"><b>quickie</b></font>
+</td>
+<td bgcolor=#EBCDB1 width=70% align=right><font size=+1 face="Times">
+
+The quickie class and in-Max development
+</font>
+</td>
+</tr>
+</table>
+</p>
+<font face="Times">
+
+<p>
+
+As mentioned in the previous section, sending a "viewsource" message to any
+instance launches an editing environment.  
+
+If the <font face="Courier" size=-1>.java</font> file for 
+the object's peer Java class and the class file are in the same directory, 
+the source code will be loaded into the editor window.  
+One can make changes to the code and save from the editor window's 
+<font face="Courier" size=-1>File:Save</font> menu item.  One can also 
+compile using the <font face="Courier" size=-1>Java:Compile...</font> menu item.  Before compiling the <b>MXJ
+Compile Window</b> presents options for source location, compiler command, 
+build directory, classpath, and compiler options.  The default settings 
+should work using standard installations of Max/MSP and Java.
+If the default path to your Java compiler isn't correct, or you would like 
+to use a different Java compiler, you can use the browse button to choose a 
+new compilation command.  This setting will be remembered until it is changed again, 
+even after exiting the application.
+</p><p>
+In the event that a <font face="Courier" size=-1>.java</font> file can't be found, a dissasembly of the <font face="Courier" size=-1>.class</font> 
+bytecode is attempted.  We currently use the JODE library (http://jode.sourceforge.net)
+to handle decompilation duties.  If the class is decompiled from a <font face="Courier" size=-1>.JAR</font> library, 
+the auto-generated source code must be saved to a new file before compilation.
+</p><p>
+After a successful
+compilation any changes made will only be reflected in subsequent instantiations 
+of the class.  All objects of the class that were 
+instantiated before the class changed will continue to operate as instances of 
+the old class.
+Furthermore, if you have not enabled the 
+<font face="Courier" size=-1>max.classloader.fromdisk</font> option (as explained in <b><a href="Configuring.html">Configuring</a></b>), the
+class file will only reload if an instance of the class receives a "_zap" message.
+Otherwise Max will use the version of the class that it has cached from a 
+previous instantiation.
+If <font face="Courier" size=-1>max.classloader.fromdisk</font> is enabled, every new instance 
+of the class will load the <font face="Courier" size=-1>.class</font> file directly from disk. 
+Although convenient for the developer, this option is by default off 
+because it substantially slows down the creation of new mxj objects.
+</p><p>
+Another nice tool that the in-Max editing environment provides is the Class
+Reference window.  Highlight any class and press command-D if using Mac or ctrl-D
+if using Windows.  The Max Class Reference window that pops up provides
+a breakdown of the class's fields and methods.  
+</p><p>
+Another way to access a class's source is through the <b>quickie</b> class.
+<b>quickie</b> takes as an argument the name of a class.  For instance you might 
+initialize a new Max object as "mxj quickie MyClass".  If you then were to 
+send a bang to or double-click on the newly created object, the editor environment
+would load with the <b>MyClass</b> code.  If <font face="Courier" size=-1>MyClass.java</font> and 
+<font face="Courier" size=-1>MyClass.class</font> cannot be found, the editor opens with a template class.
+This template class is defined by the contents a file called 
+<font face="Courier" size=-1>QUICKIE_PROTO</font> which can be anywhere in Max's search path.
+By default <font face="Courier" size=-1>QUICKIE_PROTO</font> looks like this:</p>
+<blockquote><code><pre>
+import com.cycling74.max.*;
+
+public class MyClass extends MaxObject
+{
+	public MyClass(Atom[] args)
+	{
+		declareInlets(new int[]{DataTypes.ALL});
+		declareOutlets(new int[]{DataTypes.ALL});
+	}
+
+	public void bang()
+	{
+	}
+
+	public void inlet(int i)
+	{
+	}
+
+	public void inlet(float f)
+	{
+	}
+
+	public void list(Atom[] list)
+	{
+	}
+
+}
+</pre></code></blockquote>
+
+</font>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<html>
+<head>
+<title>Tutorial04</title>
+</head>
+<body bgcolor=#F7F7F7 link=#000000 vlink=#000000>
+<table><tr><td><a href="index.html"><img src="images/mxj_smallest.jpg" border=0></a><br></td></tr></table>
+<table border=0 width=100%>
+<tr>
+<td bgcolor=#DCAF6A width=30% valign=bottom>
+<font size=+3 face="Times"><b>Tutorial04</b></font>
+</td>
+<td bgcolor=#EBCDB1 width=70% align=right><font size=+1 face="Times">
+
+Plus1 - Variables and inlet identification
+</font>
+</td>
+</tr>
+</table>
+</p>
+<font face="Times">
+
+<p>
+We'll continue our investigation of Java by creating an example class that 
+has the functionality of the Max plus object (+).  Recall that the plus 
+object has two inlets: the right inlet is used to set the <b>addend</b> 
+and the left inlet to input the primary value and trigger output of 
+the addition.  
+</p>
+<blockquote><code><pre>
+import com.cycling74.max.*;
+
+public class Plus1 extends MaxObject {
+
+	private int addend = 0;
+	
+	public Plus1() {
+		declareInlets(new int[]{DataTypes.INT, DataTypes.INT});
+		declareOutlets(new int[]{DataTypes.INT});
+	}
+	
+	public void inlet(int i) {
+		if (getInlet() == 0) {
+			outlet(0, i+addend);
+		} else {
+			addend = i;
+		}
+	}
+}
+</pre></code></blockquote>
+
+<p>
+After the import statement and the class declaration, the variable <font face="Courier" size=-1>addend</font> 
+is declared as an integer.  The <font face="Courier" size=-1>private</font> keyword means that the variable 
+will not be accessible by code outside of this class.  <font face="Courier" size=-1>addend</font> is an 
+<b>instance variable</b>, which means that each copy of the <b>Plus1</b> class 
+that is created will have its own instance of <font face="Courier" size=-1>addend</font>.  It's also possible 
+to define a variable which is allocated only once and can be accessed by the 
+entire class.  We'll see an example of this type of <b>class variable</b> in a 
+later tutorial, but in this case an instance variable is appropriate since the 
+user probably wants to have different <b>Plus1</b> objects with different addends in 
+different parts of his patch.  Note that <font face="Courier" size=-1>addend</font> is assigned a default value of 0.
+</p><p>
+In the constructor that follows this variable declaration we see for the first time 
+an example of how to change the number of inlets and outlets.  The 
+<font face="Courier">declareInlets</font> and <font face="Courier">declareOutlets</font> methods each take an array of integers as 
+an argument, the size of which determines the number of inlets or outlets, respectively.  
+(In fact the number of outlets will be one greater than the number of items in the 
+integer array that is passed to <font face="Courier">declareOutlets</font>.  This is to accommodate the 
+standard output methods for attributes, a special type of variable that we'll discuss 
+in a later tutorial.)
+</p><p>
+In the example above you'll notice that we're creating new arrays right inside the 
+<font face="Courier">declareInlets</font> and <font face="Courier">declareOutlets</font> method calls.  You'll also notice that 
+the contents of the arrays have been initialized using <font face="Courier" size=-1>DataTypes.INT</font>.  Each 
+inlet and outlet can be associated with a certain type of data, which can help prevent 
+confusion in a patching situation.  For example, if a particular outlet is only going 
+to send integers the developer may want to declare it using <font face="Courier" size=-1>DataTypes.INT</font> so 
+that Max doesn't allow a connection to be made between it and an inlet that only 
+accepts floats.  
+</p><p>
+The <b>DataTypes</b> class defines five different types you can use 
+to declare your inlets and outlets, each of which corresponds to one of the types of 
+messages we examined in the <b>HelloWorld2</b> tutorial: <font face="Courier" size=-1>DataTypes.INT</font> for 
+integers, <font face="Courier" size=-1>DataTypes.FLOAT</font> for floats, <font face="Courier" size=-1>DataTypes.LIST</font> for lists, 
+<font face="Courier" size=-1>DataTypes.MESSAGE</font> for messages, and <font face="Courier" size=-1>DataTypes.ALL</font> for an inlet or outlet 
+that will accept or send any of the different data types.  For most purposes, 
+<font face="Courier" size=-1>DataTypes.ALL</font> is a fine choice, but since <b>Plus1</b> is only designed to work 
+with integers we've used <font face="Courier" size=-1>DataTypes.INT</font>.  In addition to preventing patching errors,
+using integer inlets and outlets allows Max to minimize the overhead associated with sending 
+and receiving integers - in other words, using a type such as <font face="Courier" size=-1>DataTypes.INT</font> 
+is more efficient than using an untyped <font face="Courier" size=-1>DataTypes.ALL</font>, and so should be used
+if possible.
+</p><p>
+Other than the constructor, this class has only a single <font face="Courier">inlet</font> method that handles 
+integers that are input into either of the two inlets.  To determine which inlet has 
+been used the <font face="Courier">getInlet</font> method, which returns the appropriate inlet index, is called.  
+In the above method if the integer is input in the left inlet the addition is sent out the 
+left outlet.  If the right inlet was used the incoming value is stored in <font face="Courier" size=-1>addend</font>.
+</p>
+</font>
+<p>
+<table border=0 width=100%>
+<tr>
+<td bgcolor=#CCCCDD><font size=+1 face="Times"><b>Example:</b></a></td>
+</tr>
+</table>
+
+<p>
+<center>
+<img src="images/Tutorial04.jpg" border=0></center>
+
+</body>
+</html>

@@ -1,0 +1,415 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0F2313A8098ADA43007E8020 /* mxj_props.c in Sources */ = {isa = PBXBuildFile; fileRef = 0F2313A6098ADA43007E8020 /* mxj_props.c */; };
+		0F2313A9098ADA43007E8020 /* mxj_props.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2313A7098ADA43007E8020 /* mxj_props.h */; };
+		0F2313AC098ADA52007E8020 /* mxj_method.c in Sources */ = {isa = PBXBuildFile; fileRef = 0F2313AA098ADA52007E8020 /* mxj_method.c */; };
+		0F2313AD098ADA52007E8020 /* mxj_method.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2313AB098ADA52007E8020 /* mxj_method.h */; };
+		0F2313B0098ADA5D007E8020 /* mxj_methodlist.c in Sources */ = {isa = PBXBuildFile; fileRef = 0F2313AE098ADA5D007E8020 /* mxj_methodlist.c */; };
+		0F2313B1098ADA5D007E8020 /* mxj_methodlist.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2313AF098ADA5D007E8020 /* mxj_methodlist.h */; };
+		0F2313B4098ADA69007E8020 /* mxj_attr.c in Sources */ = {isa = PBXBuildFile; fileRef = 0F2313B2098ADA69007E8020 /* mxj_attr.c */; };
+		0F2313B5098ADA69007E8020 /* mxj_attr.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2313B3098ADA69007E8020 /* mxj_attr.h */; };
+		0F2313B7098ADA75007E8020 /* maxjava.c in Sources */ = {isa = PBXBuildFile; fileRef = 0F2313B6098ADA75007E8020 /* maxjava.c */; };
+		0F2313B9098ADA7E007E8020 /* maxjava.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2313B8098ADA7E007E8020 /* maxjava.h */; };
+		0F2313C0098ADACA007E8020 /* ExceptionUtils.c in Sources */ = {isa = PBXBuildFile; fileRef = 0F2313BE098ADACA007E8020 /* ExceptionUtils.c */; };
+		0F2313C1098ADACA007E8020 /* ExceptionUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2313BF098ADACA007E8020 /* ExceptionUtils.h */; };
+		0F2313C4098ADAD8007E8020 /* Atom.c in Sources */ = {isa = PBXBuildFile; fileRef = 0F2313C2098ADAD8007E8020 /* Atom.c */; };
+		0F2313C5098ADAD8007E8020 /* Atom.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2313C3098ADAD8007E8020 /* Atom.h */; };
+		0F2313D9098ADB42007E8020 /* mxj_box.c in Sources */ = {isa = PBXBuildFile; fileRef = 0F2313D7098ADB42007E8020 /* mxj_box.c */; };
+		0F2313DA098ADB42007E8020 /* mxj_box.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2313D8098ADB42007E8020 /* mxj_box.h */; };
+		0F2313DD098ADB4E007E8020 /* mxj_qelem.c in Sources */ = {isa = PBXBuildFile; fileRef = 0F2313DB098ADB4E007E8020 /* mxj_qelem.c */; };
+		0F2313DE098ADB4E007E8020 /* mxj_qelem.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2313DC098ADB4E007E8020 /* mxj_qelem.h */; };
+		0F2313E1098ADB61007E8020 /* mxj_wind.c in Sources */ = {isa = PBXBuildFile; fileRef = 0F2313DF098ADB61007E8020 /* mxj_wind.c */; };
+		0F2313E2098ADB61007E8020 /* mxj_wind.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2313E0098ADB61007E8020 /* mxj_wind.h */; };
+		0F2313E5098ADB6C007E8020 /* mxj_patcher.c in Sources */ = {isa = PBXBuildFile; fileRef = 0F2313E3098ADB6C007E8020 /* mxj_patcher.c */; };
+		0F2313E6098ADB6C007E8020 /* mxj_patcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2313E4098ADB6C007E8020 /* mxj_patcher.h */; };
+		0F2313E9098ADB8B007E8020 /* mxj_utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 0F2313E7098ADB8B007E8020 /* mxj_utils.c */; };
+		0F2313EA098ADB8B007E8020 /* mxj_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2313E8098ADB8B007E8020 /* mxj_utils.h */; };
+		0F2313ED098ADBAE007E8020 /* mxj_msp_buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 0F2313EB098ADBAE007E8020 /* mxj_msp_buffer.c */; };
+		0F2313EE098ADBAE007E8020 /* mxj_msp_buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2313EC098ADBAE007E8020 /* mxj_msp_buffer.h */; };
+		0F2313F1098ADBCA007E8020 /* mxj_max_system.c in Sources */ = {isa = PBXBuildFile; fileRef = 0F2313EF098ADBCA007E8020 /* mxj_max_system.c */; };
+		0F2313F2098ADBCA007E8020 /* mxj_max_system.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2313F0098ADBCA007E8020 /* mxj_max_system.h */; };
+		0F2313F5098ADBD7007E8020 /* clock_callbacks.c in Sources */ = {isa = PBXBuildFile; fileRef = 0F2313F3098ADBD7007E8020 /* clock_callbacks.c */; };
+		0F2313F6098ADBD7007E8020 /* clock_callbacks.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2313F4098ADBD7007E8020 /* clock_callbacks.h */; };
+		0F2313F9098ADBE4007E8020 /* callbacks.c in Sources */ = {isa = PBXBuildFile; fileRef = 0F2313F7098ADBE4007E8020 /* callbacks.c */; };
+		0F2313FA098ADBE4007E8020 /* callbacks.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2313F8098ADBE4007E8020 /* callbacks.h */; };
+		0F2313FE098ADE42007E8020 /* mxj_macho_prefix.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2313FD098ADE42007E8020 /* mxj_macho_prefix.h */; };
+		0FCF77C2098AF49B006F07A0 /* classes.c in Sources */ = {isa = PBXBuildFile; fileRef = 0FCF77C0098AF49B006F07A0 /* classes.c */; };
+		0FCF77C3098AF49B006F07A0 /* classes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0FCF77C1098AF49B006F07A0 /* classes.h */; };
+		0FCF7846098EE44A006F07A0 /* JavaVM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FCF7845098EE44A006F07A0 /* JavaVM.framework */; };
+		22E076901AE823D0009EC560 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E0768F1AE823D0009EC560 /* MaxAudioAPI.framework */; };
+		8D01CCCE0486CAD60068D4B7 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		0F2313A6098ADA43007E8020 /* mxj_props.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = mxj_props.c; sourceTree = SOURCE_ROOT; };
+		0F2313A7098ADA43007E8020 /* mxj_props.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = mxj_props.h; sourceTree = SOURCE_ROOT; };
+		0F2313AA098ADA52007E8020 /* mxj_method.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = mxj_method.c; sourceTree = SOURCE_ROOT; };
+		0F2313AB098ADA52007E8020 /* mxj_method.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = mxj_method.h; sourceTree = SOURCE_ROOT; };
+		0F2313AE098ADA5D007E8020 /* mxj_methodlist.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = mxj_methodlist.c; sourceTree = SOURCE_ROOT; };
+		0F2313AF098ADA5D007E8020 /* mxj_methodlist.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = mxj_methodlist.h; sourceTree = SOURCE_ROOT; };
+		0F2313B2098ADA69007E8020 /* mxj_attr.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = mxj_attr.c; sourceTree = SOURCE_ROOT; };
+		0F2313B3098ADA69007E8020 /* mxj_attr.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = mxj_attr.h; sourceTree = SOURCE_ROOT; };
+		0F2313B6098ADA75007E8020 /* maxjava.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = maxjava.c; sourceTree = SOURCE_ROOT; };
+		0F2313B8098ADA7E007E8020 /* maxjava.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = maxjava.h; sourceTree = SOURCE_ROOT; };
+		0F2313BE098ADACA007E8020 /* ExceptionUtils.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = ExceptionUtils.c; sourceTree = SOURCE_ROOT; };
+		0F2313BF098ADACA007E8020 /* ExceptionUtils.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ExceptionUtils.h; sourceTree = SOURCE_ROOT; };
+		0F2313C2098ADAD8007E8020 /* Atom.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = Atom.c; sourceTree = SOURCE_ROOT; };
+		0F2313C3098ADAD8007E8020 /* Atom.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Atom.h; sourceTree = SOURCE_ROOT; };
+		0F2313D7098ADB42007E8020 /* mxj_box.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = mxj_box.c; sourceTree = SOURCE_ROOT; };
+		0F2313D8098ADB42007E8020 /* mxj_box.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = mxj_box.h; sourceTree = SOURCE_ROOT; };
+		0F2313DB098ADB4E007E8020 /* mxj_qelem.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = mxj_qelem.c; sourceTree = SOURCE_ROOT; };
+		0F2313DC098ADB4E007E8020 /* mxj_qelem.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = mxj_qelem.h; sourceTree = SOURCE_ROOT; };
+		0F2313DF098ADB61007E8020 /* mxj_wind.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = mxj_wind.c; sourceTree = SOURCE_ROOT; };
+		0F2313E0098ADB61007E8020 /* mxj_wind.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = mxj_wind.h; sourceTree = SOURCE_ROOT; };
+		0F2313E3098ADB6C007E8020 /* mxj_patcher.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = mxj_patcher.c; sourceTree = SOURCE_ROOT; };
+		0F2313E4098ADB6C007E8020 /* mxj_patcher.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = mxj_patcher.h; sourceTree = SOURCE_ROOT; };
+		0F2313E7098ADB8B007E8020 /* mxj_utils.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = mxj_utils.c; sourceTree = SOURCE_ROOT; };
+		0F2313E8098ADB8B007E8020 /* mxj_utils.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = mxj_utils.h; sourceTree = SOURCE_ROOT; };
+		0F2313EB098ADBAE007E8020 /* mxj_msp_buffer.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = mxj_msp_buffer.c; sourceTree = SOURCE_ROOT; };
+		0F2313EC098ADBAE007E8020 /* mxj_msp_buffer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = mxj_msp_buffer.h; sourceTree = SOURCE_ROOT; };
+		0F2313EF098ADBCA007E8020 /* mxj_max_system.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = mxj_max_system.c; sourceTree = SOURCE_ROOT; };
+		0F2313F0098ADBCA007E8020 /* mxj_max_system.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = mxj_max_system.h; sourceTree = SOURCE_ROOT; };
+		0F2313F3098ADBD7007E8020 /* clock_callbacks.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = clock_callbacks.c; sourceTree = SOURCE_ROOT; };
+		0F2313F4098ADBD7007E8020 /* clock_callbacks.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = clock_callbacks.h; sourceTree = SOURCE_ROOT; };
+		0F2313F7098ADBE4007E8020 /* callbacks.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = callbacks.c; sourceTree = SOURCE_ROOT; };
+		0F2313F8098ADBE4007E8020 /* callbacks.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = callbacks.h; sourceTree = SOURCE_ROOT; };
+		0F2313FD098ADE42007E8020 /* mxj_macho_prefix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mxj_macho_prefix.h; sourceTree = "<group>"; };
+		0FCF77C0098AF49B006F07A0 /* classes.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = classes.c; sourceTree = "<group>"; };
+		0FCF77C1098AF49B006F07A0 /* classes.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = classes.h; sourceTree = "<group>"; };
+		0FCF7845098EE44A006F07A0 /* JavaVM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaVM.framework; path = /System/Library/Frameworks/JavaVM.framework; sourceTree = "<absolute>"; };
+		22E0768E1AE82254009EC560 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = "../max-sdk/source/maxmspsdk.xcconfig"; sourceTree = "<group>"; };
+		22E0768F1AE823D0009EC560 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../max-sdk/source/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
+		8D01CCD20486CAD60068D4B7 /* mxj~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mxj~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D01CCCD0486CAD60068D4B7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22E076901AE823D0009EC560 /* MaxAudioAPI.framework in Frameworks */,
+				8D01CCCE0486CAD60068D4B7 /* Carbon.framework in Frameworks */,
+				0FCF7846098EE44A006F07A0 /* JavaVM.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		089C166AFE841209C02AAC07 /* mxj */ = {
+			isa = PBXGroup;
+			children = (
+				22E0768E1AE82254009EC560 /* maxmspsdk.xcconfig */,
+				08FB77ADFE841716C02AAC07 /* Source */,
+				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
+				19C28FB4FE9D528D11CA2CBB /* Products */,
+			);
+			name = mxj;
+			sourceTree = "<group>";
+		};
+		089C1671FE841209C02AAC07 /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				22E0768F1AE823D0009EC560 /* MaxAudioAPI.framework */,
+				0FCF7845098EE44A006F07A0 /* JavaVM.framework */,
+				08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */,
+			);
+			name = "External Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		08FB77ADFE841716C02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				0F231404098ADE95007E8020 /* prefix */,
+				0F2313FD098ADE42007E8020 /* mxj_macho_prefix.h */,
+				0F2313A2098AD9D0007E8020 /* core */,
+				0F23139F098AD9CA007E8020 /* jni_callbacks */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		0F23139F098AD9CA007E8020 /* jni_callbacks */ = {
+			isa = PBXGroup;
+			children = (
+				0F2313F7098ADBE4007E8020 /* callbacks.c */,
+				0F2313F8098ADBE4007E8020 /* callbacks.h */,
+				0F2313F3098ADBD7007E8020 /* clock_callbacks.c */,
+				0F2313F4098ADBD7007E8020 /* clock_callbacks.h */,
+				0F2313EF098ADBCA007E8020 /* mxj_max_system.c */,
+				0F2313F0098ADBCA007E8020 /* mxj_max_system.h */,
+				0F2313EB098ADBAE007E8020 /* mxj_msp_buffer.c */,
+				0F2313EC098ADBAE007E8020 /* mxj_msp_buffer.h */,
+				0F2313E3098ADB6C007E8020 /* mxj_patcher.c */,
+				0F2313E4098ADB6C007E8020 /* mxj_patcher.h */,
+				0F2313DF098ADB61007E8020 /* mxj_wind.c */,
+				0F2313E0098ADB61007E8020 /* mxj_wind.h */,
+				0F2313DB098ADB4E007E8020 /* mxj_qelem.c */,
+				0F2313DC098ADB4E007E8020 /* mxj_qelem.h */,
+			);
+			name = jni_callbacks;
+			sourceTree = "<group>";
+		};
+		0F2313A2098AD9D0007E8020 /* core */ = {
+			isa = PBXGroup;
+			children = (
+				0F2313C2098ADAD8007E8020 /* Atom.c */,
+				0F2313C3098ADAD8007E8020 /* Atom.h */,
+				0FCF77C0098AF49B006F07A0 /* classes.c */,
+				0FCF77C1098AF49B006F07A0 /* classes.h */,
+				0F2313BE098ADACA007E8020 /* ExceptionUtils.c */,
+				0F2313BF098ADACA007E8020 /* ExceptionUtils.h */,
+				0F2313B6098ADA75007E8020 /* maxjava.c */,
+				0F2313B8098ADA7E007E8020 /* maxjava.h */,
+				0F2313B2098ADA69007E8020 /* mxj_attr.c */,
+				0F2313B3098ADA69007E8020 /* mxj_attr.h */,
+				0F2313D7098ADB42007E8020 /* mxj_box.c */,
+				0F2313D8098ADB42007E8020 /* mxj_box.h */,
+				0F2313AA098ADA52007E8020 /* mxj_method.c */,
+				0F2313AB098ADA52007E8020 /* mxj_method.h */,
+				0F2313AE098ADA5D007E8020 /* mxj_methodlist.c */,
+				0F2313AF098ADA5D007E8020 /* mxj_methodlist.h */,
+				0F2313A6098ADA43007E8020 /* mxj_props.c */,
+				0F2313A7098ADA43007E8020 /* mxj_props.h */,
+				0F2313E7098ADB8B007E8020 /* mxj_utils.c */,
+				0F2313E8098ADB8B007E8020 /* mxj_utils.h */,
+			);
+			name = core;
+			sourceTree = "<group>";
+		};
+		0F231404098ADE95007E8020 /* prefix */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = prefix;
+			sourceTree = "<group>";
+		};
+		19C28FB4FE9D528D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D01CCD20486CAD60068D4B7 /* mxj~.mxo */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8D01CCC70486CAD60068D4B7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F2313A9098ADA43007E8020 /* mxj_props.h in Headers */,
+				0F2313AD098ADA52007E8020 /* mxj_method.h in Headers */,
+				0F2313B1098ADA5D007E8020 /* mxj_methodlist.h in Headers */,
+				0F2313B5098ADA69007E8020 /* mxj_attr.h in Headers */,
+				0F2313B9098ADA7E007E8020 /* maxjava.h in Headers */,
+				0F2313C1098ADACA007E8020 /* ExceptionUtils.h in Headers */,
+				0F2313C5098ADAD8007E8020 /* Atom.h in Headers */,
+				0F2313DA098ADB42007E8020 /* mxj_box.h in Headers */,
+				0F2313DE098ADB4E007E8020 /* mxj_qelem.h in Headers */,
+				0F2313E2098ADB61007E8020 /* mxj_wind.h in Headers */,
+				0F2313E6098ADB6C007E8020 /* mxj_patcher.h in Headers */,
+				0F2313EA098ADB8B007E8020 /* mxj_utils.h in Headers */,
+				0F2313EE098ADBAE007E8020 /* mxj_msp_buffer.h in Headers */,
+				0F2313F2098ADBCA007E8020 /* mxj_max_system.h in Headers */,
+				0F2313F6098ADBD7007E8020 /* clock_callbacks.h in Headers */,
+				0F2313FA098ADBE4007E8020 /* callbacks.h in Headers */,
+				0F2313FE098ADE42007E8020 /* mxj_macho_prefix.h in Headers */,
+				0FCF77C3098AF49B006F07A0 /* classes.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8D01CCC60486CAD60068D4B7 /* mxj~ */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0F231389098AD861007E8020 /* Build configuration list for PBXNativeTarget "mxj~" */;
+			buildPhases = (
+				8D01CCC70486CAD60068D4B7 /* Headers */,
+				8D01CCC90486CAD60068D4B7 /* Resources */,
+				8D01CCCB0486CAD60068D4B7 /* Sources */,
+				8D01CCCD0486CAD60068D4B7 /* Frameworks */,
+				8D01CCCF0486CAD60068D4B7 /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "mxj~";
+			productInstallPath = "$(HOME)/Library/Bundles";
+			productName = MaxExternal;
+			productReference = 8D01CCD20486CAD60068D4B7 /* mxj~.mxo */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		089C1669FE841209C02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = 0F23138D098AD861007E8020 /* Build configuration list for PBXProject "mxj~" */;
+			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 089C166AFE841209C02AAC07 /* mxj */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D01CCC60486CAD60068D4B7 /* mxj~ */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D01CCC90486CAD60068D4B7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		8D01CCCF0486CAD60068D4B7 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D01CCCB0486CAD60068D4B7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F2313A8098ADA43007E8020 /* mxj_props.c in Sources */,
+				0F2313AC098ADA52007E8020 /* mxj_method.c in Sources */,
+				0F2313B0098ADA5D007E8020 /* mxj_methodlist.c in Sources */,
+				0F2313B4098ADA69007E8020 /* mxj_attr.c in Sources */,
+				0F2313B7098ADA75007E8020 /* maxjava.c in Sources */,
+				0F2313C0098ADACA007E8020 /* ExceptionUtils.c in Sources */,
+				0F2313C4098ADAD8007E8020 /* Atom.c in Sources */,
+				0F2313D9098ADB42007E8020 /* mxj_box.c in Sources */,
+				0F2313DD098ADB4E007E8020 /* mxj_qelem.c in Sources */,
+				0F2313E1098ADB61007E8020 /* mxj_wind.c in Sources */,
+				0F2313E5098ADB6C007E8020 /* mxj_patcher.c in Sources */,
+				0F2313E9098ADB8B007E8020 /* mxj_utils.c in Sources */,
+				0F2313ED098ADBAE007E8020 /* mxj_msp_buffer.c in Sources */,
+				0F2313F1098ADBCA007E8020 /* mxj_max_system.c in Sources */,
+				0F2313F5098ADBD7007E8020 /* clock_callbacks.c in Sources */,
+				0F2313F9098ADBE4007E8020 /* callbacks.c in Sources */,
+				0FCF77C2098AF49B006F07A0 /* classes.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0F23138A098AD861007E8020 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22E0768E1AE82254009EC560 /* maxmspsdk.xcconfig */;
+			buildSettings = {
+				C74SUPPORT = "$(SRCROOT)/../max-sdk/source/c74support";
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = "$(SRCROOT)/../../externals";
+				FRAMEWORK_SEARCH_PATHS = (
+					/Library/Frameworks,
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
+					"/Users/tim/Code/max-mxj/source/max-sdk/source/c74support/msp-includes",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ./mxj_macho_prefix.h;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"MXJ_MSP=1",
+					"_DEBUG=1",
+				);
+				INFOPLIST_FILE = "$(C74SUPPORT)/../Info.plist";
+				OTHER_LDFLAGS = (
+					"$(C74_SYM_LINKER_FLAGS)",
+					"$(C74_SYM_LINKER_FLAGS_MSP)",
+				);
+				USER_HEADER_SEARCH_PATHS = "$(HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_1) $(HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2) /System/Library/Frameworks/JavaVM.framework/Versions/A/Headers $(HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_3)";
+			};
+			name = Development;
+		};
+		0F23138B098AD861007E8020 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22E0768E1AE82254009EC560 /* maxmspsdk.xcconfig */;
+			buildSettings = {
+				C74SUPPORT = "$(SRCROOT)/../max-sdk/source/c74support";
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = "$(SRCROOT)/../../externals";
+				FRAMEWORK_SEARCH_PATHS = (
+					/Library/Frameworks,
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
+					"/Users/tim/Code/max-mxj/source/max-sdk/source/c74support/msp-includes",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ./mxj_macho_prefix.h;
+				GCC_PREPROCESSOR_DEFINITIONS = "MXJ_MSP=1";
+				INFOPLIST_FILE = "$(C74SUPPORT)/../Info.plist";
+				OTHER_LDFLAGS = (
+					"$(C74_SYM_LINKER_FLAGS)",
+					"$(C74_SYM_LINKER_FLAGS_MSP)",
+				);
+				USER_HEADER_SEARCH_PATHS = "$(HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_1) $(HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2) /System/Library/Frameworks/JavaVM.framework/Versions/A/Headers $(HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_3)";
+			};
+			name = Deployment;
+		};
+		0F23138E098AD861007E8020 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22E0768E1AE82254009EC560 /* maxmspsdk.xcconfig */;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		0F23138F098AD861007E8020 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22E0768E1AE82254009EC560 /* maxmspsdk.xcconfig */;
+			buildSettings = {
+			};
+			name = Deployment;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0F231389098AD861007E8020 /* Build configuration list for PBXNativeTarget "mxj~" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0F23138A098AD861007E8020 /* Development */,
+				0F23138B098AD861007E8020 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		0F23138D098AD861007E8020 /* Build configuration list for PBXProject "mxj~" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0F23138E098AD861007E8020 /* Development */,
+				0F23138F098AD861007E8020 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
+}

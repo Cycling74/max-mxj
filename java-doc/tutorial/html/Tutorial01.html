@@ -1,0 +1,107 @@
+<html>
+<head>
+<title>Tutorial01</title>
+</head>
+<body bgcolor=#F7F7F7 link=#000000 vlink=#000000>
+<table><tr><td><a href="index.html"><img src="images/mxj_smallest.jpg" border=0></a><br></td></tr></table>
+<table border=0 width=100%>
+<tr>
+<td bgcolor=#DCAF6A width=30% valign=bottom>
+<font size=+3 face="Times"><b>Tutorial01</b></font>
+</td>
+<td bgcolor=#EBCDB1 width=70% align=right><font size=+1 face="Times">
+
+HelloWorld - The traditional start of a programming adventure
+</font>
+</td>
+</tr>
+</table>
+</p>
+<font face="Times">
+
+<p>
+Max-compatible Java classes are prototypes that define the variables and 
+methods common to all objects of their kind.  Your task in programming 
+for the mxj object will be to extend a class called, <b>MaxObject</b>, 
+which contains methods that interface with the Max world.  When you create a new 
+Max object by typing <font face="Courier" size=-1>mxj MyClass</font> in an empty object box, 
+mxj <b>instantiates</b> (creates an instance of) two objects a Java object of 
+the <b>MyClass</b> class, and a peer mxj object to "contain" the Java object.
+</p><p>
+The first example we'll look at is a classic.  Upon instantiation of the 
+object, "hello world!" is printed in the Max console.  Here is the code 
+for the <b>HelloWorld1</b> Java class:
+</p>
+<blockquote><code><pre>
+import com.cycling74.max.*;
+
+public class HelloWorld1 extends MaxObject {
+
+	public HelloWorld1() {
+		post("hello world!");
+	}
+}
+</pre></code></blockquote>
+
+<p>
+Short and sweet.  Let's examine the blocks of the code in detail, starting 
+with the <font face="Courier" size=-1>import</font> statement at the top.  This first line is what allows 
+our class to use all of the essential classes and methods of the 
+<a href="file://../api/index.html">mxj API</a>.  It's also possible to import 
+any of the classes from the 
+<a href="http://java.sun.com/j2se/1.4.2/docs/api/index.html">1.4 Java API</a>, 
+or from a third-party library, but for this class everything we need is in the 
+<font face="Courier" size=-1>max.jar</font> package that Cycling '74 provides.
+</p><p>
+The next block defines our class as a subclass of the primary occupant of the 
+imported API, <b>MaxObject</b>:
+</p>
+<blockquote><code><pre>
+public class HelloWorld1 extends MaxObject {
+	...
+}
+</pre></code></blockquote>
+
+<p>
+The <font face="Courier" size=-1>public</font> modifier in front of the class declaration simply means that 
+the class can be accessed by outside programs.  To exist in the Max universe, a 
+Java class must be a subclass of <b>MaxObject</b> - this relationship is declared 
+with the <font face="Courier" size=-1>extends</font> keyword.  A subclass inherits all the public variables 
+and methods of its superclass.  <b>MaxObject</b> contains many methods which allow 
+your Java code to interact with Max, but for this first example we only use its 
+<font face="Courier">post</font> method, which outputs a <b>String</b> argument to the Max console.
+</p>
+<blockquote><code><pre>
+	public HelloWorld1() {
+		post("hello world!");
+	}
+</pre></code></blockquote>
+
+<p>
+The above code is the <b>HelloWorld1</b> class's <b>constructor</b>, a method that 
+is called every time a new object of the class is instantiated.  In the context of 
+Max programming this method is called when a new mxj object with an argument of 
+<b>HelloWorld1</b> is created.  The constructor must have the same name as the class 
+it is constructing.  
+</p><p>
+The HelloWorld1 class's constructor method is pretty silly: we call <font face="Courier">post</font> and 
+ask it to output "hello world!" to the Max Window.  As you can see from the picture 
+below, mxj obliges.  At this point it might be worthwhile to open up <font face="Courier" size=-1>HelloWorld1.java</font>, 
+replace "hello world!" with something more exciting, and then confirm that you're 
+able to compile and instantiate your new and improved <b>HelloWorld1</b> class.
+</p>
+
+</font>
+<p>
+<table border=0 width=100%>
+<tr>
+<td bgcolor=#CCCCDD><font size=+1 face="Times"><b>Example:</b></a></td>
+</tr>
+</table>
+
+<p>
+<center>
+<img src="images/Tutorial01.jpg" border=0></center>
+
+</body>
+</html>

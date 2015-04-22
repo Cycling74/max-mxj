@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="max" default="jar" basedir=".">
+    <property name="src" location="../../src/com"/>
+	<property name="lib" location="../../dist/lib"/>
+    <property name="dist" location="../../dist/lib"/>
+    <property name="jarfile" location="${dist}/${ant.project.name}.jar"/>
+    <property name="compile.debug" value="true"/>
+
+    <fileset id="lib.jars" dir="${lib}">
+		<include name="**/*.jar"/>
+		<exclude name="max.jar"/>		
+    </fileset>
+
+    <path id="lib.path">
+        <fileset refid="lib.jars"/>
+    </path>
+
+    <target name="compile" description="Compile code">
+        <mkdir dir="${bin}"/>
+        <mkdir dir="${lib}"/>
+        <javac srcdir="${src}" destdir="${bin}" includeAntRuntime="no"
+               classpathref="lib.path" debug="${compile.debug}">
+        </javac>
+    </target>
+
+    <target name="jar" depends="compile" description="Build jar">
+        <jar jarfile="${jarfile}" basedir="${bin}"/>
+    </target>
+
+    <target name="clean" description="Remove build and dist directories">
+        <delete dir="${bin}"/>
+    </target>
+</project>

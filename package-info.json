@@ -1,0 +1,10 @@
+ {
+ "name": "mxj",
+ "type": "package",
+ "author": "Cycling '74",
+ "description": "Max Java Support",
+ "version": "7.0.4",
+ "major_version": "7",
+ "minor_version": "0",
+ "min_max_version": "7.0.4"
+}

@@ -1,0 +1,93 @@
+<html>
+<head>
+<title>Tutorial06</title>
+</head>
+<body bgcolor=#F7F7F7 link=#000000 vlink=#000000>
+<table><tr><td><a href="index.html"><img src="images/mxj_smallest.jpg" border=0></a><br></td></tr></table>
+<table border=0 width=100%>
+<tr>
+<td bgcolor=#DCAF6A width=30% valign=bottom>
+<font size=+3 face="Times"><b>Tutorial06</b></font>
+</td>
+<td bgcolor=#EBCDB1 width=70% align=right><font size=+1 face="Times">
+
+autocount1 - Attributes
+</font>
+</td>
+</tr>
+</table>
+</p>
+<font face="Times">
+
+<p>
+In this example we introduce the <b>attribute</b> system, a particularly 
+painless way of interfacing your class's variables with the world of Max.
+</p>
+<blockquote><code><pre>
+import com.cycling74.max.*;
+
+public class autocount1 extends MaxObject {
+
+	private int count=0;
+	
+	public autocount1() {
+		declareAttribute("count");
+	}
+
+	public void bang() {
+		count++;
+		outlet(0, count);
+	}
+}
+</pre></code></blockquote>
+
+<p>
+The <font face="Courier">count</font> variable is an integer and has been declared like any other 
+integer might be declared.  In the class's constructor, however, the 
+<font face="Courier">declareAttribute</font> method has been passed the name of the variable as 
+a <b>String</b>.  This will register <font face="Courier">count</font> as an attribute, which 
+automatically gives it some very nice functionality.  
+</p><p>
+The primary functionality afforded to an attribute is the automatic, background 
+support for setting and getting the value of the variable in a Max patch.  If the Max user 
+sends a "count 8" message to an <b>autocount1</b> object the value of the <font face="Courier">count</font> 
+will be set to 8.  If the user were to then send a "get count" message into the object, 
+an 8 would be sent out the object's right outlet.
+</p><p>
+In some situations you may want to provide your own set or get method for an 
+attribute - for instance, if you want to limit input values 
+to a particular range, or if you want your get method to provide additional 
+information beyond just the value of the variable.  To do this it's necessary 
+to call <font face="Courier">declareAttributes(String, String, String)</font>, where the second and 
+third <b>String</b>s should be the names of the getter and setter methods, 
+respectively.  Passing <font face="Courier" size=-1>null</font> for either of these enables the default 
+automatic get or set implementation.  To be a valid setter a method must have a 
+return type of <font face="Courier" size=-1>void</font>; to be a valid getter a method must have a return
+type of <font face="Courier" size=-1>Atom[]</font>.  
+</p><p>
+The other major bit of functionality that attributes enjoy is the ability of 
+the user to access an attribute's set method from instantiation arguments.  
+If that instantiation arguments for a new <b>autocount1</b> object include "@count", 
+the subsequent value will be passed to <font face="Courier">count</font>'s set method sometime after 
+the constructor method has finished executing.  Please note that since a setter method
+can be called at construction time, similarly to the constructor a setter should not 
+send data out the object's outlets.  
+</p><p>
+The class itself is pretty basic - like the counter object, <b>autocount1</b> 
+sends out an increasing integer with each bang.  Things will get more interesting 
+in <b>autocount2</b>.
+</p>
+</font>
+<p>
+<table border=0 width=100%>
+<tr>
+<td bgcolor=#CCCCDD><font size=+1 face="Times"><b>Example:</b></a></td>
+</tr>
+</table>
+
+<p>
+<center>
+<img src="images/Tutorial06.jpg" border=0></center>
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+<html>
+<head>
+<title>Tutorial02</title>
+</head>
+<body bgcolor=#F7F7F7 link=#000000 vlink=#000000>
+<table><tr><td><a href="index.html"><img src="images/mxj_smallest.jpg" border=0></a><br></td></tr></table>
+<table border=0 width=100%>
+<tr>
+<td bgcolor=#DCAF6A width=30% valign=bottom>
+<font size=+3 face="Times"><b>Tutorial02</b></font>
+</td>
+<td bgcolor=#EBCDB1 width=70% align=right><font size=+1 face="Times">
+
+HelloWorld 2 - Messages and methods
+</font>
+</td>
+</tr>
+</table>
+</p>
+<font face="Times">
+
+<p>
+After a Max object has been created it can send and receive messages.  Max 
+objects communicate with one another by sending messages made up of integers, 
+floating-point numbers, and symbols.  The mxj API defines the 
+<a href="file://../api/com/cycling74/max/Atom.html">Atom</a><b></b> class, 
+a single unit that can represent any of these three data types.  
+The API also provides convenience methods to convert from <b>Atom</b> to and 
+from any of the eight primitve types (<font face="Courier" size=-1>byte</font>, <font face="Courier" size=-1>short</font>, <font face="Courier" size=-1>int</font>, 
+<font face="Courier" size=-1>long</font>, <font face="Courier" size=-1>float</font>, <font face="Courier" size=-1>double</font>, <font face="Courier" size=-1>boolean</font> and <font face="Courier" size=-1>char</font>).
+</p><p>
+In order to send and receive messages your object must have inlets and outlets.  
+In a later tutorial we will learn how to specify the number of inlets and outlets, 
+but for now we'll keep the same constructor and use the <b>MaxObject</b> class's 
+default one inlet and two outlets.
+</p><p>
+Let's add some methods to the <b>HelloWorld1</b> class to enable further 
+interaction with the Max universe.  We're going to rename the class 
+<b>HelloWorld2</b> - note that the name of the constructor and the <font face="Courier" size=-1>.java</font> 
+text file must match the new name of the class.
+</p>
+<blockquote><code><pre>
+import com.cycling74.max.*;
+
+public class HelloWorld2 extends MaxObject {
+
+	public HelloWorld2() {
+		post("hello world!");
+	}
+	
+	public void errpost() {
+		error("hello error!");
+	}
+	
+	public void hello() {
+		outlet(0, "world!");
+	}
+	
+	public void cycling() {
+		outlet(0, 74);
+	}
+}
+</pre></code></blockquote>
+
+<p>
+When the mxj object instantiates an instance of a Java class it builds a table of 
+supported messages by using the names of the <font face="Courier" size=-1>public</font> methods that the Java 
+class defines.  When you create a new Max object box and type 
+<font face="Courier" size=-1>mxj HelloWorld2</font> inside, the mxj object analyzes the Java class and prepares 
+itself to respond to input messages of "hello", "cycling", and "errpost".  The 
+constructor is exempt from this process, so in this case the object will not 
+respond to a "HelloWorld2" message.  In later tutorials we will encounter some 
+other method names with special functions that are exempt.  To make a method that 
+mxj will not map to an incoming message, you can simply declare it as 
+<font face="Courier" size=-1>private</font> instead of <font face="Courier" size=-1>public</font>.
+</p><p>
+Upon receiving an "errpost" message in Max the mxj object will call the 
+<font face="Courier">errpost</font> method, which in turn calls <b>MaxObject's</b> <font face="Courier">error</font> method.  
+<font face="Courier">error</font> is like <font face="Courier">post</font> except that the console output is preceeded by 
+the standard Max error prefix.  
+</p><p>
+The <font face="Courier">hello</font> and <font face="Courier">cycling</font> methods illustrate uses of <b>MaxObject</b>'s 
+<font face="Courier">outlet</font> method.  The first argument to <font face="Courier">outlet</font> is an integer index that 
+specifies which outlet to use.  Outlets are numbered from the left to the right, 
+starting with an index of zero, so in both of these cases the data will be sent out 
+the leftmost outlet.
+</p><p>
+The second argument of the <font face="Courier">outlet</font> method can take a number of different forms.  
+In the <font face="Courier">hello</font> method we pass a <b>String</b> as the second parameter, upon 
+receiving a message of "hello" in the Max universe our object will output the symbol 
+<font face="Courier" size=-1>world!</font>.  In the <font face="Courier">cycling</font> method the second argument is an integer, and 
+so upon receipt of "cycling" the object will send out the integer 74.
+</p><p>
+Let's quickly define some useful programming terminology.  The <b>signature</b> 
+of a method is its name and the types and arrangement of its arguments; for instance,
+the signature of the <font face="Courier">outlet</font> method we used above for the <font face="Courier">hello</font> method is 
+<font face="Courier" size=-1>outlet(int, String)</font>, but the signature of the <font face="Courier">outlet</font> method used in 
+the <font face="Courier">cycling</font> method is <font face="Courier" size=-1>outlet(int, int)</font>.  Unlike C, which requires that 
+no two methods have the same name, Java is able to distinguish between 
+identically-named methods with different signatures (ie, their arguments differ in 
+number, or type).  This technique is called <b>overloading</b>, and when carefully
+used it can make code easier to write and read.  The <font face="Courier">outlet</font> method is an 
+example of an overloaded method; below is a list of all its signatures that can 
+legitimately be called.</p>
+<blockquote><code><pre>
+outlet(int, Atom)
+outlet(int, Atom[])
+outlet(int, boolean)
+outlet(int, boolean[])
+outlet(int, byte)
+outlet(int, byte[])
+outlet(int, char)
+outlet(int, char[])
+outlet(int, double)
+outlet(int, double[])
+outlet(int, float)
+outlet(int, float[])
+outlet(int, int) 
+outlet(int, int[])
+outlet(int, long)
+outlet(int, long[])
+outlet(int, short)
+outlet(int, short[])
+outlet(int, java.lang.String) 
+outlet(int, java.lang.String, Atom[])
+</pre></code></blockquote>
+
+<p>
+All of these <font face="Courier">outlet</font> methods have the same basic function, but they differ in how 
+they handle the data you want to output.  Please note that <font face="Courier">outlet</font> should never be called 
+from within a constructor, since the object isn't fully formed and ready to send out 
+data until after the constructor method has finished executing.
+</p><p>
+If you feel like experimenting, you can try changing the method names or changing what 
+they send out the outlet, recompiling and seeing how your new class behaves in Max.
+</p>
+</font>
+<p>
+<table border=0 width=100%>
+<tr>
+<td bgcolor=#CCCCDD><font size=+1 face="Times"><b>Example:</b></a></td>
+</tr>
+</table>
+
+<p>
+<center>
+<img src="images/Tutorial02.jpg" border=0></center>
+
+</body>
+</html>

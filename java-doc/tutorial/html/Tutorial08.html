@@ -1,0 +1,165 @@
+<html>
+<head>
+<title>Tutorial08</title>
+</head>
+<body bgcolor=#F7F7F7 link=#000000 vlink=#000000>
+<table><tr><td><a href="index.html"><img src="images/mxj_smallest.jpg" border=0></a><br></td></tr></table>
+<table border=0 width=100%>
+<tr>
+<td bgcolor=#DCAF6A width=30% valign=bottom>
+<font size=+3 face="Times"><b>Tutorial08</b></font>
+</td>
+<td bgcolor=#EBCDB1 width=70% align=right><font size=+1 face="Times">
+
+Threads
+</font>
+</td>
+</tr>
+</table>
+</p>
+<font face="Times">
+
+<p>
+From a user's perspective, modern operating systems are able to 
+simultaneously run many programs at "the same time." 
+The truth is that each CPU registered with 
+the operating system can only handle one <b>thread</b> of execution at 
+a time. The illusion of simultaneity is achieved because the 
+operating system nimbly juggles the many active threads. 
+The analysis and design of the scheduling algorithms that 
+set the order in which threads are executed is a fertile area of 
+computer science research. 
+</p><p>
+Individual programs may themselves consist of multiple threads of 
+execution. For instance, a web browser might have one thread that 
+handles the networking and another that handles user input.  Keeping 
+these parts of the program in separate threads allows the program to 
+process user input (setting the preferences, for instance) while the other 
+thread is waiting for a request to complete (retrieving the contents 
+of a web page). 
+</p><p>
+When using mxj, input from or output to the Max environment can take place in 
+one of two threads. The <b>main</b> thread handles the least time-critical 
+jobs, such as rendering to the screen or processing keyboard and mouse events.
+The <b>scheduler</b> thread handles time-sensitive data: midi data and
+the output of clocked objects (metro, delay, etc).  
+</p><p>
+The code below is from the <b>WhichThread</b> example provided in the classes directory. 
+</p>
+<blockquote><code><pre>
+import com.cycling74.max.*;
+
+public class WhichThread extends MaxObject implements Runnable
+{
+    private static final String SCHEDULER = "SCHEDULER";
+    private static final String MAIN      = "MAIN";
+    private static final String UNKNOWN   = "????";
+
+   	public void bang() {
+		if(MaxSystem.inTimerThread())
+		    outlet(0,SCHEDULER);
+		else if(MaxSystem.inMainThread())
+		    outlet(0,MAIN);
+		else
+		    outlet(0,UNKNOWN);
+	}
+
+    public void run() {
+		this.bang();
+    }
+
+    public void spawnThread() {
+		Thread t = new Thread(this);
+		t.start();
+    }
+}
+</pre></code></blockquote>
+
+<p>
+The bang method illustrates how to use the <font face="Courier">inTimerThread</font> and 
+<font face="Courier">inMainThread</font> methods from <b>MaxSystem</b> to determine the 
+thread of execution.  Each possibility for the thread of execution 
+produces a different output - interacting with the <font face="Courier" size=-1>WhichThread.help</font> 
+patch can be instructive. 
+</p><p>
+If you click on either bang in the help patch, the <font face="Courier">bang</font> method will be
+called in the main thread and "MAIN" will be output. 
+If overdrive is enabled, starting the metro in the help patch will call 
+the <font face="Courier">bang</font> method from the scheduler thread, and "SCHEDULER" will 
+be output. Notice that if you turn overdrive off "MAIN" is output. 
+</p><p>
+<b>WhichThread</b> also illustrates one way that a class can create its 
+own thread.  Note that the class implements <b>Runnable</b> - very much 
+like the <b>Executable</b> interface that we discussed in previous 
+tutorials, <b>Runnable</b> is used to provide a common calling framework 
+for thread-based classes. To implement <b>Runnable</b> a class must 
+contain a public run method which will be executed when a <b>Thread</b> 
+is started. In the case above, when <font face="Courier">spawnThread</font> is called a new 
+instance of the <b>Thread</b> class is created, with the <b>WhichThread</b> 
+object itself passed to the constructor method via the "this" keyword. 
+The next line calls this new <b>Thread</b>'s start method - this is how 
+you tell a <b>Thread</b> to start executing.  The <font face="Courier">start</font> method 
+calls the <font face="Courier">run</font> method of the <b>Runnable</b> that is was passed 
+when it was constructed; since we passed in the object itself, 
+<b>WhichThread</b>'s run method is called, which then calls the <font face="Courier">bang</font> 
+method.  So in this case <font face="Courier">bang</font> has been called from neither the main 
+nor the scheduler thread, and so <font face="Courier" size=-1>"????"</font> is output. 
+</p><p>
+If you click on the "spawnThread" message in the help patch you'll notice 
+that <font face="Courier" size=-1>"????"</font> does indeed get sent out the object's outlet. However, you'll 
+also notice that the construction on the right, which takes the output of 
+the first <b>WhichThread</b> object, triggers a bang and feeds that into 
+another <b>WhichThread</b>. After clicking on the "spawnThread" message 
+one might expect the output of this second <b>WhichThread</b> to also be 
+<font face="Courier" size=-1>"????"</font>, since the thread that initiates the action is neither the main 
+nor the scheduler thread.  Instead "MAIN" is output, which indicates that 
+this second bang is received by the second <b>WhichThread</b> object in the 
+main thread. This is so because <b>MaxObject</b>'s <font face="Courier">outlet</font> method will only 
+output messages into the Max world in the main or scheduler threads. Any 
+<font face="Courier">outlet</font> call not made from within either of those two threads is 
+deferred to the main thread. 
+</p>
+<p>
+It is important to understand that it is possible for a thread to be
+interrupted at any time by another thread.  For example, if the operating 
+system decides that it's time to pay attention to the scheduler thread 
+instead of the main thread, execution of the main thread will be suspended 
+and the scheduler thread will take over.  When the main thread resumes it
+will pick up exactly where it left off.  This can lead to some unstable 
+situations.  Consider the following class:
+</p>
+<blockquote><code><pre>
+public class threadProblem extends MaxObject {
+	private int[] data = new int[10];
+	
+	public void bang() {
+		int size = data.length;
+		for (int i=0;i size;i++) {
+			data[i] = i;
+		}
+	}
+		
+	public void inlet(int i) {
+		data = new int[i];
+	}
+}
+</pre></code></blockquote>
+
+<p>
+An <font face="Courier" size=-1>int</font> sent in the object's inlet will create a new array of the given
+length, and a <font face="Courier" size=-1>bang</font> will populate the array for numbers.  However, consider 
+what would happen if a bang in the main thread (caused by user input, say) was
+interrupted sometime while executing the <font face="Courier">bang</font> method and in the scheduler thread
+a integer was input?  If the input is smaller than the previous size of the array, an
+exception will be thrown shortly after the flow of execution has passed back to the
+main thread when the for loop exceeds the end of the new array length.  If the input
+is larger than the previous length no exception will be thrown, but the values
+of the array beyond the old length or that have already been set with the for loop 
+will be uninitialized.  Either way the results are unwelcome, so it is
+important to design your classes so that an unlucky flow of execution does not 
+leave the data in an indeterminant state.
+</p>
+</font>
+
+</body>
+</html>

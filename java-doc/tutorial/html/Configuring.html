@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>Configuring</title>
+</head>
+<body bgcolor=#F7F7F7 link=#000000 vlink=#000000>
+<table><tr><td><a href="index.html"><img src="images/mxj_smallest.jpg" border=0></a><br></td></tr></table>
+<table border=0 width=100%>
+<tr>
+<td bgcolor=#DCAF6A width=30% valign=bottom>
+<font size=+3 face="Times"><b>Configuring</b></font>
+</td>
+<td bgcolor=#EBCDB1 width=70% align=right><font size=+1 face="Times">
+
+How to configure mxj
+</font>
+</td>
+</tr>
+</table>
+</p>
+<font face="Times">
+
+<p>
+The <font face="Courier" size=-1>java/max.java.config.txt</font> file enables customization 
+of the mxj system with respect to classpath and virtual machine
+options.  Examples for using the 
+file are contained within the file itself in comments beginning 
+and terminating
+with semicolons.  Copy a line, remove the semicolons and edit 
+the text to suit your 
+configuration.  All the paths in max.java.config.txt should be specified 
+as max style paths. So whether using Mac or Windows the directory format is:
+</p><blockquote><code><pre>
+volume:/path/to/dir
+</pre></code></blockquote>
+<p>
+or
+</p><blockquote><code><pre>
+/path/to/dir
+</pre></code></blockquote>
+<p>
+Classes loaded in the <b>system</b> classpath cannot be reloaded 
+dynamically.  For these classes the "_zap" message described on the <b><a href="Compiling.html">Compiling</a></b>
+page will have no effect.  Classes in the <b>dynamic</b> classpath
+can be reloaded dynamically.  If you're adding your own directory to
+the classpath it is probably best to add a dynamic entry as opposed 
+to a system entry.
+</p><p>
+Here's a brief synopsis of the available options:
+</p><p>
+<font face="Courier" size=-1>max.system.jar.dir [directory]</font> 
+- adds all JARs in the directory to the system classpath</p>
+
+<p><font face="Courier" size=-1>max.dynamic.jar.dir [directory]</font> 
+- adds all JARs in the directory to the dynamic classpath</p>
+
+<p><font face="Courier" size=-1>max.system.class.dir [directory]</font> 
+- adds the directory to the system classpath</p>
+
+<p><font face="Courier" size=-1>max.dynamic.class.dir [directory]</font> 
+- adds the directory to the dynamic classpath</p>
+
+<p><font face="Courier" size=-1>max.jvm.option [option]</font> 
+- set JVM options</p>
+
+<p><font face="Courier" size=-1>max.classloader.fromdisk [val]</font> 
+- by default <font face="Courier" size=-1>val</font> is 0, which means that once a class has been loaded from the 
+hard drive it will be cached in RAM.  If <font face="Courier" size=-1>val</font> is 1
+every new instance of a class loads the class file anew from the hard drive. 
+Using 1 will make new object instantiations quick, but using 0 can be convenient
+when developing code for new mxj classes.</p>
+
+
+
+</font>
+
+</body>
+</html>

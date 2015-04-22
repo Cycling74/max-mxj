@@ -1,0 +1,102 @@
+<html>
+<head>
+<title>Compiling</title>
+</head>
+<body bgcolor=#F7F7F7 link=#000000 vlink=#000000>
+<table><tr><td><a href="index.html"><img src="images/mxj_smallest.jpg" border=0></a><br></td></tr></table>
+<table border=0 width=100%>
+<tr>
+<td bgcolor=#DCAF6A width=30% valign=bottom>
+<font size=+3 face="Times"><b>Compiling</b></font>
+</td>
+<td bgcolor=#EBCDB1 width=70% align=right><font size=+1 face="Times">
+
+How to compile an mxj class
+</font>
+</td>
+</tr>
+</table>
+</p>
+<font face="Times">
+
+
+<p>
+To develop Java classes you will create and edit text files of Java code, 
+and then <b>compile</b> them into 
+<b>bytecode</b> <font face="Courier" size=-1>.class</font> files that the Java Virtual Machine 
+(JVM) needs.  The traditional way to compile Java code is to 
+use <font face="Courier" size=-1>javac</font>, a compiler that can be executed from the command 
+line - in OS X this means using the terminal, and in Windows XP 
+this means going to the DOS command prompt, or a unix-emulating layer
+such as <a href="http://www.cygwin.com">Cygwin</a>.  For instance, if 
+the working directory contains a text file called <font face="Courier" size=-1>MyClass.java</font>, 
+the command
+</p>
+<blockquote><code><pre>
+javac MyClass.java
+</pre></code></blockquote>
+
+<p>
+compiles the source code in the text file and creates a bytecode 
+file called <font face="Courier" size=-1>MyClass.class</font> in the working directory.  
+If the code has a complicated structure it is possible for
+several different <font face="Courier" size=-1>.class</font> files to be generated.  If the code
+contains errors the compiler outputs descriptions of the errors.  IBM's 
+<a href="http://www-124.ibm.com/developerworks/projects/jikes/"><font face="Courier" size=-1>jikes</font></a> 
+is another command-line Java compiler that can be used in the same way. 
+</p><p>
+If you are reading this for the first time and you try the above 
+command on any of the classes that live
+in <font face="Courier" size=-1>java/classes</font>, the compiler probably will return an error related
+to the fact that the Java compiler does not know where to look 
+to find <font face="Courier" size=-1>max.jar</font>.
+To remedy this we have to add <font face="Courier" size=-1>max.jar</font> to our <b>classpath</b>.  It's possible to
+do this in a few different ways, but perhaps the most straightforward way 
+is with a command line argument to the compiler.  On Mac we'd use
+</p>
+<blockquote><code><pre>
+javac -classpath "/Applications/Max*/Cycling '74/java/lib/max.jar" MyClass.java
+</pre></code></blockquote>
+
+<p>
+And on Windows,
+</p>
+<blockquote><code><pre>
+javac -classpath "\Program Files\Common Files\Cycling '74\java\lib\max.jar" MyClass.java
+</pre></code></blockquote>
+
+<p>
+The <font face="Courier" size=-1>*.java</font> source code files for the tutorial examples can be found in the 
+<font face="Courier" size=-1>java/doc/tutorial/src</font> directory, so the following command
+could be used to compile the <b>HelloWorld1</b> class on Mac:
+</p><blockquote><code><pre>
+javac -classpath "/Applications/Max*/Cycling '74/java/lib/max.jar" HelloWorld1.java
+</pre></code></blockquote>
+
+<p>
+If you're using a unix terminal, to learn more about the <font face="Courier" size=-1>javac</font> 
+compiler you can call up its manual pages:
+</p>
+<blockquote><code><pre>
+% man javac
+</pre></code></blockquote>
+
+<p>
+If the command line isn't your style, don't despair - it's actually possible
+to do all your Java development within the Max environment.  After receiving a
+<font face="Courier" size=-1>viewsource</font> message an mxj object will launch an editing 
+environment.  We'll discuss this environment next when we talk about the 
+<b><a href="quickie.html">quickie</a></b> class.
+</p><p>
+Finally, it's also possible to compile your Java classes using one
+of many available IDE (Integrated Development Environment) packages.  
+In the <font face="Courier" size=-1>java/doc/ide</font> directory we've provided example 
+projects for a couple of great free options, Apple's Xcode and IBM's Eclipse.  
+Please note that there is a bug in Xcode that's triggered by
+a path name with a single quote mark, so don't 
+place any Xcode projects in your Cycling '74 directory.
+</p>
+</font>
+
+</body>
+</html>

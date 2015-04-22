@@ -1,0 +1,120 @@
+<html>
+<head>
+<title>Tutorial03</title>
+</head>
+<body bgcolor=#F7F7F7 link=#000000 vlink=#000000>
+<table><tr><td><a href="index.html"><img src="images/mxj_smallest.jpg" border=0></a><br></td></tr></table>
+<table border=0 width=100%>
+<tr>
+<td bgcolor=#DCAF6A width=30% valign=bottom>
+<font size=+3 face="Times"><b>Tutorial03</b></font>
+</td>
+<td bgcolor=#EBCDB1 width=70% align=right><font size=+1 face="Times">
+
+HelloWorld 3 - More about messages
+</font>
+</td>
+</tr>
+</table>
+</p>
+<font face="Times">
+
+<p>
+To further explore the types of messages that a Max object can send and receive 
+we're going to alter our class again and call it <b>HelloWorld3</b>.
+</p>
+<blockquote><code><pre>
+import com.cycling74.max.*;
+
+public class HelloWorld3 extends MaxObject {
+
+	public void bang() {
+		post("hello bang!");
+		outletBang(0);
+	}
+
+	public void loadbang() {
+		post("welcome to the patch!");
+	}
+	
+	public void inlet(int i) {
+		post("hello integer " + i + "!");
+		outlet(0, i);
+	}
+	
+	public void inlet(float f) {
+		post("hello float " + f + "!");
+		outlet(0, f);
+	}
+	
+	public void list(Atom[] a) {
+		post("hello list " + Atom.toOneString(a) + "!");
+		outlet(0, a);
+	}
+	
+	public void anything(String s, Atom[] args) {
+		post("hello anything " + s + " " + Atom.toOneString(args) + "!");
+		outlet(0, s, args);
+	}
+}
+</pre></code></blockquote>
+
+<p>
+The first thing to notice is that we no longer have a constructor method.  It's not 
+necessary to have a constructor if you are happy with the default one inlet and two 
+outlets, and there's nothing else that needs to happen at the time of object 
+instantiation.
+</p><p>
+The class above has six methods, each of which responds to a special type of Max message.  
+The <font face="Courier">bang</font> method will be called when an object receives a bang.  The method 
+posts a message to the Max console and then calls a method we didn't see in the 
+previous example, <b>MaxObject</b>'s <font face="Courier">outletBang</font>, to send a bang out the object's 
+first outlet. 
+</p><p>
+The <font face="Courier">loadbang</font> method will be called when a user opens a patch that contains 
+an object of this class.  This method is called after construction time, so it is
+safe to call the outlet methods from within, but in this case we simply post a 
+pleasant welcome message.
+</p><p>
+The implementation of next two methods, both named <font face="Courier">inlet</font>, is another example 
+of overloading.  The <font face="Courier">inlet(int)</font> and <font face="Courier">inlet(float)</font> methods will respond 
+to single integers and floating-point numbers, respectively.  Upon receiving an 
+integer, a message that incorporates the input integer <font face="Courier" size=-1>i</font> is posted to the 
+Max console, and then <font face="Courier" size=-1>i</font> is sent out the first outlet.  A similar sequence of 
+operations is executed upon receipt of a floating-point number.
+</p><p>
+The next method, <font face="Courier">list</font>, will be called whenever a list  is sent in an object's 
+inlet.  The argument <font face="Courier" size=-1>a</font> is an array of <b>Atom</b>s, and we've used one of the 
+methods from the <b>Atom</b> class, <font face="Courier">Atom.toOneString()</font>, to convert the individual 
+<b>Atom</b>s into one long <b>String</b> for output to the Max console.
+</p><p>
+Finally, the <font face="Courier">anything</font> method will respond to any message whose first element 
+is a symbol that isn't the name of a public method declared elsewhere in the class - 
+in this case, "bang", "inlet", and "list".  The <b>String</b> <font face="Courier" size=-1>s</font> is this first 
+symbol, and the <font face="Courier" size=-1>args</font> array of <b>Atom</b>s that follows can be of any length.  
+</p>
+<p>
+If a class does not define an <font face="Courier">inlet(int)</font> but does define an <font face="Courier">inlet(float)</font>, 
+incoming integers will be redirected to the <font face="Courier">inlet(float)</font>.  If neither of these 
+methods is defined, mxj will call <font face="Courier">list(Atom[])</font>, if it exists.  If it does not
+exist mxj will call <font face="Courier">anything(String, Atom[])</font>.  If a list is received but no 
+<font face="Courier">list</font> method is defined, mxj will call <font face="Courier">anything(String, Atom[])</font> with the 
+<font face="Courier" size=-1>String</font> set to "list".  If the <font face="Courier">anything</font> method is not defined mxj will 
+take the first element of the list and call either <font face="Courier">inlet(int)</font> or <font face="Courier">inlet(float)</font>
+depending on the type of this first element.  If no appropriate method to call exists, 
+mxj will post an error message to the Max console.
+</p>
+</font>
+<p>
+<table border=0 width=100%>
+<tr>
+<td bgcolor=#CCCCDD><font size=+1 face="Times"><b>Example:</b></a></td>
+</tr>
+</table>
+
+<p>
+<center>
+<img src="images/Tutorial03.jpg" border=0></center>
+
+</body>
+</html>

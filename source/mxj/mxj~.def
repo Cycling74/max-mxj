@@ -1,0 +1,6 @@
+;mxj~.def
+
+LIBRARY mxj~
+
+EXPORTS
+	main

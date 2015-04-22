@@ -1,0 +1,74 @@
+<html>
+<head>
+<title>Using</title>
+</head>
+<body bgcolor=#F7F7F7 link=#000000 vlink=#000000>
+<table><tr><td><a href="index.html"><img src="images/mxj_smallest.jpg" border=0></a><br></td></tr></table>
+<table border=0 width=100%>
+<tr>
+<td bgcolor=#DCAF6A width=30% valign=bottom>
+<font size=+3 face="Times"><b>Using</b></font>
+</td>
+<td bgcolor=#EBCDB1 width=70% align=right><font size=+1 face="Times">
+
+How to use the mxj object
+</font>
+</td>
+</tr>
+</table>
+</p>
+<font face="Times">
+
+
+<p>
+In Java speak, a <b>class</b> is a prototype that defines a set of
+variables (data) and methods (actions).  Java <b>object</b>s are 
+created as members of a class.  The <font face="Courier" size=-1>java</font> directory in your Max 
+installation has a subdirectory called <font face="Courier" size=-1>classes</font> in which you will 
+keep the Java classes that can be used with mxj.  When you create a new 
+mxj object in Max, the first instantiation argument must be the name of a 
+class that exists in this directory.  Successfully instantiating 
+an mxj object creates two objects: an mxj Max object and internal to that 
+a Java object of the class that was supplied as an argument.  
+We can call these two objects "peer" objects - the mxj object is simply
+a shell that acts as a 
+conduit between the worlds of Max and Java.  Note that unlike 
+the name of regular Max objects, the name of a Java class is 
+case-senstive.  The figure below shows an mxj object that has 
+successfully created an instance of the <font face="Courier" size=-1>sbuf</font> Java class.
+</p>
+
+<img src="images/mxjsbuf.jpg" border=0>
+
+<p>
+The class files that live in the <font face="Courier" size=-1>classes</font> folder are what are 
+known as <b>bytecode</b> files.  Unlike C externals, which are compiled 
+into platform-specific machine code, Java bytecode can be 
+executed on any system that will run the JVM (Java Virtual Machine). 
+This means that unlike Max externals, mxj-compatible class files 
+are <b>cross-platform</b>.  The <font face="Courier" size=-1>.java</font> code that is used to compile 
+these bytecode files lives in the same directory.  
+If you are a developer you can use these files as starting points 
+for your own mxj-compatible Java classes and change the behaviour 
+to suit your needs.  If you are not a 
+developer, well... there's never been a better time to learn how 
+to develop your own Max objects!  It's easier than you think.
+</p><p>
+It is possible to collect multiple class files into a package.  
+In the <font face="Courier" size=-1>java/lib</font> directory you can find one such package named 
+<b>max.jar</b>.  This package contains the code that facilitates 
+communication between Max and Java; the file's placement within 
+the <font face="Courier" size=-1>lib</font> directory is essential.  Cycling '74 does not distribute 
+the source code for these classes, but we do make available the 
+<a href="../../api/index.html">
+specification of the API</a> (Application Programming Interface) so 
+that developers can use the code to make their own classes.  
+</p><p>
+The <font face="Courier" size=-1>java/help</font> directory contains a selection of patches that you 
+can use to explore the classes we've implemented. 
+</p>
+
+</font>
+
+</body>
+</html>

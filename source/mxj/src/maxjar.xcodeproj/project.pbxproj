@@ -1,0 +1,587 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0FDD30C00A30D2DF006F6193 /* ConsoleStream.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD306D0A30D2DE006F6193 /* ConsoleStream.java */; };
+		0FDD30C10A30D2DF006F6193 /* ErrorStream.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD306E0A30D2DE006F6193 /* ErrorStream.java */; };
+		0FDD30C20A30D2DF006F6193 /* MessageWriter.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD306F0A30D2DE006F6193 /* MessageWriter.java */; };
+		0FDD30C30A30D2DF006F6193 /* PostStream.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30700A30D2DE006F6193 /* PostStream.java */; };
+		0FDD30C40A30D2DF006F6193 /* Atom.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30720A30D2DE006F6193 /* Atom.java */; };
+		0FDD30C50A30D2DF006F6193 /* AtomDataTypes.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30730A30D2DE006F6193 /* AtomDataTypes.java */; };
+		0FDD30C60A30D2DF006F6193 /* AttributeInfo.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30740A30D2DE006F6193 /* AttributeInfo.java */; };
+		0FDD30C70A30D2DF006F6193 /* Callback.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30750A30D2DE006F6193 /* Callback.java */; };
+		0FDD30C80A30D2DF006F6193 /* DataTypes.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30760A30D2DE006F6193 /* DataTypes.java */; };
+		0FDD30C90A30D2DF006F6193 /* Executable.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30770A30D2DE006F6193 /* Executable.java */; };
+		0FDD30CA0A30D2DF006F6193 /* MaxBox.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30780A30D2DE006F6193 /* MaxBox.java */; };
+		0FDD30CB0A30D2DF006F6193 /* MaxClock.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30790A30D2DE006F6193 /* MaxClock.java */; };
+		0FDD30CC0A30D2DF006F6193 /* MaxContext.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD307A0A30D2DE006F6193 /* MaxContext.java */; };
+		0FDD30CD0A30D2DF006F6193 /* MaxObject.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD307B0A30D2DE006F6193 /* MaxObject.java */; };
+		0FDD30CE0A30D2DF006F6193 /* MaxPatcher.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD307C0A30D2DE006F6193 /* MaxPatcher.java */; };
+		0FDD30CF0A30D2DF006F6193 /* MaxQelem.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD307D0A30D2DE006F6193 /* MaxQelem.java */; };
+		0FDD30D00A30D2DF006F6193 /* MaxRuntimeException.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD307E0A30D2DE006F6193 /* MaxRuntimeException.java */; };
+		0FDD30D10A30D2DF006F6193 /* MaxSystem.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD307F0A30D2DE006F6193 /* MaxSystem.java */; };
+		0FDD30D20A30D2DF006F6193 /* MaxWindow.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30800A30D2DE006F6193 /* MaxWindow.java */; };
+		0FDD30D30A30D2DF006F6193 /* MessageReceiver.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30810A30D2DE006F6193 /* MessageReceiver.java */; };
+		0FDD30D40A30D2DF006F6193 /* MXJClassLoader.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30820A30D2DE006F6193 /* MXJClassLoader.java */; };
+		0FDD30D50A30D2DF006F6193 /* MXJClassLoaderImpl.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30830A30D2DE006F6193 /* MXJClassLoaderImpl.java */; };
+		0FDD30D60A30D2DF006F6193 /* MXJDecompiler.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30840A30D2DE006F6193 /* MXJDecompiler.java */; };
+		0FDD30D70A30D2DF006F6193 /* MXJPreferences.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30850A30D2DF006F6193 /* MXJPreferences.java */; };
+		0FDD30D80A30D2DF006F6193 /* AudioFileBuffer.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30870A30D2DF006F6193 /* AudioFileBuffer.java */; };
+		0FDD30D90A30D2DF006F6193 /* MSPBuffer.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30880A30D2DF006F6193 /* MSPBuffer.java */; };
+		0FDD30DA0A30D2DF006F6193 /* MSPObject.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30890A30D2DF006F6193 /* MSPObject.java */; };
+		0FDD30DB0A30D2DF006F6193 /* MSPPerformable.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD308A0A30D2DF006F6193 /* MSPPerformable.java */; };
+		0FDD30DC0A30D2DF006F6193 /* MSPPerformer.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD308B0A30D2DF006F6193 /* MSPPerformer.java */; };
+		0FDD30DD0A30D2DF006F6193 /* MSPSignal.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD308C0A30D2DF006F6193 /* MSPSignal.java */; };
+		0FDD30DE0A30D2DF006F6193 /* BatchFileTokenMarker.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD308E0A30D2DF006F6193 /* BatchFileTokenMarker.java */; };
+		0FDD30DF0A30D2DF006F6193 /* CCTokenMarker.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD308F0A30D2DF006F6193 /* CCTokenMarker.java */; };
+		0FDD30E00A30D2DF006F6193 /* CTokenMarker.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30900A30D2DF006F6193 /* CTokenMarker.java */; };
+		0FDD30E10A30D2DF006F6193 /* DefaultInputHandler.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30910A30D2DF006F6193 /* DefaultInputHandler.java */; };
+		0FDD30E20A30D2DF006F6193 /* EiffelTokenMarker.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30920A30D2DF006F6193 /* EiffelTokenMarker.java */; };
+		0FDD30E30A30D2DF006F6193 /* GLSLTokenMarker.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30930A30D2DF006F6193 /* GLSLTokenMarker.java */; };
+		0FDD30E40A30D2DF006F6193 /* HTMLTokenMarker.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30940A30D2DF006F6193 /* HTMLTokenMarker.java */; };
+		0FDD30E50A30D2DF006F6193 /* IDLTokenMarker.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30950A30D2DF006F6193 /* IDLTokenMarker.java */; };
+		0FDD30E60A30D2DF006F6193 /* InputHandler.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30960A30D2DF006F6193 /* InputHandler.java */; };
+		0FDD30E70A30D2DF006F6193 /* JavaScriptTokenMarker.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30970A30D2DF006F6193 /* JavaScriptTokenMarker.java */; };
+		0FDD30E80A30D2DF006F6193 /* JavaTokenMarker.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30980A30D2DF006F6193 /* JavaTokenMarker.java */; };
+		0FDD30E90A30D2DF006F6193 /* JEditTextArea.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30990A30D2DF006F6193 /* JEditTextArea.java */; };
+		0FDD30EA0A30D2DF006F6193 /* KeywordMap.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD309A0A30D2DF006F6193 /* KeywordMap.java */; };
+		0FDD30EB0A30D2DF006F6193 /* MakefileTokenMarker.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD309B0A30D2DF006F6193 /* MakefileTokenMarker.java */; };
+		0FDD30EC0A30D2DF006F6193 /* MXJClassRefFrame.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD309C0A30D2DF006F6193 /* MXJClassRefFrame.java */; };
+		0FDD30ED0A30D2DF006F6193 /* MXJEditCfunkCompileFrame.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD309D0A30D2DF006F6193 /* MXJEditCfunkCompileFrame.java */; };
+		0FDD30EE0A30D2DF006F6193 /* MXJEditCompileContext.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD309E0A30D2DF006F6193 /* MXJEditCompileContext.java */; };
+		0FDD30EF0A30D2DF006F6193 /* MXJEditCompileFrame.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD309F0A30D2DF006F6193 /* MXJEditCompileFrame.java */; };
+		0FDD30F00A30D2DF006F6193 /* MXJEditor.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30A00A30D2DF006F6193 /* MXJEditor.java */; };
+		0FDD30F10A30D2DF006F6193 /* PatchTokenMarker.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30A10A30D2DF006F6193 /* PatchTokenMarker.java */; };
+		0FDD30F20A30D2DF006F6193 /* PerlTokenMarker.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30A20A30D2DF006F6193 /* PerlTokenMarker.java */; };
+		0FDD30F30A30D2DF006F6193 /* PHPTokenMarker.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30A30A30D2DF006F6193 /* PHPTokenMarker.java */; };
+		0FDD30F40A30D2DF006F6193 /* PropsTokenMarker.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30A40A30D2DF006F6193 /* PropsTokenMarker.java */; };
+		0FDD30F50A30D2DF006F6193 /* PythonTokenMarker.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30A50A30D2DF006F6193 /* PythonTokenMarker.java */; };
+		0FDD30F60A30D2DF006F6193 /* ShellScriptTokenMarker.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30A60A30D2DF006F6193 /* ShellScriptTokenMarker.java */; };
+		0FDD30F70A30D2DF006F6193 /* SQLTokenMarker.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30A70A30D2DF006F6193 /* SQLTokenMarker.java */; };
+		0FDD30F80A30D2DF006F6193 /* SyntaxDocument.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30A80A30D2DF006F6193 /* SyntaxDocument.java */; };
+		0FDD30F90A30D2DF006F6193 /* SyntaxStyle.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30A90A30D2DF006F6193 /* SyntaxStyle.java */; };
+		0FDD30FA0A30D2DF006F6193 /* SyntaxUtilities.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30AA0A30D2DF006F6193 /* SyntaxUtilities.java */; };
+		0FDD30FB0A30D2DF006F6193 /* TextAreaDefaults.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30AB0A30D2DF006F6193 /* TextAreaDefaults.java */; };
+		0FDD30FC0A30D2DF006F6193 /* TextAreaPainter.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30AC0A30D2DF006F6193 /* TextAreaPainter.java */; };
+		0FDD30FD0A30D2DF006F6193 /* TeXTokenMarker.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30AD0A30D2DF006F6193 /* TeXTokenMarker.java */; };
+		0FDD30FE0A30D2DF006F6193 /* TextUtilities.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30AE0A30D2DF006F6193 /* TextUtilities.java */; };
+		0FDD30FF0A30D2DF006F6193 /* Token.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30AF0A30D2DF006F6193 /* Token.java */; };
+		0FDD31000A30D2DF006F6193 /* TokenMarker.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30B00A30D2DF006F6193 /* TokenMarker.java */; };
+		0FDD31010A30D2DF006F6193 /* TSQLTokenMarker.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30B10A30D2DF006F6193 /* TSQLTokenMarker.java */; };
+		0FDD31020A30D2DF006F6193 /* XMLTokenMarker.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30B20A30D2DF006F6193 /* XMLTokenMarker.java */; };
+		0FDD31030A30D2DF006F6193 /* MultiReceiver.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30B40A30D2DF006F6193 /* MultiReceiver.java */; };
+		0FDD31040A30D2DF006F6193 /* MultiSender.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30B50A30D2DF006F6193 /* MultiSender.java */; };
+		0FDD31050A30D2DF006F6193 /* TcpReceiver.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30B60A30D2DF006F6193 /* TcpReceiver.java */; };
+		0FDD31060A30D2DF006F6193 /* TcpSender.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30B70A30D2DF006F6193 /* TcpSender.java */; };
+		0FDD31070A30D2DF006F6193 /* UdpReceiver.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30B80A30D2DF006F6193 /* UdpReceiver.java */; };
+		0FDD31080A30D2DF006F6193 /* UdpSender.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30B90A30D2DF006F6193 /* UdpSender.java */; };
+		0FDD31090A30D2DF006F6193 /* ArrayUtilities.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30BC0A30D2DF006F6193 /* ArrayUtilities.java */; };
+		0FDD310A0A30D2DF006F6193 /* Async.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30BD0A30D2DF006F6193 /* Async.java */; };
+		0FDD310B0A30D2DF006F6193 /* ImageUtilities.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30BE0A30D2DF006F6193 /* ImageUtilities.java */; };
+		0FDD310C0A30D2DF006F6193 /* IOUtilities.java in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD30BF0A30D2DF006F6193 /* IOUtilities.java */; };
+		0FDD311C0A30D566006F6193 /* jode-1.1.2-pre-embedded.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDD311B0A30D566006F6193 /* jode-1.1.2-pre-embedded.jar */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6A0644BC02C7C42C0CC91562 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = usr/share/man/man1;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0FDD306D0A30D2DE006F6193 /* ConsoleStream.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = ConsoleStream.java; sourceTree = "<group>"; };
+		0FDD306E0A30D2DE006F6193 /* ErrorStream.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = ErrorStream.java; sourceTree = "<group>"; };
+		0FDD306F0A30D2DE006F6193 /* MessageWriter.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MessageWriter.java; sourceTree = "<group>"; };
+		0FDD30700A30D2DE006F6193 /* PostStream.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = PostStream.java; sourceTree = "<group>"; };
+		0FDD30720A30D2DE006F6193 /* Atom.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = Atom.java; sourceTree = "<group>"; };
+		0FDD30730A30D2DE006F6193 /* AtomDataTypes.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = AtomDataTypes.java; sourceTree = "<group>"; };
+		0FDD30740A30D2DE006F6193 /* AttributeInfo.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = AttributeInfo.java; sourceTree = "<group>"; };
+		0FDD30750A30D2DE006F6193 /* Callback.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = Callback.java; sourceTree = "<group>"; };
+		0FDD30760A30D2DE006F6193 /* DataTypes.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = DataTypes.java; sourceTree = "<group>"; };
+		0FDD30770A30D2DE006F6193 /* Executable.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = Executable.java; sourceTree = "<group>"; };
+		0FDD30780A30D2DE006F6193 /* MaxBox.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MaxBox.java; sourceTree = "<group>"; };
+		0FDD30790A30D2DE006F6193 /* MaxClock.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MaxClock.java; sourceTree = "<group>"; };
+		0FDD307A0A30D2DE006F6193 /* MaxContext.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MaxContext.java; sourceTree = "<group>"; };
+		0FDD307B0A30D2DE006F6193 /* MaxObject.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MaxObject.java; sourceTree = "<group>"; };
+		0FDD307C0A30D2DE006F6193 /* MaxPatcher.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MaxPatcher.java; sourceTree = "<group>"; };
+		0FDD307D0A30D2DE006F6193 /* MaxQelem.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MaxQelem.java; sourceTree = "<group>"; };
+		0FDD307E0A30D2DE006F6193 /* MaxRuntimeException.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MaxRuntimeException.java; sourceTree = "<group>"; };
+		0FDD307F0A30D2DE006F6193 /* MaxSystem.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MaxSystem.java; sourceTree = "<group>"; };
+		0FDD30800A30D2DE006F6193 /* MaxWindow.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MaxWindow.java; sourceTree = "<group>"; };
+		0FDD30810A30D2DE006F6193 /* MessageReceiver.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MessageReceiver.java; sourceTree = "<group>"; };
+		0FDD30820A30D2DE006F6193 /* MXJClassLoader.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MXJClassLoader.java; sourceTree = "<group>"; };
+		0FDD30830A30D2DE006F6193 /* MXJClassLoaderImpl.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MXJClassLoaderImpl.java; sourceTree = "<group>"; };
+		0FDD30840A30D2DE006F6193 /* MXJDecompiler.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; name = MXJDecompiler.java; path = com/cycling74/max/MXJDecompiler.java; sourceTree = SOURCE_ROOT; };
+		0FDD30850A30D2DF006F6193 /* MXJPreferences.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MXJPreferences.java; sourceTree = "<group>"; };
+		0FDD30870A30D2DF006F6193 /* AudioFileBuffer.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = AudioFileBuffer.java; sourceTree = "<group>"; };
+		0FDD30880A30D2DF006F6193 /* MSPBuffer.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MSPBuffer.java; sourceTree = "<group>"; };
+		0FDD30890A30D2DF006F6193 /* MSPObject.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MSPObject.java; sourceTree = "<group>"; };
+		0FDD308A0A30D2DF006F6193 /* MSPPerformable.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MSPPerformable.java; sourceTree = "<group>"; };
+		0FDD308B0A30D2DF006F6193 /* MSPPerformer.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MSPPerformer.java; sourceTree = "<group>"; };
+		0FDD308C0A30D2DF006F6193 /* MSPSignal.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MSPSignal.java; sourceTree = "<group>"; };
+		0FDD308E0A30D2DF006F6193 /* BatchFileTokenMarker.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = BatchFileTokenMarker.java; sourceTree = "<group>"; };
+		0FDD308F0A30D2DF006F6193 /* CCTokenMarker.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = CCTokenMarker.java; sourceTree = "<group>"; };
+		0FDD30900A30D2DF006F6193 /* CTokenMarker.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = CTokenMarker.java; sourceTree = "<group>"; };
+		0FDD30910A30D2DF006F6193 /* DefaultInputHandler.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = DefaultInputHandler.java; sourceTree = "<group>"; };
+		0FDD30920A30D2DF006F6193 /* EiffelTokenMarker.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = EiffelTokenMarker.java; sourceTree = "<group>"; };
+		0FDD30930A30D2DF006F6193 /* GLSLTokenMarker.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = GLSLTokenMarker.java; sourceTree = "<group>"; };
+		0FDD30940A30D2DF006F6193 /* HTMLTokenMarker.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = HTMLTokenMarker.java; sourceTree = "<group>"; };
+		0FDD30950A30D2DF006F6193 /* IDLTokenMarker.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = IDLTokenMarker.java; sourceTree = "<group>"; };
+		0FDD30960A30D2DF006F6193 /* InputHandler.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = InputHandler.java; sourceTree = "<group>"; };
+		0FDD30970A30D2DF006F6193 /* JavaScriptTokenMarker.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = JavaScriptTokenMarker.java; sourceTree = "<group>"; };
+		0FDD30980A30D2DF006F6193 /* JavaTokenMarker.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = JavaTokenMarker.java; sourceTree = "<group>"; };
+		0FDD30990A30D2DF006F6193 /* JEditTextArea.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = JEditTextArea.java; sourceTree = "<group>"; };
+		0FDD309A0A30D2DF006F6193 /* KeywordMap.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = KeywordMap.java; sourceTree = "<group>"; };
+		0FDD309B0A30D2DF006F6193 /* MakefileTokenMarker.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MakefileTokenMarker.java; sourceTree = "<group>"; };
+		0FDD309C0A30D2DF006F6193 /* MXJClassRefFrame.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MXJClassRefFrame.java; sourceTree = "<group>"; };
+		0FDD309D0A30D2DF006F6193 /* MXJEditCfunkCompileFrame.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MXJEditCfunkCompileFrame.java; sourceTree = "<group>"; };
+		0FDD309E0A30D2DF006F6193 /* MXJEditCompileContext.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MXJEditCompileContext.java; sourceTree = "<group>"; };
+		0FDD309F0A30D2DF006F6193 /* MXJEditCompileFrame.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MXJEditCompileFrame.java; sourceTree = "<group>"; };
+		0FDD30A00A30D2DF006F6193 /* MXJEditor.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MXJEditor.java; sourceTree = "<group>"; };
+		0FDD30A10A30D2DF006F6193 /* PatchTokenMarker.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = PatchTokenMarker.java; sourceTree = "<group>"; };
+		0FDD30A20A30D2DF006F6193 /* PerlTokenMarker.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = PerlTokenMarker.java; sourceTree = "<group>"; };
+		0FDD30A30A30D2DF006F6193 /* PHPTokenMarker.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = PHPTokenMarker.java; sourceTree = "<group>"; };
+		0FDD30A40A30D2DF006F6193 /* PropsTokenMarker.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = PropsTokenMarker.java; sourceTree = "<group>"; };
+		0FDD30A50A30D2DF006F6193 /* PythonTokenMarker.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = PythonTokenMarker.java; sourceTree = "<group>"; };
+		0FDD30A60A30D2DF006F6193 /* ShellScriptTokenMarker.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = ShellScriptTokenMarker.java; sourceTree = "<group>"; };
+		0FDD30A70A30D2DF006F6193 /* SQLTokenMarker.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = SQLTokenMarker.java; sourceTree = "<group>"; };
+		0FDD30A80A30D2DF006F6193 /* SyntaxDocument.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = SyntaxDocument.java; sourceTree = "<group>"; };
+		0FDD30A90A30D2DF006F6193 /* SyntaxStyle.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = SyntaxStyle.java; sourceTree = "<group>"; };
+		0FDD30AA0A30D2DF006F6193 /* SyntaxUtilities.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = SyntaxUtilities.java; sourceTree = "<group>"; };
+		0FDD30AB0A30D2DF006F6193 /* TextAreaDefaults.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = TextAreaDefaults.java; sourceTree = "<group>"; };
+		0FDD30AC0A30D2DF006F6193 /* TextAreaPainter.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = TextAreaPainter.java; sourceTree = "<group>"; };
+		0FDD30AD0A30D2DF006F6193 /* TeXTokenMarker.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = TeXTokenMarker.java; sourceTree = "<group>"; };
+		0FDD30AE0A30D2DF006F6193 /* TextUtilities.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = TextUtilities.java; sourceTree = "<group>"; };
+		0FDD30AF0A30D2DF006F6193 /* Token.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = Token.java; sourceTree = "<group>"; };
+		0FDD30B00A30D2DF006F6193 /* TokenMarker.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = TokenMarker.java; sourceTree = "<group>"; };
+		0FDD30B10A30D2DF006F6193 /* TSQLTokenMarker.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = TSQLTokenMarker.java; sourceTree = "<group>"; };
+		0FDD30B20A30D2DF006F6193 /* XMLTokenMarker.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = XMLTokenMarker.java; sourceTree = "<group>"; };
+		0FDD30B40A30D2DF006F6193 /* MultiReceiver.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MultiReceiver.java; sourceTree = "<group>"; };
+		0FDD30B50A30D2DF006F6193 /* MultiSender.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = MultiSender.java; sourceTree = "<group>"; };
+		0FDD30B60A30D2DF006F6193 /* TcpReceiver.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = TcpReceiver.java; sourceTree = "<group>"; };
+		0FDD30B70A30D2DF006F6193 /* TcpSender.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = TcpSender.java; sourceTree = "<group>"; };
+		0FDD30B80A30D2DF006F6193 /* UdpReceiver.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = UdpReceiver.java; sourceTree = "<group>"; };
+		0FDD30B90A30D2DF006F6193 /* UdpSender.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = UdpSender.java; sourceTree = "<group>"; };
+		0FDD30BC0A30D2DF006F6193 /* ArrayUtilities.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = ArrayUtilities.java; sourceTree = "<group>"; };
+		0FDD30BD0A30D2DF006F6193 /* Async.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = Async.java; sourceTree = "<group>"; };
+		0FDD30BE0A30D2DF006F6193 /* ImageUtilities.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = ImageUtilities.java; sourceTree = "<group>"; };
+		0FDD30BF0A30D2DF006F6193 /* IOUtilities.java */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.java; path = IOUtilities.java; sourceTree = "<group>"; };
+		0FDD311B0A30D566006F6193 /* jode-1.1.2-pre-embedded.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = "jode-1.1.2-pre-embedded.jar"; path = "../../java-classes/lib/jode-1.1.2-pre-embedded.jar"; sourceTree = SOURCE_ROOT; };
+		6A9ED92C02B0286D0CC91562 /* max */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = max; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		130F8B94001BDF0A11CA292A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0FDD311C0A30D566006F6193 /* jode-1.1.2-pre-embedded.jar in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00E6828FFEC88D1A11DB9C8B = {
+			isa = PBXGroup;
+			children = (
+				0FDD311B0A30D566006F6193 /* jode-1.1.2-pre-embedded.jar */,
+				0FDD306A0A30D2DE006F6193 /* com */,
+				0120612AFEC8923411DB9C8B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0120612AFEC8923411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6A9ED92C02B0286D0CC91562 /* max */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0FDD306A0A30D2DE006F6193 /* com */ = {
+			isa = PBXGroup;
+			children = (
+				0FDD306B0A30D2DE006F6193 /* cycling74 */,
+			);
+			path = com;
+			sourceTree = "<group>";
+		};
+		0FDD306B0A30D2DE006F6193 /* cycling74 */ = {
+			isa = PBXGroup;
+			children = (
+				0FDD306C0A30D2DE006F6193 /* io */,
+				0FDD30710A30D2DE006F6193 /* max */,
+				0FDD30860A30D2DF006F6193 /* msp */,
+				0FDD308D0A30D2DF006F6193 /* mxjedit */,
+				0FDD30B30A30D2DF006F6193 /* net */,
+				0FDD30BB0A30D2DF006F6193 /* util */,
+			);
+			path = cycling74;
+			sourceTree = "<group>";
+		};
+		0FDD306C0A30D2DE006F6193 /* io */ = {
+			isa = PBXGroup;
+			children = (
+				0FDD306D0A30D2DE006F6193 /* ConsoleStream.java */,
+				0FDD306E0A30D2DE006F6193 /* ErrorStream.java */,
+				0FDD306F0A30D2DE006F6193 /* MessageWriter.java */,
+				0FDD30700A30D2DE006F6193 /* PostStream.java */,
+			);
+			path = io;
+			sourceTree = "<group>";
+		};
+		0FDD30710A30D2DE006F6193 /* max */ = {
+			isa = PBXGroup;
+			children = (
+				0FDD30720A30D2DE006F6193 /* Atom.java */,
+				0FDD30730A30D2DE006F6193 /* AtomDataTypes.java */,
+				0FDD30740A30D2DE006F6193 /* AttributeInfo.java */,
+				0FDD30750A30D2DE006F6193 /* Callback.java */,
+				0FDD30760A30D2DE006F6193 /* DataTypes.java */,
+				0FDD30770A30D2DE006F6193 /* Executable.java */,
+				0FDD30780A30D2DE006F6193 /* MaxBox.java */,
+				0FDD30790A30D2DE006F6193 /* MaxClock.java */,
+				0FDD307A0A30D2DE006F6193 /* MaxContext.java */,
+				0FDD307B0A30D2DE006F6193 /* MaxObject.java */,
+				0FDD307C0A30D2DE006F6193 /* MaxPatcher.java */,
+				0FDD307D0A30D2DE006F6193 /* MaxQelem.java */,
+				0FDD307E0A30D2DE006F6193 /* MaxRuntimeException.java */,
+				0FDD307F0A30D2DE006F6193 /* MaxSystem.java */,
+				0FDD30800A30D2DE006F6193 /* MaxWindow.java */,
+				0FDD30810A30D2DE006F6193 /* MessageReceiver.java */,
+				0FDD30820A30D2DE006F6193 /* MXJClassLoader.java */,
+				0FDD30830A30D2DE006F6193 /* MXJClassLoaderImpl.java */,
+				0FDD30840A30D2DE006F6193 /* MXJDecompiler.java */,
+				0FDD30850A30D2DF006F6193 /* MXJPreferences.java */,
+			);
+			path = max;
+			sourceTree = "<group>";
+		};
+		0FDD30860A30D2DF006F6193 /* msp */ = {
+			isa = PBXGroup;
+			children = (
+				0FDD30870A30D2DF006F6193 /* AudioFileBuffer.java */,
+				0FDD30880A30D2DF006F6193 /* MSPBuffer.java */,
+				0FDD30890A30D2DF006F6193 /* MSPObject.java */,
+				0FDD308A0A30D2DF006F6193 /* MSPPerformable.java */,
+				0FDD308B0A30D2DF006F6193 /* MSPPerformer.java */,
+				0FDD308C0A30D2DF006F6193 /* MSPSignal.java */,
+			);
+			path = msp;
+			sourceTree = "<group>";
+		};
+		0FDD308D0A30D2DF006F6193 /* mxjedit */ = {
+			isa = PBXGroup;
+			children = (
+				0FDD308E0A30D2DF006F6193 /* BatchFileTokenMarker.java */,
+				0FDD308F0A30D2DF006F6193 /* CCTokenMarker.java */,
+				0FDD30900A30D2DF006F6193 /* CTokenMarker.java */,
+				0FDD30910A30D2DF006F6193 /* DefaultInputHandler.java */,
+				0FDD30920A30D2DF006F6193 /* EiffelTokenMarker.java */,
+				0FDD30930A30D2DF006F6193 /* GLSLTokenMarker.java */,
+				0FDD30940A30D2DF006F6193 /* HTMLTokenMarker.java */,
+				0FDD30950A30D2DF006F6193 /* IDLTokenMarker.java */,
+				0FDD30960A30D2DF006F6193 /* InputHandler.java */,
+				0FDD30970A30D2DF006F6193 /* JavaScriptTokenMarker.java */,
+				0FDD30980A30D2DF006F6193 /* JavaTokenMarker.java */,
+				0FDD30990A30D2DF006F6193 /* JEditTextArea.java */,
+				0FDD309A0A30D2DF006F6193 /* KeywordMap.java */,
+				0FDD309B0A30D2DF006F6193 /* MakefileTokenMarker.java */,
+				0FDD309C0A30D2DF006F6193 /* MXJClassRefFrame.java */,
+				0FDD309D0A30D2DF006F6193 /* MXJEditCfunkCompileFrame.java */,
+				0FDD309E0A30D2DF006F6193 /* MXJEditCompileContext.java */,
+				0FDD309F0A30D2DF006F6193 /* MXJEditCompileFrame.java */,
+				0FDD30A00A30D2DF006F6193 /* MXJEditor.java */,
+				0FDD30A10A30D2DF006F6193 /* PatchTokenMarker.java */,
+				0FDD30A20A30D2DF006F6193 /* PerlTokenMarker.java */,
+				0FDD30A30A30D2DF006F6193 /* PHPTokenMarker.java */,
+				0FDD30A40A30D2DF006F6193 /* PropsTokenMarker.java */,
+				0FDD30A50A30D2DF006F6193 /* PythonTokenMarker.java */,
+				0FDD30A60A30D2DF006F6193 /* ShellScriptTokenMarker.java */,
+				0FDD30A70A30D2DF006F6193 /* SQLTokenMarker.java */,
+				0FDD30A80A30D2DF006F6193 /* SyntaxDocument.java */,
+				0FDD30A90A30D2DF006F6193 /* SyntaxStyle.java */,
+				0FDD30AA0A30D2DF006F6193 /* SyntaxUtilities.java */,
+				0FDD30AB0A30D2DF006F6193 /* TextAreaDefaults.java */,
+				0FDD30AC0A30D2DF006F6193 /* TextAreaPainter.java */,
+				0FDD30AD0A30D2DF006F6193 /* TeXTokenMarker.java */,
+				0FDD30AE0A30D2DF006F6193 /* TextUtilities.java */,
+				0FDD30AF0A30D2DF006F6193 /* Token.java */,
+				0FDD30B00A30D2DF006F6193 /* TokenMarker.java */,
+				0FDD30B10A30D2DF006F6193 /* TSQLTokenMarker.java */,
+				0FDD30B20A30D2DF006F6193 /* XMLTokenMarker.java */,
+			);
+			path = mxjedit;
+			sourceTree = "<group>";
+		};
+		0FDD30B30A30D2DF006F6193 /* net */ = {
+			isa = PBXGroup;
+			children = (
+				0FDD30B40A30D2DF006F6193 /* MultiReceiver.java */,
+				0FDD30B50A30D2DF006F6193 /* MultiSender.java */,
+				0FDD30B60A30D2DF006F6193 /* TcpReceiver.java */,
+				0FDD30B70A30D2DF006F6193 /* TcpSender.java */,
+				0FDD30B80A30D2DF006F6193 /* UdpReceiver.java */,
+				0FDD30B90A30D2DF006F6193 /* UdpSender.java */,
+			);
+			path = net;
+			sourceTree = "<group>";
+		};
+		0FDD30BB0A30D2DF006F6193 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				0FDD30BC0A30D2DF006F6193 /* ArrayUtilities.java */,
+				0FDD30BD0A30D2DF006F6193 /* Async.java */,
+				0FDD30BE0A30D2DF006F6193 /* ImageUtilities.java */,
+				0FDD30BF0A30D2DF006F6193 /* IOUtilities.java */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXJavaArchiveBuildPhase section */
+		130F8B93001BDF0A11CA292A /* JavaArchive */ = {
+			isa = PBXJavaArchiveBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXJavaArchiveBuildPhase section */
+
+/* Begin PBXProject section */
+		00E6828EFEC88D1A11DB9C8B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = 0AE31F6908BBAC2E002AF232 /* Build configuration list for PBXProject "maxjar" */;
+			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 00E6828FFEC88D1A11DB9C8B;
+			productRefGroup = 0120612AFEC8923411DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				130F8B90001BDF0A11CA292A /* maxjar */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0FDD31230A30D61B006F6193 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp \"$BUILT_PRODUCTS_DIR/max.jar\" \"$BUILT_PRODUCTS_DIR\"/../../../java-classes/lib";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		130F8B91001BDF0A11CA292A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0FDD30C00A30D2DF006F6193 /* ConsoleStream.java in Sources */,
+				0FDD30C10A30D2DF006F6193 /* ErrorStream.java in Sources */,
+				0FDD30C20A30D2DF006F6193 /* MessageWriter.java in Sources */,
+				0FDD30C30A30D2DF006F6193 /* PostStream.java in Sources */,
+				0FDD30C40A30D2DF006F6193 /* Atom.java in Sources */,
+				0FDD30C50A30D2DF006F6193 /* AtomDataTypes.java in Sources */,
+				0FDD30C60A30D2DF006F6193 /* AttributeInfo.java in Sources */,
+				0FDD30C70A30D2DF006F6193 /* Callback.java in Sources */,
+				0FDD30C80A30D2DF006F6193 /* DataTypes.java in Sources */,
+				0FDD30C90A30D2DF006F6193 /* Executable.java in Sources */,
+				0FDD30CA0A30D2DF006F6193 /* MaxBox.java in Sources */,
+				0FDD30CB0A30D2DF006F6193 /* MaxClock.java in Sources */,
+				0FDD30CC0A30D2DF006F6193 /* MaxContext.java in Sources */,
+				0FDD30CD0A30D2DF006F6193 /* MaxObject.java in Sources */,
+				0FDD30CE0A30D2DF006F6193 /* MaxPatcher.java in Sources */,
+				0FDD30CF0A30D2DF006F6193 /* MaxQelem.java in Sources */,
+				0FDD30D00A30D2DF006F6193 /* MaxRuntimeException.java in Sources */,
+				0FDD30D10A30D2DF006F6193 /* MaxSystem.java in Sources */,
+				0FDD30D20A30D2DF006F6193 /* MaxWindow.java in Sources */,
+				0FDD30D30A30D2DF006F6193 /* MessageReceiver.java in Sources */,
+				0FDD30D40A30D2DF006F6193 /* MXJClassLoader.java in Sources */,
+				0FDD30D50A30D2DF006F6193 /* MXJClassLoaderImpl.java in Sources */,
+				0FDD30D60A30D2DF006F6193 /* MXJDecompiler.java in Sources */,
+				0FDD30D70A30D2DF006F6193 /* MXJPreferences.java in Sources */,
+				0FDD30D80A30D2DF006F6193 /* AudioFileBuffer.java in Sources */,
+				0FDD30D90A30D2DF006F6193 /* MSPBuffer.java in Sources */,
+				0FDD30DA0A30D2DF006F6193 /* MSPObject.java in Sources */,
+				0FDD30DB0A30D2DF006F6193 /* MSPPerformable.java in Sources */,
+				0FDD30DC0A30D2DF006F6193 /* MSPPerformer.java in Sources */,
+				0FDD30DD0A30D2DF006F6193 /* MSPSignal.java in Sources */,
+				0FDD30DE0A30D2DF006F6193 /* BatchFileTokenMarker.java in Sources */,
+				0FDD30DF0A30D2DF006F6193 /* CCTokenMarker.java in Sources */,
+				0FDD30E00A30D2DF006F6193 /* CTokenMarker.java in Sources */,
+				0FDD30E10A30D2DF006F6193 /* DefaultInputHandler.java in Sources */,
+				0FDD30E20A30D2DF006F6193 /* EiffelTokenMarker.java in Sources */,
+				0FDD30E30A30D2DF006F6193 /* GLSLTokenMarker.java in Sources */,
+				0FDD30E40A30D2DF006F6193 /* HTMLTokenMarker.java in Sources */,
+				0FDD30E50A30D2DF006F6193 /* IDLTokenMarker.java in Sources */,
+				0FDD30E60A30D2DF006F6193 /* InputHandler.java in Sources */,
+				0FDD30E70A30D2DF006F6193 /* JavaScriptTokenMarker.java in Sources */,
+				0FDD30E80A30D2DF006F6193 /* JavaTokenMarker.java in Sources */,
+				0FDD30E90A30D2DF006F6193 /* JEditTextArea.java in Sources */,
+				0FDD30EA0A30D2DF006F6193 /* KeywordMap.java in Sources */,
+				0FDD30EB0A30D2DF006F6193 /* MakefileTokenMarker.java in Sources */,
+				0FDD30EC0A30D2DF006F6193 /* MXJClassRefFrame.java in Sources */,
+				0FDD30ED0A30D2DF006F6193 /* MXJEditCfunkCompileFrame.java in Sources */,
+				0FDD30EE0A30D2DF006F6193 /* MXJEditCompileContext.java in Sources */,
+				0FDD30EF0A30D2DF006F6193 /* MXJEditCompileFrame.java in Sources */,
+				0FDD30F00A30D2DF006F6193 /* MXJEditor.java in Sources */,
+				0FDD30F10A30D2DF006F6193 /* PatchTokenMarker.java in Sources */,
+				0FDD30F20A30D2DF006F6193 /* PerlTokenMarker.java in Sources */,
+				0FDD30F30A30D2DF006F6193 /* PHPTokenMarker.java in Sources */,
+				0FDD30F40A30D2DF006F6193 /* PropsTokenMarker.java in Sources */,
+				0FDD30F50A30D2DF006F6193 /* PythonTokenMarker.java in Sources */,
+				0FDD30F60A30D2DF006F6193 /* ShellScriptTokenMarker.java in Sources */,
+				0FDD30F70A30D2DF006F6193 /* SQLTokenMarker.java in Sources */,
+				0FDD30F80A30D2DF006F6193 /* SyntaxDocument.java in Sources */,
+				0FDD30F90A30D2DF006F6193 /* SyntaxStyle.java in Sources */,
+				0FDD30FA0A30D2DF006F6193 /* SyntaxUtilities.java in Sources */,
+				0FDD30FB0A30D2DF006F6193 /* TextAreaDefaults.java in Sources */,
+				0FDD30FC0A30D2DF006F6193 /* TextAreaPainter.java in Sources */,
+				0FDD30FD0A30D2DF006F6193 /* TeXTokenMarker.java in Sources */,
+				0FDD30FE0A30D2DF006F6193 /* TextUtilities.java in Sources */,
+				0FDD30FF0A30D2DF006F6193 /* Token.java in Sources */,
+				0FDD31000A30D2DF006F6193 /* TokenMarker.java in Sources */,
+				0FDD31010A30D2DF006F6193 /* TSQLTokenMarker.java in Sources */,
+				0FDD31020A30D2DF006F6193 /* XMLTokenMarker.java in Sources */,
+				0FDD31030A30D2DF006F6193 /* MultiReceiver.java in Sources */,
+				0FDD31040A30D2DF006F6193 /* MultiSender.java in Sources */,
+				0FDD31050A30D2DF006F6193 /* TcpReceiver.java in Sources */,
+				0FDD31060A30D2DF006F6193 /* TcpSender.java in Sources */,
+				0FDD31070A30D2DF006F6193 /* UdpReceiver.java in Sources */,
+				0FDD31080A30D2DF006F6193 /* UdpSender.java in Sources */,
+				0FDD31090A30D2DF006F6193 /* ArrayUtilities.java in Sources */,
+				0FDD310A0A30D2DF006F6193 /* Async.java in Sources */,
+				0FDD310B0A30D2DF006F6193 /* ImageUtilities.java in Sources */,
+				0FDD310C0A30D2DF006F6193 /* IOUtilities.java in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXToolTarget section */
+		130F8B90001BDF0A11CA292A /* maxjar */ = {
+			isa = PBXToolTarget;
+			buildConfigurationList = 0AE31F6508BBAC2E002AF232 /* Build configuration list for PBXToolTarget "maxjar" */;
+			buildPhases = (
+				130F8B91001BDF0A11CA292A /* Sources */,
+				130F8B93001BDF0A11CA292A /* JavaArchive */,
+				130F8B94001BDF0A11CA292A /* Frameworks */,
+				0FDD31230A30D61B006F6193 /* ShellScript */,
+				6A0644BC02C7C42C0CC91562 /* CopyFiles */,
+			);
+			dependencies = (
+			);
+			name = maxjar;
+			productInstallPath = /usr/local/bin;
+			productName = maxjar;
+			productReference = 6A9ED92C02B0286D0CC91562 /* max */;
+		};
+/* End PBXToolTarget section */
+
+/* Begin XCBuildConfiguration section */
+		0AE31F6608BBAC2E002AF232 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				JAVA_ARCHIVE_CLASSES = YES;
+				JAVA_ARCHIVE_COMPRESSION = NO;
+				JAVA_ARCHIVE_TYPE = JAR;
+				JAVA_COMPILER = /System/Library/Frameworks/JavaVM.framework/Versions/1.4/Commands/javac;
+				JAVA_COMPILER_DEPRECATED_WARNINGS = YES;
+				JAVA_SOURCE_SUBDIR = .;
+				PRODUCT_NAME = max;
+				PURE_JAVA = YES;
+				REZ_EXECUTABLE = YES;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		0AE31F6708BBAC2E002AF232 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				JAVA_ARCHIVE_CLASSES = YES;
+				JAVA_ARCHIVE_COMPRESSION = NO;
+				JAVA_ARCHIVE_TYPE = JAR;
+				JAVA_COMPILER = /System/Library/Frameworks/JavaVM.framework/Versions/1.4/Commands/javac;
+				JAVA_COMPILER_DEBUGGING_SYMBOLS = NO;
+				JAVA_COMPILER_DEPRECATED_WARNINGS = YES;
+				JAVA_SOURCE_SUBDIR = .;
+				PRODUCT_NAME = maxjar;
+				PURE_JAVA = YES;
+				REZ_EXECUTABLE = YES;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		0AE31F6A08BBAC2E002AF232 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		0AE31F6B08BBAC2E002AF232 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0AE31F6508BBAC2E002AF232 /* Build configuration list for PBXToolTarget "maxjar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0AE31F6608BBAC2E002AF232 /* Debug */,
+				0AE31F6708BBAC2E002AF232 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0AE31F6908BBAC2E002AF232 /* Build configuration list for PBXProject "maxjar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0AE31F6A08BBAC2E002AF232 /* Debug */,
+				0AE31F6B08BBAC2E002AF232 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 00E6828EFEC88D1A11DB9C8B /* Project object */;
+}

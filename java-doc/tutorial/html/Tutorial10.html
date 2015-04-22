@@ -1,0 +1,103 @@
+<html>
+<head>
+<title>Tutorial10</title>
+</head>
+<body bgcolor=#F7F7F7 link=#000000 vlink=#000000>
+<table><tr><td><a href="index.html"><img src="images/mxj_smallest.jpg" border=0></a><br></td></tr></table>
+<table border=0 width=100%>
+<tr>
+<td bgcolor=#DCAF6A width=30% valign=bottom>
+<font size=+3 face="Times"><b>Tutorial10</b></font>
+</td>
+<td bgcolor=#EBCDB1 width=70% align=right><font size=+1 face="Times">
+
+Embedding data in patches
+</font>
+</td>
+</tr>
+</table>
+</p>
+<font face="Times">
+
+<p>
+The <b>keep</b> class provides an example of simple data propogation between
+patching sessions:
+</p>
+<blockquote><code><pre>
+public class keep extends MaxObject {
+	
+	private Atom[] stuff = null;
+	private MaxPatcher patch = getParentPatcher();
+	private MaxWindow window = patch.getWindow();
+	boolean autobang = true;
+	
+	keep() {
+		declareIO(1,1);
+		declareAttribute("autobang");
+		setInletAssist(0, "(anything) whatever is input is stored and saved with the patch");
+		setOutletAssist(1, "info outlet");
+		setOutletAssist(0, "(anything) outputs whatever is stored on bang");
+	}
+		
+	private void setStuff(Atom[] a) {
+		window.setDirty(true);
+		stuff = a;
+	}
+	
+	public void inlet(int i) {
+		setStuff(new Atom[] {Atom.newAtom(i)});
+	}
+	
+	public void inlet(float f) {
+		setStuff(new Atom[] {Atom.newAtom(f)});
+	}
+	
+	public void list(Atom[] a) {
+		setStuff(a);
+	}
+	
+	public void anything(String msg, Atom[] a) {
+		setStuff(Atom.newAtom(msg, a));
+	}
+	
+	public void bang() {
+		outlet(0, stuff);
+	}
+	
+	public void loadbang() {
+		if (autobang)
+			bang();
+	}
+	
+	public void save() {
+		embedMessage("list", stuff);
+	}
+}
+</pre></code></blockquote>
+
+<p>
+<b>keep</b> maintains an array of <b>Atom</b>s in <font face="Courier" size=-1>stuff</font>.  When an instance
+of the class receives new input, it is stored in <font face="Courier" size=-1>stuff</font>.  The method we're
+interested in for the purposes of this tutorial is <font face="Courier">save</font>.  
+When the user saves a patcher, Max calls the <font face="Courier">save</font>
+method for every mxj object.  By default the method does nothing, but if it is 
+overridden as in the class above, one can use the
+<font face="Courier">embedMessage</font> method to embed messages into the patcher file that
+will be sent to the newly created object the next time patcher file is loaded off
+of the disk.
+</p><p>
+In the <b>keep</b> class' <font face="Courier">save</font> method the <font face="Courier">embedMessage</font>
+call embeds a "list" message with <font face="Courier" size=-1>stuff</font> as the argument.  When the patch is 
+loaded from the disk, the object will receive this message immediately after being 
+instantiated.  Therefore the <font face="Courier">list</font> method willo be called with the old value of
+<font face="Courier" size=-1>stuff</font> as the argument, and this sets the value of <font face="Courier" size=-1>stuff</font> in the new object
+to whatever it was when the patch was last saved.  
+</p>
+<p>
+As in the case of <font face="Courier">loadbang</font> or a class's constructor, output should <b>not</b> be 
+triggered by any message stored in the patcher file.  Doing so risks instability.
+</p>
+</font>
+
+</body>
+</html>

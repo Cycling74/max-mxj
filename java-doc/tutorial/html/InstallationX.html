@@ -1,0 +1,163 @@
+<html>
+<head>
+<title>InstallationX</title>
+</head>
+<body bgcolor=#F7F7F7 link=#000000 vlink=#000000>
+<table><tr><td><a href="index.html"><img src="images/mxj_smallest.jpg" border=0></a><br></td></tr></table>
+<table border=0 width=100%>
+<tr>
+<td bgcolor=#DCAF6A width=30% valign=bottom>
+<font size=+3 face="Times"><b>InstallationX</b></font>
+</td>
+<td bgcolor=#EBCDB1 width=70% align=right><font size=+1 face="Times">
+
+How to install Java on Mac OS X
+</font>
+</td>
+</tr>
+</table>
+</p>
+<font face="Times">
+
+
+<p>
+Good news: if you're running OS X, you probably already
+have the proper version of the Java Virtual Machine (JVM) installed
+on your system.  To confirm that you have a JVM installed, open a new 
+Terminal window and type java -version.  You should see something like this:
+</p>
+<blockquote><code><pre>
+java version "1.4.2_03"
+Java(TM) 2 Runtime Environment, Standard Edition (build 1.4.2_03-117.1)
+Java HotSpot(TM) Client VM (build 1.4.2-34, mixed mode)
+</pre></code></blockquote>
+
+<p>
+It's okay if your Java version is something different, 
+as long as it's some flavour of 1.4.  A 1.4.x version 
+of Java has been included with every version of the 
+Mac OS since 10.2.  Note that 1.4.2 is compatible 
+only with 10.3.x.  You may wish to update your computer 
+to the most recent version of Java that's compatible with 
+your operating system by using the Software Update 
+control panel in the System Preferences.
+</p>
+
+<p>
+To confirm that you have a Java Virtual Machine (JVM) installed, 
+open a new Terminal window and type <font face="Courier" size=-1>java -version</font>.  You should see something like this:
+</p>
+<blockquote><code><pre>
+java version "1.4.2_03"
+Java(TM) 2 Runtime Environment, Standard Edition (build 1.4.2_03-117.1)
+Java HotSpot(TM) Client VM (build 1.4.2-34, mixed mode)
+</pre></code></blockquote>
+
+<p>
+It's okay if your Java version is something different, as long as it's some flavour of 1.4.  A 1.4.x version of Java has been included with every version of the Mac OS since 10.2.  Note that at the time of writing this document, 1.4.2 is compatible only with 10.3.x.  You may wish to update your computer to the most recent version of Java that's compatible with your operating system by using the Software Update control panel in the System Preferences.
+</p><p>
+Follow the next few steps to learn about the layout of Java in OS X.
+While you're in the terminal, navigate to the heart of the Java installation as follows:
+</p>
+<blockquote><code><pre>
+[computron:~] bbn% cd /System/Library/Frameworks/JavaVM.framework/Versions/
+[computron:Frameworks/JavaVM.framework/Versions] bbn% ls -l
+total 16
+drwxr-xr-x   9 root  wheel  306 23 Sep 23:39 ./
+drwxr-xr-x  10 root  wheel  340 20 Feb 20:04 ../
+drwxr-xr-x   3 root  wheel  102 10 Jan 01:28 1.2/
+drwxr-xr-x   3 root  wheel  102 10 Jan 01:28 1.3/
+drwxr-xr-x   7 root  wheel  238 23 Sep 23:39 1.3.1/
+drwxr-xr-x   8 root  wheel  272  9 Jan 22:26 1.4.2/
+drwxr-xr-x   5 root  wheel  170 10 Jan 01:28 A/
+lrwxr-xr-x   1 root  wheel    1 20 Feb 20:04 Current@ -> A
+lrwxr-xr-x   1 root  wheel    5  2 Feb 23:21 CurrentJDK@ -> 1.4.2
+</pre></code></blockquote>
+
+<p>
+Each of the first four directories contains a different JDK (Java Development Kit).  At the time of writing the most recent JDK version is 1.4.2, so it is symbolically linked as the <font face="Courier" size=-1>CurrentJDK</font>.  Mxj uses this most current version, so let's have a look in there.
+</p>
+<blockquote><code><pre>
+[computron:Frameworks/JavaVM.framework/Versions] bbn% cd CurrentJDK
+[computron:JavaVM.framework/Versions/CurrentJDK] bbn% ls -l
+total 0
+drwxr-xr-x   8 root  wheel   272  9 Jan 22:26 ./
+drwxr-xr-x   9 root  wheel   306 23 Sep 23:39 ../
+drwxr-xr-x  10 root  wheel   340 21 Jan 11:01 Classes/
+drwxr-xr-x  24 root  wheel   816  2 Feb 23:25 Commands/
+drwxr-xr-x  12 root  wheel   408 21 Jan 11:01 Headers/
+drwxr-xr-x   8 root  wheel   272  9 Jan 22:26 Home/
+drwxr-xr-x  34 root  wheel  1156  2 Feb 23:54 Libraries/
+drwxr-xr-x   8 root  wheel   272 20 Feb 20:04 Resources/
+</pre></code></blockquote>
+
+<p>
+The <font face="Courier" size=-1>Classes</font> directory contains a few JAR packages, the <font face="Courier" size=-1>Libraries</font> directory contains some Mac OS native libraries for use with Java, and <font face="Courier" size=-1>Headers</font> some C header files.  The <font face="Courier" size=-1>Commands</font> directory contains the files that would traditionally be inside the Java bin directory: <font face="Courier" size=-1>jar</font>, <font face="Courier" size=-1>java</font>, <font face="Courier" size=-1>javac</font>, <font face="Courier" size=-1>javadoc</font>, etc.  The <font face="Courier" size=-1>Home</font> directory looks more like what you may be used to: the <font face="Courier" size=-1>bin</font> directory contains symbolic links to the files in the <font face="Courier" size=-1>Commands</font> directory, include points back to the <font face="Courier" size=-1>Headers</font> directory, and the <font face="Courier" size=-1>lib</font> directory contains all the configuration and property files you would expect.
+</p><p>
+Drop down two levels in the directory structure:
+</p>
+<blockquote><code><pre>
+[computron:JavaVM.framework/Versions/CurrentJDK] bbn% cd ../..
+[computron:Library/Frameworks/JavaVM.framework] bbn% pwd
+/System/Library/Frameworks/JavaVM.framework
+[computron:Library/Frameworks/JavaVM.framework] bbn% ls -l
+total 56
+drwxr-xr-x  10 root  wheel   340 20 Feb 20:04 ./
+drwxr-xr-x  60 root  wheel  2040 20 Feb 20:04 ../
+lrwxr-xr-x   1 root  wheel    27  2 Feb 23:21 Classes@ -> Versions/CurrentJDK/Classes
+lrwxr-xr-x   1 root  wheel    28  2 Feb 23:21 Commands@ -> Versions/CurrentJDK/Commands
+lrwxr-xr-x   1 root  wheel    24 20 Feb 20:04 Headers@ -> Versions/Current/Headers
+lrwxr-xr-x   1 root  wheel    24  2 Feb 23:21 Home@ -> Versions/CurrentJDK/Home
+lrwxr-xr-x   1 root  wheel    23 20 Feb 20:04 JavaVM@ -> Versions/Current/JavaVM
+lrwxr-xr-x   1 root  wheel    29  2 Feb 23:21 Libraries@ -> Versions/CurrentJDK/Libraries
+lrwxr-xr-x   1 root  wheel    26 20 Feb 20:04 Resources@ -> Versions/Current/Resources
+drwxr-xr-x   9 root  wheel   306 23 Sep 23:39 Versions/
+</pre></code></blockquote>
+
+<p>
+So in addition to the <font face="Courier" size=-1>Versions</font> folder the <font face="Courier" size=-1>JavaVM.framework</font> directory contains symbolic links to directories in the most recent version of the JDK.  Now let's drop back to the <font face="Courier" size=-1>Library</font> folder immediately above the root and explore the <font face="Courier" size=-1>Java</font> directory: 
+</p>
+<blockquote><code><pre>
+[computron:Library/Frameworks/JavaVM.framework] bbn% cd /Library/Java
+[computron:/Library/Java] bbn% ls -l
+total 24
+drwxrwxr-x   5 root  admin   170 20 Feb 20:04 ./
+drwxrwxr-x  43 root  admin  1462 20 Feb 20:04 ../
+drwxrwxr-x   8 root  admin   272 23 Sep 20:24 Extensions/
+lrwxr-xr-x   1 root  admin    48 20 Feb 20:04 Home@ -> /System/Library/Frameworks/JavaVM.framework/Home
+</pre></code></blockquote>
+
+<p>
+The <font face="Courier" size=-1>Home</font> directory here is a symbolic link to the <font face="Courier" size=-1>Home</font> directory in <font face="Courier" size=-1>JavaVM.framework</font>, which is itself a symbolic link to the <font face="Courier" size=-1>Home</font> directory in <font face="Courier" size=-1>CurrentJDK</font>.  Let's move into the <font face="Courier" size=-1>Extensions</font> folder:
+</p>
+<blockquote><code><pre>
+[computron:/Library/Java] bbn% cd Extensions
+[computron:/Library/Java/Extensions] bbn% ls -l
+total 2288
+drwxrwxr-x  8 root  admin     272 23 Sep 20:24 ./
+drwxrwxr-x  5 root  admin     170 20 Feb 20:04 ../
+-rwxr-xr-x  1 bbn   admin   54665 28 Aug  2002 activation.jar*
+-rw-r--r--  1 bbn   staff  364863  7 Jun  2001 javaSpeechFramework.jar
+-rwxr-xr-x  1 bbn   admin  305434 28 Aug  2002 mail.jar*
+-rw-r--r--  1 bbn   admin  215441 23 May  2003 mysql-connector-java-3.0.8-stable-bin.jar
+</pre></code></blockquote>
+
+<p>
+If you're just beginning with Java development, your <font face="Courier" size=-1>Extensions</font> directory 
+is probably empty.  <font face="Courier" size=-1>Library/Java/Extensions</font> is where you put class files 
+if you want them to be accessible by any user on the system. If you're working 
+on a shared machine you may want to create a <font face="Courier" size=-1>~/Library/Java/Extensions</font> 
+folder within your home directory to limit group clutter and prevent others from 
+messing with your files.  In the listing above there are four JAR files that 
+extend Java development possibilities: <font face="Courier" size=-1>activation.jar</font> contains the 
+classes of the JavaBeans Activation Framework, <font face="Courier" size=-1>javaSpeechFramework.jar</font> 
+contains the classes necessary to make the computer talk and respond to speech 
+commands, <font face="Courier" size=-1>mail.jar</font> contains classes that can send and receive email, and 
+<font face="Courier" size=-1>mysql-connector-java-3.0.8-stable-bin.jar</font> contains a JDBC driver for 
+the popular open-source database software <b>MySQL</b>.
+</p>
+
+</font>
+
+</body>
+</html>

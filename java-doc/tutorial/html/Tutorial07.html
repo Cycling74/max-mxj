@@ -1,0 +1,118 @@
+<html>
+<head>
+<title>Tutorial07</title>
+</head>
+<body bgcolor=#F7F7F7 link=#000000 vlink=#000000>
+<table><tr><td><a href="index.html"><img src="images/mxj_smallest.jpg" border=0></a><br></td></tr></table>
+<table border=0 width=100%>
+<tr>
+<td bgcolor=#DCAF6A width=30% valign=bottom>
+<font size=+3 face="Times"><b>Tutorial07</b></font>
+</td>
+<td bgcolor=#EBCDB1 width=70% align=right><font size=+1 face="Times">
+
+autocount2 - MaxClock
+</font>
+</td>
+</tr>
+</table>
+</p>
+<font face="Times">
+
+<p>
+This class will put the auto in <b>autocount1</b> - whereas 
+before an input bang was required to increase the count by 
+one and output the result, in the class below we use the 
+<b>MaxClock</b> class to create a clock that regularly calls 
+the bang method with a period set by the user.
+</p>
+<blockquote><code><pre>
+import com.cycling74.max.*;
+
+public class autocount2 extends MaxObject implements Executable {
+
+	private MaxClock clock;
+	private int count=0;
+	private float interval=400.f;
+	
+	public autocount2() {
+		declareAttribute("count");
+		declareAttribute("interval");
+		clock = new MaxClock(this);
+	}
+
+	public void inlet(int i) {
+		if (i==1)  
+			clock.delay(0);
+		else 
+			clock.unset();
+	}
+
+	public void execute() {
+		bang();
+		clock.delay(interval);
+	}
+
+	protected void notifyDeleted() {
+		clock.unset();
+	}
+
+	public void bang() {
+		count++;
+		outlet(0, count);
+	}
+}
+</pre></code></blockquote>
+
+<p>
+The first thing to notice is that the <b>autocount2</b> class not only extends 
+<b>MaxObject</b>, it also implements the <b>Executable</b> interface.  In Java 
+an <b>Interface</b> is a device that unrelated objects use to interact 
+with each other.  You use an interface to define behaviour that can be implemented 
+by any class.  For a class to implement <b>Executable</b> the only requirement 
+is that it define an <font face="Courier">execute()</font> method.
+</p><p>
+In this case we use the fact that our class in an <b>Executable</b> in the constructor
+when we create a new <b>MaxClock</b>.  The constructor for the <b>MaxClock</b> class
+requires an executable as an argument.  Then, when it is time for the clock to execute, 
+the <b>MaxClock</b> will call the <font face="Courier">execute</font> method in the <b>Executable</b> object
+that it was passed at construction time.  In this case we pass the keyword <font face="Courier" size=-1>this</font>,
+which is shorthand for "this object".  In other words, a new <b>autocount2</b> object
+passes itself as the <b>Excutable</b> to the <b>MaxClock</b> constructor, and when it's
+time for the <b>MaxClock</b> to do something it will call the <b>autocount2</b> 
+object's <font face="Courier">execute</font> method.
+</p><p>
+A <b>MaxClock</b> can be told to execute at some time in the future by calling its
+<font face="Courier">delay(double)</font> method, where the <font face="Courier" size=-1>double</font> represents the number of milliseconds
+the clock should wait before executing.  In the case of the class above, the code calls
+<font face="Courier" size=-1>clock.delay(0)</font> if the mxj object receives a 1, as might happen if
+a toggle were connected to the inlet.  The <font face="Courier">execute</font> method will then be called 
+almost immediately - it calls <font face="Courier">bang</font>, which increases the count variable and outputs 
+the result, and then calls <font face="Courier">clock.delay(interval)</font>, which will cause the <font face="Courier">execute</font>
+method to be called again in 400 milliseconds.  Note that 400 is the default value for 
+the <font face="Courier" size=-1>interval</font> variable, but that we have declared it as an attribute so the user
+may set a new value with an <font face="Courier" size=-1>interval</font> message.
+</p><p>
+We introduce also in this class the <font face="Courier">notifyDeleted</font> method.  As you might have suspected,
+it is called when the mxj object that contains the Java class is deleted in the Max patch.
+The typical use of this method is to tie up all of the "loose ends" that the object may have
+created during its lifetime.  In this case the only loose end to take care of is the 
+<b>MaxClock</b>, which, if running, will continue to call the object's <font face="Courier">execute</font>
+method over and over, perhaps with disastrous consequences when the outlet that the 
+<font face="Courier">bang</font> method requires no longer exists.  The <font face="Courier" size=-1>clock.unset</font> call causes
+the <b>MaxClock</b> to stop any future <font face="Courier">execute</font> calls it may have planned.
+</p>
+</font>
+<p>
+<table border=0 width=100%>
+<tr>
+<td bgcolor=#CCCCDD><font size=+1 face="Times"><b>Example:</b></a></td>
+</tr>
+</table>
+
+<p>
+<center>
+<img src="images/Tutorial07.jpg" border=0></center>
+
+</body>
+</html>
