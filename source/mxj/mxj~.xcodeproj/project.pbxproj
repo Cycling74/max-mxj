@@ -332,7 +332,7 @@
 					/Library/Frameworks,
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
-					"/Users/tim/Code/max-mxj/source/max-sdk/source/c74support/msp-includes",
+					"$(SRCROOT)/../max-sdk/source/c74support/msp-includes",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ./mxj_macho_prefix.h;
@@ -360,7 +360,7 @@
 					/Library/Frameworks,
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
-					"/Users/tim/Code/max-mxj/source/max-sdk/source/c74support/msp-includes",
+					"$(SRCROOT)/../max-sdk/source/c74support/msp-includes",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ./mxj_macho_prefix.h;
