@@ -112,7 +112,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\max-sdk\source\c74support\max-includes;..\j2sdk\include;..\j2sdk\include\win32;..\max-sdk\source\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\maxsdk\source\c74support\max-includes;..\j2sdk\include;..\j2sdk\include\win32;..\maxsdk\source\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>MXJ_MSP;WIN_VERSION;WIN32;_DEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <ExceptionHandling>
@@ -154,7 +154,7 @@
       </DataExecutionPrevention>
       <ImportLibrary>$(IntDir)$(ProjectName).lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>..\max-sdk\source\c74support\max-includes;..\max-sdk\source\c74support\msp-includes</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\maxsdk\source\c74support\max-includes;..\maxsdk\source\c74support\msp-includes</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -173,7 +173,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\max-sdk\source\c74support\max-includes;..\j2sdk\include;..\j2sdk\include\win32;..\max-sdk\source\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\maxsdk\source\c74support\max-includes;..\j2sdk\include;..\j2sdk\include\win32;..\maxsdk\source\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>MXJ_MSP;WIN_VERSION;WIN32;_DEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <ExceptionHandling>
@@ -213,7 +213,7 @@
       </DataExecutionPrevention>
       <ImportLibrary>$(IntDir)$(ProjectName).lib</ImportLibrary>
       <TargetMachine>MachineX64</TargetMachine>
-      <AdditionalLibraryDirectories>..\max-sdk\source\c74support\max-includes\x64;..\max-sdk\source\c74support\msp-includes\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\maxsdk\source\c74support\max-includes\x64;..\maxsdk\source\c74support\msp-includes\x64</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -233,7 +233,7 @@
     <ClCompile>
       <Optimization>Full</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>..\max-sdk\source\c74support\max-includes;..\j2sdk\include;..\j2sdk\include\win32;..\max-sdk\source\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\maxsdk\source\c74support\max-includes;..\j2sdk\include;..\j2sdk\include\win32;..\maxsdk\source\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>MXJ_MSP;WIN_VERSION;WIN32;NDEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>
@@ -263,7 +263,7 @@
       <AdditionalDependencies>MaxAPI.lib;MaxAudio.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName).mxe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\max-sdk\source\c74support\max-includes;..\max-sdk\source\c74support\msp-includes</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\maxsdk\source\c74support\max-includes;..\maxsdk\source\c74support\msp-includes</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <ModuleDefinitionFile>
       </ModuleDefinitionFile>
@@ -297,7 +297,7 @@
     <ClCompile>
       <Optimization>Full</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>..\max-sdk\source\c74support\max-includes;..\j2sdk\include;..\j2sdk\include\win32;..\max-sdk\source\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\maxsdk\source\c74support\max-includes;..\j2sdk\include;..\j2sdk\include\win32;..\maxsdk\source\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>MXJ_MSP;WIN_VERSION;WIN32;NDEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>
@@ -325,7 +325,7 @@
       <AdditionalDependencies>MaxAPI.lib;MaxAudio.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName).mxe64</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\max-sdk\source\c74support\max-includes\x64;..\max-sdk\source\c74support\msp-includes\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\maxsdk\source\c74support\max-includes\x64;..\maxsdk\source\c74support\msp-includes\x64</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <ModuleDefinitionFile>
       </ModuleDefinitionFile>

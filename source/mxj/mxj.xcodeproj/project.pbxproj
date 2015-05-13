@@ -84,7 +84,7 @@
 		0FCF77C0098AF49B006F07A0 /* classes.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = classes.c; sourceTree = "<group>"; };
 		0FCF77C1098AF49B006F07A0 /* classes.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = classes.h; sourceTree = "<group>"; };
 		0FCF7845098EE44A006F07A0 /* JavaVM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaVM.framework; path = /System/Library/Frameworks/JavaVM.framework; sourceTree = "<absolute>"; };
-		2271EACC1ABCEEA200F1B0C0 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = "../max-sdk/source/maxmspsdk.xcconfig"; sourceTree = "<group>"; };
+		2271EACC1ABCEEA200F1B0C0 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = "../maxsdk/source/maxmspsdk.xcconfig"; sourceTree = "<group>"; };
 		8D01CCD20486CAD60068D4B7 /* mxj.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mxj.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		93BB3F6A12843A14000B77A5 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -324,7 +324,7 @@
 			baseConfigurationReference = 2271EACC1ABCEEA200F1B0C0 /* maxmspsdk.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				C74SUPPORT = "$(SRCROOT)/../max-sdk/source/c74support";
+				C74SUPPORT = "$(SRCROOT)/../maxsdk/source/c74support";
 				C74_SYM_LINKER_FLAGS = "@$(C74SUPPORT)/max-includes/c74_linker_flags.txt";
 				C74_SYM_LINKER_FLAGS_MSP = "-Wl,-U,_dsp_add,-U,_dsp_add64,-U,_z_add_signalmethod,-U,_z_dsp_free,-U,_z_dsp_setup,-U,_class_dspinit,-U,_buffer_getchannelcount,-U,_buffer_getframecount,-U,_buffer_getsamplerate,-U,_buffer_getmillisamplerate,-U,_buffer_locksamples,-U,_buffer_unlocksamples,-U,_buffer_ref_exists,-U,_buffer_ref_getobject,-U,_buffer_ref_new,-U,_buffer_ref_notify,-U,_buffer_setdirty,-U,_class_dspinitjbox,-U,_sys_getdspobjdspstate,-U,_sys_getdspstate,-U,_z_jbox_dsp_free,-U,_z_jbox_dsp_setup,-U,_dsp_resize,-U,_dspchain_start,-U,_dspchain_compile2,-U,_dspchain_tick,-U,_buffer_getinfo";
 				COPY_PHASE_STRIP = NO;
@@ -351,7 +351,7 @@
 			baseConfigurationReference = 2271EACC1ABCEEA200F1B0C0 /* maxmspsdk.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				C74SUPPORT = "$(SRCROOT)/../max-sdk/source/c74support";
+				C74SUPPORT = "$(SRCROOT)/../maxsdk/source/c74support";
 				C74_SYM_LINKER_FLAGS = "@$(C74SUPPORT)/max-includes/c74_linker_flags.txt";
 				C74_SYM_LINKER_FLAGS_MSP = "-Wl,-U,_dsp_add,-U,_dsp_add64,-U,_z_add_signalmethod,-U,_z_dsp_free,-U,_z_dsp_setup,-U,_class_dspinit,-U,_buffer_getchannelcount,-U,_buffer_getframecount,-U,_buffer_getsamplerate,-U,_buffer_getmillisamplerate,-U,_buffer_locksamples,-U,_buffer_unlocksamples,-U,_buffer_ref_exists,-U,_buffer_ref_getobject,-U,_buffer_ref_new,-U,_buffer_ref_notify,-U,_buffer_setdirty,-U,_class_dspinitjbox,-U,_sys_getdspobjdspstate,-U,_sys_getdspstate,-U,_z_jbox_dsp_free,-U,_z_jbox_dsp_setup,-U,_dsp_resize,-U,_dspchain_start,-U,_dspchain_compile2,-U,_dspchain_tick,-U,_buffer_getinfo";
 				COPY_PHASE_STRIP = YES;
