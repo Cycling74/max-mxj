@@ -294,6 +294,11 @@ void mxj_loadbang(t_maxjava *x);
 void mxj_dblclick(t_maxjava *x);
 
 /*
+ * Tell the Max standalone builder about our dependencies.
+ */
+void mxj_fileusage(t_maxjava *x, void *w);
+
+/*
  * Create and return a new mxj instance.
  */
 void *maxjava_new(t_symbol *s, short argc, t_atom *argv);
@@ -462,6 +467,7 @@ void ext_main(void *r) {
 	class_addmethod(c, (method)mxj_save2,						"save2", A_CANT, 0);
 	class_addmethod(c, (method)mxj_loadbang,					"loadbang",A_CANT,0);
 	class_addmethod(c, (method)mxj_dblclick,					"dblclick",A_CANT,0);
+	class_addmethod(c, (method)mxj_fileusage,					"fileusage", A_CANT, 0);
 #ifdef MXJ_MSP
 	class_addmethod(c, (method)mxj_dsp64,						"dsp64", A_CANT, 0);
 	class_addmethod(c, (method)mxj_dspstate,					"dspstate", A_CANT, 0);
@@ -1162,6 +1168,21 @@ void mxj_dblclick(t_maxjava *x)
 	checkException(env);
 }
 
+	
+void mxj_fileusage(t_maxjava *x, void *w)
+{
+	t_atom a;
+	t_atomarray *aa = atomarray_new(0, NULL);
+	
+	atom_setsym(&a, gensym("externals"));
+	atomarray_appendatom(aa, &a);
+	atom_setsym(&a, gensym("java-classes"));
+	atomarray_appendatom(aa, &a);
+	
+	fileusage_addpackage(w, "max-mxj", (t_object*)aa);
+	// fileusage takes ownership of aa and thus will take care of freeing it
+}
+	
 
 
 /////MESSAGE RESOLUTION/////////////////////////////////////////////////////////////
