@@ -272,7 +272,7 @@ public class DefaultInputHandler extends InputHandler
 		
 		
 		if(c != KeyEvent.CHAR_UNDEFINED &&
-		   //(modifiers & KeyEvent.ALT_MASK) == 0 && --FIX for trond. Commented out no alt modifier. Can¾t think why we wouldn¾t want these anyway
+		   //(modifiers & KeyEvent.ALT_MASK) == 0 && --FIX for trond. Commented out no alt modifier. Can't think why we wouldn't want these anyway
 		   (modifiers & SHORTCUT_MASK) == 0)//we need to test for the shortcut mask here because apple doesn't set the
 		    {                               //key char to '' when there is a modifier, like CTRL for instance
 

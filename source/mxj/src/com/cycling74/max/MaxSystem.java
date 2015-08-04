@@ -259,7 +259,7 @@ public class MaxSystem {
 	public static native String[] getSearchPathForContext();
 
 	/**
-	 * Used with the nameConform method. As of version 4.3, Max’s path style is
+	 * Used with the nameConform method. As of version 4.3, Max's path style is
 	 * the slash style. Max style paths are of the form vol:/path/to/file
 	 */
 	public static final int PATH_STYLE_MAX = 0;
@@ -605,5 +605,6 @@ public class MaxSystem {
 	 * Put up a Max error window. Internal method.
 	 */
 	private static final native void doOuch(byte message[]);
+
 
 }

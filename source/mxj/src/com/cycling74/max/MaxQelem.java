@@ -109,7 +109,7 @@ public class MaxQelem
 	
 	/**
 	 * This function is identical to <code>set()</code>, except that the 
-	 * <code>MaxQelem</code>’s function is placed at the front of the list 
+	 * <code>MaxQelem</code>'s function is placed at the front of the list 
 	 * of routines to execute in the main thread instead of the back. 
 	 * Be polite and only use <code>front()</code> 
 	 * for special time-critical applications.
