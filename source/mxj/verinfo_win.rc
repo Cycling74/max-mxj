@@ -1,0 +1,53 @@
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+#include "max_winversion.h"
+#include "winver.h"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version Info
+//
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION     VER_FILEVERSION	
+PRODUCTVERSION  VER_PRODUCTVERSION
+FILEFLAGSMASK   VER_FILEFLAGSMASK
+FILEFLAGS       VER_FILEFLAGS
+FILEOS          VER_FILEOS
+FILETYPE        VFT_DLL
+FILESUBTYPE     VFT2_UNKNOWN
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK LANGUAGE_ANSI
+	BEGIN
+	  VALUE "CompanyName",		VER_COMPANYNAME_STR
+	  VALUE "FileDescription",	VER_FILEDESC_STR
+	  VALUE "FileVersion",		VER_FILEVERSION_STR
+	  VALUE "InternalName",		VER_TARGETNAME "\0"
+	  VALUE "LegalCopyright",	VER_LEGALCOPYRIGHT_STR
+	  // VALUE "LegalTrademarks",	VER_LEGALTRADEMARKS_STR		// rbs -- these are empty
+	  VALUE "OriginalFilename",	VER_TARGETNAME VER_TARGETEXT "\0"
+	  VALUE "ProductName",		VER_PRODUCTNAME_STR
+	  VALUE "ProductVersion",	VER_PRODUCTVERSION_STR
+	END
+  END
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation",		LANGUAGE_TRANS
+  END
+END
+
+//////////////////////////////
+//  C74ObjectProperties
+
+// By default we mark externals we make as C74 factory externals. 
+// However, things we ship separately from max (i.e. mira) should not have that set.
+#ifdef C74_EXCLUDE_FROM_COLLECTIVES
+C74OBJECTPROPERTIES C74OBJECTPROPERTIES  "c74excludefromcollectives.json"
+#elif !defined(C74_NON_FACTORY_EXTERNAL)
+C74OBJECTPROPERTIES C74OBJECTPROPERTIES "c74objectproperties.json"
+#endif
