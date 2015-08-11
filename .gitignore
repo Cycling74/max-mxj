@@ -32,3 +32,6 @@ externals
 # Xcode User Data
 project.xcworkspace
 xcuserdata
+
+build
+*.framework
