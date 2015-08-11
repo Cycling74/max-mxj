@@ -35,3 +35,7 @@ xcuserdata
 
 build
 *.framework
+
+*.sdf
+*.suo
+sysbuild
