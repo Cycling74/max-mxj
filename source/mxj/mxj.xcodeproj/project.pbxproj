@@ -84,7 +84,7 @@
 		0FCF77C0098AF49B006F07A0 /* classes.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = classes.c; sourceTree = "<group>"; };
 		0FCF77C1098AF49B006F07A0 /* classes.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = classes.h; sourceTree = "<group>"; };
 		0FCF7845098EE44A006F07A0 /* JavaVM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaVM.framework; path = /System/Library/Frameworks/JavaVM.framework; sourceTree = "<absolute>"; };
-		2271EACC1ABCEEA200F1B0C0 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = "../maxsdk/source/maxmspsdk.xcconfig"; sourceTree = "<group>"; };
+		2271EACC1ABCEEA200F1B0C0 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxsdk/source/maxmspsdk.xcconfig; sourceTree = "<group>"; };
 		8D01CCD20486CAD60068D4B7 /* mxj.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mxj.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		93BB3F6A12843A14000B77A5 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -337,7 +337,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ./mxj_macho_prefix.h;
 				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
-				INFOPLIST_FILE = "$(C74SUPPORT)/../Info.plist";
+				INFOPLIST_FILE = Info.plist;
 				OTHER_LDFLAGS = (
 					"$(C74_SYM_LINKER_FLAGS)",
 					"$(C74_SYM_LINKER_FLAGS_MSP)",
@@ -363,7 +363,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ./mxj_macho_prefix.h;
-				INFOPLIST_FILE = "$(C74SUPPORT)/../Info.plist";
+				INFOPLIST_FILE = Info.plist;
 				OTHER_LDFLAGS = (
 					"$(C74_SYM_LINKER_FLAGS)",
 					"$(C74_SYM_LINKER_FLAGS_MSP)",
