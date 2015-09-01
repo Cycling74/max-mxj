@@ -141,11 +141,14 @@ void say_deferred(t_maxjava *x,   t_symbol *s,  short argc,  t_atom argv[])
 {
 	t_outputfunc outputFn = (void *)argv[0].a_w.w_long;
 	char *message = (char *)argv[1].a_w.w_long;
-	long length = (long)strlen(message);
-    outputFn(NULL, "%s", message);
-    mxj_freebytes(message, length+1);
-}
+	long length;
 
+	if (message) {
+		length = (long)strlen(message);
+		outputFn(NULL, "%s", message);
+		mxj_freebytes(message, length+1);
+	}
+}
 
 /*
  * Deferred outlet functions
