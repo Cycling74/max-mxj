@@ -396,9 +396,6 @@
     <ClInclude Include="package.h" />
     <ClInclude Include="threadenv.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="verinfo_win.rc" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
