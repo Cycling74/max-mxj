@@ -11,7 +11,7 @@ t_mxj_proplist *mxj_proplist_new(int initialsize)
 	return pl;
 }
 
-void mxj_proplist_add_prop(t_mxj_proplist* pl,int id, void *data)
+void mxj_proplist_add_prop(t_mxj_proplist *pl,int id, void *data)
 {
 	if (pl != NULL) {
 		if (pl->len == pl->size) {
@@ -27,6 +27,20 @@ void mxj_proplist_add_prop(t_mxj_proplist* pl,int id, void *data)
 	}
 }
 
+void *mxj_proplist_find_stringprop(t_mxj_proplist *pl, int id, const char *data)
+{
+	int i;
+
+	for (i = 0; i < pl->len; i++) {
+		t_mxj_prop *p = pl->pptr[i];
+		if (p->id == id) {
+			if (!strcmp(data, (const char *)p->prop)) {
+				return p;
+			}
+		}
+	}
+	return NULL;
+}
 
 void mxj_proplist_free(t_mxj_proplist *x)
 {

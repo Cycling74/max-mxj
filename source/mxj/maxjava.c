@@ -437,6 +437,7 @@ jboolean mxj_check_z_no_inplace(JNIEnv *env, t_maxjava *x);
 
 #endif // MXJ_MSP
 
+void mxj_string_appendtoclasspath(t_string *classpath, char *jarpath);
 
 //--------------------------------------------------------------------------
 #ifdef MAC_VERSION
@@ -2811,7 +2812,7 @@ short mxj_get_jvmopts(JavaVMOption* options, int *num_options, int max_opts)
 					jpath[0] = '\0';
 				}
 				strncat(jpath, prop_val, MAX_PATH_CHARS);
-				string_append(classpath, jpath);
+				mxj_string_appendtoclasspath(classpath, jpath);
 			}
 			else if (!strcmp(prop_name, PROP_DYNAMIC_CLASS_DIR))
 			{
@@ -2859,7 +2860,11 @@ short mxj_get_jvmopts(JavaVMOption* options, int *num_options, int max_opts)
 								
 								strcat(dyn_cl_entry,fname);
 								//post("adding dyn cl entry %s",dyn_cl_entry);
-								mxj_proplist_add_prop( props, MXJPROP_DYN_CLASS_DIR, (void *)dyn_cl_entry);
+								if (!mxj_proplist_find_stringprop(props, MXJPROP_DYN_CLASS_DIR, dyn_cl_entry)) {
+									mxj_proplist_add_prop( props, MXJPROP_DYN_CLASS_DIR, (void *)dyn_cl_entry);
+								} else {
+									sysmem_freeptr(dyn_cl_entry);
+								}
 							}
 					}
 				}
@@ -2971,6 +2976,14 @@ make_classpath:
 	return MAX_ERR_NONE;
 }
 
+void mxj_string_appendtoclasspath(t_string *classpath, char *jarpath)
+{
+	int offset = (*jarpath == CLASSPATH_SEPARATOR) ? 1 : 0;
+	if (!(strstr(string_getptr(classpath), jarpath+offset))) {
+		string_append(classpath, jarpath);
+	}
+}
+
 void cp_add_system_jar_dir(char *native_dirname, short path, t_string *classpath)
 {
 	void *fx;
@@ -3008,7 +3021,7 @@ void cp_add_system_jar_dir(char *native_dirname, short path, t_string *classpath
 				jarpath[jarlen] = '\0';
 			}
 			strncat(&jarpath[jarlen], fname, MAX_PATH_CHARS);
-			string_append(classpath, jarpath);
+			mxj_string_appendtoclasspath(classpath, jarpath);
 		}
 	}
 }
@@ -3016,9 +3029,12 @@ void cp_add_system_jar_dir(char *native_dirname, short path, t_string *classpath
 void cp_add_dynamic_class_dir(char* native_dirname)
 {
 	char* dyn_cl_entry;
-	dyn_cl_entry = (char *)sysmem_newptr((long)strlen(native_dirname) + 2);
-	strcpy(dyn_cl_entry, native_dirname);
-	mxj_proplist_add_prop(props, MXJPROP_DYN_CLASS_DIR, (void *)dyn_cl_entry);				
+
+	if (!mxj_proplist_find_stringprop(props, MXJPROP_DYN_CLASS_DIR, native_dirname)) {
+		dyn_cl_entry = (char *)sysmem_newptr((long)strlen(native_dirname) + 2);
+		strcpy(dyn_cl_entry, native_dirname);
+		mxj_proplist_add_prop(props, MXJPROP_DYN_CLASS_DIR, (void *)dyn_cl_entry);
+	}
 }
 
 void cp_post_system_classpath(char *sys_classpath)
