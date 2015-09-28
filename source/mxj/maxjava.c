@@ -3087,7 +3087,7 @@ void setPeer(JNIEnv *env, t_maxjava *x)
 	jfieldID mPeer_FID;
 	
 	mPeer_FID = MXJ_JNI_CALL(env,GetFieldID)(env, x->cls, PEER_FNAME, PEER_SIG);
-	MXJ_JNI_CALL(env,SetLongField)(env, x->javaInstance, mPeer_FID, (long)x);
+	MXJ_JNI_CALL(env,SetLongField)(env, x->javaInstance, mPeer_FID, (t_atom_long)x);
 }
 
 void unsetPeer(JNIEnv *env, t_maxjava *x)

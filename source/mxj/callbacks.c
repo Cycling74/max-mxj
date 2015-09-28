@@ -127,8 +127,8 @@ void say(t_outputfunc outputFn, JNIEnv *env, jclass cls, jbyteArray bytes)
 		mxj_freebytes(message, length+1);
 	}
 	else {	// call defer low on it. message is freed in say_deferred
-		A_SETLONG(&deferArgs[0], (long)outputFn);
-		A_SETLONG(&deferArgs[1], (long)message);
+		A_SETLONG(&deferArgs[0], (t_atom_long)outputFn);
+		A_SETLONG(&deferArgs[1], (t_atom_long)message);
 		defer_low(NULL, (method)say_deferred, 0, 2, deferArgs);
 	}	
 }
