@@ -13,6 +13,7 @@
 #endif
 
 #include "buffer.h"
+#include "IVirtualMachineAPI.h"
 
 #include "ext_byteorder.h"
 #include "ext_sysmem.h"
@@ -1184,7 +1185,11 @@ void mxj_fileusage(t_maxjava *x, void *w)
 }
 	
 
-
+    //dyload complains this is missing
+    void fileusage_addpackage(void *w, C74_CONST char *name, t_object *subfoldernames)
+    {
+    }
+    
 /////MESSAGE RESOLUTION/////////////////////////////////////////////////////////////
 
 
@@ -2602,21 +2607,40 @@ JNIEnv *jvm_new(long *exists) {
 		
 		cp_post_system_classpath(ps);	
 		
+        //grab an IVirtualMachine
+        ivirtualmachine * ivm = new_virtualmachine();
+        //populate java options
+        
+        for(int i=0;i<numOptions;i++)
+        {
+            add_java_option(ivm, options[i].optionString);
+        }
+        
+        //
+        
 		post("MXJClassloader CLASSPATH:");
 		for(i = 0; i < props->len;i++) {
 			char buff[1024];
 			if (props->pptr[i]->id == MXJPROP_DYN_CLASS_DIR) {
 				strcpy(buff, (char *)(props->pptr[i])->prop);
 				post("   %s",buff);
-			}
+                add_java_classpath(ivm, (char *)(props->pptr[i])->prop);
+            }
 		}
-	    if ((err = MXJ_JNI_CREATE_JAVA_VM(&g_jvm, (void**)&env, &vmArgs)) != 0) {
-
+        
+        start_java(ivm);
+        g_jvm = get_java_vm(ivm);
+        
+        
+//	    if ((err = MXJ_JNI_CREATE_JAVA_VM(&g_jvm, (void**)&env, &vmArgs)) != 0) {
+        if(g_jvm==NULL){
 	    		for(i = 0; i < numOptions;i++)
 	    			sysmem_freeptr(options[i].optionString);		
 	    	
 	    	return NULL;
     	}
+    
+        env = get_thread_env(ivm);
 	 
 	 	ps_global_jvm->s_thing = (t_object *)g_jvm;
 	    
