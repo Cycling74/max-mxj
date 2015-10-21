@@ -2609,6 +2609,7 @@ JNIEnv *jvm_new(long *exists) {
 		
         //grab an IVirtualMachine
         ivirtualmachine * ivm = new_virtualmachine();
+		post("IVirtual Machine boot");
         //populate java options
         
         for(int i=0;i<numOptions;i++)

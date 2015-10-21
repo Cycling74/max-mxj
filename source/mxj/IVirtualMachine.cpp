@@ -17,7 +17,7 @@ typedef _JNI_IMPORT_OR_EXPORT_ jint  (*WRAPPED_JNI_CreateJavaVM)(JavaVM **pvm, v
 typedef _JNI_IMPORT_OR_EXPORT_ jint  (*WRAPPED_JNI_GetCreatedJavaVMs)(JavaVM **, jsize, jsize *);
 
 #include <sys/types.h>
-#include <dirent.h>
+
 
 
 
@@ -50,6 +50,14 @@ void *JVMThread(void *param)
 	return NULL;
 }
 
+
+#ifdef WIN_VERSION
+inline bool file_exists(const std::string& name) {
+	struct stat buffer;
+	return (stat(name.c_str(), &buffer) == 0);
+}
+
+#endif
 
 //-------------------------------------------------------------------------------------------------
 // Initialize static class members
@@ -161,7 +169,7 @@ void IVirtualMachine::startJVM()
         
         if(NULL == pszOldVal)
         {
-            Logger::writeToLog("Out of memory for environment block swap");
+           // Logger::writeToLog("Out of memory for environment block swap");
         }else{
             
             dwRet = GetEnvironmentVariable(VARNAME, pszOldVal, ENV_BUFSIZE);
@@ -171,18 +179,18 @@ void IVirtualMachine::startJVM()
                 
             }else{
                 //calculate the length of the updated path
-                File jvmLib = File(eclipseLibrary);
-                String jvmLibPath = jvmLib.getParentDirectory().getParentDirectory().getFullPathName();
-                String oldPath = String(pszOldVal);
-                oldPath.append(String(";") + jvmLibPath , ENV_BUFSIZE - oldPath.length());
-                
-                if (! SetEnvironmentVariable(VARNAME, oldPath.getCharPointer()))
+				string jvmLibPath(eclipseLibrary);
+                string oldPath(pszOldVal);
+				oldPath.append(string(";"));
+				oldPath.append(string(jvmLibPath));
+
+                if (! SetEnvironmentVariable(VARNAME, oldPath.data()))
                 {
-                    Logger::writeToLog("SetEnvironmentVariable failed");
+                    //Logger::writeToLog("SetEnvironmentVariable failed");
                 }
                 
-                Logger::writeToLog(" new environment ");
-                Logger::writeToLog(oldPath);
+                //Logger::writeToLog(" new environment ");
+                //Logger::writeToLog(oldPath);
                 
             }
             
@@ -227,11 +235,9 @@ void IVirtualMachine::startJVM()
  */
 _TCHAR*  IVirtualMachine::findLib() {
 
-	int i, j;
-	size_t pathLength;	
-	struct _stat stats;
+	int  j;
+	
 	_TCHAR * path;				/* path to resulting jvm shared library */
-	_TCHAR * location;			/* points to begining of jvmLocations section of path */
 	
 	/* for looking in the registry */
 	HKEY jreKey = NULL;
@@ -289,7 +295,7 @@ _TCHAR*  IVirtualMachine::findLib() {
 	HKEY subKey = NULL;
 	DWORD length = MAX_PATH;
 	_TCHAR *result = NULL;
-	struct _stat stats;
+
 	
 	if(RegOpenKeyEx(jreKey, subKeyName, 0, KEY_READ, &subKey) == ERROR_SUCCESS) {				
 		/*The RuntimeLib value should point to the library we want*/
@@ -300,14 +306,24 @@ _TCHAR*  IVirtualMachine::findLib() {
 	  // but in fact they are at ../server.  so we do a dance here to make the extra check
 	  //in the case that we get a reg value but the file doesn't exist
 
-			String myLib = String(value);
-			File myLibFile = File(myLib);
-			if(!myLibFile.exists()){
-			  String newLib = myLib.replace("client","server");
-			  File myNewLibFile = File(newLib);
-			  if(myNewLibFile.exists()){
-				  memcpy(value,newLib.getCharPointer(), newLib.length());
-				  result = _tcsdup(value);
+			string myLib (value);
+			const string replacement("server");
+			if(!file_exists(myLib)){
+				size_t ps = myLib.find(string("client"), 0);
+				if (ps != string::npos){
+
+
+					myLib.replace(ps, 6, replacement);
+
+
+					if (file_exists(myLib)){
+						memcpy(value, myLib.data(), myLib.length());
+						result = _tcsdup(value);
+					}
+				}
+			  else
+			  {
+				  result = (_TCHAR *)NULL;
 			  }
 			} else{
 				result = _tcsdup(value);
@@ -422,7 +438,7 @@ void IVirtualMachine::addJavaOption(string newOption)
  */
 bool IVirtualMachine::launchJVM()
 {
-    int j = 0;
+    size_t j = 0;
     
     if(this->isLaunched)
         return false;
@@ -648,7 +664,7 @@ void IVirtualMachine::logLastError(LPTSTR lpszFunction){
         TEXT("%s failed with error %d: %s"), 
         lpszFunction, dw, lpMsgBuf); 
 
-	Logger::writeToLog(String((LPCTSTR)lpDisplayBuf));
+	//Logger::writeToLog(String((LPCTSTR)lpDisplayBuf));
 
     LocalFree(lpMsgBuf);
     LocalFree(lpDisplayBuf);
