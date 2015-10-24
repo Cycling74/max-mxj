@@ -348,6 +348,12 @@
     <ClCompile Include="clock_callbacks.c" />
     <ClCompile Include="copyprot.c" />
     <ClCompile Include="ExceptionUtils.c" />
+    <ClCompile Include="IVirtualMachine.cpp">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
     <ClCompile Include="maxjava.c">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
@@ -377,6 +383,8 @@
     <ClInclude Include="copyprot.h" />
     <ClInclude Include="dbg.h" />
     <ClInclude Include="ExceptionUtils.h" />
+    <ClInclude Include="IVirtualMachine.h" />
+    <ClInclude Include="IVirtualMachineAPI.h" />
     <ClInclude Include="maxjava.h" />
     <ClInclude Include="MaxObject.h" />
     <ClInclude Include="mxj_attr.h" />

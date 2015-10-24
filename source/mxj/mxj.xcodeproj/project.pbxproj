@@ -42,7 +42,10 @@
 		0F2313FE098ADE42007E8020 /* mxj_macho_prefix.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2313FD098ADE42007E8020 /* mxj_macho_prefix.h */; };
 		0FCF77C2098AF49B006F07A0 /* classes.c in Sources */ = {isa = PBXBuildFile; fileRef = 0FCF77C0098AF49B006F07A0 /* classes.c */; };
 		0FCF77C3098AF49B006F07A0 /* classes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0FCF77C1098AF49B006F07A0 /* classes.h */; };
-		0FCF7846098EE44A006F07A0 /* JavaVM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FCF7845098EE44A006F07A0 /* JavaVM.framework */; };
+		6A0A17421BD2C7A50050BF01 /* IVirtualMachine.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A0A17401BD2C7A50050BF01 /* IVirtualMachine.h */; };
+		6A0A17431BD2C7A50050BF01 /* IVirtualMachine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A0A17411BD2C7A50050BF01 /* IVirtualMachine.cpp */; };
+		6A0A175A1BD317B00050BF01 /* JavaHomeOsx.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A0A17581BD317B00050BF01 /* JavaHomeOsx.c */; };
+		6A0A175B1BD317B00050BF01 /* JavaHomeOsx.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A0A17591BD317B00050BF01 /* JavaHomeOsx.h */; };
 		93BB3F6B12843A14000B77A5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93BB3F6A12843A14000B77A5 /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -83,8 +86,12 @@
 		0F2313FD098ADE42007E8020 /* mxj_macho_prefix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mxj_macho_prefix.h; sourceTree = "<group>"; };
 		0FCF77C0098AF49B006F07A0 /* classes.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = classes.c; sourceTree = "<group>"; };
 		0FCF77C1098AF49B006F07A0 /* classes.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = classes.h; sourceTree = "<group>"; };
-		0FCF7845098EE44A006F07A0 /* JavaVM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaVM.framework; path = /System/Library/Frameworks/JavaVM.framework; sourceTree = "<absolute>"; };
 		2271EACC1ABCEEA200F1B0C0 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxsdk/source/maxmspsdk.xcconfig; sourceTree = "<group>"; };
+		6A0A17401BD2C7A50050BF01 /* IVirtualMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVirtualMachine.h; sourceTree = "<group>"; };
+		6A0A17411BD2C7A50050BF01 /* IVirtualMachine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IVirtualMachine.cpp; sourceTree = "<group>"; };
+		6A0A17441BD2DD350050BF01 /* IVirtualMachineAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVirtualMachineAPI.h; sourceTree = "<group>"; };
+		6A0A17581BD317B00050BF01 /* JavaHomeOsx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = JavaHomeOsx.c; sourceTree = "<group>"; };
+		6A0A17591BD317B00050BF01 /* JavaHomeOsx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JavaHomeOsx.h; sourceTree = "<group>"; };
 		8D01CCD20486CAD60068D4B7 /* mxj.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mxj.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		93BB3F6A12843A14000B77A5 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -94,7 +101,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FCF7846098EE44A006F07A0 /* JavaVM.framework in Frameworks */,
 				93BB3F6B12843A14000B77A5 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -117,7 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				93BB3F6A12843A14000B77A5 /* Cocoa.framework */,
-				0FCF7845098EE44A006F07A0 /* JavaVM.framework */,
 				08EA7FFBFE8413EDC02AAC07 /* Carbon.framework */,
 			);
 			name = "External Frameworks and Libraries";
@@ -157,6 +162,8 @@
 		0F2313A2098AD9D0007E8020 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				6A0A17401BD2C7A50050BF01 /* IVirtualMachine.h */,
+				6A0A17411BD2C7A50050BF01 /* IVirtualMachine.cpp */,
 				0F2313C2098ADAD8007E8020 /* Atom.c */,
 				0F2313C3098ADAD8007E8020 /* Atom.h */,
 				0FCF77C0098AF49B006F07A0 /* classes.c */,
@@ -177,6 +184,9 @@
 				0F2313A7098ADA43007E8020 /* mxj_props.h */,
 				0F2313E7098ADB8B007E8020 /* mxj_utils.c */,
 				0F2313E8098ADB8B007E8020 /* mxj_utils.h */,
+				6A0A17441BD2DD350050BF01 /* IVirtualMachineAPI.h */,
+				6A0A17581BD317B00050BF01 /* JavaHomeOsx.c */,
+				6A0A17591BD317B00050BF01 /* JavaHomeOsx.h */,
 			);
 			name = core;
 			sourceTree = "<group>";
@@ -204,6 +214,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A0A175B1BD317B00050BF01 /* JavaHomeOsx.h in Headers */,
 				0F2313A9098ADA43007E8020 /* mxj_props.h in Headers */,
 				0F2313AD098ADA52007E8020 /* mxj_method.h in Headers */,
 				0F2313B1098ADA5D007E8020 /* mxj_methodlist.h in Headers */,
@@ -215,6 +226,7 @@
 				0F2313DE098ADB4E007E8020 /* mxj_qelem.h in Headers */,
 				0F2313E2098ADB61007E8020 /* mxj_wind.h in Headers */,
 				0F2313E6098ADB6C007E8020 /* mxj_patcher.h in Headers */,
+				6A0A17421BD2C7A50050BF01 /* IVirtualMachine.h in Headers */,
 				0F2313EA098ADB8B007E8020 /* mxj_utils.h in Headers */,
 				0F2313EE098ADBAE007E8020 /* mxj_msp_buffer.h in Headers */,
 				0F2313F2098ADBCA007E8020 /* mxj_max_system.h in Headers */,
@@ -302,9 +314,11 @@
 				0F2313B4098ADA69007E8020 /* mxj_attr.c in Sources */,
 				0F2313B7098ADA75007E8020 /* maxjava.c in Sources */,
 				0F2313C0098ADACA007E8020 /* ExceptionUtils.c in Sources */,
+				6A0A17431BD2C7A50050BF01 /* IVirtualMachine.cpp in Sources */,
 				0F2313C4098ADAD8007E8020 /* Atom.c in Sources */,
 				0F2313D9098ADB42007E8020 /* mxj_box.c in Sources */,
 				0F2313DD098ADB4E007E8020 /* mxj_qelem.c in Sources */,
+				6A0A175A1BD317B00050BF01 /* JavaHomeOsx.c in Sources */,
 				0F2313E1098ADB61007E8020 /* mxj_wind.c in Sources */,
 				0F2313E5098ADB6C007E8020 /* mxj_patcher.c in Sources */,
 				0F2313E9098ADB8B007E8020 /* mxj_utils.c in Sources */,
