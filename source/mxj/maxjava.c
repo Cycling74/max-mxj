@@ -1186,11 +1186,6 @@ void mxj_fileusage(t_maxjava *x, void *w)
 }
 	
 
-    //dyload complains this is missing
-    void fileusage_addpackage(void *w, C74_CONST char *name, t_object *subfoldernames)
-    {
-    }
-    
 /////MESSAGE RESOLUTION/////////////////////////////////////////////////////////////
 
 
