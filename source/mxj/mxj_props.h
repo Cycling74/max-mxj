@@ -20,6 +20,7 @@ typedef struct mxj_proplist
 
 t_mxj_proplist* mxj_proplist_new(int initialsize);
 void mxj_proplist_add_prop(t_mxj_proplist* pl,int id, void *data);
+void *mxj_proplist_find_stringprop(t_mxj_proplist *pl, int id, const char *data);
 void mxj_proplist_free(t_mxj_proplist *x);
 t_mxj_prop *mxj_prop_new(int id, void *prop);
 void mxj_prop_free(t_mxj_prop *x);

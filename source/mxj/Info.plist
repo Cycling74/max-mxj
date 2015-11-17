@@ -26,7 +26,7 @@
 	<true/>
 	<key>C74ObjectProperties</key>
 	<dict>
-		<key>c74factoryexternal</key>
+		<key>c74excludefromcollectives</key>
 		<string>yes</string>
 	</dict>
 </dict>

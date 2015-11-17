@@ -113,7 +113,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\maxsdk\source\c74support\max-includes;..\j2sdk\include;..\j2sdk\include\win32;..\maxsdk\source\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>MXJ_MSP;WIN_VERSION;WIN32;_DEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MXJ_MSP;WIN_VERSION;WIN32;_DEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;C74_EXCLUDE_FROM_COLLECTIVES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <ExceptionHandling>
       </ExceptionHandling>
@@ -135,7 +135,7 @@
       <ForcedIncludeFiles>mxj_prefix.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>_DEBUG;WIN_VERSION;VER_TARGETNAME=\"$(TargetName)\";VER_TARGETEXT=\".mxe\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;WIN_VERSION;C74_EXCLUDE_FROM_COLLECTIVES;VER_TARGETNAME=\"$(TargetName)\";VER_TARGETEXT=\".mxe\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
@@ -174,7 +174,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\maxsdk\source\c74support\max-includes;..\j2sdk\include;..\j2sdk\include\win32;..\maxsdk\source\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>MXJ_MSP;WIN_VERSION;WIN32;_DEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MXJ_MSP;WIN_VERSION;C74_EXCLUDE_FROM_COLLECTIVES;WIN32;_DEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <ExceptionHandling>
       </ExceptionHandling>
@@ -195,7 +195,7 @@
       <ForcedIncludeFiles>mxj_prefix.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>_DEBUG;WIN_VERSION;VER_TARGETNAME=\"$(TargetName)\";VER_TARGETEXT=\".mxe64\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;WIN_VERSION;C74_EXCLUDE_FROM_COLLECTIVES;VER_TARGETNAME=\"$(TargetName)\";VER_TARGETEXT=\".mxe64\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
@@ -234,7 +234,7 @@
       <Optimization>Full</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>..\maxsdk\source\c74support\max-includes;..\j2sdk\include;..\j2sdk\include\win32;..\maxsdk\source\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>MXJ_MSP;WIN_VERSION;WIN32;NDEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MXJ_MSP;WIN_VERSION;C74_EXCLUDE_FROM_COLLECTIVES;WIN32;NDEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>
       </ExceptionHandling>
@@ -255,7 +255,7 @@
       <ForcedIncludeFiles>mxj_prefix.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>NDEBUG;WIN_VERSION;VER_TARGETNAME=\"$(TargetName)\";VER_TARGETEXT=\".mxe\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;WIN_VERSION;C74_EXCLUDE_FROM_COLLECTIVES;VER_TARGETNAME=\"$(TargetName)\";VER_TARGETEXT=\".mxe\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
@@ -298,7 +298,7 @@
       <Optimization>Full</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>..\maxsdk\source\c74support\max-includes;..\j2sdk\include;..\j2sdk\include\win32;..\maxsdk\source\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>MXJ_MSP;WIN_VERSION;WIN32;NDEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MXJ_MSP;WIN_VERSION;C74_EXCLUDE_FROM_COLLECTIVES;WIN32;NDEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>
       </ExceptionHandling>
@@ -318,7 +318,7 @@
       <ForcedIncludeFiles>mxj_prefix.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>NDEBUG;WIN_VERSION;VER_TARGETNAME=\"$(TargetName)\";VER_TARGETEXT=\".mxe64\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;WIN_VERSION;C74_EXCLUDE_FROM_COLLECTIVES;VER_TARGETNAME=\"$(TargetName)\";VER_TARGETEXT=\".mxe64\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
