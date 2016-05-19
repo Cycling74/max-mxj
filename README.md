@@ -1,5 +1,16 @@
 # max-mxj
-mxj/mxj~ for max
+[![Build Status](https://travis-ci.com/Cycling74/max-mxj.svg?token=GAmnsUEo9aYasSF5pz8q&branch=master)](https://travis-ci.com/Cycling74/max-mxj)
+[![Build status](https://ci.appveyor.com/api/projects/status/gp3t8xshfsjbmdcy?svg=true)](https://ci.appveyor.com/project/c74/max-mxj)
+
+The mxj/mxj~ objects for authoring objects in Max using Java.
+
+
+## Continuous Integration
+
+Builds can be downloaded from [S3](https://s3-us-west-2.amazonaws.com/cycling74-ci/index.html?prefix=max-mxj/)
+
+Use the badges above to go directly to the CI services.
+
 
 ## To build (Mac)
 Open the mxj or mxj~ project in Xcode 6.x
