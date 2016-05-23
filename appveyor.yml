@@ -9,7 +9,7 @@ shallow_clone: false
 platform:
   - x86
   - x64
-  
+
 build_script:
   - if "%platform%" == "x86" SET VS_FULL=%VS_VERSION%
   - if "%platform%" == "x86" SET CUSTOM_FLAG=""
@@ -22,6 +22,8 @@ build_script:
   - mkdir %APPVEYOR_PROJECT_NAME%
   - cp -r externals %APPVEYOR_PROJECT_NAME%
   - cp -r help %APPVEYOR_PROJECT_NAME%
+  - cp -r java-classes %APPVEYOR_PROJECT_NAME%
+  - cp -r java-doc %APPVEYOR_PROJECT_NAME%
   - cp License.md %APPVEYOR_PROJECT_NAME%
   - cp ReadMe.md %APPVEYOR_PROJECT_NAME%
   - 7z a %APPVEYOR_PROJECT_NAME%-win-%platform%-%APPVEYOR_REPO_COMMIT%.zip %APPVEYOR_PROJECT_NAME% > %APPVEYOR_BUILD_FOLDER%\archive.log
