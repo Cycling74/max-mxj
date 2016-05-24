@@ -216,6 +216,7 @@ void IVirtualMachine::startJVM()
     
     char * baseDir = getJavaHome();
     char * dylib = findLib(baseDir);
+    char * jli = getJavaJli();
     
     //we look to the environment for an embedded path
     char * embeddedEnvironment = getenv("EMBEDDED_JAVA_LIBRARY_PATH");
@@ -223,6 +224,8 @@ void IVirtualMachine::startJVM()
     if(embeddedEnvironment!=NULL)
         dylib = embeddedEnvironment;
     
+    if(jli!= NULL)
+        dlopen(jli, RTLD_NOW);
     
     if(dylib!=NULL)
         handle= dlopen(dylib,RTLD_NOW);
