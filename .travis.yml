@@ -42,3 +42,5 @@ deploy:
   acl: public_read
   on:
     repo: Cycling74/max-mxj
+  notifications:
+    slack: c74:K4YqdJQWsYlgyCeOjQv8yUqn
