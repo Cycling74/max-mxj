@@ -13,9 +13,15 @@ Use the badges above to go directly to the CI services.
 
 
 ## To build (Mac)
-Open the mxj or mxj~ project in Xcode 6.x
+
+* `mkdir build`
+* `cd build`
+* `cmake -G Xcode ..`
+* `cmake --build .` (or open the Xcode project in this build folder and build there)
+
 
 ## To build (Windows)
+
 Download the Java 2 SDK from Oracle, and place it in the top-level "source" folder. It should be named "j2sdk" and contain at least 3 folders named "include", "lib", and "jre".
 
 Open the mxj or mxj~ project in Visual Studio 2013
