@@ -26,6 +26,8 @@ script:
 - if [ -d media ]; then cp -r media $PACKAGE_NAME; fi
 - if [ -d misc ]; then cp -r misc $PACKAGE_NAME; fi
 - if [ -d patchers ]; then cp -r help $PACKAGE_NAME; fi
+- if [ -d java-classes ]; then cp -r java-classes $PACKAGE_NAME; fi
+- if [ -d java-doc ]; then cp -r java-doc $PACKAGE_NAME; fi
 - mkdir dist
 - zip -q -r dist/$PACKAGE_NAME-$PACKAGE_REV.zip $PACKAGE_NAME
 deploy:
