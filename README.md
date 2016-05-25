@@ -16,6 +16,6 @@ Use the badges above to go directly to the CI services.
 Open the mxj or mxj~ project in Xcode 6.x
 
 ## To build (Windows)
-Download the Java 2 SDK from Oracle, and place it in the top-level "source" folder. It should be named "j2sdk" and contain at least 3 folders named "include", "lib", and "jre".
+Download the Windows x86 Java SE Development Kit 8 (from http://www.oracle.com and install it in the default location (C:\Program Files (x86)\Java). Rename 'C:\Program Files (x86)\Java\jdk1.8.0_xxx' to 'C:\Program Files (x86)\Java\jdk1.8.0'.
 
 Open the mxj or mxj~ project in Visual Studio 2013
