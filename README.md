@@ -13,7 +13,12 @@ Use the badges above to go directly to the CI services.
 
 
 ## To build (Mac)
-Open the mxj or mxj~ project in Xcode 6.x
+
+* `mkdir build`
+* `cd build`
+* `cmake -G Xcode ..`
+* `cmake --build .` (or open the Xcode project in this build folder and build there)
+
 
 ## To build (Windows)
 Download the Windows x86 Java SE Development Kit 8 (from http://www.oracle.com and install it in the default location (C:\Program Files (x86)\Java). Rename 'C:\Program Files (x86)\Java\jdk1.8.0_xxx' to 'C:\Program Files (x86)\Java\jdk1.8.0'.

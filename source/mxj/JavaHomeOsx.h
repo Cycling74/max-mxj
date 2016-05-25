@@ -18,6 +18,7 @@
 
 char * getJavaVersion(char* command);
 char * getJavaHome();
+char * getJavaJli();
 char * findVMLibrary( char* command );
 char * findLib( char* command );
 

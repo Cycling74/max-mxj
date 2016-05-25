@@ -9,7 +9,7 @@ osx_image: xcode7.3
 script:
 - mkdir build
 - cd build
-- cmake ..
+- cmake -G Xcode ..
 - cd ..
 - PACKAGE_NAME=`echo $TRAVIS_REPO_SLUG | sed 's/.*\///g'`
 - PACKAGE_REV=`echo $TRAVIS_COMMIT | sed -e 's/^[[:alnum:]]\{6\}/&-/g' | sed 's/-.*//'`

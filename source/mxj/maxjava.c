@@ -582,21 +582,21 @@ void *maxjava_new(t_symbol *s, short argc, t_atom *argv)
 		
 		rl = PMO_GetCFRunLoopFromEventLoop(PMO_GetCurrentEventLoop());
 		if (!exists) { // only do this for the first one of mxj or mxj~ loaded -jkc
-			t_symbol *ps_sched_disablequeue = gensym("sched_disablequeue"); 
-			method sched_disablequeue = (method) ps_sched_disablequeue->s_thing; 
-			long oldval; 
-			init_awt();
-			// a very hacky way to make sure that awt is already initialized on the other thread
-			// this prevents a hang on OS X 10.9 Mavericks
-			systhread_sleep(2000);
-			// we disable queue servicing while running the run loop here 
-			if (sched_disablequeue)
-				oldval = (long) (*sched_disablequeue)((void*) 1); 
-			PMO_CFRunLoopRun();//enter CF runloop so cocoa can call back to us. Thread spawned in init_awt will break us out.
-			if (sched_disablequeue)
-				(*sched_disablequeue)((void*) oldval); 
+//			t_symbol *ps_sched_disablequeue = gensym("sched_disablequeue"); 
+//			method sched_disablequeue = (method) ps_sched_disablequeue->s_thing; 
+//			long oldval; 
+//			init_awt();
+//			// a very hacky way to make sure that awt is already initialized on the other thread
+//			// this prevents a hang on OS X 10.9 Mavericks
+//			systhread_sleep(2000);
+//			// we disable queue servicing while running the run loop here 
+//			if (sched_disablequeue)
+//				oldval = (long) (*sched_disablequeue)((void*) 1); 
+//			PMO_CFRunLoopRun();//enter CF runloop so cocoa can call back to us. Thread spawned in init_awt will break us out.
+//			if (sched_disablequeue)
+//				(*sched_disablequeue)((void*) oldval); 
 		}
-#endif	//MAC_VERSION	
+#endif	//MAC_VERSION
 	} else {
 		THREADENV(env);
 	}
@@ -2558,7 +2558,8 @@ JNIEnv *jvm_new(long *exists) {
 	
 	if (g_jvm == NULL) {
 	    JavaVMInitArgs vmArgs;
-	    JavaVMOption options[20];
+        //be very generous, we can have max 256 options
+	    JavaVMOption options[256];
 	    int numOptions = 0;
 	    int i;
 		int err;
@@ -2580,7 +2581,8 @@ JNIEnv *jvm_new(long *exists) {
 			return NULL;
 		}
 #endif
-		err = mxj_get_jvmopts(options,&numOptions, 20);
+        //be generous 256 options ..
+		err = mxj_get_jvmopts(options,&numOptions, 256);
 
 		if (err != MAX_ERR_NONE)
 			return NULL;
@@ -2913,8 +2915,9 @@ short mxj_get_jvmopts(JavaVMOption* options, int *num_options, int max_opts)
 				if (strcmp(jvm_opt, "-Xdebug") || !mxj_inlive())
 				{
 					if (op_idx < max_opts)
-					{		
-						options[op_idx].optionString = (char*)sysmem_newptr(64);
+					{
+                        //need more than 64 byte options ber generous here
+						options[op_idx].optionString = (char*)sysmem_newptr(256);
 						options[op_idx].extraInfo = NULL;
 						strcpy(options[op_idx].optionString,jvm_opt);
 						op_idx++;	
@@ -3059,7 +3062,9 @@ void cp_add_dynamic_class_dir(char* native_dirname)
 
 void cp_post_system_classpath(char *sys_classpath)
 {
-	char cp_out[1024];
+    //classpaths can get much larger than 1024 be very generous here as well
+    //too small a buffer is the cause of crashes
+	char cp_out[10240];
 	int idx;
 	char c;
 	char cp_sep;
