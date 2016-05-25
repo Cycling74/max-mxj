@@ -42,4 +42,3 @@ deploy:
   acl: public_read
   on:
     repo: Cycling74/max-mxj
-    branch: bb_ci_test
