@@ -34,6 +34,11 @@ struct mxj_safe {
 };
 
 
+void mxj_safe_dopost(mxj_safe* self) {
+	object_error_obtrusive((t_object*)self, "Java is not installed on this computer. Please install it from https://support.apple.com/kb/DL1572?locale=en_US.");
+}
+
+
 mxj_safe* mxj_safe_new(t_symbol* name, long ac, t_atom* av) {
 	mxj_safe* self;
 	
@@ -42,7 +47,7 @@ mxj_safe* mxj_safe_new(t_symbol* name, long ac, t_atom* av) {
 	else
 		self = (mxj_safe*)object_alloc(mxj_class);
 	
-	object_error_obtrusive((t_object*)self, "Java is not installed on this computer. Please install it from https://support.apple.com/kb/DL1572?locale=en_US.");
+	defer_low(self, (method)mxj_safe_dopost, nullptr, 0, nullptr);
 	return self;
 }
 
