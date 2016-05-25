@@ -44,3 +44,6 @@ deploy:
     repo: Cycling74/max-mxj
   notifications:
     slack: c74:K4YqdJQWsYlgyCeOjQv8yUqn
+notifications:
+  slack:
+    secure: WV3Cx0m0epgwlVdY7LXPeVPwUfAWbile1nDbwc0qQ5Z8bPo1yhNQnSXTKv6SNOj4aqZLCw3KOuE6eKf37907J0ZV4pv6GGgrEwi4TK7PMF3hnPgoXhCTQjqYr0fqWD2egCOHRGwoZ+LvVKeHzMIFqEWmOyMUgMWzR/BNsX3VyGI=
