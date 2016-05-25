@@ -166,7 +166,8 @@ char * getJavaVersion(char* command) {
     return version;
 }
 
-char * getJavaHome() {
+char * getHome()
+{
     FILE *fp;
     char path[4096];
     char *result, *start;
@@ -182,10 +183,32 @@ char * getJavaHome() {
     if (start) {
         start[0] = 0;
     }
-    sprintf(path, "%s/bin/java", result);
-    pclose(fp);
+    return strdup(result);
+    
+}
+
+char * getJavaHome() {
+    char path[4096];
+    char * home = getHome();
+    if(home == NULL)
+        return NULL;
+    
+    sprintf(path, "%s/bin/java", home);
     return strdup(path);
 }
+
+char * getJavaJli()
+{
+    char path[4096];
+    char * home = getHome();
+    if(home == NULL)
+        return NULL;
+    
+    sprintf(path, "%s/../MacOS/libjli.dylib", home);
+    return strdup(path);
+
+}
+
 
 char * findVMLibrary( char* command ) {
     char *start, *end;
