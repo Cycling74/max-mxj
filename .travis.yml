@@ -42,3 +42,9 @@ deploy:
   acl: public_read
   on:
     repo: Cycling74/max-mxj
+    branch: bb_ci_test
+after_deploy:
+  - curl -X POST -H 'Content-type: application/json' --data '{"text":"Successful Travis max-mxj build upload: <https://s3-us-west-2.amazonaws.com/cycling74-ci/max-mxj/max-mxj-$PACKAGE_REV.zip>"}' https://hooks.slack.com/services/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
+notifications:
+  slack:
+    secure: WV3Cx0m0epgwlVdY7LXPeVPwUfAWbile1nDbwc0qQ5Z8bPo1yhNQnSXTKv6SNOj4aqZLCw3KOuE6eKf37907J0ZV4pv6GGgrEwi4TK7PMF3hnPgoXhCTQjqYr0fqWD2egCOHRGwoZ+LvVKeHzMIFqEWmOyMUgMWzR/BNsX3VyGI=
