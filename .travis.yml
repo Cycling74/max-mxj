@@ -13,7 +13,7 @@ script:
 - cd ..
 - PACKAGE_NAME=`echo $TRAVIS_REPO_SLUG | sed 's/.*\///g'`
 - PACKAGE_REV=`echo $TRAVIS_COMMIT | sed -e 's/^[[:alnum:]]\{6\}/&-/g' | sed 's/-.*//'`
-- PAYLOAD=`echo "{ \"username\":\"TravisCI\", \"icon_url\":\"https://a.slack-edge.com/0180/img/services/travis_48.png\", \"text\":\"<https://s3-us-west-2.amazonaws.com/cycling74-ci/"$PACKAGE_NAME"/"$PACKAGE_NAME"-"$PACKAGE_REV".zip>\" }"`
+- PAYLOAD=`echo "{ \"username\":\"Travis CI\", \"icon_url\":\"https://a.slack-edge.com/0180/img/services/travis_48.png\", \"text\":\"Build "$TRAVIS_BUILD_NUMBER"("$PACKAGE_REV") of "$TRAVIS_REPO_SLUG" <https://s3-us-west-2.amazonaws.com/cycling74-ci/"$PACKAGE_NAME"/"$PACKAGE_NAME"-"$PACKAGE_REV".zip>\" }"`
 - mkdir $PACKAGE_NAME
 - if [ -e *.json ]; then cp *.json $PACKAGE_NAME; fi
 - if [ -e *.md ]; then cp *.json $PACKAGE_NAME; fi
