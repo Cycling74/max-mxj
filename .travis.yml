@@ -14,7 +14,7 @@ script:
 - PACKAGE_NAME=`echo $TRAVIS_REPO_SLUG | sed 's/.*\///g'`
 - PACKAGE_REV=`echo $TRAVIS_COMMIT | sed -e 's/^[[:alnum:]]\{6\}/&-/g' | sed 's/-.*//'`
 - PAYLOAD=`( cat ./slack_payload.json)`
-- PAYLOAD_PARSE=$(echo $PAYLOAD | sed -e "s/\$PACKAGE_NAME/$PACKAGE_NAME/g" -e "s/\$PACKAGE_REV/$PACKAGE_REV/g" -e "s/\$TRAVIS_REPO_SLUG/$TRAVIS_REPO_SLUG/g" -e "s/\$TRAVIS_BUILD_NUMBER/$TRAVIS_BUILD_NUMBER/g" -e "s/\$PACKAGE_REV/$PACKAGE_REV/g")
+- PAYLOAD_PARSE=$(echo $PAYLOAD | sed -e "s/\$PACKAGE_NAME/$PACKAGE_NAME/g" -e "s/\$PACKAGE_REV/$PACKAGE_REV/g" -e "s:\$TRAVIS_REPO_SLUG:$TRAVIS_REPO_SLUG:g" -e "s/\$TRAVIS_BUILD_NUMBER/$TRAVIS_BUILD_NUMBER/g" -e "s/\$PACKAGE_REV/$PACKAGE_REV/g")
 - mkdir $PACKAGE_NAME
 - if [ -e *.json ]; then cp *.json $PACKAGE_NAME; fi
 - if [ -e *.md ]; then cp *.json $PACKAGE_NAME; fi
