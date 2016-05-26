@@ -14,6 +14,7 @@ script:
 - PACKAGE_NAME=`echo $TRAVIS_REPO_SLUG | sed 's/.*\///g'`
 - PACKAGE_REV=`echo $TRAVIS_COMMIT | sed -e 's/^[[:alnum:]]\{6\}/&-/g' | sed 's/-.*//'`
 - PAYLOAD=`( cat ./slack_payload.json)`
+- PAYLOAD_PARSE=$(echo $PAYLOAD | sed -e "s/\$PACKAGE_NAME/$PACKAGE_NAME/g" -e "s/\$PACKAGE_REV/$PACKAGE_REV/g" -e "s/\$TRAVIS_REPO_SLUG/$TRAVIS_REPO_SLUG/g" -e "s/\$TRAVIS_BUILD_NUMBER/$TRAVIS_BUILD_NUMBER/g" -e "s/\$PACKAGE_REV/$PACKAGE_REV/g")
 - mkdir $PACKAGE_NAME
 - if [ -e *.json ]; then cp *.json $PACKAGE_NAME; fi
 - if [ -e *.md ]; then cp *.json $PACKAGE_NAME; fi
@@ -45,7 +46,7 @@ deploy:
     repo: Cycling74/max-mxj
     branch: bb_ci_test
 after_deploy:
-  - curl -X POST -H "Content-type:application/json" --data "$PAYLOAD" https://hooks.slack.com/services/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
+  - curl -X POST -H "Content-type:application/json" --data "$PAYLOAD_PARSE" https://hooks.slack.com/services/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
 notifications:
   slack:
     secure: WV3Cx0m0epgwlVdY7LXPeVPwUfAWbile1nDbwc0qQ5Z8bPo1yhNQnSXTKv6SNOj4aqZLCw3KOuE6eKf37907J0ZV4pv6GGgrEwi4TK7PMF3hnPgoXhCTQjqYr0fqWD2egCOHRGwoZ+LvVKeHzMIFqEWmOyMUgMWzR/BNsX3VyGI=

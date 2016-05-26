@@ -3,9 +3,9 @@
 	"icon_url":"https://a.slack-edge.com/0180/img/services/travis_48.png",
 	"attachments": [
 		{
-			"pretext": "Build # <https://travis-ci.com/\"$TRAVIS_REPO_SLUG\"/\"$TRAVIS_JOB_ID\"|\"$TRAVIS_BUILD_NUMBER\"> (\"$PACKAGE_REV\") of \"$TRAVIS_REPO_SLUG\"",
+			"pretext": "Build # <https://travis-ci.com/$TRAVIS_REPO_SLUG/$TRAVIS_JOB_ID|$TRAVIS_BUILD_NUMBER> ($PACKAGE_REV) of $TRAVIS_REPO_SLUG",
 			"color": "good",
-			"text":"<https://s3-us-west-2.amazonaws.com/cycling74-ci/\"$PACKAGE_NAME\"/\"$PACKAGE_NAME\"-\"$PACKAGE_REV\".zip>"
+			"text":"<https://s3-us-west-2.amazonaws.com/cycling74-ci/$PACKAGE_NAME/$PACKAGE_NAME-$PACKAGE_REV.zip>"
 		}
 	]
 }
