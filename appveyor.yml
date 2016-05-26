@@ -26,7 +26,7 @@ build_script:
   - cp -r java-doc %APPVEYOR_PROJECT_NAME%
   - cp License.md %APPVEYOR_PROJECT_NAME%
   - cp ReadMe.md %APPVEYOR_PROJECT_NAME%
-  - set SHORT_COMMIT=%APPVEYOR_REPO_COMMIT:~0,10%
+  - set SHORT_COMMIT=%APPVEYOR_REPO_COMMIT:~0,6%
   - 7z a %APPVEYOR_PROJECT_NAME%-win-%platform%-%SHORT_COMMIT%.zip %APPVEYOR_PROJECT_NAME% > %APPVEYOR_BUILD_FOLDER%\archive.log
 
 artifacts:
