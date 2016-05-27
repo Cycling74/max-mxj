@@ -26,13 +26,12 @@ build_script:
   - cp -r java-doc %APPVEYOR_PROJECT_NAME%
   - cp License.md %APPVEYOR_PROJECT_NAME%
   - cp ReadMe.md %APPVEYOR_PROJECT_NAME%
-  - 7z a %APPVEYOR_PROJECT_NAME%-win-%platform%-%APPVEYOR_REPO_COMMIT%.zip %APPVEYOR_PROJECT_NAME% > %APPVEYOR_BUILD_FOLDER%\archive.log
+  - set SHORT_COMMIT=%APPVEYOR_REPO_COMMIT:~0,6%
+  - 7z a %APPVEYOR_PROJECT_NAME%-win-%platform%-%SHORT_COMMIT%.zip %APPVEYOR_PROJECT_NAME% > %APPVEYOR_BUILD_FOLDER%\archive.log
 
 artifacts:
   - name: Build
     path: '*.zip'
-  - name: Log files
-    path: '*.log'
 
 deploy:
   provider: S3
@@ -43,4 +42,4 @@ deploy:
   folder: max-mxj
   region: us-west-2
   set_public: true
-  artifact: "$(APPVEYOR_PROJECT_NAME)-win-$(platform)-$(APPVEYOR_REPO_COMMIT).zip"
+  artifact: "$(APPVEYOR_PROJECT_NAME)-win-$(platform)-$(SHORT_COMMIT).zip"
