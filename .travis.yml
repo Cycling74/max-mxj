@@ -33,6 +33,7 @@ script:
 - if [ -d java-doc ]; then cp -r java-doc $PACKAGE_NAME; fi
 - mkdir dist
 - zip -q -r dist/$PACKAGE_NAME-$PACKAGE_REV.zip $PACKAGE_NAME
+secure: "XSY3BXw4/DmoOy35XT9B3V69JUxKRnP21/GabUm/8zWAB+WC9u5Ybc7hRXpQYT2JT9VN8JxkMcHCZ6bALc/1yg9Yfg72ky9UNq459vuF1FJ00+hH0ayll/VH9NFpPpezxYhgSgrnkCQdWCKSCBj03Sf/f1JsrLv9AereKCDR6cw="
 deploy:
   provider: s3
   access_key_id: AKIAIWE3SI2TMXC5AJBA
@@ -46,7 +47,7 @@ deploy:
   on:
     repo: Cycling74/max-mxj
 after_deploy:
-  - curl -X POST -H "Content-type:application/json" --data "$PAYLOAD_PARSE" https://hooks.slack.com/services/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
+  - curl -X POST -H "Content-type:application/json" --data "$PAYLOAD_PARSE" $SLACK_HOOK
 notifications:
   slack:
     secure: WV3Cx0m0epgwlVdY7LXPeVPwUfAWbile1nDbwc0qQ5Z8bPo1yhNQnSXTKv6SNOj4aqZLCw3KOuE6eKf37907J0ZV4pv6GGgrEwi4TK7PMF3hnPgoXhCTQjqYr0fqWD2egCOHRGwoZ+LvVKeHzMIFqEWmOyMUgMWzR/BNsX3VyGI=
