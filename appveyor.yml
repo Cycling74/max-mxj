@@ -32,8 +32,6 @@ build_script:
 artifacts:
   - name: Build
     path: '*.zip'
-  - name: Log files
-    path: '*.log'
 
 deploy:
   provider: S3
