@@ -44,7 +44,6 @@ deploy:
   acl: public_read
   on:
     repo: Cycling74/max-mxj
-    branch: bb_ci_test
 after_deploy:
   - curl -X POST -H "Content-type:application/json" --data "$PAYLOAD_PARSE" https://hooks.slack.com/services/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
 notifications:
