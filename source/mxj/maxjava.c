@@ -1173,18 +1173,7 @@ void mxj_dblclick(t_maxjava *x)
 	
 void mxj_fileusage(t_maxjava *x, void *w)
 {
-	t_atom a;
-	t_atomarray *aa = atomarray_new(0, NULL);
-	
-	atom_setsym(&a, gensym("extensions"));
-	atomarray_appendatom(aa, &a);
-	atom_setsym(&a, gensym("externals"));
-	atomarray_appendatom(aa, &a);
-	atom_setsym(&a, gensym("java-classes"));
-	atomarray_appendatom(aa, &a);
-	
-	fileusage_addpackage(w, "max-mxj", (t_object*)aa);
-	// fileusage takes ownership of aa and thus will take care of freeing it
+	fileusage_addpackage(w, "max-mxj", NULL);
 }
 	
 
