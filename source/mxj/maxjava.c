@@ -1176,6 +1176,8 @@ void mxj_fileusage(t_maxjava *x, void *w)
 	t_atom a;
 	t_atomarray *aa = atomarray_new(0, NULL);
 	
+	atom_setsym(&a, gensym("extensions"));
+	atomarray_appendatom(aa, &a);
 	atom_setsym(&a, gensym("externals"));
 	atomarray_appendatom(aa, &a);
 	atom_setsym(&a, gensym("java-classes"));
