@@ -31,11 +31,18 @@ static t_class *mxj_tilde_class = nullptr;
 
 struct mxj_safe {
 	t_pxobject	base;
+	t_object*	patcher;
 };
 
 
+extern "C" void jpatcher_error_obtrusive(t_object *p, t_object *x, const char *s, const char *linktext, const char *linkurl, t_symbol *dontshowid);
+
 void mxj_safe_dopost(mxj_safe* self) {
-	object_error_obtrusive((t_object*)self, "Java is not installed on this computer. Please install it from https://support.apple.com/kb/DL1572?locale=en_US.");
+	jpatcher_error_obtrusive(	self->patcher, nullptr, 
+								"Java is not installed on this computer. Please visit the MXJ wiki for instructions on installing it.", 
+								"Learn more...", 
+								"https://github.com/Cycling74/max-mxj/wiki/Install-Java", 
+								nullptr);
 }
 
 
@@ -46,7 +53,8 @@ mxj_safe* mxj_safe_new(t_symbol* name, long ac, t_atom* av) {
 		self = (mxj_safe*)object_alloc(mxj_class);
 	else
 		self = (mxj_safe*)object_alloc(mxj_class);
-	
+
+	object_obex_lookup(self, gensym("#P"), &self->patcher);
 	defer_low(self, (method)mxj_safe_dopost, nullptr, 0, nullptr);
 	return self;
 }
