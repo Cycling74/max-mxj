@@ -42,7 +42,7 @@ script:
 - curl http://akiaj5esl75o5wbdcv2a-maxmspjitter.s3.amazonaws.com/Max724_160725.dmg --output max.dmg
 - hdiutil attach max.dmg
 - cd ~/Documents/Max\ 7/Packages/max-test-v1.0-beta
-- mv misc/testpackage-config-example.json misc/max-test-config.json
+- mv misc/testpackage-config-example.json misc/testpackage-config.json
 - cd ruby
 - gem install sqlite3
 - ./test.rb /Volumes/Max7_160721_1cf59cb
