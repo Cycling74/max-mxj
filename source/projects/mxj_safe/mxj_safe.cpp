@@ -7,8 +7,12 @@
 
 using namespace c74::max;
 
+#ifdef C74_X64
+	#define DEFAULT_OS_ARCH "x86_64"
+#else
+	#define DEFAULT_OS_ARCH "i386"
+#endif
 
-#define DEFAULT_OS_ARCH "x86_64" // do we need to worry about 32-bit?
 #include "../../mxj/JavaHomeOsx.c"
 #include <dlfcn.h>
 #include <string>
