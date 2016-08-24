@@ -21,6 +21,6 @@ char * getJavaHome();
 char * getJavaJli();
 char * findVMLibrary( char* command );
 char * findLib( char* command );
-
+int isVMLibrary( _TCHAR* vm );
 
 #endif /* defined(__mxj__JavaHomeOsx__) */
