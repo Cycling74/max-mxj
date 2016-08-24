@@ -34,24 +34,7 @@ script:
 - if [ -d java-doc ]; then cp -r java-doc $PACKAGE_NAME; fi
 - mkdir dist
 - zip -q -r dist/$PACKAGE_NAME-$PACKAGE_REV.zip $PACKAGE_NAME
-- mkdir -p ~/Documents/Max\ 7/Packages/
-- cp -r $PACKAGE_NAME ~/Documents/Max\ 7/Packages
-- curl https://github.com/Cycling74/max-test/releases/download/v1.0-beta2/max-test-v1.0-beta2.zip -L --output max-test.zip
-- unzip max-test.zip -d Packages
-- cp -r Packages/max-test-v1.0-beta2 ~/Documents/Max\ 7/Packages/
-- curl http://akiaj5esl75o5wbdcv2a-maxmspjitter.s3.amazonaws.com/Max724_160725.dmg --output max.dmg
-- hdiutil attach max.dmg
-- mkdir -p ~/Applications
-- cp -r /Volumes/Max7_160721_1cf59cb/Max.app ~/Applications
-- rm -rf ~/Applications/Max.app/Contents/Resources/C74/packages/max-mxj
-- cp -r $PACKAGE_NAME ~/Applications/Max.app/Contents/Resources/C74/packages/max-mxj
-- cd ~/Documents/Max\ 7/Packages/max-test-v1.0-beta2
-- mv misc/testpackage-config-example.json misc/testpackage-config.json
-- rm -rf patchers
-- cd ruby
-- rvm get head
-- gem install sqlite3
-- ./test.rb ~/Applications
+- script/test.sh
 env:
   global:
     - secure: "XSY3BXw4/DmoOy35XT9B3V69JUxKRnP21/GabUm/8zWAB+WC9u5Ybc7hRXpQYT2JT9VN8JxkMcHCZ6bALc/1yg9Yfg72ky9UNq459vuF1FJ00+hH0ayll/VH9NFpPpezxYhgSgrnkCQdWCKSCBj03Sf/f1JsrLv9AereKCDR6cw="
