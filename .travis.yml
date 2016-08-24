@@ -43,6 +43,7 @@ script:
 - hdiutil attach max.dmg
 - cd ~/Documents/Max\ 7/Packages/max-test-v1.0-beta2
 - mv misc/testpackage-config-example.json misc/testpackage-config.json
+- rm -rf patchers
 - cd ruby
 - gem install sqlite3
 - ./test.rb /Volumes/Max7_160721_1cf59cb
