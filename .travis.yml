@@ -49,7 +49,8 @@ script:
 - rm -rf patchers
 - cd ruby
 - gem install sqlite3
-- ./test.rb ~/Applications
+- ls -la ~/Documents/Max\ 7/Packages
+- ./test.rb ~/Applications 1
 env:
   global:
     - secure: "XSY3BXw4/DmoOy35XT9B3V69JUxKRnP21/GabUm/8zWAB+WC9u5Ybc7hRXpQYT2JT9VN8JxkMcHCZ6bALc/1yg9Yfg72ky9UNq459vuF1FJ00+hH0ayll/VH9NFpPpezxYhgSgrnkCQdWCKSCBj03Sf/f1JsrLv9AereKCDR6cw="
