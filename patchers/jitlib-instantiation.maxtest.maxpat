@@ -56,9 +56,9 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 85.0, 140.0, 243.0, 23.0 ],
+					"patching_rect" : [ 85.0, 140.0, 232.0, 23.0 ],
 					"style" : "",
-					"text" : "script newdefault testob 280 200 mxj~ noise"
+					"text" : "script newdefault testob 280 200 jit.matrix"
 				}
 
 			}
@@ -98,7 +98,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 130.0, 10.0, 275.0, 35.0 ],
 					"style" : "",
-					"text" : "test that there are no errors posted for a simple patcher containing an mxj object."
+					"text" : "test that there are no errors posted when loading jitlib"
 				}
 
 			}

@@ -44,7 +44,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 40.0, 225.0, 32.0, 23.0 ],
-					"presentation_rect" : [ 40.0, 223.0, 0.0, 0.0 ],
 					"style" : "",
 					"text" : "qlim"
 				}
@@ -85,7 +84,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 130.0, 50.0, 275.0, 64.0 ],
-					"presentation_rect" : [ 114.0, 57.0, 0.0, 0.0 ],
 					"style" : "",
 					"text" : "the error object has to be created and registered prior to the attempt to create the mxj so we use scripting to accomplish the instantiation after the patcher has gotten its feet under itself."
 				}
