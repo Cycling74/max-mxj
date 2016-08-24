@@ -41,7 +41,7 @@ script:
 - cp -r Packages/max-test-v1.0-beta2 ~/Documents/Max\ 7/Packages/
 - curl http://akiaj5esl75o5wbdcv2a-maxmspjitter.s3.amazonaws.com/Max724_160725.dmg --output max.dmg
 - hdiutil attach max.dmg
-- mkdir ~/Applications
+- mkdir -p ~/Applications
 - cp -r /Volumes/Max7_160721_1cf59cb/Max.app ~/Applications
 - rm -rf ~/Applications/Max.app/Contents/Resources/C74/packages/max-mxj
 - cd ~/Documents/Max\ 7/Packages/max-test-v1.0-beta2
