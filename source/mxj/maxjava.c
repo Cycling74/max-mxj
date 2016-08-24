@@ -582,19 +582,19 @@ void *maxjava_new(t_symbol *s, short argc, t_atom *argv)
 		
 		rl = PMO_GetCFRunLoopFromEventLoop(PMO_GetCurrentEventLoop());
 		if (!exists) { // only do this for the first one of mxj or mxj~ loaded -jkc
-//			t_symbol *ps_sched_disablequeue = gensym("sched_disablequeue"); 
-//			method sched_disablequeue = (method) ps_sched_disablequeue->s_thing; 
-//			long oldval; 
-//			init_awt();
-//			// a very hacky way to make sure that awt is already initialized on the other thread
-//			// this prevents a hang on OS X 10.9 Mavericks
-//			systhread_sleep(2000);
-//			// we disable queue servicing while running the run loop here 
-//			if (sched_disablequeue)
-//				oldval = (long) (*sched_disablequeue)((void*) 1); 
-//			PMO_CFRunLoopRun();//enter CF runloop so cocoa can call back to us. Thread spawned in init_awt will break us out.
-//			if (sched_disablequeue)
-//				(*sched_disablequeue)((void*) oldval); 
+			t_symbol *ps_sched_disablequeue = gensym("sched_disablequeue"); 
+			method sched_disablequeue = (method) ps_sched_disablequeue->s_thing; 
+			long oldval; 
+			init_awt();
+			// a very hacky way to make sure that awt is already initialized on the other thread
+			// this prevents a hang on OS X 10.9 Mavericks
+			systhread_sleep(2000);
+			// we disable queue servicing while running the run loop here 
+			if (sched_disablequeue)
+				oldval = (long) (*sched_disablequeue)((void*) 1); 
+			PMO_CFRunLoopRun();//enter CF runloop so cocoa can call back to us. Thread spawned in init_awt will break us out.
+			if (sched_disablequeue)
+				(*sched_disablequeue)((void*) oldval); 
 		}
 #endif	//MAC_VERSION
 	} else {

@@ -44,8 +44,9 @@ void *JVMThread(void *param)
 #ifdef MAC_VERSION
 	pthread_setname_np("IVirtualMachine JVM Launch Thread");
 #endif
-
-	(IVirtualMachine::getInstance())->startJVM();
+    IVirtualMachine * myMachine = IVirtualMachine::getInstance();
+	myMachine->startJVM();
+    
     
 	return NULL;
 }
@@ -131,14 +132,21 @@ void IVirtualMachine::startJava()
 	pthread_create_rval=pthread_create(&jvmThread, &attr, &JVMThread, NULL);
 	if(pthread_create_rval != 0){
         //error condition
+        return;
     }
 
-	pthread_attr_destroy(&attr);
 
-	pthread_join(jvmThread,NULL);
+	int pjrval = pthread_join(jvmThread,NULL);
+
+    if(pjrval!=0)
+    {
+        //error condition
+        return;
+    }
+
+    pthread_attr_destroy(&attr);
 
     
-    CFRunLoopRun();
 
 
 #endif
@@ -219,16 +227,29 @@ void IVirtualMachine::startJVM()
     char * jli = getJavaJli();
     
     //we look to the environment for an embedded path
-    char * embeddedEnvironment = getenv("EMBEDDED_JAVA_LIBRARY_PATH");
+    char * embeddedEnvironment = getenv("EMBEDDED_JVM_LIBRARY_PATH");
+    char * embeddedJliEnvironment = getenv("EMBEDDED_JLI_LIBRARY_PATH");
     
     if(embeddedEnvironment!=NULL)
         dylib = embeddedEnvironment;
     
+    //embedded users must also provide the full path to the JLI library
+    if(embeddedJliEnvironment!=NULL)
+        jli = embeddedJliEnvironment;
+    
+    //the jvm can still launch if jli is not present
+    //in the case of Apple java 1.6 for example this will not result in a problem
     if(jli!= NULL)
         dlopen(jli, RTLD_NOW);
     
     if(dylib!=NULL)
+    {
         handle= dlopen(dylib,RTLD_NOW);
+        if(handle==NULL)
+        {
+            return;
+        }
+    }
     else
         return;
 #endif
