@@ -54,7 +54,7 @@ mxj_safe* mxj_safe_new(t_symbol* name, long ac, t_atom* av) {
 	mxj_safe* self;
 	
 	if (name == gensym("mxj~"))
-		self = (mxj_safe*)object_alloc(mxj_class);
+		self = (mxj_safe*)object_alloc(mxj_tilde_class);
 	else
 		self = (mxj_safe*)object_alloc(mxj_class);
 
