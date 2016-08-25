@@ -31,6 +31,7 @@ gem install sqlite3
 ls -la ~/Documents/Max\ 7/Packages/
 ls -la ~/Documents/Max\ 7/Packages/*
 ls -la ~/Documents/Max\ 7/Packages/*/patchers
+java -version
 
 # 6. Run the tests
 ./test.rb ~/Applications
