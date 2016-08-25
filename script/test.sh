@@ -3,7 +3,7 @@
 
 # 1. Copy the MXJ package into the install location
 mkdir -p ~/Documents/Max\ 7/Packages/
-cp -r $PACKAGE_NAME ~/Documents/Max\ 7/Packages
+cp -r $PACKAGE_NAME ~/Documents/Max\ 7/Packages/
 
 # 2. Download and copy the Test framework package into the install location
 curl https://github.com/Cycling74/max-test/releases/download/v1.0-beta2/max-test-v1.0-beta2.zip -L --output max-test.zip
@@ -18,7 +18,7 @@ cp -r /Volumes/Max7_160721_1cf59cb/Max.app ~/Applications
 
 # 4. Remove the pre-installed MXJ so the we know for certain that our build will be used
 rm -rf ~/Applications/Max.app/Contents/Resources/C74/packages/max-mxj
-# - cp -r $PACKAGE_NAME ~/Applications/Max.app/Contents/Resources/C74/packages/max-mxj
+cp -r $PACKAGE_NAME ~/Applications/Max.app/Contents/Resources/C74/packages/max-mxj
 
 # 5. Configure
 cd ~/Documents/Max\ 7/Packages/max-test-v1.0-beta2
