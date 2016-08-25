@@ -21,7 +21,7 @@ rm -rf ~/Applications/Max.app/Contents/Resources/C74/packages/max-mxj
 cp -rv $PACKAGE_NAME ~/Applications/Max.app/Contents/Resources/C74/packages
 
 # 5. Configure
-cd ~/Documents/Max\ 7/Packages/max-test-v1.0-beta3
+cd ~/Documents/Max\ 7/Packages/max-test
 mv misc/testpackage-config-example.json misc/testpackage-config.json
 rm -rf patchers
 cd ruby
