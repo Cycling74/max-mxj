@@ -2,8 +2,7 @@
 # must be run from the top-level of the max-mxj dir
 
 # 1. Copy the MXJ package into the install location
-mkdir -p ~/Documents/Max\ 7/Packages/
-cp -r $PACKAGE_NAME ~/Documents/Max\ 7/Packages/
+# Done in the travis script where the $PACKAGE_NAME var is in-scope
 
 # 2. Download and copy the Test framework package into the install location
 curl https://github.com/Cycling74/max-test/releases/download/v1.0-beta3/max-test-v1.0-beta3.zip -L --output max-test.zip
