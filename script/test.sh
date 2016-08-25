@@ -18,12 +18,12 @@ cp -r /Volumes/Max7_160721_1cf59cb/Max.app ~/Applications
 
 # 4. Remove the pre-installed MXJ so the we know for certain that our build will be used
 rm -rf ~/Applications/Max.app/Contents/Resources/C74/packages/max-mxj
-cp -r $PACKAGE_NAME ~/Applications/Max.app/Contents/Resources/C74/packages/max-mxj
+cp -rv $PACKAGE_NAME ~/Applications/Max.app/Contents/Resources/C74/packages
 
 # 5. Configure
 cd ~/Documents/Max\ 7/Packages/max-test-v1.0-beta2
 mv misc/testpackage-config-example.json misc/testpackage-config.json
-rm -rf patchers
+#rm -rf patchers
 cd ruby
 rvm get head
 gem install sqlite3
