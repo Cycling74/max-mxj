@@ -24,6 +24,7 @@ extern "C" {
     void add_java_classpath(ivirtualmachine* v,char * classpath);
     JavaVM * get_java_vm(ivirtualmachine* v);
     JNIEnv * get_thread_env(ivirtualmachine* v);
+    jstring get_system_property(ivirtualmachine* v,char * property);
     
 #ifdef __cplusplus
 }
