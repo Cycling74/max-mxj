@@ -6,7 +6,7 @@
 
 # 2. Download and copy the Test framework package into the install location
 #curl https://github.com/Cycling74/max-test/releases/download/v1.0-beta3/max-test-v1.0-beta3.zip -L --output max-test.zip
-curl https://github.com/cassiel/max-test/releases/download/v1.1-beta/max-test-v1.1-beta.zip -L --output max-test.zip
+curl https://github.com/cassiel/max-test/archive/v1.1-beta1.zip -L --output max-test.zip
 unzip max-test.zip -d Packages
 cp -r Packages/max-test-v1.1-beta ~/Documents/Max\ 7/Packages/Max-Test
 
