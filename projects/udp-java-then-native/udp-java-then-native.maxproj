@@ -1,29 +1,24 @@
 {
-	"name" : "check-class-file-version",
+	"name" : "udp-java-then-native",
 	"version" : 1,
-	"creationdate" : -739890790,
-	"modificationdate" : 3555316323,
-	"viewrect" : [ 25.0, 87.0, 300.0, 500.0 ],
+	"creationdate" : -739640702,
+	"modificationdate" : -739640658,
+	"viewrect" : [ 25.0, 70.0, 300.0, 500.0 ],
 	"autoorganize" : 1,
 	"hideprojectwindow" : 0,
 	"showdependencies" : 1,
 	"autolocalize" : 0,
 	"contents" : 	{
 		"patchers" : 		{
-			"NewerFormat.maxpat" : 			{
-				"kind" : "patcher",
-				"local" : 1
-			}
-,
-			"check-class-file-version_BOGUS.maxpat" : 			{
-				"kind" : "patcher",
-				"local" : 1
-			}
-,
-			"check-class-file-version.maxpat" : 			{
+			"udp-java-then-native.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1,
 				"toplevel" : 1
+			}
+,
+			"native-udp.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
 			}
 
 		}
