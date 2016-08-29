@@ -71,6 +71,11 @@ void awt_init_func(void);
 // Carbon/Swing modal dialog fix
 int g_in_java_modal_dialog = false;
 
+//do we need the awt hack?
+//we need the hack only in the case java is 1.6
+//let's default to true
+bool awt_hack_required = true;
+
 #endif // MAC_VERSION
 
 #ifdef WIN_VERSION
@@ -336,6 +341,9 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID cid, t_symbol *
  */
 JNIEnv *jvm_new(long *exists);
 
+/*new ivritual machine interface */
+ivirtualmachine * ivm = NULL;
+
 /*
  * Max is exiting.  If we've allocated a JVM, destroy it.
  */
@@ -581,20 +589,20 @@ void *maxjava_new(t_symbol *s, short argc, t_atom *argv)
 		PMO_CFRunLoopStop = (t_mp) CFBundleGetFunctionPointerForName(c_bundle, CFSTR("CFRunLoopStop"));	
 		
 		rl = PMO_GetCFRunLoopFromEventLoop(PMO_GetCurrentEventLoop());
-		if (!exists) { // only do this for the first one of mxj or mxj~ loaded -jkc
-//			t_symbol *ps_sched_disablequeue = gensym("sched_disablequeue"); 
-//			method sched_disablequeue = (method) ps_sched_disablequeue->s_thing; 
-//			long oldval; 
-//			init_awt();
-//			// a very hacky way to make sure that awt is already initialized on the other thread
-//			// this prevents a hang on OS X 10.9 Mavericks
-//			systhread_sleep(2000);
-//			// we disable queue servicing while running the run loop here 
-//			if (sched_disablequeue)
-//				oldval = (long) (*sched_disablequeue)((void*) 1); 
-//			PMO_CFRunLoopRun();//enter CF runloop so cocoa can call back to us. Thread spawned in init_awt will break us out.
-//			if (sched_disablequeue)
-//				(*sched_disablequeue)((void*) oldval); 
+		if (!exists && awt_hack_required) { // only do this for the first one of mxj or mxj~ loaded -jkc
+			t_symbol *ps_sched_disablequeue = gensym("sched_disablequeue"); 
+			method sched_disablequeue = (method) ps_sched_disablequeue->s_thing; 
+			long oldval; 
+			init_awt();
+			// a very hacky way to make sure that awt is already initialized on the other thread
+			// this prevents a hang on OS X 10.9 Mavericks
+			systhread_sleep(2000);
+			// we disable queue servicing while running the run loop here 
+			if (sched_disablequeue)
+				oldval = (long) (*sched_disablequeue)((void*) 1); 
+			PMO_CFRunLoopRun();//enter CF runloop so cocoa can call back to us. Thread spawned in init_awt will break us out.
+			if (sched_disablequeue)
+				(*sched_disablequeue)((void*) oldval); 
 		}
 #endif	//MAC_VERSION
 	} else {
@@ -2597,7 +2605,7 @@ JNIEnv *jvm_new(long *exists) {
 		cp_post_system_classpath(ps);	
 		
         //grab an IVirtualMachine
-        ivirtualmachine * ivm = new_virtualmachine();
+        ivm = new_virtualmachine();
 		post("IVirtual Machine boot");
         //populate java options
         
@@ -2631,8 +2639,79 @@ JNIEnv *jvm_new(long *exists) {
     	}
     
         env = get_thread_env(ivm);
-	 
-	 	ps_global_jvm->s_thing = (t_object *)g_jvm;
+        //let's grab system properties
+        //and post them out
+        if(env != NULL)
+        {
+            jstring java_version        = get_system_property(ivm, "java.version");
+            jstring java_spec_version   = get_system_property(ivm, "java.specification.version");
+            jstring os_arch             = get_system_property(ivm, "os.arch");
+            jstring os_name             = get_system_property(ivm, "os.name");
+            jstring os_version          = get_system_property(ivm, "os.version");
+            
+            if(java_version != NULL)
+            {
+                const char * jversion = (*env)->GetStringUTFChars(env,java_version,0);
+                post("Installed Java Version :");
+                post(jversion);
+                
+                (*env)->ReleaseStringUTFChars(env,java_version,jversion);
+            }
+            
+            if(java_spec_version!=NULL)
+            {
+                const char * jspecversion = (*env)->GetStringUTFChars(env,java_spec_version,0);
+                post("Java Specification Version :");
+                post(jspecversion);
+                
+                //we switch out awt hack here
+                if(strcmp(jspecversion, "1.6")==0)
+                    awt_hack_required=true;
+                else
+                    awt_hack_required=false;
+                
+                (*env)->ReleaseStringUTFChars(env,java_spec_version,jspecversion);
+
+            
+            }
+            
+            if(os_name!=NULL)
+            {
+                const char * osname = (*env)->GetStringUTFChars(env,os_name,0);
+                post("OS Name : ");
+                post(osname);
+                
+                (*env)->ReleaseStringUTFChars(env,os_name,osname);
+
+            }
+            
+            if(os_version!=NULL)
+            {
+                const char * osversion = (*env)->GetStringUTFChars(env,os_version,0);
+                post("OS Version : ");
+                post(osversion);
+                
+                (*env)->ReleaseStringUTFChars(env,os_version,osversion);
+
+                
+            }
+
+            if(os_arch!=NULL)
+            {
+                const char * osarch = (*env)->GetStringUTFChars(env,os_arch,0);
+                post("OS Architecture : ");
+                post(osarch);
+                
+                (*env)->ReleaseStringUTFChars(env,os_arch,osarch);
+
+                
+            }
+
+            
+        }
+	 	
+        
+        ps_global_jvm->s_thing = (t_object *)g_jvm;
 	    
 	    for(i = 0; i < numOptions;i++)
 	    	sysmem_freeptr(options[i].optionString);	

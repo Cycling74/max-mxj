@@ -56,9 +56,9 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 85.0, 140.0, 258.0, 23.0 ],
+					"patching_rect" : [ 85.0, 140.0, 243.0, 23.0 ],
 					"style" : "",
-					"text" : "script newdefault testob 280 200 mxj list.Group"
+					"text" : "script newdefault testob 280 200 mxj~ noise"
 				}
 
 			}

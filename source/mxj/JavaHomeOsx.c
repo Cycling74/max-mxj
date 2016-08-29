@@ -47,8 +47,8 @@ char   dirSeparator  = '/';
 
 #define JAVA_FRAMEWORK "/System/Library/Frameworks/JavaVM.framework"
 
-#define MAX_LOCATION_LENGTH 40 /* none of the jvmLocations strings should be longer than this */
-#define MAX_JVMLIB_LENGTH   15 /* none of the jvmLibs strings should be longer than this */
+#define MAX_LOCATION_LENGTH 100 /* none of the jvmLocations strings should be longer than this */
+#define MAX_JVMLIB_LENGTH   100 /* none of the jvmLibs strings should be longer than this */
 static const char* jvmLocations[] = {
     "../lib/" JAVA_ARCH "/client",
     "../lib/" JAVA_ARCH "/server",
@@ -61,7 +61,7 @@ static const char* jvmLocations[] = {
     "../bundle/Libraries",
     NULL
 };
-static const char* jvmLibs[] = { "libjvm.dylib", "libjvm.jnilib", "libjvm.so", NULL };
+static const char* jvmLibs[] = { "libclient64.dylib","libjvm.dylib", "libjvm.jnilib", "libjvm.so", NULL };
 
 /* Define the window system arguments for the various Java VMs. */
 static char*  argVM_JAVA[] = { "-XstartOnFirstThread", NULL };

@@ -84,7 +84,10 @@ public:
 	
 	/** The constructed option string */
 	char  			*libraryPathString;
-
+    bool exceptionCheck(JNIEnv * env,int numCleanups,...);
+    void cleanUpObjects(JNIEnv * env,int numCleanups,...);
+    static jstring getSystemProperty(string propertyName);
+    
 protected:
 
 	bool launchJVM();
@@ -137,6 +140,7 @@ protected:
 	static IVirtualMachine *instance;
 
 private:
+    
     
     /** we are a singleton so our cunstructor is private */
 	IVirtualMachine();

@@ -7,8 +7,12 @@
 
 using namespace c74::max;
 
+#ifdef C74_X64
+	#define DEFAULT_OS_ARCH "x86_64"
+#else
+	#define DEFAULT_OS_ARCH "i386"
+#endif
 
-#define DEFAULT_OS_ARCH "x86_64" // do we need to worry about 32-bit?
 #include "../../mxj/JavaHomeOsx.c"
 #include <dlfcn.h>
 #include <string>
@@ -50,7 +54,7 @@ mxj_safe* mxj_safe_new(t_symbol* name, long ac, t_atom* av) {
 	mxj_safe* self;
 	
 	if (name == gensym("mxj~"))
-		self = (mxj_safe*)object_alloc(mxj_class);
+		self = (mxj_safe*)object_alloc(mxj_tilde_class);
 	else
 		self = (mxj_safe*)object_alloc(mxj_class);
 

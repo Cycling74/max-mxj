@@ -29,23 +29,15 @@ script:
 - if [ -d javascript ]; then cp -r javascript $PACKAGE_NAME; fi
 - if [ -d media ]; then cp -r media $PACKAGE_NAME; fi
 - if [ -d misc ]; then cp -r misc $PACKAGE_NAME; fi
-- if [ -d patchers ]; then cp -r help $PACKAGE_NAME; fi
+- if [ -d patchers ]; then cp -r patchers $PACKAGE_NAME; fi
 - if [ -d java-classes ]; then cp -r java-classes $PACKAGE_NAME; fi
 - if [ -d java-doc ]; then cp -r java-doc $PACKAGE_NAME; fi
 - mkdir dist
 - zip -q -r dist/$PACKAGE_NAME-$PACKAGE_REV.zip $PACKAGE_NAME
 - mkdir -p ~/Documents/Max\ 7/Packages/
-- cp -r $PACKAGE_NAME ~/Documents/Max\ 7/Packages
-- curl https://github.com/Cycling74/max-test/releases/download/v1.0-beta/max-test-v1.0-beta.zip -L --output max-test.zip
-- unzip max-test.zip -d Packages
-- cp -r Packages/max-test-v1.0-beta ~/Documents/Max\ 7/Packages/
-- curl http://akiaj5esl75o5wbdcv2a-maxmspjitter.s3.amazonaws.com/Max724_160725.dmg --output max.dmg
-- hdiutil attach max.dmg
-- cd ~/Documents/Max\ 7/Packages/max-test-v1.0-beta
-- mv misc/testpackage-config-example.json misc/testpackage-config.json
-- cd ruby
-- gem install sqlite3
-- ./test.rb /Volumes/Max7_160721_1cf59cb
+- cp -r $PACKAGE_NAME ~/Documents/Max\ 7/Packages/
+- script/test.sh
+- rvm reload
 env:
   global:
     - secure: "XSY3BXw4/DmoOy35XT9B3V69JUxKRnP21/GabUm/8zWAB+WC9u5Ybc7hRXpQYT2JT9VN8JxkMcHCZ6bALc/1yg9Yfg72ky9UNq459vuF1FJ00+hH0ayll/VH9NFpPpezxYhgSgrnkCQdWCKSCBj03Sf/f1JsrLv9AereKCDR6cw="
