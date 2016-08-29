@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 78.0, 133.0, 1275.0, 636.0 ],
+		"rect" : [ 67.0, 94.0, 1275.0, 636.0 ],
 		"bgcolor" : [ 0.239216, 0.254902, 0.278431, 1.0 ],
 		"editing_bgcolor" : [ 0.32549, 0.345098, 0.372549, 1.0 ],
 		"bglocked" : 0,
@@ -58,7 +58,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 555.0, 300.0, 104.0, 20.0 ],
+					"patching_rect" : [ 615.0, 300.0, 104.0, 20.0 ],
 					"style" : "",
 					"text" : "prepend check"
 				}
@@ -112,7 +112,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 630.0, 400.0, 50.0, 20.0 ],
+					"patching_rect" : [ 690.0, 400.0, 50.0, 20.0 ],
 					"style" : ""
 				}
 
@@ -125,7 +125,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 555.0, 400.0, 50.0, 20.0 ],
+					"patching_rect" : [ 615.0, 400.0, 50.0, 20.0 ],
 					"style" : ""
 				}
 
@@ -137,7 +137,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "int" ],
-					"patching_rect" : [ 555.0, 370.0, 83.0, 20.0 ],
+					"patching_rect" : [ 615.0, 370.0, 83.0, 20.0 ],
 					"style" : "",
 					"text" : "unpack 0 0"
 				}
@@ -149,7 +149,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 480.0, 430.0, 76.0, 18.0 ],
+					"patching_rect" : [ 540.0, 430.0, 76.0, 18.0 ],
 					"style" : "cassiel.comment",
 					"text" : "> Java 6\n"
 				}
@@ -162,7 +162,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 555.0, 430.0, 39.0, 20.0 ],
+					"patching_rect" : [ 615.0, 430.0, 39.0, 20.0 ],
 					"style" : "",
 					"text" : "> 50"
 				}
@@ -175,7 +175,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 555.0, 265.0, 299.0, 20.0 ],
+					"patching_rect" : [ 615.0, 265.0, 299.0, 20.0 ],
 					"style" : "",
 					"text" : "sprintf symout %s/code/NewerFormat.class"
 				}
@@ -188,7 +188,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 555.0, 340.0, 191.0, 20.0 ],
+					"patching_rect" : [ 615.0, 340.0, 191.0, 20.0 ],
 					"style" : "",
 					"text" : "mxj CheckClassFileVersion"
 				}
@@ -304,9 +304,9 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 225.0, 265.0, 299.0, 20.0 ],
+					"patching_rect" : [ 225.0, 265.0, 371.0, 20.0 ],
 					"style" : "",
-					"text" : "sprintf symout %s/code/NewerFormat.class"
+					"text" : "sprintf symout %s/code/CheckClassFileVersion.class"
 				}
 
 			}
@@ -461,7 +461,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 885.0, 175.0, 24.0, 24.0 ],
+					"patching_rect" : [ 930.0, 175.0, 24.0, 24.0 ],
 					"style" : ""
 				}
 
@@ -510,7 +510,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 885.0, 390.0, 29.5, 20.0 ],
+					"patching_rect" : [ 930.0, 390.0, 29.5, 20.0 ],
 					"style" : "",
 					"text" : "0"
 				}
@@ -910,7 +910,6 @@
 		"styles" : [ 			{
 				"name" : "cassiel",
 				"default" : 				{
-					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"type" : "gradient",
 						"color" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
@@ -924,6 +923,7 @@
 					"bgcolor" : [ 0.095481, 0.100396, 0.100293, 1.0 ],
 					"fontname" : [ "Courier" ],
 					"elementcolor" : [ 0.32549, 0.345098, 0.372549, 1.0 ],
+					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"selectioncolor" : [ 0.784314, 0.145098, 0.023529, 1.0 ],
 					"patchlinecolor" : [ 0.960784, 0.827451, 0.156863, 0.9 ]
 				}
@@ -934,8 +934,8 @@
 , 			{
 				"name" : "cassiel.comment",
 				"default" : 				{
-					"textcolor" : [ 0.862745, 0.870588, 0.878431, 1.0 ],
-					"fontface" : [ 2 ]
+					"fontface" : [ 2 ],
+					"textcolor" : [ 0.862745, 0.870588, 0.878431, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
