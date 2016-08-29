@@ -11,3 +11,9 @@ for f in $(find . -name '*.java'); do
     file=$(basename $f)
     (cd $dir && javac -bootclasspath $BOOT_CLASSES -cp $MAX_JAR -source 6 -target 6 $file)
 done
+
+# However: specifically (re)compile this trap file at higher Java version, to see if we trap it:
+
+NEWER=NewerFormat.java
+echo "Compiling later version: " $NEWER
+(cd check-class-file-version/code && javac -cp $MAX_JAR $NEWER)
