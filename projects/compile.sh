@@ -13,7 +13,7 @@ for f in $(find . -name '*.maxproj'); do
         echo ROOT: $code_root
         pushd $code_root
         sources=`find . -name '*.java'`
-        echo SOURCES: $sources
+        #echo SOURCES: $sources
         javac -bootclasspath $BOOT_CLASSES -cp $MAX_JAR -source 6 -target 6 $sources
         popd
     fi
@@ -24,3 +24,9 @@ done
 NEWER=NewerFormat.java
 echo "Compiling later version: " $NEWER
 (cd check-class-file-version/code && javac -cp $MAX_JAR $NEWER)
+
+# Hardwire any tests for generated JARs:
+
+for f in qualified-class-name_JAR; do
+    ./jarify.sh $f
+done

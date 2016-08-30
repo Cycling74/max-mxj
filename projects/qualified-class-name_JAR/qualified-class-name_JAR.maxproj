@@ -1,16 +1,16 @@
 {
-	"name" : "qualified-class-name",
+	"name" : "qualified-class-name_JAR",
 	"version" : 1,
-	"creationdate" : -739574111,
-	"modificationdate" : -739568529,
-	"viewrect" : [ 59.0, 99.0, 300.0, 500.0 ],
+	"creationdate" : -739568557,
+	"modificationdate" : -739568511,
+	"viewrect" : [ 25.0, 70.0, 300.0, 500.0 ],
 	"autoorganize" : 1,
 	"hideprojectwindow" : 0,
 	"showdependencies" : 1,
 	"autolocalize" : 0,
 	"contents" : 	{
 		"patchers" : 		{
-			"qualified-class-name.maxpat" : 			{
+			"qualified-class-name_JAR.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1,
 				"toplevel" : 1
