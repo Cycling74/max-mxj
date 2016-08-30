@@ -75,8 +75,9 @@ int g_in_java_modal_dialog = false;
 //we need the hack only in the case java is 1.6
 //let's default to true
 bool awt_hack_required = true;
-
-#endif // MAC_VERSION
+#else // WIN_VERSION
+bool awt_hack_required = false;
+#endif
 
 #ifdef WIN_VERSION
 #include "mxj_win.h"
