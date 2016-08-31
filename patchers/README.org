@@ -23,7 +23,7 @@ To build Project snapshots, run ~maxzip.sh~.
 | clojure-test             | Simple Clojure script: testing library linkage.              | FAIL   |
 | makes-sound              | Audio from mxj~ noise?                                       | PASS   |
 | noise-gen                | Noise generated from Project-local performer subclass.       | PASS   |
-| audio-file               | Audio file: Project-local class and audio file               |        |
+| audio-file               | Audio file: Project-local class and audio file               | PASS   |
 #+TBLFM:
 
 * TO DO [0/3]
