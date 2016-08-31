@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Pack .class files for project $1 into lib, then delete them.
+# We don't have equivalent for non-project Java.
 
 echo "Converting $1 to JAR"
 
