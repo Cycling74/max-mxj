@@ -2,6 +2,7 @@
 
 # Compile all source files under Java 6, OS X.
 # Run in the directory containing this script.
+# TODO: This does projects only; we clearly need to put in a quick fix for any top-level patcher-only files.
 
 BOOT_CLASSES=/System/Library/Frameworks/JavaVM.framework/Versions/1.6/Classes/classes.jar
 MAX_JAR=/Applications/Max.app/Contents/Resources/C74/packages/max-mxj/java-classes/lib/max.jar
@@ -21,9 +22,10 @@ done
 
 # However: specifically (re)compile this trap file at higher Java version, to see if we identify it:
 
+NEWER_PROJ=check-class-file-version
 NEWER=NewerFormat.java
 echo "Compiling later version: " $NEWER
-(cd check-class-file-version/code && javac -cp $MAX_JAR $NEWER)
+(cd $NEWER_PROJ/code && javac -cp $MAX_JAR $NEWER)
 
 # Hardwire any tests for generated JARs:
 
