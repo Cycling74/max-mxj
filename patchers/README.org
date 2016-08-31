@@ -19,6 +19,9 @@ To build Project snapshots, run ~maxzip.sh~.
 | reports-java-version     | Simple check that Java version can be reported. Any version accepted. | PASS   |
 | check-class-file-version | Check class file versions. (Seems to highlight issue with Project unpacking.) | PASS   |
 | qualified-class-name     | Simple instantiation of class with qualified name. (Mainly test for compile script and packaging/unpacking.) | PASS   |
+| qualified-class-name_JAR | As above, but with generated JAR file.                       | PASS   |
+| clojure-test             | Simple Clojure script: testing library linkage.              | FAIL   |
+| makes-sound              | Audio from mxj~ noise?                                       | PASS   |
 #+TBLFM:
 
 * TO DO [0/3]
@@ -26,3 +29,9 @@ To build Project snapshots, run ~maxzip.sh~.
 - [ ] It seems that we can see class files from projects other than the current one. Isolate this and formulate a test. (Probably just classes that aren't purged from the JVM.)
 - [ ] Regexp in ~check-class-file-version~ is Mac-specific.
 - [ ] In general: when we generate Project shapshots we aren't adding Windows binaries (for ~oscar~).
+
+* UNCLEAR
+
+- Are patchers supposed to be closed after a test?
+- Are projects supposed to be closed after a test? (Probably not.)
+- Is audio stopped after a test? (Probably not.)

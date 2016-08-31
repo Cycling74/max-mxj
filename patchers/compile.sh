@@ -29,6 +29,6 @@ echo "Compiling later version: " $NEWER
 
 # Hardwire any tests for generated JARs:
 
-for f in qualified-class-name_JAR; do
+for f in *_JAR; do
     ./jarify.sh $f
 done
