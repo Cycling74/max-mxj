@@ -22,6 +22,8 @@ To build Project snapshots, run ~maxzip.sh~.
 | qualified-class-name_JAR | As above, but with generated JAR file.                       | PASS   |
 | clojure-test             | Simple Clojure script: testing library linkage.              | FAIL   |
 | makes-sound              | Audio from mxj~ noise?                                       | PASS   |
+| noise-gen                | Noise generated from Project-local performer subclass.       | PASS   |
+| audio-file               | Audio file: Project-local class and audio file               |        |
 #+TBLFM:
 
 * TO DO [0/3]
