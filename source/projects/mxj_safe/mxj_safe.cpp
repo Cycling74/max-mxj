@@ -20,7 +20,7 @@ using namespace c74::max;
 
 bool java_installed() {
 	char* baseDir = getJavaHome();
-	
+
 	if (baseDir == nullptr || !strcmp(baseDir, "/"))
 		return false;
 	else
@@ -42,17 +42,17 @@ struct mxj_safe {
 extern "C" void jpatcher_error_obtrusive(t_object *p, t_object *x, const char *s, const char *linktext, const char *linkurl, t_symbol *dontshowid);
 
 void mxj_safe_dopost(mxj_safe* self) {
-	jpatcher_error_obtrusive(	self->patcher, nullptr, 
-								"Java is not installed on this computer. Please visit the MXJ wiki for instructions on installing it.", 
-								"Learn more...", 
-								"https://github.com/Cycling74/max-mxj/wiki/Install-Java", 
+	jpatcher_error_obtrusive(	self->patcher, nullptr,
+								"Java is not installed on this computer. Click below for support info and installation instructions.",
+								"Learn more...",
+								"https://cycling74.s3.amazonaws.com/support/java_install.html",
 								nullptr);
 }
 
 
 mxj_safe* mxj_safe_new(t_symbol* name, long ac, t_atom* av) {
 	mxj_safe* self;
-	
+
 	if (name == gensym("mxj~"))
 		self = (mxj_safe*)object_alloc(mxj_tilde_class);
 	else
@@ -70,7 +70,7 @@ void ext_main(void* r) {
 	}
 	else {
 		// object_error(nullptr, "java is not installed... defining dummies!");
-		
+
 		auto c = class_new("mxj", (method)mxj_safe_new, nullptr, sizeof(mxj_safe), nullptr, A_GIMME, 0);
 		class_addmethod(c, (method)method_false,	"int", A_LONG, 0);
 		class_addmethod(c, (method)method_false,	"float", A_FLOAT, 0);
@@ -89,11 +89,11 @@ void ext_main(void* r) {
 		class_addmethod(c, (method)method_false,	"fileusage", A_CANT, 0);
 		class_register(CLASS_BOX, c);
 		mxj_class = c;
-		
+
 		object_method_direct(void, (t_object*, t_symbol*, t_symbol*, t_symbol*),
 							 gensym("max")->s_thing, gensym("objectfile"), gensym("mxj"), gensym("mxj_safe"), gensym("mxj"));
 
-		
+
 
 		c = class_new("mxj~", (method)mxj_safe_new, nullptr, sizeof(mxj_safe), nullptr, A_GIMME, 0);
 		class_dspinit(c);
@@ -121,8 +121,8 @@ void ext_main(void* r) {
 
 		object_method_direct(void, (t_object*, t_symbol*, t_symbol*, t_symbol*),
 							 gensym("max")->s_thing, gensym("objectfile"), gensym("mxj~"), gensym("mxj_safe"), gensym("mxj~"));
-		
-	
+
+
 	}
 }
 
