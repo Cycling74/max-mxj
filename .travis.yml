@@ -18,8 +18,8 @@ script:
 - PAYLOAD_PARSE=$(echo $PAYLOAD | sed -e "s/\$PACKAGE_NAME/$PACKAGE_NAME/g" -e "s/\$PACKAGE_REV/$PACKAGE_REV/g" -e "s:\$TRAVIS_REPO_SLUG:$TRAVIS_REPO_SLUG:g" -e "s/\$TRAVIS_BUILD_NUMBER/$TRAVIS_BUILD_NUMBER/g" -e "s/\$PACKAGE_REV/$PACKAGE_REV/g")
 - mkdir $PACKAGE_NAME
 - if [ -e *.json ]; then cp *.json $PACKAGE_NAME; fi
-- if [ -e *.md ]; then cp *.json $PACKAGE_NAME; fi
-- if [ -e *.png ]; then cp *.json $PACKAGE_NAME; fi
+- if [ -e *.md ]; then cp *.md $PACKAGE_NAME; fi
+- if [ -e *.png ]; then cp *.png $PACKAGE_NAME; fi
 - if [ -d docs ]; then cp -r docs $PACKAGE_NAME; fi
 - if [ -d extensions ]; then cp -r extensions $PACKAGE_NAME; fi
 - if [ -d externals ]; then cp -r externals $PACKAGE_NAME; fi
