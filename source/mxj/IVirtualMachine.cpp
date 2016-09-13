@@ -116,59 +116,58 @@ IVirtualMachine::IVirtualMachine()
 void IVirtualMachine::startJava()
 {
 
-
-#ifdef WIN_VERSION
+//originally windows only launch
+    
 	startJVM();
-#endif
 
 	
 #ifdef MAC_VERSION
 
-    pthread_t jvmThread;
-
-	// Create a new pthread copying the stack size of the primordial pthread
-	struct rlimit limit;
-	size_t stack_size = 0;
-	int rc = getrlimit(RLIMIT_STACK, &limit);
-	if (rc == 0) {
-		if (limit.rlim_cur != 0LL) {
-			stack_size = (size_t)limit.rlim_cur;
-		}
-	}
-
-	// Set up and launch the jvm main thread
-	pthread_attr_t attr;
-	int attr_init_rval;
-	int attr_setstate_rval;
-	int pthread_create_rval;
-
-	attr_init_rval=pthread_attr_init(&attr);
-
-	pthread_attr_setscope(&attr, PTHREAD_SCOPE_SYSTEM);
-	attr_setstate_rval=pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
-
-	if (stack_size > 0)
-	{
-		pthread_attr_setstacksize(&attr, stack_size);
-	}
-
-
-	pthread_create_rval=pthread_create(&jvmThread, &attr, &JVMThread, NULL);
-	if(pthread_create_rval != 0){
-        //error condition
-        return;
-    }
-
-
-	int pjrval = pthread_join(jvmThread,NULL);
-
-    if(pjrval!=0)
-    {
-        //error condition
-        return;
-    }
-
-    pthread_attr_destroy(&attr);
+//    pthread_t jvmThread;
+//
+//	// Create a new pthread copying the stack size of the primordial pthread
+//	struct rlimit limit;
+//	size_t stack_size = 0;
+//	int rc = getrlimit(RLIMIT_STACK, &limit);
+//	if (rc == 0) {
+//		if (limit.rlim_cur != 0LL) {
+//			stack_size = (size_t)limit.rlim_cur;
+//		}
+//	}
+//
+//	// Set up and launch the jvm main thread
+//	pthread_attr_t attr;
+//	int attr_init_rval;
+//	int attr_setstate_rval;
+//	int pthread_create_rval;
+//
+//	attr_init_rval=pthread_attr_init(&attr);
+//
+//	pthread_attr_setscope(&attr, PTHREAD_SCOPE_SYSTEM);
+//	attr_setstate_rval=pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
+//
+//	if (stack_size > 0)
+//	{
+//		pthread_attr_setstacksize(&attr, stack_size);
+//	}
+//
+//
+//	pthread_create_rval=pthread_create(&jvmThread, &attr, &JVMThread, NULL);
+//	if(pthread_create_rval != 0){
+//        //error condition
+//        return;
+//    }
+//
+//
+//	int pjrval = pthread_join(jvmThread,NULL);
+//
+//    if(pjrval!=0)
+//    {
+//        //error condition
+//        return;
+//    }
+//
+//    pthread_attr_destroy(&attr);
 
 
 
