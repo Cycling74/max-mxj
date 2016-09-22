@@ -112,7 +112,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\maxsdk\source\c74support\max-includes;..\maxsdk\source\c74support\msp-includes;C:\Program Files\Java\jdk1.8.0_101\include;C:\Program Files\Java\jdk1.8.0_101\include\win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\maxsdk\source\c74support\max-includes;..\maxsdk\source\c74support\msp-includes;C:\Program Files\Java\jdk1.8.0_101\include;C:\Program Files\Java\jdk1.8.0_101\include\win32;C:\Program Files\Java\jdk1.8.0\include;C:\Program Files\Java\jdk1.8.0\include\win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN_VERSION;C74_EXCLUDE_FROM_COLLECTIVES;WIN32;_DEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <ExceptionHandling>
@@ -173,7 +173,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\maxsdk\source\c74support\max-includes;..\maxsdk\source\c74support\msp-includes;C:\Program Files\Java\jdk1.8.0_101\include;C:\Program Files\Java\jdk1.8.0_101\include\win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\maxsdk\source\c74support\max-includes;..\maxsdk\source\c74support\msp-includes;C:\Program Files\Java\jdk1.8.0_101\include;C:\Program Files\Java\jdk1.8.0_101\include\win32;C:\Program Files\Java\jdk1.8.0\include;C:\Program Files\Java\jdk1.8.0\include\win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN_VERSION;C74_EXCLUDE_FROM_COLLECTIVES;WIN32;_DEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <ExceptionHandling>
@@ -233,7 +233,7 @@
     <ClCompile>
       <Optimization>Full</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>..\maxsdk\source\c74support\max-includes;..\maxsdk\source\c74support\msp-includes;C:\Program Files\Java\jdk1.8.0_101\include;C:\Program Files\Java\jdk1.8.0_101\include\win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\maxsdk\source\c74support\max-includes;..\maxsdk\source\c74support\msp-includes;C:\Program Files\Java\jdk1.8.0_101\include;C:\Program Files\Java\jdk1.8.0_101\include\win32;C:\Program Files\Java\jdk1.8.0\include;C:\Program Files\Java\jdk1.8.0\include\win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN_VERSION;C74_EXCLUDE_FROM_COLLECTIVES;WIN32;NDEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>
@@ -297,7 +297,7 @@
     <ClCompile>
       <Optimization>Full</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>..\maxsdk\source\c74support\max-includes;..\maxsdk\source\c74support\msp-includes;C:\Program Files\Java\jdk1.8.0_101\include;C:\Program Files\Java\jdk1.8.0_101\include\win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\maxsdk\source\c74support\max-includes;..\maxsdk\source\c74support\msp-includes;C:\Program Files\Java\jdk1.8.0_101\include;C:\Program Files\Java\jdk1.8.0_101\include\win32;C:\Program Files\Java\jdk1.8.0\include;C:\Program Files\Java\jdk1.8.0\include\win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN_VERSION;C74_EXCLUDE_FROM_COLLECTIVES;WIN32;NDEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>
