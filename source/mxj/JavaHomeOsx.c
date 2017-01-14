@@ -26,7 +26,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <strings.h>
-
+#include <dlfcn.h>
 
 
 #ifdef i386
@@ -66,6 +66,8 @@ static const char* jvmLibs[] = { "libclient64.dylib","libjvm.dylib", "libjvm.jni
 
 /* Define the window system arguments for the various Java VMs. */
 static char*  argVM_JAVA[] = { "-XstartOnFirstThread", NULL };
+
+char * embeddedHomeDirectory=NULL;
 
 char * findLib(char * command) {
     int i, q;
@@ -168,23 +170,39 @@ char * getJavaVersion(char* command) {
 
 char * getHome()
 {
+    
+    
     FILE *fp;
     char path[4096];
     char *result, *start;
-    sprintf(path, "/usr/libexec/java_home -a %s", JAVA_HOME_ARCH);
-    fp = popen(path, "r");
-    if (fp == NULL) {
-        return NULL;
+
+    //for osx we only look at embedded binaries for 64 bit
+#if defined(__x86_64__)
+    if(embeddedHomeDirectory==NULL){
+#endif
+        sprintf(path, "/usr/libexec/java_home -a %s", JAVA_HOME_ARCH);
+        fp = popen(path, "r");
+        if (fp == NULL) {
+            return NULL;
+        }
+        while (fgets(path, sizeof(path)-1, fp) != NULL) {
+        }
+        result = path;
+        start = strchr(result, '\n');
+        if (start) {
+            start[0] = 0;
+        }
+        return strdup(result);
+
+#if defined(__x86_64__)
     }
-    while (fgets(path, sizeof(path)-1, fp) != NULL) {
+    else
+    {
+        return embeddedHomeDirectory;
+        
     }
-    result = path;
-    start = strchr(result, '\n');
-    if (start) {
-        start[0] = 0;
-    }
-    return strdup(result);
-    
+#endif
+
 }
 
 char * getJavaHome() {
