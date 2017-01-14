@@ -28,13 +28,12 @@
 #include <strings.h>
 #include <dlfcn.h>
 
+int isVMLibrary( _TCHAR* vm );
 
+	
 #ifdef i386
 #define JAVA_ARCH "i386"
 #define JAVA_HOME_ARCH "i386"
-#elif defined(__ppc__) || defined(__powerpc64__)
-#define JAVA_ARCH "ppc"
-#define JAVA_HOME_ARCH "ppc"
 #elif defined(__amd64__) || defined(__x86_64__)
 #define JAVA_ARCH "amd64"
 #define JAVA_HOME_ARCH "x86_64"
@@ -87,7 +86,7 @@ char * findLib(char * command) {
         
         location = strrchr(command, dirSeparator) + 1;
         pathLength = location - command;
-        path = malloc((pathLength + MAX_LOCATION_LENGTH + 1 + MAX_JVMLIB_LENGTH	+ 1) * sizeof(char));
+        path = (char*)malloc((pathLength + MAX_LOCATION_LENGTH + 1 + MAX_JVMLIB_LENGTH	+ 1) * sizeof(char));
         strncpy(path, command, pathLength);
         location = &path[pathLength];
         
@@ -110,11 +109,6 @@ char * findLib(char * command) {
     }
     return NULL;
 }
-
-
-
-
-bool isSUN;
 
 
 int isVMLibrary( _TCHAR* vm )
@@ -196,10 +190,10 @@ char * getHome()
 
 #if defined(__x86_64__)
     }
+
     else
     {
         return embeddedHomeDirectory;
-        
     }
 #endif
 
@@ -245,7 +239,7 @@ char * findVMLibrary( char* command ) {
         end = strchr( start, dirSeparator);
         if (end != NULL && end > start) {
             length = end - start;
-            version = malloc(length + 1);
+            version = (char*)malloc(length + 1);
             strncpy(version, start, length);
             version[length] = 0;
             

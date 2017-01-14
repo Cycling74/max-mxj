@@ -75,8 +75,9 @@ int g_in_java_modal_dialog = false;
 //we need the hack only in the case java is 1.6
 //let's default to true
 bool awt_hack_required = true;
-
-#endif // MAC_VERSION
+#else // WIN_VERSION
+bool awt_hack_required = false;
+#endif
 
 #ifdef WIN_VERSION
 #include "mxj_win.h"
@@ -1181,16 +1182,7 @@ void mxj_dblclick(t_maxjava *x)
 	
 void mxj_fileusage(t_maxjava *x, void *w)
 {
-	t_atom a;
-	t_atomarray *aa = atomarray_new(0, NULL);
-	
-	atom_setsym(&a, gensym("externals"));
-	atomarray_appendatom(aa, &a);
-	atom_setsym(&a, gensym("java-classes"));
-	atomarray_appendatom(aa, &a);
-	
-	fileusage_addpackage(w, "max-mxj", (t_object*)aa);
-	// fileusage takes ownership of aa and thus will take care of freeing it
+	fileusage_addpackage(w, "max-mxj", NULL);
 }
 	
 
@@ -2648,77 +2640,56 @@ JNIEnv *jvm_new(long *exists) {
     	}
     
         env = get_thread_env(ivm);
-        //let's grab system properties
-        //and post them out
-        if(env != NULL)
-        {
+
+		// add MXJ, Java, and System properties to the support info dictionary for Max reports
+		if (env != NULL) {
             jstring java_version        = get_system_property(ivm, "java.version");
             jstring java_spec_version   = get_system_property(ivm, "java.specification.version");
             jstring os_arch             = get_system_property(ivm, "os.arch");
             jstring os_name             = get_system_property(ivm, "os.name");
             jstring os_version          = get_system_property(ivm, "os.version");
-            
-            if(java_version != NULL)
-            {
-                const char * jversion = (*env)->GetStringUTFChars(env,java_version,0);
-                post("Installed Java Version :");
-                post(jversion);
-                
-                (*env)->ReleaseStringUTFChars(env,java_version,jversion);
-            }
-            
-            if(java_spec_version!=NULL)
-            {
-                const char * jspecversion = (*env)->GetStringUTFChars(env,java_spec_version,0);
-                post("Java Specification Version :");
-                post(jspecversion);
-                
-                //we switch out awt hack here
-                if(strcmp(jspecversion, "1.6")==0)
-                    awt_hack_required=true;
-                else
-                    awt_hack_required=false;
-                
-                (*env)->ReleaseStringUTFChars(env,java_spec_version,jspecversion);
+			t_dictionary* support_info	= (t_dictionary*)gensym("#max:supportinfo")->s_thing;
 
-            
-            }
-            
-            if(os_name!=NULL)
-            {
-                const char * osname = (*env)->GetStringUTFChars(env,os_name,0);
-                post("OS Name : ");
-                post(osname);
-                
-                (*env)->ReleaseStringUTFChars(env,os_name,osname);
+			if (support_info) {
 
-            }
-            
-            if(os_version!=NULL)
-            {
-                const char * osversion = (*env)->GetStringUTFChars(env,os_version,0);
-                post("OS Version : ");
-                post(osversion);
-                
-                (*env)->ReleaseStringUTFChars(env,os_version,osversion);
+				if (java_version) {
+					const char* jversion = (*env)->GetStringUTFChars(env,java_version,0);
+					dictionary_appendstring(support_info, gensym("MXJ Java Version"), jversion);
+					(*env)->ReleaseStringUTFChars(env,java_version,jversion);
+				}
+				
+				if (java_spec_version) {
+					const char* jspecversion = (*env)->GetStringUTFChars(env,java_spec_version,0);
+					dictionary_appendstring(support_info, gensym("MXJ Java Specification Version"), jspecversion);
 
-                
-            }
+					//we switch out awt hack here
+					if(strcmp(jspecversion, "1.6")==0)
+						awt_hack_required=true;
+					else
+						awt_hack_required=false;
+					
+					(*env)->ReleaseStringUTFChars(env,java_spec_version,jspecversion);
+				}
+				
+				if (os_name) {
+					const char* osname = (*env)->GetStringUTFChars(env, os_name, 0);
+					dictionary_appendstring(support_info, gensym("MXJ OS Name"), osname);
+					(*env)->ReleaseStringUTFChars(env,os_name,osname);
+				}
+				
+				if (os_version) {
+					const char* osversion = (*env)->GetStringUTFChars(env, os_version, 0);
+					dictionary_appendstring(support_info, gensym("MXJ OS Version"), osversion);
+					(*env)->ReleaseStringUTFChars(env,os_version,osversion);
+				}
 
-            if(os_arch!=NULL)
-            {
-                const char * osarch = (*env)->GetStringUTFChars(env,os_arch,0);
-                post("OS Architecture : ");
-                post(osarch);
-                
-                (*env)->ReleaseStringUTFChars(env,os_arch,osarch);
-
-                
-            }
-
-            
+				if (os_arch) {
+					const char* osarch = (*env)->GetStringUTFChars(env, os_arch, 0);
+					dictionary_appendstring(support_info, gensym("MXJ OS Architecture"), osarch);					
+					(*env)->ReleaseStringUTFChars(env,os_arch,osarch);
+				}
+			}
         }
-	 	
         
         ps_global_jvm->s_thing = (t_object *)g_jvm;
 	    
