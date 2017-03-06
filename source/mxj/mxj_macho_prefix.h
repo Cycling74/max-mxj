@@ -1,7 +1,6 @@
 #include <Carbon/Carbon.h>
 #include <CoreServices/CoreServices.h>
 #include <ApplicationServices/ApplicationServices.h>
-#include <QuickTime/QuickTime.h>
 
 #include "ext.h"
 #include "ext_wind.h"

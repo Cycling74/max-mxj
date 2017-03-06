@@ -28,6 +28,7 @@
 *.x86_64
 *.hex
 externals
+extensions
 
 # Xcode User Data
 project.xcworkspace
