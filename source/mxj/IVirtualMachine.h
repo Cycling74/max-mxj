@@ -30,6 +30,7 @@
 #include <JavaVM/jni.h>
 #include <unistd.h>
 #include <strings.h>
+#include "OSXSys.h"
 extern "C"{
 #include "JavaHomeOsx.h"
 }
@@ -87,6 +88,8 @@ public:
     bool exceptionCheck(JNIEnv * env,int numCleanups,...);
     void cleanUpObjects(JNIEnv * env,int numCleanups,...);
     static jstring getSystemProperty(string propertyName);
+    bool is64BitArchitecture();
+    int majorOSVersion();
     
 protected:
 

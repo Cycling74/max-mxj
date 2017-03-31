@@ -25,6 +25,8 @@ extern "C" {
     JavaVM * get_java_vm(ivirtualmachine* v);
     JNIEnv * get_thread_env(ivirtualmachine* v);
     jstring get_system_property(ivirtualmachine* v,char * property);
+    bool is64BitArchitecture(ivirtualmachine* v);
+    int getMajorOSVersion(ivirtualmachine* v);
     
 #ifdef __cplusplus
 }
