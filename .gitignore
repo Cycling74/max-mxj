@@ -40,3 +40,7 @@ build
 *.sdf
 *.suo
 sysbuild
+
+.DS_Store
+
+

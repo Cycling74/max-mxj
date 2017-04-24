@@ -922,6 +922,8 @@ extern "C" {
         string myProp(property);
         return real(v)->getSystemProperty(myProp);
     }
+    bool is64BitArchitecture(ivirtualmachine* v){return real(v)->is64BitArchitecture();}
+    int getMajorOSVersion(ivirtualmachine* v){return real(v)->majorOSVersion();}
 }
 
 #ifdef WIN_VERSION
@@ -959,3 +961,26 @@ void IVirtualMachine::logLastError(LPTSTR lpszFunction){
 }
 
 #endif
+
+
+bool IVirtualMachine::is64BitArchitecture()
+{
+    bool retval = false;
+#ifdef MAC_VERSION
+    OSXSys q;
+    retval = q.is64BitRunning();
+#endif
+    return retval;
+}
+int IVirtualMachine::majorOSVersion()
+{
+    
+    int retval = 0 ;
+#ifdef MAC_VERSION
+    OSXSys q;
+    retval = q.getMajorOSVersion();
+#endif
+    return retval;
+}
+
+

@@ -2608,6 +2608,92 @@ JNIEnv *jvm_new(long *exists) {
         //grab an IVirtualMachine
         ivm = new_virtualmachine();
 		post("IVirtual Machine boot");
+#ifdef MAC_VERSION
+        //check for OSX architecture and put up message
+        
+        bool architect = is64BitArchitecture(ivm);
+        int mosv = getMajorOSVersion(ivm);
+
+        /*
+         
+         16.x.x  macOS 10.12.x Sierra
+         15.x.x  OS X  10.11.x El Capitan
+         14.x.x  OS X  10.10.x Yosemite
+         13.x.x  OS X  10.9.x  Mavericks
+         12.x.x  OS X  10.8.x  Mountain Lion
+         11.x.x  OS X  10.7.x  Lion
+         10.x.x  OS X  10.6.x  Snow Leopard
+         9.x.x  OS X  10.5.x  Leopard
+         8.x.x  OS X  10.4.x  Tiger
+         7.x.x  OS X  10.3.x  Panther
+         6.x.x  OS X  10.2.x  Jaguar
+         5.x    OS X  10.1.x  Puma
+         
+         */
+        
+        switch( mosv)
+        {
+            case 16:
+                post("Sierra OSX detected");
+                break;
+            case 15:
+                post("El Capitan OSX detected");
+                break;
+            case 14:
+                post("Yosemite OSX detected");
+                break;
+            case 13:
+                post("Mavericks OSX detected");
+                break;
+            case 12:
+                post("Mountain Lion OSX detected");
+                break;
+            case 11:
+                post("Lion OSX detected");
+                break;
+            case 10:
+                post("Snow Leopard OSX detected");
+                break;
+            case 9:
+                post("Leopard OSX detected");
+                break;
+            case 8:
+                post("Tiger OSX detected");
+                break;
+            case 7:
+                post("Panther OSX detected");
+                break;
+            case 6:
+                post("Jaguar OSX detected");
+                break;
+            case 5:
+                post("Puma OSX detected");
+                break;
+            
+        
+        }
+        
+        if(! architect)
+        {
+            
+            if( mosv >= 16)
+            {
+                post("32 bit Java is not supported on Sierra and later");
+                post("please install 64 bit Java SDK and use 64 bit mode of MAX MSP");
+            }
+            if(mosv < 16)
+            {
+                post("WARNING: 32 bit detected");
+                post("Apple legacy Java will be required to operate in 32 bit mode");
+            
+            }
+            
+        }else
+        {
+            post("64 bit Architecture detected");
+        }
+        
+#endif
         //populate java options
         
         for(int i=0;i<numOptions;i++)

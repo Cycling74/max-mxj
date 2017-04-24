@@ -46,6 +46,8 @@
 		6A0A17431BD2C7A50050BF01 /* IVirtualMachine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A0A17411BD2C7A50050BF01 /* IVirtualMachine.cpp */; };
 		6A0A175A1BD317B00050BF01 /* JavaHomeOsx.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A0A17581BD317B00050BF01 /* JavaHomeOsx.c */; };
 		6A0A175B1BD317B00050BF01 /* JavaHomeOsx.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A0A17591BD317B00050BF01 /* JavaHomeOsx.h */; };
+		759B84411E8AE71D001D3A53 /* OSXSys.h in Headers */ = {isa = PBXBuildFile; fileRef = 759B843F1E8AE71D001D3A53 /* OSXSys.h */; };
+		759B84421E8AE71D001D3A53 /* OSXSys.mm in Sources */ = {isa = PBXBuildFile; fileRef = 759B84401E8AE71D001D3A53 /* OSXSys.mm */; };
 		93BB3F6B12843A14000B77A5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93BB3F6A12843A14000B77A5 /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +94,8 @@
 		6A0A17441BD2DD350050BF01 /* IVirtualMachineAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVirtualMachineAPI.h; sourceTree = "<group>"; };
 		6A0A17581BD317B00050BF01 /* JavaHomeOsx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = JavaHomeOsx.c; sourceTree = "<group>"; };
 		6A0A17591BD317B00050BF01 /* JavaHomeOsx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JavaHomeOsx.h; sourceTree = "<group>"; };
+		759B843F1E8AE71D001D3A53 /* OSXSys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSXSys.h; sourceTree = "<group>"; };
+		759B84401E8AE71D001D3A53 /* OSXSys.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OSXSys.mm; sourceTree = "<group>"; };
 		8D01CCD20486CAD60068D4B7 /* mxj.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mxj.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		93BB3F6A12843A14000B77A5 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -162,6 +166,8 @@
 		0F2313A2098AD9D0007E8020 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				759B843F1E8AE71D001D3A53 /* OSXSys.h */,
+				759B84401E8AE71D001D3A53 /* OSXSys.mm */,
 				6A0A17401BD2C7A50050BF01 /* IVirtualMachine.h */,
 				6A0A17411BD2C7A50050BF01 /* IVirtualMachine.cpp */,
 				0F2313C2098ADAD8007E8020 /* Atom.c */,
@@ -233,6 +239,7 @@
 				0F2313F6098ADBD7007E8020 /* clock_callbacks.h in Headers */,
 				0F2313FA098ADBE4007E8020 /* callbacks.h in Headers */,
 				0F2313FE098ADE42007E8020 /* mxj_macho_prefix.h in Headers */,
+				759B84411E8AE71D001D3A53 /* OSXSys.h in Headers */,
 				0FCF77C3098AF49B006F07A0 /* classes.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -322,6 +329,7 @@
 				0F2313E1098ADB61007E8020 /* mxj_wind.c in Sources */,
 				0F2313E5098ADB6C007E8020 /* mxj_patcher.c in Sources */,
 				0F2313E9098ADB8B007E8020 /* mxj_utils.c in Sources */,
+				759B84421E8AE71D001D3A53 /* OSXSys.mm in Sources */,
 				0F2313ED098ADBAE007E8020 /* mxj_msp_buffer.c in Sources */,
 				0F2313F1098ADBCA007E8020 /* mxj_max_system.c in Sources */,
 				0F2313F5098ADBD7007E8020 /* clock_callbacks.c in Sources */,
