@@ -27,6 +27,7 @@
 #include <unistd.h>
 #include <strings.h>
 
+#define MXJ_JAVA_PATH_MAX_LEN 4096
 
 int isVMLibrary( _TCHAR* vm );
 
@@ -127,7 +128,7 @@ int isVMLibrary( _TCHAR* vm )
 
 char * getJavaVersion(char* command) {
     FILE *fp;
-    char buffer[4096];
+    char buffer[MXJ_JAVA_PATH_MAX_LEN];
     char *version = NULL, *firstChar;
     int numChars = 0;
     sprintf(buffer,"%s -version 2>&1", command);
@@ -170,7 +171,7 @@ char *getHome()
     {
 #endif
         FILE *fp;
-        char path[4096];
+        char path[MXJ_JAVA_PATH_MAX_LEN];
         char *result, *start;
         snprintf(path,sizeof(path), "/usr/libexec/java_home -a %s", JAVA_HOME_ARCH);
         fp = popen(path, "r");
@@ -198,7 +199,7 @@ char *getHome()
 }
 
 char * getJavaHome() {
-    char path[4096];
+    char path[MXJ_JAVA_PATH_MAX_LEN];
     char * home = getHome();
     if(home == NULL)
         return NULL;
@@ -209,7 +210,7 @@ char * getJavaHome() {
 
 char * getJavaJli()
 {
-    char path[4096];
+    char path[MXJ_JAVA_PATH_MAX_LEN];
     char * home = getHome();
     if(home == NULL)
         return NULL;
