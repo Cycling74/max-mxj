@@ -31,7 +31,7 @@
 
 int isVMLibrary( _TCHAR* vm );
 
-	
+
 #ifdef i386
 #define JAVA_ARCH "i386"
 #define JAVA_HOME_ARCH "i386"
@@ -75,7 +75,7 @@ char * findLib(char * command) {
     struct stat stats;
     char * path; /* path to resulting jvm shared library */
     char * location; /* points to begining of jvmLocations section of path */
-    
+
     if (command != NULL) {
         /*check first to see if command already points to the library */
         if (isVMLibrary(command)) {
@@ -84,13 +84,13 @@ char * findLib(char * command) {
             }
             return NULL;
         }
-        
+
         location = strrchr(command, dirSeparator) + 1;
         pathLength = location - command;
         path = (char*)malloc((pathLength + MAX_LOCATION_LENGTH + 1 + MAX_JVMLIB_LENGTH	+ 1) * sizeof(char));
         strncpy(path, command, pathLength);
         location = &path[pathLength];
-        
+
         /*
          * We are trying base/jvmLocations[*]/vmLibrary
          * where base is the directory containing the given java command, normally jre/bin
@@ -141,7 +141,7 @@ char * getJavaVersion(char* command) {
             firstChar = (char *) (strchr(buffer, '"') + 1);
             if (firstChar != NULL)
                 numChars = (int)  (strrchr(buffer, '"') - firstChar);
-            
+
             /* Allocate a buffer and copy the version string into it. */
             if (numChars > 0)
             {
@@ -208,6 +208,12 @@ char * getJavaHome() {
     return strdup(path);
 }
 
+static bool fileExists(const char *filename)
+{
+    int res = access(filename,F_OK | R_OK);
+    return res==0;
+}
+
 char * getJavaJli()
 {
     char path[MXJ_JAVA_PATH_MAX_LEN];
@@ -215,9 +221,21 @@ char * getJavaJli()
     if(home == NULL)
         return NULL;
 
-    snprintf(path,sizeof(path), "%s/lib/jli/libjli.dylib", home); // This is that path from at least JRE 8, compatible with osx 10.7.3+
-    return strdup(path);
+    // Search JDK
+    snprintf(path, sizeof(path), "%s/../MacOS/libjli.dylib", home);
+    // Check if JDK jli is found
+    if (!fileExists(path))
+    {
+        // Not found, search JRE
+        // This is needed when embeddedHomeDirectory is not NULL, which means we found an embedded JRE (so no JDK at home path)
+        snprintf(path, sizeof(path), "%s/lib/jli/libjli.dylib", home); // This is that path from at least JRE 8, compatible with osx 10.7.3+
 
+        if (!fileExists(path))
+        {
+            return NULL; // Nothing found
+        }
+    }
+    return strdup(path);
 }
 
 
