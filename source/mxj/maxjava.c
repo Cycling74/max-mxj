@@ -500,7 +500,8 @@ void ext_main(void *r) {
 		props = (t_mxj_proplist *)ps_global_props->s_thing;
 	else
 	{
-		props = mxj_proplist_new(32);
+		props = mxj_proplist_new(500); // originally 32 we can have many more options in a file than this
+                                       //500 may be overkill
 		ps_global_props->s_thing = (void*)props;
 	}
 

@@ -15,7 +15,7 @@
 #define _tcsstr strstr
 #define _tcsrchr strrchr
 
-
+extern char * embeddedHomeDirectory;
 char * getJavaVersion(char* command);
 char * getJavaHome();
 char * getJavaJli();
