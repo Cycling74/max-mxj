@@ -214,7 +214,7 @@ char * getJavaJli()
     if(home == NULL)
         return NULL;
     
-    sprintf(path, "%s/../MacOS/libjli.dylib", home);
+    sprintf(path, "%s/lib/jli/libjli.dylib", home); // This is that path from at least JRE 8, compatible with osx 10.7.3+
     return strdup(path);
 
 }
