@@ -172,7 +172,7 @@ char *getHome()
         FILE *fp;
         char path[4096];
         char *result, *start;
-        sprintf(path, "/usr/libexec/java_home -a %s", JAVA_HOME_ARCH);
+        snprintf(path,sizeof(path), "/usr/libexec/java_home -a %s", JAVA_HOME_ARCH);
         fp = popen(path, "r");
         if (fp == NULL) {
             return NULL;
@@ -202,8 +202,8 @@ char * getJavaHome() {
     char * home = getHome();
     if(home == NULL)
         return NULL;
-    
-    sprintf(path, "%s/bin/java", home);
+
+    snprintf(path,sizeof(path), "%s/bin/java", home);
     return strdup(path);
 }
 
@@ -213,8 +213,8 @@ char * getJavaJli()
     char * home = getHome();
     if(home == NULL)
         return NULL;
-    
-    sprintf(path, "%s/lib/jli/libjli.dylib", home); // This is that path from at least JRE 8, compatible with osx 10.7.3+
+
+    snprintf(path,sizeof(path), "%s/lib/jli/libjli.dylib", home); // This is that path from at least JRE 8, compatible with osx 10.7.3+
     return strdup(path);
 
 }
