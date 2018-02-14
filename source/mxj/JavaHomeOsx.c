@@ -163,6 +163,12 @@ char * getJavaVersion(char* command) {
     return version;
 }
 
+static bool fileExists(const char *filename, bool isExecutable)
+{
+    int res = access(filename, F_OK | R_OK | (isExecutable ? X_OK : 0));
+    return res == 0;
+}
+
 char *getHome()
 {
     //for osx we only look at embedded binaries for 64 bit
@@ -175,9 +181,21 @@ char *getHome()
         char *result, *start;
         snprintf(path,sizeof(path), "/usr/libexec/java_home -a %s", JAVA_HOME_ARCH);
         fp = popen(path, "r");
-        if (fp == NULL) {
-            return NULL;
+        if (fp == NULL)
+        {
+            // No JDK certainly, check for JRE
+            snprintf(path,sizeof(path), "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin/java", JAVA_HOME_ARCH);
+            if (!fileExists(path,true))
+            {
+                // No JRE certainly
+                return NULL;
+            }
+
+            // Return JRE home path
+            return strdup("/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home");
         }
+
+        // Build and return JDK home path
         while (fgets(path, sizeof(path) - 1, fp) != NULL) {
         }
         if (strstr(path, " -a "))
@@ -208,36 +226,31 @@ char * getJavaHome() {
     return strdup(path);
 }
 
-static bool fileExists(const char *filename)
-{
-    int res = access(filename,F_OK | R_OK);
-    return res==0;
-}
-
-char * getJavaJli()
+char *getJavaJli()
 {
     char path[MXJ_JAVA_PATH_MAX_LEN];
-    char * home = getHome();
-    if(home == NULL)
+    char *home = getHome();
+    if (home == NULL)
+    {
         return NULL;
+    }
 
     // Search JDK
     snprintf(path, sizeof(path), "%s/../MacOS/libjli.dylib", home);
     // Check if JDK jli is found
-    if (!fileExists(path))
+    if (!fileExists(path, false))
     {
         // Not found, search JRE
         // This is needed when embeddedHomeDirectory is not NULL, which means we found an embedded JRE (so no JDK at home path)
         snprintf(path, sizeof(path), "%s/lib/jli/libjli.dylib", home); // This is that path from at least JRE 8, compatible with osx 10.7.3+
 
-        if (!fileExists(path))
+        if (!fileExists(path, false))
         {
             return NULL; // Nothing found
         }
     }
     return strdup(path);
 }
-
 
 char * findVMLibrary( char* command ) {
     char *start, *end;
