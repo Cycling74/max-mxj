@@ -96,12 +96,17 @@ inline bool hasEnding(const char *fullString,const char*ending)
     return true;
 }
 
+static char *privateEmbeddedHomeDirectory        = NULL;
+static bool privateEmbeddedHomeDirectorySearched = false; // Search already done? avoid doing it several times
+
 // Function to retreive eventually the existence of embedded JRE home directory
 // (folder jre in max-mxj package)
-static char *privateEmbeddedHomeDirectory        = NULL;
-static bool privateEmbeddedHomeDirectorySearched = false;
 char *getEmbeddedHomeDirectory()
 {
+    //for osx we only look at embedded binaries for 64 bit
+#if !defined(__x86_64__)
+    return NULL;
+#else
     if (!privateEmbeddedHomeDirectorySearched) // Search embedded jre if not searched yet
     {
         privateEmbeddedHomeDirectorySearched = true;
@@ -147,6 +152,7 @@ char *getEmbeddedHomeDirectory()
         }
     }
     return privateEmbeddedHomeDirectory;
+#endif
 }
 
 
@@ -244,51 +250,80 @@ char * getJavaVersion(char* command) {
     return version;
 }
 
+/** Search for a JRE internet plugin on the machine */
+char *getJREHome()
+{
+#define JRE_PLUGIN_HOME "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home"
+    char path[MXJ_JAVA_PATH_MAX_LEN];
+    snprintf(path, sizeof(path), JRE_PLUGIN_HOME
+            "/bin/java");
+    if (!fileExists(path, true))
+    {
+        // No JRE certainly
+        return NULL;
+    }
+
+    // Return JRE home path
+    return strdup(JRE_PLUGIN_HOME);
+}
+
+/** Search for a JDK on the machine */
+char *getJDKHome()
+{
+    FILE *fp;
+    char path[MXJ_JAVA_PATH_MAX_LEN];
+    char *result, *start;
+    snprintf(path, sizeof(path), "/usr/libexec/java_home -a %s", JAVA_HOME_ARCH);
+    fp = popen(path, "r");
+    if (fp == NULL)
+    {
+        // No JDK certainly
+        return NULL;
+    }
+
+    // Build and return JDK home path
+    while (fgets(path, sizeof(path) - 1, fp) != NULL) {}
+    if (strstr(path, " -a "))
+    {
+        return NULL;
+    }
+    result = path;
+    start  = strchr(result, '\n');
+    if (start)
+    {
+        start[0] = 0;
+    }
+
+    return strdup(result);
+}
+
+/** Search for a JDK or JRE java home */
+static char *privateJavaHomeDirectory        = NULL;
+static bool privateJavaHomeDirectorySearched = false; // Search already done? avoid doing it several times
+
 char *getHome()
 {
-    //for osx we only look at embedded binaries for 64 bit
-#if defined(__x86_64__)
-    if (getEmbeddedHomeDirectory() == NULL)
+    if (!privateJavaHomeDirectorySearched)
     {
-#endif
-        FILE *fp;
-        char path[MXJ_JAVA_PATH_MAX_LEN];
-        char *result, *start;
-        snprintf(path,sizeof(path), "/usr/libexec/java_home -a %s", JAVA_HOME_ARCH);
-        fp = popen(path, "r");
-        if (fp == NULL)
+        privateJavaHomeDirectorySearched = true;
+
+        // Search embedded JRE (only works with x64)
+        char *embeddedHome = getEmbeddedHomeDirectory();
+        if (embeddedHome != NULL) { privateJavaHomeDirectory = embeddedHome; }
+        else
         {
-            // No JDK certainly, check for JRE
-            snprintf(path,sizeof(path), "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin/java");
-            if (!fileExists(path,true))
+            // Nothing embedded, search JDK
+            char *jdkHome = getJDKHome();
+            if (jdkHome != NULL) { privateJavaHomeDirectory = jdkHome; }
+            else
             {
-                // No JRE certainly
-                return NULL;
+                // No JDK, search JRE
+                char *jreHome = getJREHome();
+                privateJavaHomeDirectory = jreHome;
             }
-
-            // Return JRE home path
-            return strdup("/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home");
         }
-
-        // Build and return JDK home path
-        while (fgets(path, sizeof(path) - 1, fp) != NULL) {
-        }
-        if (strstr(path, " -a "))
-            return NULL;
-        result = path;
-        start  = strchr(result, '\n');
-        if (start) {
-            start[0] = 0;
-        }
-    return strdup(result);
-
-#if defined(__x86_64__)
     }
-    else
-    {
-        return getEmbeddedHomeDirectory();
-    }
-#endif
+    return privateJavaHomeDirectory;
 }
 
 char * getJavaHome() {
