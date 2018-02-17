@@ -60,22 +60,6 @@ JLI_NotifyAWTLoaded()
 
 using namespace std;
 
-/**
- * a function to determine if string ends with a specific value
- */
-bool hasEnding (std::string const &fullString, std::string const &ending) {
-    if (fullString.length() >= ending.length()) {
-        return (0 == fullString.compare (fullString.length() - ending.length(), ending.length(), ending));
-    } else {
-        return false;
-    }
-}
-
-bool file_exists (const std::string& name) {
-    struct stat buffer;
-    return (stat (name.c_str(), &buffer) == 0);
-}
-
 
 //  When launching JVM on OSX we need to do so on a separate thread
 //  This is the thread launch callback
@@ -267,36 +251,7 @@ void IVirtualMachine::startJVM()
         objc_registerThreadWithCollectorFunction = (objc_registerThreadWithCollector_t) dlsym(handleLibObjc, OBJC_GCREGISTER);
     }
     
-    
-    Dl_info     myPluginInfo;
-    const char *pluginFName=NULL;
-    const char * mxjSuffix ="externals/mxj.mxo/Contents/MacOS/mxj\0";
-    string embeddedHome;
-    
-    //here we're going to find where our library file is on OSX using dladdr
-    //this returns the executable based on a symbol in our memory
-    if (dladdr("mxj", &myPluginInfo) != 0)
-    {
-        if (myPluginInfo.dli_fname != NULL)
-        {
 
-            if(hasEnding( string(myPluginInfo.dli_fname),string(mxjSuffix)))
-            {
-
-                string fullName(myPluginInfo.dli_fname);
-                pluginFName = myPluginInfo.dli_fname;
-                embeddedHome = fullName.substr(0,fullName.size()-string(mxjSuffix).size());
-                embeddedHome.append("jre/Contents/Home");
-                if(file_exists(embeddedHome.c_str()))
-                {
-                    embeddedHomeDirectory = strdup(embeddedHome.c_str());
-                }
-                
-            }
-        }
-    }
-
-    
     char * baseDir = getJavaHome();
     char * dylib = findLib(baseDir);
     char * jli = getJavaJli();

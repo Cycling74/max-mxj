@@ -68,7 +68,87 @@ static const char* jvmLibs[] = { "libclient64.dylib","libjvm.dylib", "libjvm.jni
 /* Define the window system arguments for the various Java VMs. */
 static const char*  argVM_JAVA[] = { "-XstartOnFirstThread", NULL };
 
-char * embeddedHomeDirectory=NULL;
+static const char *mxjSuffixes[] = {
+    "externals/mxj.mxo/Contents/MacOS/mxj\0",
+    "externals/mxj~.mxo/Contents/MacOS/mxj~\0",
+    "extensions/mxj_safe.mxo/Contents/MacOS/mxj_safe\0",
+    NULL
+};
+
+static bool fileExists(const char *filename, bool isExecutable)
+{
+    int res = access(filename, F_OK | R_OK | (isExecutable ? X_OK : 0));
+    return res == 0;
+}
+
+/** a function to determine if string ends with a specific value */
+inline bool hasEnding(const char *fullString,const char*ending)
+{
+    size_t is = (fullString==NULL) ? 0 : strlen(fullString);
+    size_t ie = strlen(ending);
+    if (is<ie) return false;
+
+    while(ie--)
+    {
+        is--;
+        if (ending[ie]!=fullString[is]) return false;
+    }
+    return true;
+}
+
+// Function to retreive eventually the existence of embedded JRE home directory
+// (folder jre in max-mxj package)
+static char *privateEmbeddedHomeDirectory        = NULL;
+static bool privateEmbeddedHomeDirectorySearched = false;
+char *getEmbeddedHomeDirectory()
+{
+    if (!privateEmbeddedHomeDirectorySearched) // Search embedded jre if not searched yet
+    {
+        privateEmbeddedHomeDirectorySearched = true;
+        privateEmbeddedHomeDirectory         = NULL;
+
+        //here we're going to find where our library file is on OSX using dladdr
+        //this returns the executable based on a symbol in our memory
+        Dl_info myPluginInfo;
+        if (dladdr("mxj", &myPluginInfo) != 0)
+        {
+            if (myPluginInfo.dli_fname != NULL)
+            {
+                const char *jreHome = "jre/Contents/Home";
+
+                // Check all possible suffixes (call can be made from mxj, mxj~ and mxj_safe objects)
+                for (int q = 0; (mxjSuffixes[q] != NULL) && (privateEmbeddedHomeDirectory == NULL); ++q)
+                {
+                    const char *mxjSuffix = mxjSuffixes[q];
+                    if (hasEnding(myPluginInfo.dli_fname, mxjSuffix))
+                    {
+                        const char *fullName = myPluginInfo.dli_fname; // Full binary path name
+
+                        // Replace mxj suffix in path by jre home relative path
+
+                        const int  maxxxLen  = strlen(fullName) + strlen(jreHome) + 1; // In case mxjSuffix is smaller than jreHome, take precautions
+                        char       embeddedHome[maxxxLen];
+                        memset(embeddedHome, 0, maxxxLen); // Clear it
+                        // Set to fullName
+                        strncpy(embeddedHome, fullName, maxxxLen - 1);
+                        // Remove mxj suffix
+                        embeddedHome[strlen(fullName) - strlen(mxjSuffix)] = 0;
+                        // Append jre home
+                        strncat(embeddedHome, jreHome, maxxxLen - 1);
+
+                        // Check for folder
+                        if (fileExists(embeddedHome, true))
+                        {
+                            privateEmbeddedHomeDirectory = strdup(embeddedHome);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return privateEmbeddedHomeDirectory;
+}
+
 
 char * findLib(char * command) {
     int i, q;
@@ -164,17 +244,11 @@ char * getJavaVersion(char* command) {
     return version;
 }
 
-static bool fileExists(const char *filename, bool isExecutable)
-{
-    int res = access(filename, F_OK | R_OK | (isExecutable ? X_OK : 0));
-    return res == 0;
-}
-
 char *getHome()
 {
     //for osx we only look at embedded binaries for 64 bit
 #if defined(__x86_64__)
-    if (embeddedHomeDirectory == NULL)
+    if (getEmbeddedHomeDirectory() == NULL)
     {
 #endif
         FILE *fp;
@@ -212,7 +286,7 @@ char *getHome()
     }
     else
     {
-        return embeddedHomeDirectory;
+        return getEmbeddedHomeDirectory();
     }
 #endif
 }
