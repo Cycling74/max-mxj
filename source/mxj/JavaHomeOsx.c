@@ -255,8 +255,7 @@ char *getJREHome()
 {
 #define JRE_PLUGIN_HOME "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home"
     char path[MXJ_JAVA_PATH_MAX_LEN];
-    snprintf(path, sizeof(path), JRE_PLUGIN_HOME
-            "/bin/java");
+    snprintf(path, sizeof(path), JRE_PLUGIN_HOME "/bin/java");
     if (!fileExists(path, true))
     {
         // No JRE certainly
