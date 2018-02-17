@@ -26,6 +26,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <strings.h>
+#include <dlfcn.h>
 
 #define MXJ_JAVA_PATH_MAX_LEN 4096
 
@@ -65,7 +66,7 @@ static const char* jvmLocations[] = {
 static const char* jvmLibs[] = { "libclient64.dylib","libjvm.dylib", "libjvm.jnilib", "libjvm.so", NULL };
 
 /* Define the window system arguments for the various Java VMs. */
-static char*  argVM_JAVA[] = { "-XstartOnFirstThread", NULL };
+static const char*  argVM_JAVA[] = { "-XstartOnFirstThread", NULL };
 
 char * embeddedHomeDirectory=NULL;
 
@@ -205,7 +206,7 @@ char *getHome()
         if (start) {
             start[0] = 0;
         }
-        return strdup(result);
+    return strdup(result);
 
 #if defined(__x86_64__)
     }
@@ -252,16 +253,17 @@ char *getJavaJli()
     return strdup(path);
 }
 
-char * findVMLibrary( char* command ) {
+const char * findVMLibrary( char* command ) {
     char *start, *end;
-    char *version, *result, *cmd;
+    char *version, *cmd;
     int length;
-    
+    const char *result;
+
     /*check first to see if command already points to the library */
     if (strcmp(command, JAVA_FRAMEWORK) == 0) {
         return JAVA_FRAMEWORK;
     }
-    
+
     /* select a version to use based on the command */
     start = strstr(command, "/Versions/");
     if (start != NULL){
@@ -272,12 +274,12 @@ char * findVMLibrary( char* command ) {
             version = (char*)malloc(length + 1);
             strncpy(version, start, length);
             version[length] = 0;
-            
+
             /*only set a version if it starts with a number */
             if(strtol(version, NULL, 10) != 0 || version[0] == '0') {
                 setenv("JAVA_JVM_VERSION", version, 1);
             }
-            
+
             free(version);
         }
     }

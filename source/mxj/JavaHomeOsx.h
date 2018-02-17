@@ -19,7 +19,7 @@ extern char * embeddedHomeDirectory;
 char * getJavaVersion(char* command);
 char * getJavaHome();
 char * getJavaJli();
-char * findVMLibrary( char* command );
+const char * findVMLibrary( char* command );
 char * findLib( char* command );
 int isVMLibrary( _TCHAR* vm );
 
