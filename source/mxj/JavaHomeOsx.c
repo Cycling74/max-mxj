@@ -259,7 +259,7 @@ char *getHome()
         if (fp == NULL)
         {
             // No JDK certainly, check for JRE
-            snprintf(path,sizeof(path), "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin/java", JAVA_HOME_ARCH);
+            snprintf(path,sizeof(path), "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin/java");
             if (!fileExists(path,true))
             {
                 // No JRE certainly
