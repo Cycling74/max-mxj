@@ -30,7 +30,7 @@
 
 #define MXJ_JAVA_PATH_MAX_LEN 4096
 
-int isVMLibrary( _TCHAR* vm );
+int isVMLibrary(_TCHAR *vm);
 
 
 #ifdef i386
@@ -45,34 +45,34 @@ int isVMLibrary( _TCHAR* vm );
 #endif
 
 bool isSUN;
-char   dirSeparator  = '/';
+char dirSeparator = '/';
 
 #define JAVA_FRAMEWORK "/System/Library/Frameworks/JavaVM.framework"
 
 #define MAX_LOCATION_LENGTH 100 /* none of the jvmLocations strings should be longer than this */
 #define MAX_JVMLIB_LENGTH   100 /* none of the jvmLibs strings should be longer than this */
-static const char* jvmLocations[] = {
-    "../lib/" JAVA_ARCH "/client",
-    "../lib/" JAVA_ARCH "/server",
-    "../lib/client",
-    "../lib/server",
-    "../jre/lib/" JAVA_ARCH "/client",
-    "../jre/lib/" JAVA_ARCH "/server",
-    "../jre/lib/client",
-    "../jre/lib/server",
-    "../bundle/Libraries",
-    NULL
+static const char *jvmLocations[] = {
+        "../lib/" JAVA_ARCH "/client",
+        "../lib/" JAVA_ARCH "/server",
+        "../lib/client",
+        "../lib/server",
+        "../jre/lib/" JAVA_ARCH "/client",
+        "../jre/lib/" JAVA_ARCH "/server",
+        "../jre/lib/client",
+        "../jre/lib/server",
+        "../bundle/Libraries",
+        NULL
 };
-static const char* jvmLibs[] = { "libclient64.dylib","libjvm.dylib", "libjvm.jnilib", "libjvm.so", NULL };
+static const char *jvmLibs[]      = {"libclient64.dylib", "libjvm.dylib", "libjvm.jnilib", "libjvm.so", NULL};
 
 /* Define the window system arguments for the various Java VMs. */
-static const char*  argVM_JAVA[] = { "-XstartOnFirstThread", NULL };
+static const char *argVM_JAVA[] = {"-XstartOnFirstThread", NULL};
 
 static const char *mxjSuffixes[] = {
-    "externals/mxj.mxo/Contents/MacOS/mxj\0",
-    "externals/mxj~.mxo/Contents/MacOS/mxj~\0",
-    "extensions/mxj_safe.mxo/Contents/MacOS/mxj_safe\0",
-    NULL
+        "externals/mxj.mxo/Contents/MacOS/mxj\0",
+        "externals/mxj~.mxo/Contents/MacOS/mxj~\0",
+        "extensions/mxj_safe.mxo/Contents/MacOS/mxj_safe\0",
+        NULL
 };
 
 static bool fileExists(const char *filename, bool isExecutable)
@@ -82,13 +82,13 @@ static bool fileExists(const char *filename, bool isExecutable)
 }
 
 /** a function to determine if string ends with a specific value */
-inline bool hasEnding(const char *fullString,const char*ending)
+inline bool hasEnding(const char *fullString, const char *ending)
 {
-    size_t is = (fullString==NULL) ? 0 : strlen(fullString);
+    size_t is = (fullString == NULL) ? 0 : strlen(fullString);
     size_t ie = strlen(ending);
     if (is < ie) { return false; }
 
-    while(ie--)
+    while (ie--)
     {
         is--;
         if (ending[ie] != fullString[is]) { return false; }
@@ -131,28 +131,28 @@ char *getEmbeddedHomeDirectory()
                         if (fullName != NULL)
                         {
 
-                        // Replace mxj suffix in path by jre home relative path
+                            // Replace mxj suffix in path by jre home relative path
 
-                        const int  maxxxLen  = strlen(fullName) + strlen(jreHome) + 1; // In case mxjSuffix is smaller than jreHome, take precautions
-                        char       embeddedHome[maxxxLen];
-                        memset(embeddedHome, 0, maxxxLen); // Clear it
-                        // Set to fullName
+                            const int maxxxLen = strlen(fullName) + strlen(jreHome) + 1; // In case mxjSuffix is smaller than jreHome, take precautions
+                            char      embeddedHome[maxxxLen];
+                            memset(embeddedHome, 0, maxxxLen); // Clear it
+                            // Set to fullName
                             strncpy(embeddedHome, fullName, maxxxLen - 1); // Keep last 0
-                        // Remove mxj suffix
-                        embeddedHome[strlen(fullName) - strlen(mxjSuffix)] = 0;
-                        // Append jre home
+                            // Remove mxj suffix
+                            embeddedHome[strlen(fullName) - strlen(mxjSuffix)] = 0;
+                            // Append jre home
                             strncat(embeddedHome, jreHome, maxxxLen - 1); // Keep last 0
 
 
-                        // Check for folder
-                        if (fileExists(embeddedHome, true))
-                        {
-                            privateEmbeddedHomeDirectory = strdup(embeddedHome);
-                        }
-                        }
+                            // Check for folder
+                            if (fileExists(embeddedHome, true))
+                            {
+                                privateEmbeddedHomeDirectory = strdup(embeddedHome);
+                            }
                     }
                 }
             }
+        }
         }
     }
     return privateEmbeddedHomeDirectory;
@@ -161,11 +161,11 @@ char *getEmbeddedHomeDirectory()
 
 
 char * findLib(char * command) {
-    int i, q;
-    int pathLength;
+    int         i, q;
+    int         pathLength;
     struct stat stats;
-    char * path; /* path to resulting jvm shared library */
-    char * location; /* points to begining of jvmLocations section of path */
+    char        *path; /* path to resulting jvm shared library */
+    char        *location; /* points to begining of jvmLocations section of path */
 
     if (command != NULL) {
         /*check first to see if command already points to the library */
@@ -176,9 +176,9 @@ char * findLib(char * command) {
             return NULL;
         }
 
-        location = strrchr(command, dirSeparator) + 1;
+        location   = strrchr(command, dirSeparator) + 1;
         pathLength = location - command;
-        path = (char*)malloc((pathLength + MAX_LOCATION_LENGTH + 1 + MAX_JVMLIB_LENGTH	+ 1) * sizeof(char));
+        path       = (char *) malloc((pathLength + MAX_LOCATION_LENGTH + 1 + MAX_JVMLIB_LENGTH + 1) * sizeof(char));
         strncpy(path, command, pathLength);
         location = &path[pathLength];
 
@@ -203,13 +203,15 @@ char * findLib(char * command) {
 }
 
 
-int isVMLibrary( _TCHAR* vm )
+int isVMLibrary(_TCHAR *vm)
 {
     _TCHAR *ch = NULL;
-    if (vm == NULL) return 0;
-    ch = _tcsrchr( vm, '.' );
-    if(ch == NULL)
+    if (vm == NULL) { return 0; }
+    ch = _tcsrchr(vm, '.');
+    if (ch == NULL)
+    {
         return 0;
+    }
 #ifdef _WIN32
     return (_tcsicmp(ch, _T_ECLIPSE(".dll")) == 0);
 #else
@@ -221,8 +223,8 @@ char * getJavaVersion(char* command) {
     FILE *fp;
     char buffer[MXJ_JAVA_PATH_MAX_LEN];
     char *version = NULL, *firstChar;
-    int numChars = 0;
-    sprintf(buffer,"%s -version 2>&1", command);
+    int  numChars = 0;
+    sprintf(buffer, "%s -version 2>&1", command);
     fp = popen(buffer, "r");
     if (fp == NULL) {
         return NULL;
@@ -232,13 +234,13 @@ char * getJavaVersion(char* command) {
             firstChar = (char *) (strchr(buffer, '"') + 1);
             if (firstChar != NULL)
             {
-                numChars = (int)  (strrchr(buffer, '"') - firstChar);
+                numChars = (int) (strrchr(buffer, '"') - firstChar);
             }
 
             /* Allocate a buffer and copy the version string into it. */
             if (numChars > 0)
             {
-                version = (char *) malloc( numChars + 1 );
+                version = (char *) malloc(numChars + 1);
                 strncpy(version, firstChar, numChars);
                 version[numChars] = '\0';
             }
@@ -331,13 +333,13 @@ char *getHome()
     return privateJavaHomeDirectory;
 }
 
-char * getJavaHome() {
+char * getJavaHome()
+{
     char path[MXJ_JAVA_PATH_MAX_LEN];
-    char * home = getHome();
-    if(home == NULL)
-        return NULL;
+    char *home = getHome();
+    if (home == NULL) { return NULL; }
 
-    snprintf(path,sizeof(path), "%s/bin/java", home);
+    snprintf(path, sizeof(path), "%s/bin/java", home);
     return strdup(path);
 }
 
@@ -368,9 +370,9 @@ char *getJavaJli()
 }
 
 const char * findVMLibrary( char* command ) {
-    char *start, *end;
-    char *version, *cmd;
-    int length;
+    char       *start, *end;
+    char       *version, *cmd;
+    int        length;
     const char *result;
 
     /*check first to see if command already points to the library */
@@ -382,10 +384,10 @@ const char * findVMLibrary( char* command ) {
     start = strstr(command, "/Versions/");
     if (start != NULL){
         start += 10;
-        end = strchr( start, dirSeparator);
+        end = strchr(start, dirSeparator);
         if (end != NULL && end > start) {
-            length = end - start;
-            version = (char*)malloc(length + 1);
+            length  = end - start;
+            version = (char *) malloc(length + 1);
             strncpy(version, start, length);
             version[length] = 0;
 
@@ -405,7 +407,7 @@ const char * findVMLibrary( char* command ) {
     getJavaVersion(cmd);
     result = JAVA_FRAMEWORK;
     if (strstr(cmd, "/JavaVM.framework/") == NULL) {
-        char * lib = findLib(cmd);
+        char *lib = findLib(cmd);
         if (lib != NULL) {
             result = lib;
         }
