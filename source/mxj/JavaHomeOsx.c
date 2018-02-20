@@ -149,10 +149,10 @@ char *getEmbeddedHomeDirectory()
                             {
                                 privateEmbeddedHomeDirectory = strdup(embeddedHome);
                             }
+                        }
                     }
                 }
             }
-        }
         }
     }
     return privateEmbeddedHomeDirectory;
