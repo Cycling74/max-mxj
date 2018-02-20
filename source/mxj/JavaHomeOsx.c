@@ -86,12 +86,12 @@ inline bool hasEnding(const char *fullString,const char*ending)
 {
     size_t is = (fullString==NULL) ? 0 : strlen(fullString);
     size_t ie = strlen(ending);
-    if (is<ie) return false;
+    if (is < ie) { return false; }
 
     while(ie--)
     {
         is--;
-        if (ending[ie]!=fullString[is]) return false;
+        if (ending[ie] != fullString[is]) { return false; }
     }
     return true;
 }
@@ -128,6 +128,8 @@ char *getEmbeddedHomeDirectory()
                     if (hasEnding(myPluginInfo.dli_fname, mxjSuffix))
                     {
                         const char *fullName = myPluginInfo.dli_fname; // Full binary path name
+                        if (fullName != NULL)
+                        {
 
                         // Replace mxj suffix in path by jre home relative path
 
@@ -135,16 +137,18 @@ char *getEmbeddedHomeDirectory()
                         char       embeddedHome[maxxxLen];
                         memset(embeddedHome, 0, maxxxLen); // Clear it
                         // Set to fullName
-                        strncpy(embeddedHome, fullName, maxxxLen - 1);
+                            strncpy(embeddedHome, fullName, maxxxLen - 1); // Keep last 0
                         // Remove mxj suffix
                         embeddedHome[strlen(fullName) - strlen(mxjSuffix)] = 0;
                         // Append jre home
-                        strncat(embeddedHome, jreHome, maxxxLen - 1);
+                            strncat(embeddedHome, jreHome, maxxxLen - 1); // Keep last 0
+
 
                         // Check for folder
                         if (fileExists(embeddedHome, true))
                         {
                             privateEmbeddedHomeDirectory = strdup(embeddedHome);
+                        }
                         }
                     }
                 }
@@ -227,7 +231,9 @@ char * getJavaVersion(char* command) {
         if (!version) {
             firstChar = (char *) (strchr(buffer, '"') + 1);
             if (firstChar != NULL)
+            {
                 numChars = (int)  (strrchr(buffer, '"') - firstChar);
+            }
 
             /* Allocate a buffer and copy the version string into it. */
             if (numChars > 0)
@@ -404,7 +410,7 @@ const char * findVMLibrary( char* command ) {
             result = lib;
         }
     }
-    if (cmd != command) free(cmd);
+    if (cmd != command) { free(cmd); }
     return result;
 }
 
