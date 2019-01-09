@@ -353,19 +353,7 @@ _TCHAR*  IVirtualMachine::findLib() {
 	_TCHAR * jreKeyName;		
 	
 	/* Not found yet, try the registry, we will use the first vm >= 1.4 */
-	//here we use the path to 32 bit versions in wow6432Node key path
-	//this will change when we look at 64 bitness
-#ifdef X64
 	jreKeyName = _T("Software\\JavaSoft\\Java Runtime Environment");
-#else
-	BOOL bIsWow64 = FALSE;
-	IsWow64Process(GetCurrentProcess(),&bIsWow64);
-	if(bIsWow64){
-		jreKeyName = _T("Software\\Wow6432Node\\JavaSoft\\Java Runtime Environment");
-	}else{
-		jreKeyName = _T("Software\\JavaSoft\\Java Runtime Environment");	
-	}
-#endif
 	if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, jreKeyName, 0, KEY_READ, &jreKey) == ERROR_SUCCESS) {
 		if(RegQueryValueEx(jreKey, _T("CurrentVersion"), NULL, NULL, (LPBYTE)&keyName, &length) == ERROR_SUCCESS) {
 			path = checkVMRegistryKey(jreKey, keyName);
