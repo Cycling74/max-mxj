@@ -2598,7 +2598,7 @@ JNIEnv *jvm_new(long *exists) {
 	    vmArgs.version = JNI_VERSION_1_6;
 	    vmArgs.nOptions = numOptions;
 	    vmArgs.options = options;
-	    vmArgs.ignoreUnrecognized = JNI_FALSE;
+	    vmArgs.ignoreUnrecognized = JNI_TRUE;
 		
 		// classpath is in first option
 		ps = strstr(options[0].optionString, "=");
