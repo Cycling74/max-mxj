@@ -2590,7 +2590,7 @@ JNIEnv *jvm_new(long *exists) {
 	
  		#ifdef MAC_VERSION
 		if (g_java_jvm_version[0]) {
-			post("(mxj) attempting to to set java version to %s",g_java_jvm_version);
+			post("(mxj) attempting to set java version to %s",g_java_jvm_version);
 			setenv("JAVA_JVM_VERSION", (char*)g_java_jvm_version,1);
 		}
  		#endif // MAC_VERSION
