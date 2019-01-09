@@ -2706,7 +2706,7 @@ JNIEnv *jvm_new(long *exists) {
         
 		post("MXJClassloader CLASSPATH:");
 		for(i = 0; i < props->len;i++) {
-			char buff[1024];
+			char buff[2048];
 			if (props->pptr[i]->id == MXJPROP_DYN_CLASS_DIR) {
 				strcpy(buff, (char *)(props->pptr[i])->prop);
 				post("   %s",buff);
