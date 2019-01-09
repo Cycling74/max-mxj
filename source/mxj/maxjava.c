@@ -2595,7 +2595,7 @@ JNIEnv *jvm_new(long *exists) {
 		}
  		#endif // MAC_VERSION
 
-	    vmArgs.version = JNI_VERSION_1_4;
+	    vmArgs.version = JNI_VERSION_1_6;
 	    vmArgs.nOptions = numOptions;
 	    vmArgs.options = options;
 	    vmArgs.ignoreUnrecognized = JNI_FALSE;
