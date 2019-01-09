@@ -2894,7 +2894,7 @@ short mxj_get_jvmopts(JavaVMOption* options, int *num_options, int max_opts)
 		t_ptr_size	i;
 
 		for (i=0; i<pathcount; i++) {
-			short	path = (short)(t_ptr_int)linklist_getindex(paths, i);
+			short	path = (short)(t_ptr_int)linklist_getindex(paths, (long)i);
 			short	jpath;
 			char	maxpath[MAX_PATH_CHARS];
 			char	fullpath[MAX_PATH_CHARS];
@@ -3126,7 +3126,7 @@ short mxj_get_jvmopts(JavaVMOption* options, int *num_options, int max_opts)
 	
 make_classpath:
 
-	options[0].optionString = (char*)sysmem_newptr(strlen(string_getptr(classpath)) + 256);
+	options[0].optionString = (char*)sysmem_newptr((long)(strlen(string_getptr(classpath)) + 256));
 	options[0].extraInfo = NULL;
 	sprintf(options[0].optionString,"-Djava.class.path=%s",string_getptr(classpath));
 	*num_options = op_idx;
