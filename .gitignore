@@ -44,3 +44,5 @@ sysbuild
 .DS_Store
 
 
+source/mxj/enc_temp_folder
+source/mxj/.vs
