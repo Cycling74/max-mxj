@@ -322,7 +322,8 @@ CreateExecutionEnvironment(
 }
 
 /*
- * Find path to JRE based on .exe's location or registry settings.
+ * Find path to JRE based on .exe's location (embeded into application)
+ * or registry settings (installed in the computer programs)
  */
 jboolean
 GetJREPath(char *path, jint pathsize)
