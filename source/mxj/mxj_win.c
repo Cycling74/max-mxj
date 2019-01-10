@@ -302,12 +302,12 @@ CreateExecutionEnvironment(
 	/* If we got here, jvmpath has been correctly initialized. */
 	// HACK...the above code is crashing when reading the config file. 
 	// currently assuming we will load the following file. revisit. -jkc
-	sprintf(jvmpath, "%s\\bin\\client\\jvm.dll", jrepath);
+	sprintf(jvmpath, "%s\\bin\\client\\"JVM_DLL, jrepath);
 	if (stat(jvmpath, &s) != 0) {
 		// rbs: on my install of the JVM for x64 the jvm.dll was in this path
 		// not sure what the correct way is to get this path, but this will do for 
 		// now
-		sprintf(jvmpath, "%s\\bin\\server\\jvm.dll", jrepath);
+		sprintf(jvmpath, "%s\\bin\\server\\"JVM_DLL, jrepath);
 	}
 	return 0;
 }
