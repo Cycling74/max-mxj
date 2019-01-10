@@ -185,6 +185,7 @@ void IVirtualMachine::startJVM()
     
 #ifdef WIN_VERSION
     
+	// Find jvm dll lib path
     _TCHAR * eclipseLibrary = findLib();
     
     if(eclipseLibrary != NULL){
@@ -204,7 +205,7 @@ void IVirtualMachine::startJVM()
         {
            // Logger::writeToLog("Out of memory for environment block swap");
         }else{
-            
+            // Get path env
             dwRet = GetEnvironmentVariable(VARNAME, pszOldVal, ENV_BUFSIZE);
             
             if(dwRet == 0){
