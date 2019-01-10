@@ -355,7 +355,7 @@ GetJREPath(char *path, jint pathsize)
 
  found:
     if (debug)
-      printf("JRE path is %s\n", path);
+      post("JRE path is %s\n", path);
     return JNI_TRUE;
 }
 
@@ -390,7 +390,7 @@ LoadJavaVM(const char *jvmpath, InvocationFunctions *ifn)
     HINSTANCE handle;
 
     if (debug) {
-		printf("JVM path is %s\n", jvmpath);
+		post("JVM path is %s\n", jvmpath);
     }
 
     /* Load the Java VM DLL */
@@ -501,7 +501,7 @@ GetPublicJREHome(char *buf, jint bufsize)
 			ReportErrorMessage("Warning: Can't read MicroVersion\n", true);
 	    micro[0] = '\0';
 	}
-	printf("Version major.minor.micro = %s.%s\n", version, micro);
+		post("Version major.minor.micro = %s.%s\n", version, micro);
     }
 
     RegCloseKey(key);
