@@ -311,6 +311,9 @@ CreateExecutionEnvironment(
 			ReportErrorMessage("could not find JRE client or server "JVM_DLL, JNI_TRUE);
 			return 2;
 		}
+		*_jvmtype = _strdup("server");
+	}
+	else { *_jvmtype = _strdup("client"); }
 	}
 	return 0;
 }
