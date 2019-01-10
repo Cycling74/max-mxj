@@ -307,6 +307,10 @@ CreateExecutionEnvironment(
 		// not sure what the correct way is to get this path, but this will do for 
 		// now
 		sprintf(jvmpath, "%s\\bin\\server\\"JVM_DLL, jrepath);
+		if (stat(jvmpath, &s) != 0) {
+			ReportErrorMessage("could not find JRE client or server "JVM_DLL, JNI_TRUE);
+			return 2;
+		}
 	}
 	return 0;
 }
