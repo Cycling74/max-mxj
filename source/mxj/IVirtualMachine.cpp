@@ -213,12 +213,13 @@ void IVirtualMachine::startJVM()
             }else{
                 //calculate the length of the updated path
 				string jvmLibPath(eclipseLibrary);
-                string oldPath(pszOldVal);
-				oldPath.append(string(";"));
-				oldPath.append(string(jvmLibPath));
+				string newPath(jvmLibPath);
+				newPath.append(string(";"));
+				newPath.append(string(pszOldVal));
 
-                if (! SetEnvironmentVariable(VARNAME, oldPath.data()))
+                if (! SetEnvironmentVariable(VARNAME, newPath.data()))
                 {
+					logLastError(TEXT("SetEnvironmentVariable failed after adding jvm lib"));
                     //Logger::writeToLog("SetEnvironmentVariable failed");
                 }
                 
