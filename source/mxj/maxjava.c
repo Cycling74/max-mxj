@@ -2808,7 +2808,7 @@ short mxj_generate_default_options(JavaVMOption* options)
 	options[3].extraInfo = NULL;
 	
 	sprintf(options[1].optionString,"-Xincgc");
-	sprintf(options[2].optionString,"-Xms16m");
+	sprintf(options[2].optionString,"-Xms32m");
 	sprintf(options[3].optionString,"-Xmx256m");
 	
 	return 4;
