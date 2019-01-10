@@ -273,8 +273,7 @@ CreateExecutionEnvironment(
 
     /* Find out where the JRE is that we will be using. */
     if (!GetJREPath(jrepath, so_jrepath)) {
-	ReportErrorMessage("could not find Java 2 Runtime Environment.",
-			   JNI_TRUE);
+		ReportErrorMessage("could not find Java 2 Runtime Environment.",JNI_TRUE);
 		return 2;
     }
 
@@ -391,13 +390,10 @@ LoadJavaVM(const char *jvmpath, InvocationFunctions *ifn)
     }
 
     /* Now get the function addresses */
-    ifn->CreateJavaVM =
-	(void *)GetProcAddress(handle, "JNI_CreateJavaVM");
-    ifn->GetDefaultJavaVMInitArgs =
-	(void *)GetProcAddress(handle, "JNI_GetDefaultJavaVMInitArgs");
+    ifn->CreateJavaVM =	(void *)GetProcAddress(handle, "JNI_CreateJavaVM");
+    ifn->GetDefaultJavaVMInitArgs =	(void *)GetProcAddress(handle, "JNI_GetDefaultJavaVMInitArgs");
     if (ifn->CreateJavaVM == 0 || ifn->GetDefaultJavaVMInitArgs == 0) {
-	ReportErrorMessage2("Error: can't find JNI interfaces in: %s", 
-			    (char *)jvmpath, JNI_TRUE);
+		ReportErrorMessage2("Error: can't find JNI interfaces in: %s", (char *)jvmpath, JNI_TRUE);
 	return JNI_FALSE;
     }
 
@@ -462,10 +458,8 @@ GetPublicJREHome(char *buf, jint bufsize)
 	return JNI_FALSE;
     }
 
-    if (!GetStringFromRegistry(key, "CurrentVersion",
-			       version, sizeof(version))) {
-	fprintf(stderr, "Failed reading value of registry key:\n\t"
-		JRE_KEY "\\CurrentVersion\n");
+    if (!GetStringFromRegistry(key, "CurrentVersion", version, sizeof(version))) {
+		fprintf(stderr, "Failed reading value of registry key:\n\t" JRE_KEY "\\CurrentVersion\n");
 	RegCloseKey(key);
 	return JNI_FALSE;
     }
@@ -479,15 +473,13 @@ GetPublicJREHome(char *buf, jint bufsize)
 */
     /* Find directory where the current version is installed. */
     if (RegOpenKeyEx(key, version, 0, KEY_READ, &subkey) != 0) {
-	fprintf(stderr, "Error opening registry key '"
-		JRE_KEY "\\%s'\n", version);
+		fprintf(stderr, "Error opening registry key '" JRE_KEY "\\%s'\n", version);
 	RegCloseKey(key);
 	return JNI_FALSE;
     }
 
     if (!GetStringFromRegistry(subkey, "JavaHome", buf, bufsize)) {
-	fprintf(stderr, "Failed reading value of registry key:\n\t"
-		JRE_KEY "\\%s\\JavaHome\n", version);
+		fprintf(stderr, "Failed reading value of registry key:\n\t" JRE_KEY "\\%s\\JavaHome\n", version);
 	RegCloseKey(key);
 	RegCloseKey(subkey);
 	return JNI_FALSE;
@@ -495,9 +487,8 @@ GetPublicJREHome(char *buf, jint bufsize)
 
     if (debug) {
 	char micro[MAXPATHLEN];
-	if (!GetStringFromRegistry(subkey, "MicroVersion", micro,
-				   sizeof(micro))) {
-	    printf("Warning: Can't read MicroVersion\n");
+		if (!GetStringFromRegistry(subkey, "MicroVersion", micro, sizeof(micro))) {
+			ReportErrorMessage("Warning: Can't read MicroVersion\n", true);
 	    micro[0] = '\0';
 	}
 	printf("Version major.minor.micro = %s.%s\n", version, micro);
