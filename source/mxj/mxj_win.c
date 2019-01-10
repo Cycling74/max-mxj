@@ -577,10 +577,15 @@ char g_jrepath[MAXPATHLEN], g_jvmpath[MAXPATHLEN];
 char *g_jvmtype=NULL;
 InvocationFunctions g_ifn;
 
+const char *getGlobal_jrepath() { return g_jrepath; }
+const char *getGlobal_jvmpath() { return g_jvmpath; }
+const char *getGlobal_jvmtype() { return g_jvmtype; }
+
 long mxj_platform_init()
 {
-	CreateExecutionEnvironment(g_jrepath, sizeof(g_jrepath),
-			       g_jvmpath, sizeof(g_jvmpath), &g_jvmtype);
+	g_jrepath[0] = g_jvmpath[0] = 0; 
+	g_jvmtype = NULL;
+	CreateExecutionEnvironment(g_jrepath, sizeof(g_jrepath), g_jvmpath, sizeof(g_jvmpath), &g_jvmtype);
     g_ifn.CreateJavaVM = 0;
     g_ifn.GetDefaultJavaVMInitArgs = 0;
 
