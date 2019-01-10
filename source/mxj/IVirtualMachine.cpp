@@ -24,7 +24,7 @@ typedef _JNI_IMPORT_OR_EXPORT_ jint  (*WRAPPED_JNI_GetCreatedJavaVMs)(JavaVM **,
 #ifdef WIN_VERSION
 #include <stdio.h>
 #include <strsafe.h>
-
+#include <atlstr.h>
 
 #else
 
@@ -339,6 +339,14 @@ jstring IVirtualMachine::getSystemProperty(string propertyName)
 
 
 #ifdef WIN_VERSION
+
+// Path to JRE found previously 
+extern "C" {
+	const char *getGlobal_jrepath();
+	const char *getGlobal_jvmpath();
+	const char *getGlobal_jvmtype();
+}
+
 /*
  * Find the VM shared library starting from the java executable 
  */
@@ -347,6 +355,16 @@ _TCHAR*  IVirtualMachine::findLib() {
 	int  j;
 	
 	_TCHAR * path;				/* path to resulting jvm shared library */
+
+	// Did we found a JRE before ? embeded of system installed
+	const char *global_jvmpath = getGlobal_jvmpath();
+	if (global_jvmpath != NULL && *global_jvmpath != 0)
+	{
+		size_t newsize = strlen(global_jvmpath) + 1;
+		path = new _TCHAR[newsize];
+		_tcscpy(path, A2T((char*)global_jvmpath));
+		return path;
+	}
 	
 	/* for looking in the registry */
 	HKEY jreKey = NULL;
