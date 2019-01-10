@@ -227,7 +227,8 @@ GetArch()
 
 void AddJavaBinFolderToPath(const char *javahome)
 {
-	CHAR* path = NULL;
+	CHAR* next_path = NULL;
+	CHAR* current_path = NULL;
 	CHAR binpath[MAXPATHLEN];
 
 	long len;
@@ -238,15 +239,23 @@ void AddJavaBinFolderToPath(const char *javahome)
 	}
 	strcat(binpath, "bin"); 
 
-	len = GetEnvironmentVariable("path", path, 0);
-	len += (long)strlen(binpath) + 2;
-	path = (CHAR*) sysmem_newptr(len * sizeof(path[0]));
-	if (path) {
-		len = GetEnvironmentVariable("path", path, len);
-		strcat(path, ";");
-		strcat(path, binpath);
-		SetEnvironmentVariable("path", path);
-		sysmem_freeptr(path);
+	// Get current path
+	len = GetEnvironmentVariable("path", current_path, 0);
+	const long cplen = len * sizeof(CHAR) + 1;
+	current_path = (CHAR*)sysmem_newptr(cplen);
+	GetEnvironmentVariable("path", current_path, cplen);
+
+	len = cplen + (long)strlen(binpath) + 1; // 1 for ; 
+	next_path = (CHAR*)sysmem_newptr(len * sizeof(CHAR));
+	if (next_path) {
+		// JRE path first, it will be used first when searching path
+		strcpy(next_path, binpath);
+		strcat(next_path, ";");
+		strcat(next_path, current_path);
+
+		SetEnvironmentVariable("path", next_path);
+		sysmem_freeptr(next_path);
+		sysmem_freeptr(current_path);
 	}
 }
 
