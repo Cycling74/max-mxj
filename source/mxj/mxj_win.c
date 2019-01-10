@@ -314,6 +314,9 @@ CreateExecutionEnvironment(
 		*_jvmtype = _strdup("server");
 	}
 	else { *_jvmtype = _strdup("client"); }
+
+	if (debug) {
+		post("Found "JVM_DLL" of type %s here: %s\n", *_jvmtype, jvmpath);
 	}
 	return 0;
 }
