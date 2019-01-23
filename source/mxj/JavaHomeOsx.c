@@ -146,6 +146,7 @@ char *getEmbeddedHomeDirectory()
                             if (fileExists(embeddedHome, true))
                             {
                                 privateEmbeddedHomeDirectory = strdup(embeddedHome);
+                                break;
                             }
                         }
                     }
