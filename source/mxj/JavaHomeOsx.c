@@ -130,7 +130,6 @@ char *getEmbeddedHomeDirectory()
                         const char *fullName = myPluginInfo.dli_fname; // Full binary path name
                         if (fullName != NULL)
                         {
-
                             // Replace mxj suffix in path by jre home relative path
 
                             const int maxxxLen = strlen(fullName) + strlen(jreHome) + 1; // In case mxjSuffix is smaller than jreHome, take precautions
@@ -142,7 +141,6 @@ char *getEmbeddedHomeDirectory()
                             embeddedHome[strlen(fullName) - strlen(mxjSuffix)] = 0;
                             // Append jre home
                             strncat(embeddedHome, jreHome, maxxxLen - 1); // Keep last 0
-
 
                             // Check for folder
                             if (fileExists(embeddedHome, true))
