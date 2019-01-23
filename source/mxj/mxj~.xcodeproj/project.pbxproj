@@ -414,6 +414,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22E0768E1AE82254009EC560 /* maxmspsdk.xcconfig */;
 			buildSettings = {
+				VALID_ARCHS = x86_64;
 			};
 			name = Development;
 		};
@@ -421,6 +422,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22E0768E1AE82254009EC560 /* maxmspsdk.xcconfig */;
 			buildSettings = {
+				VALID_ARCHS = x86_64;
 			};
 			name = Deployment;
 		};
