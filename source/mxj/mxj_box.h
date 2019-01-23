@@ -1,6 +1,5 @@
 #ifndef __MXJ_BOX_H
-
-#define _MXJ_BOX_H
+#define __MXJ_BOX_H
 
 #ifdef MAC_VERSION
 #include <JavaVM/jni.h>        // Java Native Interface definitions
