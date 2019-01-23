@@ -1,5 +1,5 @@
 #ifndef __MXJ_PATCHER_H
-#define _MXJ_PATCHER_H
+#define __MXJ_PATCHER_H
 
 #ifdef MAC_VERSION
 #include <JavaVM/jni.h>        // Java Native Interface definitions
