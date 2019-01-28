@@ -8,7 +8,11 @@
  *
  */
 
+#ifdef WIN32
 #include <cstdio>
+#else
+#include <stdio.h>
+#endif
 #include <assert.h>
 #include "IVirtualMachine.h"
 

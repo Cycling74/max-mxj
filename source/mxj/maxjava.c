@@ -139,7 +139,7 @@ extern InvocationFunctions g_ifn;
 
 #ifdef MXJ_MSP
 //benchmarking
-extern double systimer_gettime();
+extern double systimer_gettime(void);
 static double _t_1, _t_2;
 #define BENCHMARK_BEGIN _t_1 = systimer_gettime()
 #define BENCHMARK_END   _t_2 = systimer_gettime()
@@ -235,7 +235,7 @@ void initGlobals(JNIEnv *env);
 void init_mxj_jitter(JNIEnv *env);
 #ifdef MAC_VERSION
 CFBundleRef getMachOLibrary(CFStringRef bundleName);
-short init_awt();
+short init_awt(void);
 #endif
 
 /**
@@ -400,7 +400,7 @@ void mxjObjectWasDeleted(JNIEnv *env, t_maxjava *x);
 /*
  * Notify the classloader of all our collected classpaths.
  */
-void mxj_inform_classloader();
+void mxj_inform_classloader(void);
 
 /*
  * Get a prop value - default is the default value you would
@@ -441,7 +441,7 @@ void mxj_dspstate(t_maxjava *x, long n);
 void mxj_benchmark(t_maxjava *x, long way, long interval);
 void mxj_exception_check(t_maxjava *x,int way);
 void mxj_dsp_halt(t_maxjava *x);
-void mxj_bounce_dac();
+void mxj_bounce_dac(void);
 
 jboolean mxj_check_z_no_inplace(JNIEnv *env, t_maxjava *x);
 
@@ -506,9 +506,9 @@ void ext_main(void *r) {
 	}
 
 	ps_global_jvm = gensym("_#MAX_JAVA_VM#_");
-#ifdef MAC_VERSION 
-return 0;
-#endif
+//#ifdef MAC_VERSION 
+//return 0;
+//#endif
 }
 
 void mxj_save2(t_maxjava *x, void *z)
@@ -1338,14 +1338,15 @@ void maxjava_anything(t_maxjava *x, t_symbol *msg, short argc, t_atom *argv)
 	MXJ_JNI_CALL(env,ExceptionClear)(env);
 	
 	switch (resolve_stat) {
-		t_mxj_attr *a;
 		case MXJ_METHOD_MATCH:
 		case MXJ_ARRAY_MATCH:	
 		case MXJ_COERCE:
 		case MXJ_GIMME_MATCH:
 			call_method_with_coercion(x,m->mids[meth_offset],m->jp_types[meth_offset],argc,argv);
 			break;
-		case MXJ_NO_METHOD_MATCH: 
+		case MXJ_NO_METHOD_MATCH:
+        {
+            t_mxj_attr *a;
 			//look for attribute
 			if ((a = mxj_get_attr(x,msg)) != 0) {	// should probbly check settable here
 				a->setter((void *)env,x,a,argc,argv);
@@ -1364,6 +1365,7 @@ void maxjava_anything(t_maxjava *x, t_symbol *msg, short argc, t_atom *argv)
 			MXJ_JNI_CALL(env,DeleteLocalRef)(env,s);
 			MXJ_JNI_CALL(env,DeleteLocalRef)(env,tmp);
 			break;
+        }
 		default:
 			break;
 	}
