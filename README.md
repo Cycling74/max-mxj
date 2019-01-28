@@ -18,6 +18,7 @@ Use the badges above to go directly to the CI services.
 * `cd build`
 * `cmake -G Xcode ..`
 * `cmake --build .` (or open the Xcode project in this build folder and build there)
+* `cmake --build . --config Release`
 
 
 ## To build (Windows)
