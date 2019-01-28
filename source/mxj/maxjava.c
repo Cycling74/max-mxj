@@ -1656,7 +1656,7 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 			MXJ_JNI_CALL(env,CallNonvirtualVoidMethodA)(env,x->javaInstance,x->cls,mid,args);
 			MXJ_JNI_CALL(env,DeleteLocalRef)(env,tmp);
 			ret = constructor_excep_helper(env);
-			return ret;	
+			return (t_mxj_err)ret;
 		case 'I': // int
 			args[i].i = (jint) atomargs_getlong(i,argc,argv);
 			break;
@@ -1717,7 +1717,7 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 					MXJ_JNI_CALL(env,CallNonvirtualVoidMethodA)(env,x->javaInstance,x->cls,mid,&array_arg);
 					MXJ_JNI_CALL(env,DeleteLocalRef)(env,ja);
 					ret = constructor_excep_helper(env);
-					return ret;						
+					return (t_mxj_err)ret;
 				case 'I': //int array
 					vp  = (jint *)mxj_getbytes(argc * sizeof(jint));
 					ja  = (jarray)MXJ_JNI_CALL(env,NewIntArray)(env,argc);
@@ -1734,7 +1734,7 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 					MXJ_JNI_CALL(env,DeleteLocalRef)(env,ja);
 					ret = constructor_excep_helper(env);
 					mxj_freebytes(vp, argc * sizeof(jint));
-					return ret;		
+					return (t_mxj_err)ret;
 				case 'F': //float array
 					vp  = (jfloat *)mxj_getbytes(argc * sizeof(jfloat));
 					ja  = (jarray)MXJ_JNI_CALL(env,NewFloatArray)(env,argc);
@@ -1751,7 +1751,7 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 					MXJ_JNI_CALL(env,DeleteLocalRef)(env,ja);
 					ret = constructor_excep_helper(env);
 					mxj_freebytes(vp, argc * sizeof(jfloat));
-					return ret;		
+					return (t_mxj_err)ret;
 				case 'J': //long array
 					vp  = (jlong *)mxj_getbytes(argc * sizeof(jlong));
 					ja  = (jarray)MXJ_JNI_CALL(env,NewLongArray)(env,argc);
@@ -1768,7 +1768,7 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 					MXJ_JNI_CALL(env,DeleteLocalRef)(env,ja);
 					ret = constructor_excep_helper(env);
 					mxj_freebytes(vp, argc * sizeof(jlong));
-					return ret;		
+					return (t_mxj_err)ret;
 				
 				case 'D': //double array
 					vp  = (jdouble *)mxj_getbytes(argc * sizeof(jdouble));
@@ -1786,7 +1786,7 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 					MXJ_JNI_CALL(env,DeleteLocalRef)(env,ja);
 					ret = constructor_excep_helper(env);
 					mxj_freebytes(vp, argc * sizeof(jdouble));
-					return ret;			
+					return (t_mxj_err)ret;
 				case 'Z': //boolean array
 					vp  = (jboolean *)mxj_getbytes(argc * sizeof(jboolean));
 					ja  = (jarray)MXJ_JNI_CALL(env,NewBooleanArray)(env,argc);
@@ -1803,7 +1803,7 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 					MXJ_JNI_CALL(env,DeleteLocalRef)(env,ja);
 					ret = constructor_excep_helper(env);
 					mxj_freebytes(vp, argc * sizeof(jboolean));
-					return ret;					
+					return (t_mxj_err)ret;
 				case 'B': //byte array
 					vp  = (jbyte *)mxj_getbytes(argc * sizeof(jbyte));
 					ja  = (jarray)MXJ_JNI_CALL(env,NewByteArray)(env,argc);
@@ -1820,7 +1820,7 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 					MXJ_JNI_CALL(env,DeleteLocalRef)(env,ja);
 					ret = constructor_excep_helper(env);
 					mxj_freebytes(vp, argc * sizeof(jbyte));
-					return ret;		
+					return (t_mxj_err)ret;
 				case 'C': //char array
 					vp  = (jchar *)mxj_getbytes(argc * sizeof(jchar));
 					ja  = (jarray)MXJ_JNI_CALL(env,NewCharArray)(env,argc);
@@ -1837,7 +1837,7 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 					MXJ_JNI_CALL(env,DeleteLocalRef)(env,ja);
 					ret = constructor_excep_helper(env);
 					mxj_freebytes(vp, argc * sizeof(jchar));
-					return ret;		
+					return (t_mxj_err)ret;
 				case 'S': //short array
 					vp  = (jshort *)mxj_getbytes(argc * sizeof(jshort));
 					ja  = (jshortArray)MXJ_JNI_CALL(env,NewShortArray)(env,argc);
@@ -1855,7 +1855,7 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 	
 					ret = constructor_excep_helper(env);
 					mxj_freebytes(vp, argc * sizeof(jshort));
-					return ret;		
+					return (t_mxj_err)ret;
 				default:
 					error("unsupported array type [%c",sigstr[i + 1]);
 					return MXJ_ERR_GENERIC;
@@ -1877,7 +1877,7 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 	for(i = 0; i < num_strs_free;i++)
 		MXJ_JNI_CALL(env,DeleteLocalRef)(env,str_free[i]);
 	
-	return ret;
+	return (t_mxj_err)ret;
 }
 
 t_mxj_err constructor_excep_helper(JNIEnv *env)
@@ -2125,7 +2125,7 @@ void mxj_benchmark(t_maxjava *x, long way, long interval )
 		x->benchmark_best_time = 77777777;
 		x->benchmark_worst_time = 0;
 		if (interval && interval > 0)
-			x->benchmark_interval = interval;
+			x->benchmark_interval = (int)interval;
 		else
 			x->benchmark_interval = 256;
 		
@@ -2222,7 +2222,7 @@ void mxj_dsp_add64(t_maxjava *x, t_object *dsp64, short *count, double samplerat
 		}
 		
 		//Make MSPSignal float[] member
-		jobj =  MXJ_JNI_CALL(env,NewFloatArray)(env, maxvectorsize);
+		jobj =  MXJ_JNI_CALL(env,NewFloatArray)(env, (jsize)maxvectorsize);
 		x->inlet_msp_vecs[i] = MXJ_JNI_CALL(env,NewGlobalRef)(env, jobj);
 		MXJ_JNI_CALL(env,DeleteLocalRef)(env, jobj);
 		
@@ -2243,7 +2243,7 @@ void mxj_dsp_add64(t_maxjava *x, t_object *dsp64, short *count, double samplerat
 		}
 				
 		//Make MSPSignal float[] member
-		jobj =  MXJ_JNI_CALL(env,NewFloatArray)(env, maxvectorsize);
+		jobj =  MXJ_JNI_CALL(env,NewFloatArray)(env, (jsize)maxvectorsize);
 		x->outlet_msp_vecs[i] = MXJ_JNI_CALL(env,NewGlobalRef)(env, jobj);
 		MXJ_JNI_CALL(env,DeleteLocalRef)(env, jobj);
 		
@@ -2524,7 +2524,7 @@ void mxj_dspstate(t_maxjava *x, long n)
 	jboolean val;	
 	THREADENV(env);
 	
-	x->dsp_running = n;
+	x->dsp_running = (int)n;
 	val = (n)?JNI_TRUE:JNI_FALSE;
 	//call into java dspstate method
 	MXJ_JNI_CALL(env,CallVoidMethod)(env,x->javaInstance,x->dspstate_MID,val);
@@ -2872,7 +2872,7 @@ short mxj_get_jvmopts(JavaVMOption* options, int *num_options, int max_opts)
 	len = (long)strlen(prop_val);
 	if (prop_val[len-1] == sep)
 		len--;
-	for (i=len-1;i>=0&&prop_val[i]!=sep;i--) {
+	for (i=(int)(len-1);i>=0&&prop_val[i]!=sep;i--) {
 		;
 	}
 	prop_val[i+1] = '\0';

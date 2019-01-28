@@ -132,7 +132,7 @@ char *getEmbeddedHomeDirectory()
                         {
                             // Replace mxj suffix in path by jre home relative path
 
-                            const int maxxxLen = strlen(fullName) + strlen(jreHome) + 1; // In case mxjSuffix is smaller than jreHome, take precautions
+                            const int maxxxLen = (int)(strlen(fullName) + strlen(jreHome) + 1); // In case mxjSuffix is smaller than jreHome, take precautions
                             char      embeddedHome[maxxxLen];
                             memset(embeddedHome, 0, maxxxLen); // Clear it
                             // Set to fullName
@@ -176,7 +176,7 @@ char * findLib(char * command) {
         }
 
         location   = strrchr(command, dirSeparator) + 1;
-        pathLength = location - command;
+        pathLength = (int)(location - command);
         path       = (char *) malloc((pathLength + MAX_LOCATION_LENGTH + 1 + MAX_JVMLIB_LENGTH + 1) * sizeof(char));
         strncpy(path, command, pathLength);
         location = &path[pathLength];
@@ -385,7 +385,7 @@ const char * findVMLibrary( char* command ) {
         start += 10;
         end = strchr(start, dirSeparator);
         if (end != NULL && end > start) {
-            length  = end - start;
+            length  = (int)(end - start);
             version = (char *) malloc(length + 1);
             strncpy(version, start, length);
             version[length] = 0;

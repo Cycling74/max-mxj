@@ -322,15 +322,15 @@ jfloatArray JNICALL mxj_mspbuf_peek_region(JNIEnv *env,jclass cls, jstring name,
 				channel = (jint)CLAMP(channel,1,channelcount) - 1;
 				
 				start = start*channelcount + channel;
-				jfarr = (MXJ_JNI_CALL(env,NewFloatArray)(env, (long)length));
+				jfarr = (MXJ_JNI_CALL(env,NewFloatArray)(env, (jsize)length));
 				
 				if (channelcount > 1) {
 					copiedarray = (float *)mxj_getbytes(sizeof(float)*(long)length);
 					mxj_mspbuf_read_channel(smps+start, copiedarray, (int)channelcount, (long)length);
-					MXJ_JNI_CALL(env,SetFloatArrayRegion)(env,jfarr,0,(long)length,copiedarray);
+					MXJ_JNI_CALL(env,SetFloatArrayRegion)(env,jfarr,0,(jsize)length,copiedarray);
 					mxj_freebytes(copiedarray, sizeof(float)*(long)length);
 				} else {
-					MXJ_JNI_CALL(env,SetFloatArrayRegion)(env,jfarr,0,(long)length,smps+start);
+					MXJ_JNI_CALL(env,SetFloatArrayRegion)(env,jfarr,0,(jsize)length,smps+start);
 				}
 				
 				buffer_unlocksamples(bo);
@@ -395,8 +395,8 @@ jfloatArray JNICALL mxj_mspbuf_peek_all(JNIEnv *env, jclass cls, jstring name)
 			
 			if (smps) {
 				long size = info.b_size;
-				jfloatArray jfarr = (MXJ_JNI_CALL(env,NewFloatArray)(env, size));
-				MXJ_JNI_CALL(env,SetFloatArrayRegion)(env,jfarr,0,size,smps);
+				jfloatArray jfarr = (MXJ_JNI_CALL(env,NewFloatArray)(env, (jsize)size));
+				MXJ_JNI_CALL(env,SetFloatArrayRegion)(env,jfarr,0,(jsize)size,smps);
 				
 				buffer_unlocksamples(bo);
 				object_free(b);

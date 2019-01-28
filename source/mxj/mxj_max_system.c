@@ -370,7 +370,7 @@ jobjectArray JNICALL mxj_get_search_path_forcontext(JNIEnv *env,jclass clazz)
 	if (m) {
 		m(&pathcount, &patharray); // get an array of shorts
 		if (patharray && pathcount) {
-			MXJ_JNI_CALL(env, PushLocalFrame)(env, pathcount+1);
+			MXJ_JNI_CALL(env, PushLocalFrame)(env, (jint)(pathcount+1));
 			checkException(env);
 			
 			tmp = (jstring *)sysmem_newptr(sizeof(jstring) * pathcount);
