@@ -197,6 +197,8 @@ char * findLib(char * command) {
                 }
             }
         }
+        
+        free(path);
     }
     return NULL;
 }
