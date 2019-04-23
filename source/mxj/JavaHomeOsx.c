@@ -54,12 +54,12 @@ char dirSeparator = '/';
 static const char *jvmLocations[] = {
         "../lib/" JAVA_ARCH "/client",
         "../lib/" JAVA_ARCH "/server",
-        "../lib/client",
         "../lib/server",
-        "../jre/lib/" JAVA_ARCH "/client",
+        "../lib/client",
         "../jre/lib/" JAVA_ARCH "/server",
-        "../jre/lib/client",
+        "../jre/lib/" JAVA_ARCH "/client",
         "../jre/lib/server",
+        "../jre/lib/client",
         "../bundle/Libraries",
         NULL
 };
