@@ -49,8 +49,8 @@ char dirSeparator = '/';
 
 #define JAVA_FRAMEWORK "/System/Library/Frameworks/JavaVM.framework"
 
-#define MAX_LOCATION_LENGTH 100 /* none of the jvmLocations strings should be longer than this */
-#define MAX_JVMLIB_LENGTH   100 /* none of the jvmLibs strings should be longer than this */
+#define MAX_LOCATION_LENGTH 2000 /* none of the jvmLocations strings should be longer than this */
+#define MAX_JVMLIB_LENGTH   2000 /* none of the jvmLibs strings should be longer than this */
 static const char *jvmLocations[] = {
         "../lib/" JAVA_ARCH "/client",
         "../lib/" JAVA_ARCH "/server",
