@@ -73,7 +73,9 @@ jlong JNICALL mxj_patcher_construct(JNIEnv *env, jobject obj, jint x1, jint y1, 
 	t_patcherobject *p;
 	long top, left, bottom, right;
 	t_atom av[4];
-	
+
+	t_object *cacheP = gensym("#P")->s_thing;
+	t_object *cacheB = gensym("#B")->s_thing;
 	// the arguments to a patcher are its location on the screen
 	// then you set visible to true and give it a name using properties
 
@@ -88,6 +90,10 @@ jlong JNICALL mxj_patcher_construct(JNIEnv *env, jobject obj, jint x1, jint y1, 
 	A_SETLONG(av+3,bottom);
 	
 	p = newinstance(gensym("vpatcher"), 4, av);
+
+	gensym("#P")->s_thing = cacheP; // see #12791
+	gensym("#B")->s_thing = cacheB;
+
 	if (!p) {
 		error("(mxj) MaxPatcher: can't create patcher");
 		return (jlong)0L;
