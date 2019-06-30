@@ -1,0 +1,10 @@
+ {
+ "name": "max-mxj-testing",
+ "type": "package",
+ "author": "Cycling '74",
+ "description": "Max Java Testing Support",
+ "version": "1.0.0",
+ "major_version": "1",
+ "minor_version": "0",
+ "min_max_version": "6.1.9"
+}
