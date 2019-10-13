@@ -63,10 +63,10 @@ static const char *jvmLocations[] = {
         "../bundle/Libraries",
         NULL
 };
-static const char *jvmLibs[]      = {"libclient64.dylib", "libjvm.dylib", "libjvm.jnilib", "libjvm.so", NULL};
+static const char *jvmLibs[]      = { "libclient64.dylib", "libjvm.dylib", "libjvm.jnilib", "libjvm.so", NULL};
 
-/* Define the window system arguments for the various Java VMs. */
-static const char *argVM_JAVA[] = {"-XstartOnFirstThread", NULL};
+///* Define the window system arguments for the various Java VMs. */
+//static const char *argVM_JAVA[] = {"-XstartOnFirstThread", NULL};
 
 static const char *mxjSuffixes[] = {
         "externals/mxj.mxo/Contents/MacOS/mxj\0",
