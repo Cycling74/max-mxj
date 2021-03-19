@@ -2593,8 +2593,10 @@ JNIEnv *jvm_new(long *exists) {
         //be generous 256 options ..
 		err = mxj_get_jvmopts(options,&numOptions, 256);
 
-		if (err != MAX_ERR_NONE)
+        if (err != MAX_ERR_NONE) {
+            error("Error with mxj_get_jvmopts: %d", err);
 			return NULL;
+        }
 	
  		#ifdef MAC_VERSION
 		if (g_java_jvm_version[0]) {
@@ -2610,7 +2612,10 @@ JNIEnv *jvm_new(long *exists) {
 		
 		// classpath is in first option
 		ps = strstr(options[0].optionString, "=");
-		if (!ps) return NULL;
+        if (!ps) {
+            error("Cannot get classpath from first option");
+            return NULL;
+        }
 		
 		cp_post_system_classpath(ps);	
 		
@@ -2730,7 +2735,7 @@ JNIEnv *jvm_new(long *exists) {
         if(g_jvm==NULL){
 	    		for(i = 0; i < numOptions;i++)
 	    			sysmem_freeptr(options[i].optionString);		
-	    	
+            error("Cannot get_java_vm");
 	    	return NULL;
     	}
     
@@ -2795,6 +2800,7 @@ JNIEnv *jvm_new(long *exists) {
 		return env;
     }
 	
+    error("g_jvm already exists");
 	return NULL;
 }
 
