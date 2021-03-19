@@ -1442,12 +1442,14 @@ void call_method_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *jp_types, 
 			args[i].d = (jdouble) atomargs_getfloat(i,argc,argv);
 			break;
 		case '[': //method is expeciting primative array, it is our responsibility to make sure sigstr + 1 exists and is a known primative type
+        {
+            int q;
+            jvalue array_arg;
+            jarray ja;
+            jstring js;
+            void *vp;
+
 			switch(sigstr[i + 1]) 	{
-				int q;
-				jvalue array_arg;
-				jarray ja;
-				jstring js;
-				void *vp;
 				
 				case 's': //string object, note the use of lowercase 's' for the java sig
 					ja  = (jarray)MXJ_JNI_CALL(env,NewObjectArray)(env,argc,g_stringClass,NULL);
@@ -1606,7 +1608,8 @@ void call_method_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *jp_types, 
 					return;
 			
 			}
-			break;	
+			break;
+        }
 		//end case '['
 		default:
 			error("something in our signature is messed up");
@@ -1695,13 +1698,15 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 			args[i].d = (jdouble) atomargs_getfloat(i,argc,argv);
 			break;
 		case '[': // method is expeciting primitive array, it is our responsibility to make sure sigstr + 1 exists and is a known primitive type
+        {
+            int q;
+            jvalue array_arg;
+            jarray ja;
+            jstring js;
+            void *vp;
+
 			switch(sigstr[i + 1])
 			{
-				int q;
-				jvalue array_arg;
-				jarray ja;
-				jstring js;
-				void *vp;
 				
 				case 's': // string object, note the use of lowercase 's' for the java sig
 					ja  = (jarray)MXJ_JNI_CALL(env,NewObjectArray)(env,argc,g_stringClass,NULL);
@@ -1863,7 +1868,8 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 					return MXJ_ERR_GENERIC;
 			
 			}
-			break;	
+			break;
+        }
 		//end case '['
 		default:
 			error("something in our signature is messed up");
