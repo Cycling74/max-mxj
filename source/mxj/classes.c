@@ -2,9 +2,10 @@
  * classes.c -- operations on Java classes.
  */
 
+#include "mxj_macho_prefix.h"
 #ifdef MAC_VERSION
-#include <JavaVM/jni.h>        // Java Native Interface definitions
-#include <JavaVM/jni_md.h>
+#include "jni.h"        // Java Native Interface definitions
+#include "jni_md.h"
 #else
 #include "jni.h"
 #include "jni_md.h"

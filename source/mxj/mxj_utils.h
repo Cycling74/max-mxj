@@ -1,6 +1,8 @@
 #ifndef __MXJ_UTILS
 #define __MXJ_UTILS
 
+#include "mxj_common.h"
+
 char* mxj_getbytes(t_atom_long size);
 void mxj_freebytes(void *vp, t_atom_long size);
 short max_path_to_native_path(char *max_path_in,char *native_path_out);

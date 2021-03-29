@@ -1,6 +1,7 @@
 #ifndef _Included_maxjava_h
 #define _Included_maxjava_h
 
+#include "mxj_common.h"
 #include "mxj_methodlist.h"
 #include "mxj_attr.h"
 #include "mxj_utils.h"

@@ -1,5 +1,4 @@
-#include "ext.h"
-#include "ext_sysmem.h"
+#include "mxj_common.h"
 #include "mxj_methodlist.h"
 #include "mxj_utils.h"
 

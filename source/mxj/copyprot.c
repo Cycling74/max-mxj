@@ -2,8 +2,9 @@
  * Support for copy protection.
  */
 
-#include "copyprot.h"
+#include "ext.h"
 #include "ext_obex.h"
+#include "copyprot.h"
 
 // Have we already told the user that we're not authorized to run?
 static t_bool g_warnedUser = FALSE;

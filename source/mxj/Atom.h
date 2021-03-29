@@ -1,6 +1,8 @@
 /*
  * Information related to Java Atoms.
  */
+
+#include "mxj_common.h"
 #include "package.h"
 
 #ifndef _Included_atom_h

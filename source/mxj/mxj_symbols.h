@@ -1,6 +1,8 @@
 #ifndef _MXJ_SYMBOLS_H
 #define _MXJ_SYMBOLS_H
 
+#include "mxj_common.h"
+
 t_symbol *J_BOOL;
 t_symbol *J_BYTE;
 t_symbol *J_CHAR;

@@ -1,5 +1,5 @@
 
-#include "ext_sysmem.h"
+#include "mxj_common.h"
 #include "mxj_utils.h"
 #include "mxj_attr.h"
 

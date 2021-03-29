@@ -27,7 +27,7 @@
 #endif
 
 #ifdef MAC_VERSION
-#include <JavaVM/jni.h>
+#include "jni.h"
 #include <unistd.h>
 #include <strings.h>
 #include "OSXSys.h"

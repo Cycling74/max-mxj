@@ -1,0 +1,87 @@
+cmake_minimum_required(VERSION 3.0)
+
+if (APPLE)
+	set(CMAKE_OSX_ARCHITECTURES "x86_64")
+	set(CMAKE_OSX_DEPLOYMENT_TARGET 10.9)
+endif ()
+
+if (APPLE)
+	execute_process(COMMAND /usr/libexec/java_home OUTPUT_VARIABLE JAVA_HOME OUTPUT_STRIP_TRAILING_WHITESPACE)
+	# message (STATUS "my JAVA_HOME=${JAVA_HOME}")
+	if (NOT JAVA_HOME)
+		message (FATAL_ERROR "Could not find Java home, fatal.")
+		return()
+	endif ()
+
+	set(JAVA_JNI_INCLUDE ${JAVA_HOME}/include)
+	if (APPLE)
+		set(JAVA_JNI_INCLUDE ${JAVA_JNI_INCLUDE} ${JAVA_JNI_INCLUDE}/darwin )
+	endif()
+	# message (STATUS "my JAVA_JNI_INCLUDE=${JAVA_JNI_INCLUDE}")
+
+	#message(STATUS "here ${JAVA_HOME}/jre/lib/jli")
+	find_library(JAVA_JNI_LIB NAMES jli HINTS "${JAVA_HOME}/lib/jli" "${JAVA_HOME}/jre/lib/jli")
+	#message (STATUS "my JAVA_JNI_LIB=${JAVA_JNI_LIB}")
+
+	if (NOT JAVA_JNI_INCLUDE OR NOT JAVA_JNI_LIB)
+		message (FATAL_ERROR "Could not find Java JNI, fatal.")
+		return()
+	endif ()
+else ()
+	include(FindJNI)
+	if (NOT JNI_FOUND)
+		message (FATAL_ERROR "No JNI found, cannot build")
+	else()
+		# message (STATUS "JNI_INCLUDE_DIRS=${JNI_INCLUDE_DIRS}")
+		set(JAVA_JNI_INCLUDE ${JNI_INCLUDE_DIRS})
+		# message (STATUS "JNI_LIBRARIES=${JNI_LIBRARIES}")
+		set(JAVA_JNI_LIB ${JNI_LIBRARIES})
+	endif()
+endif ()
+
+include_directories(${JAVA_JNI_INCLUDE})
+link_libraries(${JAVA_JNI_LIB})
+
+set(SRCDIR "${CMAKE_CURRENT_SOURCE_DIR}/../../mxj")
+
+if (APPLE)
+	file(GLOB SOURCES ${SRCDIR}/*.c ${SRCDIR}/*.cpp ${SRCDIR}/*.m ${SRCDIR}/*.mm)
+else ()
+	file(GLOB SOURCES ${SRCDIR}/*.c ${SRCDIR}/*.cpp)
+endif ()
+
+list(FILTER SOURCES EXCLUDE REGEX ".*/winproxy\\.c$")
+list(FILTER SOURCES EXCLUDE REGEX ".*/mxjawtinit\\.c$")
+list(FILTER SOURCES EXCLUDE REGEX ".*/maxjavactx\\.c$")
+list(FILTER SOURCES EXCLUDE REGEX ".*/io\\.c$")
+list(FILTER SOURCES EXCLUDE REGEX ".*/copyprot\\.c$")
+list(FILTER SOURCES EXCLUDE REGEX ".*/awt\\.c$")
+if (APPLE)
+	list(FILTER SOURCES EXCLUDE REGEX ".*/mxj_win\\.c$")
+else ()
+	list(FILTER SOURCES EXCLUDE REGEX ".*/JavaHomeOsx\\.c$")
+endif()
+
+file(GLOB HEADERS ${SRCDIR}/*.h)
+
+list(FILTER HEADERS EXCLUDE REGEX ".*/winproxy\\.h$")
+list(FILTER HEADERS EXCLUDE REGEX ".*/mxjawtinit\\.h$")
+list(FILTER HEADERS EXCLUDE REGEX ".*/io\\.h$")
+list(FILTER HEADERS EXCLUDE REGEX ".*/copyprot\\.h$")
+list(FILTER HEADERS EXCLUDE REGEX ".*/awt\\.h$")
+if (APPLE)
+	list(FILTER SOURCES EXCLUDE REGEX ".*/mxj_win\\.h$")
+else ()
+	list(FILTER SOURCES EXCLUDE REGEX ".*/JavaHomeOsx\\.h$")
+endif()
+
+set(MXJ_C74_SUPPORT "${CMAKE_CURRENT_SOURCE_DIR}/../../maxsdk/source/c74support")
+#set(MXJ_C74SUPPORT_LINKER_FLAGS "@${C74SUPPORT}/max-includes/c74_linker_flags.txt")
+
+include_directories(${MXJ_C74_SUPPORT}/max-includes ${MXJ_C74_SUPPORT}/msp-includes)
+if (APPLE)
+	link_libraries(
+		"-framework Carbon"
+		"-framework Cocoa"
+	)
+endif ()

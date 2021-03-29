@@ -1,4 +1,4 @@
-#include "ext_sysmem.h"
+#include "mxj_common.h"
 #include "mxj_props.h"
 
 t_mxj_proplist *mxj_proplist_new(int initialsize)

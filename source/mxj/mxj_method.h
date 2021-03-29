@@ -1,9 +1,11 @@
 #ifndef _MXJ_METHOD_H_
 #define _MXJ_METHOD_H_
 
+#include "mxj_common.h"
+
 #ifdef MAC_VERSION
-#include <JavaVM/jni.h>        // Java Native Interface definitions
-#include <JavaVM/jni_md.h>
+#include "jni.h"        // Java Native Interface definitions
+#include "jni_md.h"
 #else
 #include "jni.h"
 #include "jni_md.h"

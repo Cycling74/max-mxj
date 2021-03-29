@@ -17,8 +17,6 @@
  *	  Andrew Niefer
  */
 
-
-
 #include "JavaHomeOsx.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -82,7 +80,7 @@ static bool fileExists(const char *filename, bool isExecutable)
 }
 
 /** a function to determine if string ends with a specific value */
-inline bool hasEnding(const char *fullString, const char *ending)
+static inline bool hasEnding(const char *fullString, const char *ending)
 {
     size_t is = (fullString == NULL) ? 0 : strlen(fullString);
     size_t ie = strlen(ending);

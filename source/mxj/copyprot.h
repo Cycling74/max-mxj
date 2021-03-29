@@ -5,6 +5,8 @@
  * Definitions for copy protection routines.
  */
 
+#include "mxj_common.h"
+
 t_bool okToRun(void);
 void notAuthorizedMessage(void);
 

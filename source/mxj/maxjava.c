@@ -5,19 +5,18 @@
  */
 
 #ifdef MAC_VERSION
-#include <JavaVM/jni.h>        // Java Native Interface definitions
-#include <JavaVM/jni_md.h>
+#include "jni.h"        // Java Native Interface definitions
+#include "jni_md.h"
 #else
 #include "jni.h"
 #include "jni_md.h"
 #endif
 
+#include "mxj_common.h"
 #include "buffer.h"
 #include "IVirtualMachineAPI.h"
 
-#include "ext_byteorder.h"
-#include "ext_sysmem.h"
-#include "ext_proto.h"
+#include "mxj_common.h"
 #include "dbg.h"
 #include "package.h"
 #include "Atom.h"

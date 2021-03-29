@@ -1,6 +1,8 @@
 /*
  * Information related to the Java classes we use.
  */
+
+#include "mxj_common.h"
 #include "package.h"
 
 #ifndef _Included_classes_h

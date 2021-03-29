@@ -1,6 +1,8 @@
 #ifndef _Included_callbacks_h
 #define _Included_callbacks_h
 
+#include "mxj_common.h"
+
 void init_max_object_callbacks(JNIEnv*);
 short i_am_a_max_thread(void);      //   i am the low or high priority thread but not the java thread
 short i_am_in_java_constructor(void);

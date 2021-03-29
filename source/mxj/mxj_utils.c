@@ -1,6 +1,5 @@
+#include "mxj_common.h"
 #include "mxj_utils.h"
-#include "ext_sysmem.h"
-#include "ext_proto.h"
 
 #define MAX_GETBYTES 32767
 
