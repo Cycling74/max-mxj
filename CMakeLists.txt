@@ -3,6 +3,12 @@ cmake_minimum_required(VERSION 3.0)
 if (APPLE)
 	set(CMAKE_OSX_ARCHITECTURES "x86_64")
 	set(CMAKE_OSX_DEPLOYMENT_TARGET 10.9)
+else ()
+	set(CMAKE_SYSTEM_VERSION 6.1)
+	# Windows 7   => 6.1
+	# Windows 8   => 6.2
+	# Windows 8.1 => 6.3
+	# Windows 10  => 10.0
 endif ()
 
 project(max-mxj C CXX)
