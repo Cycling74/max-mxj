@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 
 if (APPLE)
-	set(CMAKE_OSX_ARCHITECTURES "x86_64")
+	set(CMAKE_OSX_ARCHITECTURES "arm64")
 	set(CMAKE_OSX_DEPLOYMENT_TARGET 10.9)
 else ()
 	set(CMAKE_SYSTEM_VERSION 6.1)

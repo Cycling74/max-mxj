@@ -122,11 +122,11 @@ t_mxj_attr* mxj_attr_new(JNIEnv *env,jclass clazz,t_mxj_attr_desc* ad)
 			else if (!strcmp(tmp,"[Ljava/lang/String;"))
 				comp = J_STRING_ARRAY;
 			else if (!strcmp(tmp,"Lcom/cycling74/max/Atom;")) {
-				a->getter = (method)mxj_attr_get_atom;				
+				a->getter = (mxj_attr_getter)mxj_attr_get_atom;
 				goto getterisset;
 			}	
 			else if (!strcmp(tmp,"[Lcom/cycling74/max/Atom;")) {	// Atom array
-				a->getter = (method)mxj_attr_get_atom_array;				
+				a->getter = (mxj_attr_getter)mxj_attr_get_atom_array;
 				goto getterisset;
 			}
 			else
@@ -149,54 +149,54 @@ t_mxj_attr* mxj_attr_new(JNIEnv *env,jclass clazz,t_mxj_attr_desc* ad)
 						
 		// now bind an auto getter function
 		if (comp == J_INT)
-			a->getter = (method)mxj_attr_get_int;
+			a->getter = (mxj_attr_getter)mxj_attr_get_int;
 		else if (comp == J_FLOAT)
-			a->getter = (method)mxj_attr_get_float;	
+			a->getter = (mxj_attr_getter)mxj_attr_get_float;
 		else if (comp == J_STRING)
-			a->getter = (method)mxj_attr_get_string;
+			a->getter = (mxj_attr_getter)mxj_attr_get_string;
 		else if (comp == J_DOUBLE)
-			a->getter = (method)mxj_attr_get_double;
+			a->getter = (mxj_attr_getter)mxj_attr_get_double;
 		else if (comp == J_LONG)
-			a->getter = (method)mxj_attr_get_long;
+			a->getter = (mxj_attr_getter)mxj_attr_get_long;
 		else if (comp == J_BOOL)
-			a->getter = (method)mxj_attr_get_bool;
+			a->getter = (mxj_attr_getter)mxj_attr_get_bool;
 		else if (comp == J_CHAR)
-			a->getter = (method)mxj_attr_get_char;
+			a->getter = (mxj_attr_getter)mxj_attr_get_char;
 		else if (comp == J_BYTE)
-			a->getter = (method)mxj_attr_get_byte;
+			a->getter = (mxj_attr_getter)mxj_attr_get_byte;
 		else if (comp == J_SHORT)
-			a->getter = (method)mxj_attr_get_short;	
+			a->getter = (mxj_attr_getter)mxj_attr_get_short;
 		//arrays	
 		else if (comp == J_INT_ARRAY)
-			a->getter = (method)mxj_attr_get_int_array;
+			a->getter = (mxj_attr_getter)mxj_attr_get_int_array;
 		else if (comp == J_FLOAT_ARRAY)
-			a->getter = (method)mxj_attr_get_float_array;	
+			a->getter = (mxj_attr_getter)mxj_attr_get_float_array;
 		else if (comp == J_STRING_ARRAY)
-			a->getter = (method)mxj_attr_get_string_array;
+			a->getter = (mxj_attr_getter)mxj_attr_get_string_array;
 		else if (comp == J_DOUBLE_ARRAY)
-			a->getter = (method)mxj_attr_get_double_array;
+			a->getter = (mxj_attr_getter)mxj_attr_get_double_array;
 		else if (comp == J_LONG_ARRAY)
-			a->getter = (method)mxj_attr_get_long_array;
+			a->getter = (mxj_attr_getter)mxj_attr_get_long_array;
 		else if (comp == J_BOOL_ARRAY)
-			a->getter = (method)mxj_attr_get_bool_array;
+			a->getter = (mxj_attr_getter)mxj_attr_get_bool_array;
 		else if (comp == J_CHAR_ARRAY)
-			a->getter = (method)mxj_attr_get_char_array;
+			a->getter = (mxj_attr_getter)mxj_attr_get_char_array;
 		else if (comp == J_BYTE_ARRAY)
-			a->getter = (method)mxj_attr_get_byte_array;
+			a->getter = (mxj_attr_getter)mxj_attr_get_byte_array;
 		else if (comp == J_SHORT_ARRAY)
-			a->getter = (method)mxj_attr_get_short_array;			
+			a->getter = (mxj_attr_getter)mxj_attr_get_short_array;
 		
 				
 	}
 	else {	// end isgettable
-		a->getter = (method)mxj_attr_cantget;
+		a->getter = (mxj_attr_getter)mxj_attr_cantget;
 	}
 	
 	getterisset:
 	
 	if (a->settable) {
 		if (ad->setter) {
-			a->setter = (method)mxj_attr_set_virtual;//user overrides default or has defined attr which is not member variable
+			a->setter = (mxj_attr_setter)mxj_attr_set_virtual;//user overrides default or has defined attr which is not member variable
 			a->s_mid  = MXJ_JNI_CALL(env,GetMethodID)(env,clazz,ad->setter,ad->setter_sig);
 			strcpy(a->name_setter,ad->setter);
 		}

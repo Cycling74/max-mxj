@@ -11,6 +11,9 @@
 #include "jni_md.h"
 #endif
 
+typedef void (*mxj_attr_setter)(JNIEnv *env, void *x, void *a, short argc, t_atom *argv);
+typedef void (*mxj_attr_getter)(JNIEnv *env, void *x, void *a, short *argc, t_atom **argv);
+
 typedef struct mxj_attr
 {
 	jfieldID	 	fid;				// field id of member variable
@@ -24,8 +27,8 @@ typedef struct mxj_attr
 	
 	char            name_setter[128];	// java setter name
 	char            name_getter[128];	// java getter name
-	method          setter; 
-	method          getter;
+	mxj_attr_setter	setter; 
+	mxj_attr_getter	getter;
 	int             settable;
 	int             gettable;
 	int             isvirtual;

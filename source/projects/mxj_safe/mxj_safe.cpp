@@ -9,6 +9,8 @@ using namespace c74::max;
 
 #ifdef C74_X64
 	#define DEFAULT_OS_ARCH "x86_64"
+#elif defined(__aarch64__)
+	#define DEFAULT_OS_ARCH "arm64"
 #else
 	#define DEFAULT_OS_ARCH "i386"
 #endif

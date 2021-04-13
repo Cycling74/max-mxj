@@ -205,7 +205,7 @@ char *g_mxj_classpath = NULL;
  */
 
 typedef void* t_mark;
-#ifdef C74_X64
+#if defined(C74_X64) || defined(__aarch64__)
 typedef t_int32 t_Oop;
 #else
 typedef void* t_Oop;
@@ -2170,7 +2170,7 @@ void mxj_exception_check(t_maxjava *x,int way)
 //BEGIN DSP ROUTINE
 void mxj_dsp64(t_maxjava *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-#ifdef C74_X64
+#if defined(C74_X64) || defined(__aarch64__)
 	static short mode = MXJ_MSP_MODE_COMPATIBLE;
 #else
 	static short mode = MXJ_MSP_MODE_HIPERFORMANCE;
