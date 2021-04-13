@@ -83,7 +83,7 @@ void JNICALL mxj_system_post(JNIEnv *env, jclass cls, jbyteArray bytes);
 //allows java to send messages to objects bound to a global symbol via gensym.
 //request from IRCAM so they can use boxless mxj editor classes for their FTMlib
 jboolean JNICALL mxj_send_message_to_bound_object(JNIEnv *env, jclass clz, jstring name, jstring msg,jobjectArray argv);
-void mxj_exec_wrapper_init();
+void mxj_exec_wrapper_init(void);
 t_exec_wrapper *mxj_exec_wrapper_new(JNIEnv *env, jobject obj);
 void mxj_exec_wrapper_free(JNIEnv *env,t_exec_wrapper *x);
 void mxj_fn(t_exec_wrapper *client, t_symbol *s, short argc,t_atom *argv);
@@ -217,6 +217,11 @@ void init_mxj_max_system(JNIEnv *env)
     mxj_max_system_register_natives(env,s_mxjsys_clazz);
     checkException(env);
 }
+
+#ifdef MAC_VERSION
+void HideCursor(void);
+void ShowCursor(void);
+#endif
 
 void JNICALL mxj_hide_cursor(JNIEnv *env, jclass clazz)
 {
@@ -370,7 +375,7 @@ jobjectArray JNICALL mxj_get_search_path_forcontext(JNIEnv *env,jclass clazz)
 	if (m) {
 		m(&pathcount, &patharray); // get an array of shorts
 		if (patharray && pathcount) {
-			MXJ_JNI_CALL(env, PushLocalFrame)(env, pathcount+1);
+			MXJ_JNI_CALL(env, PushLocalFrame)(env, (jint)(pathcount+1));
 			checkException(env);
 			
 			tmp = (jstring *)sysmem_newptr(sizeof(jstring) * pathcount);

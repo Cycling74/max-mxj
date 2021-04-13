@@ -17,7 +17,7 @@ extern "C" {
     
     typedef struct ivirtualmachine ivirtualmachine;
     
-    ivirtualmachine* new_virtualmachine();
+    ivirtualmachine* new_virtualmachine(void);
     void delete_virtualmachine(ivirtualmachine* v);
     void start_java(ivirtualmachine* v);
     void add_java_option(ivirtualmachine* v,char * option);

@@ -8,7 +8,11 @@
  *
  */
 
+#ifdef WIN32
 #include <cstdio>
+#else
+#include <stdio.h>
+#endif
 #include <assert.h>
 #include "IVirtualMachine.h"
 
@@ -17,14 +21,14 @@ typedef _JNI_IMPORT_OR_EXPORT_ jint  (*WRAPPED_JNI_CreateJavaVM)(JavaVM **pvm, v
 typedef _JNI_IMPORT_OR_EXPORT_ jint  (*WRAPPED_JNI_GetCreatedJavaVMs)(JavaVM **, jsize, jsize *);
 
 #include <sys/types.h>
-
+#include <sys/stat.h>
 
 
 
 #ifdef WIN_VERSION
 #include <stdio.h>
 #include <strsafe.h>
-#include <sys/stat.h>
+#include <atlstr.h>
 
 #else
 
@@ -59,6 +63,7 @@ JLI_NotifyAWTLoaded()
 #endif
 
 using namespace std;
+
 
 //  When launching JVM on OSX we need to do so on a separate thread
 //  This is the thread launch callback
@@ -184,6 +189,7 @@ void IVirtualMachine::startJVM()
     
 #ifdef WIN_VERSION
     
+	// Find jvm dll lib path
     _TCHAR * eclipseLibrary = findLib();
     
     if(eclipseLibrary != NULL){
@@ -203,7 +209,7 @@ void IVirtualMachine::startJVM()
         {
            // Logger::writeToLog("Out of memory for environment block swap");
         }else{
-            
+            // Get path env
             dwRet = GetEnvironmentVariable(VARNAME, pszOldVal, ENV_BUFSIZE);
             
             if(dwRet == 0){
@@ -212,12 +218,13 @@ void IVirtualMachine::startJVM()
             }else{
                 //calculate the length of the updated path
 				string jvmLibPath(eclipseLibrary);
-                string oldPath(pszOldVal);
-				oldPath.append(string(";"));
-				oldPath.append(string(jvmLibPath));
+				string newPath(jvmLibPath);
+				newPath.append(string(";"));
+				newPath.append(string(pszOldVal));
 
-                if (! SetEnvironmentVariable(VARNAME, oldPath.data()))
+                if (! SetEnvironmentVariable(VARNAME, newPath.data()))
                 {
+					logLastError(TEXT("SetEnvironmentVariable failed after adding jvm lib"));
                     //Logger::writeToLog("SetEnvironmentVariable failed");
                 }
                 
@@ -250,9 +257,11 @@ void IVirtualMachine::startJVM()
         objc_registerThreadWithCollectorFunction = (objc_registerThreadWithCollector_t) dlsym(handleLibObjc, OBJC_GCREGISTER);
     }
     
+
     char * baseDir = getJavaHome();
     char * dylib = findLib(baseDir);
     char * jli = getJavaJli();
+
     
     //we look to the environment for an embedded path
     char * embeddedEnvironment = getenv("EMBEDDED_JVM_LIBRARY_PATH");
@@ -265,13 +274,17 @@ void IVirtualMachine::startJVM()
     if(embeddedJliEnvironment!=NULL)
         jli = embeddedJliEnvironment;
     
+    
     //the jvm can still launch if jli is not present
     //in the case of Apple java 1.6 for example this will not result in a problem
     if(jli!= NULL)
+    {
         dlopen(jli, RTLD_NOW + RTLD_GLOBAL);
+    }
     
     if(dylib!=NULL)
     {
+
         handle= dlopen(dylib,RTLD_NOW + RTLD_GLOBAL);
         if(handle==NULL)
         {
@@ -330,6 +343,14 @@ jstring IVirtualMachine::getSystemProperty(string propertyName)
 
 
 #ifdef WIN_VERSION
+
+// Path to JRE found previously 
+extern "C" {
+	const char *getGlobal_jrepath();
+	const char *getGlobal_jvmpath();
+	const char *getGlobal_jvmtype();
+}
+
 /*
  * Find the VM shared library starting from the java executable 
  */
@@ -338,6 +359,16 @@ _TCHAR*  IVirtualMachine::findLib() {
 	int  j;
 	
 	_TCHAR * path;				/* path to resulting jvm shared library */
+
+	// Did we found a JRE before ? embeded of system installed
+	const char *global_jvmpath = getGlobal_jvmpath();
+	if (global_jvmpath != NULL && *global_jvmpath != 0)
+	{
+		size_t newsize = strlen(global_jvmpath) + 1;
+		path = new _TCHAR[newsize];
+		_tcscpy(path, A2T((char*)global_jvmpath));
+		return path;
+	}
 	
 	/* for looking in the registry */
 	HKEY jreKey = NULL;
@@ -346,19 +377,7 @@ _TCHAR*  IVirtualMachine::findLib() {
 	_TCHAR * jreKeyName;		
 	
 	/* Not found yet, try the registry, we will use the first vm >= 1.4 */
-	//here we use the path to 32 bit versions in wow6432Node key path
-	//this will change when we look at 64 bitness
-#ifdef X64
 	jreKeyName = _T("Software\\JavaSoft\\Java Runtime Environment");
-#else
-	BOOL bIsWow64 = FALSE;
-	IsWow64Process(GetCurrentProcess(),&bIsWow64);
-	if(bIsWow64){
-		jreKeyName = _T("Software\\Wow6432Node\\JavaSoft\\Java Runtime Environment");
-	}else{
-		jreKeyName = _T("Software\\JavaSoft\\Java Runtime Environment");	
-	}
-#endif
 	if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, jreKeyName, 0, KEY_READ, &jreKey) == ERROR_SUCCESS) {
 		if(RegQueryValueEx(jreKey, _T("CurrentVersion"), NULL, NULL, (LPBYTE)&keyName, &length) == ERROR_SUCCESS) {
 			path = checkVMRegistryKey(jreKey, keyName);

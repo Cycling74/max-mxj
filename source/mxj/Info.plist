@@ -2,6 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>C74ObjectProperties</key>
+	<dict>
+		<key>c74excludefromcollectives</key>
+		<string>yes</string>
+	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
@@ -9,25 +14,20 @@
 	<key>CFBundleIconFile</key>
 	<string></string>
 	<key>CFBundleIdentifier</key>
-	<string>com.cycling74.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleLongVersionString</key>
+	<string>${PRODUCT_NAME} ${PRODUCT_VERSION} (build ${PRODUCT_BUILD}), Copyright 2019 Cycling '74</string>
 	<key>CFBundlePackageType</key>
 	<string>iLaX</string>
+	<key>CFBundleShortVersionString</key>
+	<string>${PRODUCT_VERSION} (${PRODUCT_BUILD})</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>${PRODUCT_VERSION}</string>
-	<key>CFBundleShortVersionString</key>
-	<string>${PRODUCT_VERSION} (${PRODUCT_BUILD})</string>
-	<key>CFBundleLongVersionString</key>
-	<string>${PRODUCT_NAME} ${PRODUCT_VERSION} (build ${PRODUCT_BUILD}), Copyright 2014 Cycling &apos;74</string>
 	<key>CSResourcesFileMapped</key>
 	<true/>
-	<key>C74ObjectProperties</key>
-	<dict>
-		<key>c74excludefromcollectives</key>
-		<string>yes</string>
-	</dict>
 </dict>
 </plist>

@@ -42,6 +42,9 @@ using namespace std;
 /** a structure to allow us to firewall our c++ code and provide a c API interface */
 struct ivirtualmachine{};
 
+
+
+
 //-------------------------------------------------------------------------------------------------
 // Class IVirtualMachine
 //-------------------------------------------------------------------------------------------------

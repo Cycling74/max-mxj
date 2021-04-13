@@ -227,7 +227,8 @@ GetArch()
 
 void AddJavaBinFolderToPath(const char *javahome)
 {
-	CHAR* path = NULL;
+	CHAR* next_path = NULL;
+	CHAR* current_path = NULL;
 	CHAR binpath[MAXPATHLEN];
 
 	long len;
@@ -238,15 +239,23 @@ void AddJavaBinFolderToPath(const char *javahome)
 	}
 	strcat(binpath, "bin"); 
 
-	len = GetEnvironmentVariable("path", path, 0);
-	len += (long)strlen(binpath) + 2;
-	path = (CHAR*) sysmem_newptr(len * sizeof(path[0]));
-	if (path) {
-		len = GetEnvironmentVariable("path", path, len);
-		strcat(path, ";");
-		strcat(path, binpath);
-		SetEnvironmentVariable("path", path);
-		sysmem_freeptr(path);
+	// Get current path
+	len = GetEnvironmentVariable("path", current_path, 0);
+	const long cplen = len * sizeof(CHAR) + 1;
+	current_path = (CHAR*)sysmem_newptr(cplen);
+	GetEnvironmentVariable("path", current_path, cplen);
+
+	len = cplen + (long)strlen(binpath) + 1; // 1 for ; 
+	next_path = (CHAR*)sysmem_newptr(len * sizeof(CHAR));
+	if (next_path) {
+		// JRE path first, it will be used first when searching path
+		strcpy(next_path, binpath);
+		strcat(next_path, ";");
+		strcat(next_path, current_path);
+
+		SetEnvironmentVariable("path", next_path);
+		sysmem_freeptr(next_path);
+		sysmem_freeptr(current_path);
 	}
 }
 
@@ -264,8 +273,7 @@ CreateExecutionEnvironment(
 
     /* Find out where the JRE is that we will be using. */
     if (!GetJREPath(jrepath, so_jrepath)) {
-	ReportErrorMessage("could not find Java 2 Runtime Environment.",
-			   JNI_TRUE);
+		ReportErrorMessage("could not find Java 2 Runtime Environment.",JNI_TRUE);
 		return 2;
     }
 
@@ -293,18 +301,29 @@ CreateExecutionEnvironment(
 	/* If we got here, jvmpath has been correctly initialized. */
 	// HACK...the above code is crashing when reading the config file. 
 	// currently assuming we will load the following file. revisit. -jkc
-	sprintf(jvmpath, "%s\\bin\\client\\jvm.dll", jrepath);
+	sprintf(jvmpath, "%s\\bin\\client\\"JVM_DLL, jrepath);
 	if (stat(jvmpath, &s) != 0) {
 		// rbs: on my install of the JVM for x64 the jvm.dll was in this path
 		// not sure what the correct way is to get this path, but this will do for 
 		// now
-		sprintf(jvmpath, "%s\\bin\\server\\jvm.dll", jrepath);
+		sprintf(jvmpath, "%s\\bin\\server\\"JVM_DLL, jrepath);
+		if (stat(jvmpath, &s) != 0) {
+			ReportErrorMessage("could not find JRE client or server "JVM_DLL, JNI_TRUE);
+			return 2;
+		}
+		*_jvmtype = _strdup("server");
+	}
+	else { *_jvmtype = _strdup("client"); }
+
+	if (debug) {
+		post("Found "JVM_DLL" of type %s here: %s\n", *_jvmtype, jvmpath);
 	}
 	return 0;
 }
 
 /*
- * Find path to JRE based on .exe's location or registry settings.
+ * Find path to JRE based on .exe's location (embeded into application)
+ * or registry settings (installed in the computer programs)
  */
 jboolean
 GetJREPath(char *path, jint pathsize)
@@ -337,7 +356,7 @@ GetJREPath(char *path, jint pathsize)
 
  found:
     if (debug)
-      printf("JRE path is %s\n", path);
+      post("JRE path is %s\n", path);
     return JNI_TRUE;
 }
 
@@ -372,7 +391,7 @@ LoadJavaVM(const char *jvmpath, InvocationFunctions *ifn)
     HINSTANCE handle;
 
     if (debug) {
-		printf("JVM path is %s\n", jvmpath);
+		post("JVM path is %s\n", jvmpath);
     }
 
     /* Load the Java VM DLL */
@@ -382,13 +401,10 @@ LoadJavaVM(const char *jvmpath, InvocationFunctions *ifn)
     }
 
     /* Now get the function addresses */
-    ifn->CreateJavaVM =
-	(void *)GetProcAddress(handle, "JNI_CreateJavaVM");
-    ifn->GetDefaultJavaVMInitArgs =
-	(void *)GetProcAddress(handle, "JNI_GetDefaultJavaVMInitArgs");
+    ifn->CreateJavaVM =	(void *)GetProcAddress(handle, "JNI_CreateJavaVM");
+    ifn->GetDefaultJavaVMInitArgs =	(void *)GetProcAddress(handle, "JNI_GetDefaultJavaVMInitArgs");
     if (ifn->CreateJavaVM == 0 || ifn->GetDefaultJavaVMInitArgs == 0) {
-	ReportErrorMessage2("Error: can't find JNI interfaces in: %s", 
-			    (char *)jvmpath, JNI_TRUE);
+		ReportErrorMessage2("Error: can't find JNI interfaces in: %s", (char *)jvmpath, JNI_TRUE);
 	return JNI_FALSE;
     }
 
@@ -453,10 +469,8 @@ GetPublicJREHome(char *buf, jint bufsize)
 	return JNI_FALSE;
     }
 
-    if (!GetStringFromRegistry(key, "CurrentVersion",
-			       version, sizeof(version))) {
-	fprintf(stderr, "Failed reading value of registry key:\n\t"
-		JRE_KEY "\\CurrentVersion\n");
+    if (!GetStringFromRegistry(key, "CurrentVersion", version, sizeof(version))) {
+		fprintf(stderr, "Failed reading value of registry key:\n\t" JRE_KEY "\\CurrentVersion\n");
 	RegCloseKey(key);
 	return JNI_FALSE;
     }
@@ -470,15 +484,13 @@ GetPublicJREHome(char *buf, jint bufsize)
 */
     /* Find directory where the current version is installed. */
     if (RegOpenKeyEx(key, version, 0, KEY_READ, &subkey) != 0) {
-	fprintf(stderr, "Error opening registry key '"
-		JRE_KEY "\\%s'\n", version);
+		fprintf(stderr, "Error opening registry key '" JRE_KEY "\\%s'\n", version);
 	RegCloseKey(key);
 	return JNI_FALSE;
     }
 
     if (!GetStringFromRegistry(subkey, "JavaHome", buf, bufsize)) {
-	fprintf(stderr, "Failed reading value of registry key:\n\t"
-		JRE_KEY "\\%s\\JavaHome\n", version);
+		fprintf(stderr, "Failed reading value of registry key:\n\t" JRE_KEY "\\%s\\JavaHome\n", version);
 	RegCloseKey(key);
 	RegCloseKey(subkey);
 	return JNI_FALSE;
@@ -486,12 +498,11 @@ GetPublicJREHome(char *buf, jint bufsize)
 
     if (debug) {
 	char micro[MAXPATHLEN];
-	if (!GetStringFromRegistry(subkey, "MicroVersion", micro,
-				   sizeof(micro))) {
-	    printf("Warning: Can't read MicroVersion\n");
+		if (!GetStringFromRegistry(subkey, "MicroVersion", micro, sizeof(micro))) {
+			ReportErrorMessage("Warning: Can't read MicroVersion\n", true);
 	    micro[0] = '\0';
 	}
-	printf("Version major.minor.micro = %s.%s\n", version, micro);
+		post("Version major.minor.micro = %s.%s\n", version, micro);
     }
 
     RegCloseKey(key);
@@ -568,10 +579,15 @@ char g_jrepath[MAXPATHLEN], g_jvmpath[MAXPATHLEN];
 char *g_jvmtype=NULL;
 InvocationFunctions g_ifn;
 
+const char *getGlobal_jrepath() { return g_jrepath; }
+const char *getGlobal_jvmpath() { return g_jvmpath; }
+const char *getGlobal_jvmtype() { return g_jvmtype; }
+
 long mxj_platform_init()
 {
-	CreateExecutionEnvironment(g_jrepath, sizeof(g_jrepath),
-			       g_jvmpath, sizeof(g_jvmpath), &g_jvmtype);
+	g_jrepath[0] = g_jvmpath[0] = 0; 
+	g_jvmtype = NULL;
+	CreateExecutionEnvironment(g_jrepath, sizeof(g_jrepath), g_jvmpath, sizeof(g_jvmpath), &g_jvmtype);
     g_ifn.CreateJavaVM = 0;
     g_ifn.GetDefaultJavaVMInitArgs = 0;
 

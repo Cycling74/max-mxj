@@ -139,7 +139,7 @@ extern InvocationFunctions g_ifn;
 
 #ifdef MXJ_MSP
 //benchmarking
-extern double systimer_gettime();
+extern double systimer_gettime(void);
 static double _t_1, _t_2;
 #define BENCHMARK_BEGIN _t_1 = systimer_gettime()
 #define BENCHMARK_END   _t_2 = systimer_gettime()
@@ -235,7 +235,7 @@ void initGlobals(JNIEnv *env);
 void init_mxj_jitter(JNIEnv *env);
 #ifdef MAC_VERSION
 CFBundleRef getMachOLibrary(CFStringRef bundleName);
-short init_awt();
+short init_awt(void);
 #endif
 
 /**
@@ -400,7 +400,7 @@ void mxjObjectWasDeleted(JNIEnv *env, t_maxjava *x);
 /*
  * Notify the classloader of all our collected classpaths.
  */
-void mxj_inform_classloader();
+void mxj_inform_classloader(void);
 
 /*
  * Get a prop value - default is the default value you would
@@ -441,7 +441,7 @@ void mxj_dspstate(t_maxjava *x, long n);
 void mxj_benchmark(t_maxjava *x, long way, long interval);
 void mxj_exception_check(t_maxjava *x,int way);
 void mxj_dsp_halt(t_maxjava *x);
-void mxj_bounce_dac();
+void mxj_bounce_dac(void);
 
 jboolean mxj_check_z_no_inplace(JNIEnv *env, t_maxjava *x);
 
@@ -500,14 +500,15 @@ void ext_main(void *r) {
 		props = (t_mxj_proplist *)ps_global_props->s_thing;
 	else
 	{
-		props = mxj_proplist_new(32);
+		props = mxj_proplist_new(500); // originally 32 we can have many more options in a file than this
+                                       //500 may be overkill
 		ps_global_props->s_thing = (void*)props;
 	}
 
 	ps_global_jvm = gensym("_#MAX_JAVA_VM#_");
-#ifdef MAC_VERSION 
-return 0;
-#endif
+//#ifdef MAC_VERSION 
+//return 0;
+//#endif
 }
 
 void mxj_save2(t_maxjava *x, void *z)
@@ -1337,14 +1338,15 @@ void maxjava_anything(t_maxjava *x, t_symbol *msg, short argc, t_atom *argv)
 	MXJ_JNI_CALL(env,ExceptionClear)(env);
 	
 	switch (resolve_stat) {
-		t_mxj_attr *a;
 		case MXJ_METHOD_MATCH:
 		case MXJ_ARRAY_MATCH:	
 		case MXJ_COERCE:
 		case MXJ_GIMME_MATCH:
 			call_method_with_coercion(x,m->mids[meth_offset],m->jp_types[meth_offset],argc,argv);
 			break;
-		case MXJ_NO_METHOD_MATCH: 
+		case MXJ_NO_METHOD_MATCH:
+        {
+            t_mxj_attr *a;
 			//look for attribute
 			if ((a = mxj_get_attr(x,msg)) != 0) {	// should probbly check settable here
 				a->setter((void *)env,x,a,argc,argv);
@@ -1363,6 +1365,7 @@ void maxjava_anything(t_maxjava *x, t_symbol *msg, short argc, t_atom *argv)
 			MXJ_JNI_CALL(env,DeleteLocalRef)(env,s);
 			MXJ_JNI_CALL(env,DeleteLocalRef)(env,tmp);
 			break;
+        }
 		default:
 			break;
 	}
@@ -1439,12 +1442,14 @@ void call_method_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *jp_types, 
 			args[i].d = (jdouble) atomargs_getfloat(i,argc,argv);
 			break;
 		case '[': //method is expeciting primative array, it is our responsibility to make sure sigstr + 1 exists and is a known primative type
+        {
+            int q;
+            jvalue array_arg;
+            jarray ja;
+            jstring js;
+            void *vp;
+
 			switch(sigstr[i + 1]) 	{
-				int q;
-				jvalue array_arg;
-				jarray ja;
-				jstring js;
-				void *vp;
 				
 				case 's': //string object, note the use of lowercase 's' for the java sig
 					ja  = (jarray)MXJ_JNI_CALL(env,NewObjectArray)(env,argc,g_stringClass,NULL);
@@ -1603,7 +1608,8 @@ void call_method_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *jp_types, 
 					return;
 			
 			}
-			break;	
+			break;
+        }
 		//end case '['
 		default:
 			error("something in our signature is messed up");
@@ -1655,7 +1661,7 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 			MXJ_JNI_CALL(env,CallNonvirtualVoidMethodA)(env,x->javaInstance,x->cls,mid,args);
 			MXJ_JNI_CALL(env,DeleteLocalRef)(env,tmp);
 			ret = constructor_excep_helper(env);
-			return ret;	
+			return (t_mxj_err)ret;
 		case 'I': // int
 			args[i].i = (jint) atomargs_getlong(i,argc,argv);
 			break;
@@ -1692,13 +1698,15 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 			args[i].d = (jdouble) atomargs_getfloat(i,argc,argv);
 			break;
 		case '[': // method is expeciting primitive array, it is our responsibility to make sure sigstr + 1 exists and is a known primitive type
+        {
+            int q;
+            jvalue array_arg;
+            jarray ja;
+            jstring js;
+            void *vp;
+
 			switch(sigstr[i + 1])
 			{
-				int q;
-				jvalue array_arg;
-				jarray ja;
-				jstring js;
-				void *vp;
 				
 				case 's': // string object, note the use of lowercase 's' for the java sig
 					ja  = (jarray)MXJ_JNI_CALL(env,NewObjectArray)(env,argc,g_stringClass,NULL);
@@ -1716,7 +1724,7 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 					MXJ_JNI_CALL(env,CallNonvirtualVoidMethodA)(env,x->javaInstance,x->cls,mid,&array_arg);
 					MXJ_JNI_CALL(env,DeleteLocalRef)(env,ja);
 					ret = constructor_excep_helper(env);
-					return ret;						
+					return (t_mxj_err)ret;
 				case 'I': //int array
 					vp  = (jint *)mxj_getbytes(argc * sizeof(jint));
 					ja  = (jarray)MXJ_JNI_CALL(env,NewIntArray)(env,argc);
@@ -1733,7 +1741,7 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 					MXJ_JNI_CALL(env,DeleteLocalRef)(env,ja);
 					ret = constructor_excep_helper(env);
 					mxj_freebytes(vp, argc * sizeof(jint));
-					return ret;		
+					return (t_mxj_err)ret;
 				case 'F': //float array
 					vp  = (jfloat *)mxj_getbytes(argc * sizeof(jfloat));
 					ja  = (jarray)MXJ_JNI_CALL(env,NewFloatArray)(env,argc);
@@ -1750,7 +1758,7 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 					MXJ_JNI_CALL(env,DeleteLocalRef)(env,ja);
 					ret = constructor_excep_helper(env);
 					mxj_freebytes(vp, argc * sizeof(jfloat));
-					return ret;		
+					return (t_mxj_err)ret;
 				case 'J': //long array
 					vp  = (jlong *)mxj_getbytes(argc * sizeof(jlong));
 					ja  = (jarray)MXJ_JNI_CALL(env,NewLongArray)(env,argc);
@@ -1767,7 +1775,7 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 					MXJ_JNI_CALL(env,DeleteLocalRef)(env,ja);
 					ret = constructor_excep_helper(env);
 					mxj_freebytes(vp, argc * sizeof(jlong));
-					return ret;		
+					return (t_mxj_err)ret;
 				
 				case 'D': //double array
 					vp  = (jdouble *)mxj_getbytes(argc * sizeof(jdouble));
@@ -1785,7 +1793,7 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 					MXJ_JNI_CALL(env,DeleteLocalRef)(env,ja);
 					ret = constructor_excep_helper(env);
 					mxj_freebytes(vp, argc * sizeof(jdouble));
-					return ret;			
+					return (t_mxj_err)ret;
 				case 'Z': //boolean array
 					vp  = (jboolean *)mxj_getbytes(argc * sizeof(jboolean));
 					ja  = (jarray)MXJ_JNI_CALL(env,NewBooleanArray)(env,argc);
@@ -1802,7 +1810,7 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 					MXJ_JNI_CALL(env,DeleteLocalRef)(env,ja);
 					ret = constructor_excep_helper(env);
 					mxj_freebytes(vp, argc * sizeof(jboolean));
-					return ret;					
+					return (t_mxj_err)ret;
 				case 'B': //byte array
 					vp  = (jbyte *)mxj_getbytes(argc * sizeof(jbyte));
 					ja  = (jarray)MXJ_JNI_CALL(env,NewByteArray)(env,argc);
@@ -1819,7 +1827,7 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 					MXJ_JNI_CALL(env,DeleteLocalRef)(env,ja);
 					ret = constructor_excep_helper(env);
 					mxj_freebytes(vp, argc * sizeof(jbyte));
-					return ret;		
+					return (t_mxj_err)ret;
 				case 'C': //char array
 					vp  = (jchar *)mxj_getbytes(argc * sizeof(jchar));
 					ja  = (jarray)MXJ_JNI_CALL(env,NewCharArray)(env,argc);
@@ -1836,7 +1844,7 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 					MXJ_JNI_CALL(env,DeleteLocalRef)(env,ja);
 					ret = constructor_excep_helper(env);
 					mxj_freebytes(vp, argc * sizeof(jchar));
-					return ret;		
+					return (t_mxj_err)ret;
 				case 'S': //short array
 					vp  = (jshort *)mxj_getbytes(argc * sizeof(jshort));
 					ja  = (jshortArray)MXJ_JNI_CALL(env,NewShortArray)(env,argc);
@@ -1854,13 +1862,14 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 	
 					ret = constructor_excep_helper(env);
 					mxj_freebytes(vp, argc * sizeof(jshort));
-					return ret;		
+					return (t_mxj_err)ret;
 				default:
 					error("unsupported array type [%c",sigstr[i + 1]);
 					return MXJ_ERR_GENERIC;
 			
 			}
-			break;	
+			break;
+        }
 		//end case '['
 		default:
 			error("something in our signature is messed up");
@@ -1876,7 +1885,7 @@ t_mxj_err call_constructor_with_coercion(t_maxjava *x, jmethodID mid, t_symbol *
 	for(i = 0; i < num_strs_free;i++)
 		MXJ_JNI_CALL(env,DeleteLocalRef)(env,str_free[i]);
 	
-	return ret;
+	return (t_mxj_err)ret;
 }
 
 t_mxj_err constructor_excep_helper(JNIEnv *env)
@@ -2124,7 +2133,7 @@ void mxj_benchmark(t_maxjava *x, long way, long interval )
 		x->benchmark_best_time = 77777777;
 		x->benchmark_worst_time = 0;
 		if (interval && interval > 0)
-			x->benchmark_interval = interval;
+			x->benchmark_interval = (int)interval;
 		else
 			x->benchmark_interval = 256;
 		
@@ -2221,7 +2230,7 @@ void mxj_dsp_add64(t_maxjava *x, t_object *dsp64, short *count, double samplerat
 		}
 		
 		//Make MSPSignal float[] member
-		jobj =  MXJ_JNI_CALL(env,NewFloatArray)(env, maxvectorsize);
+		jobj =  MXJ_JNI_CALL(env,NewFloatArray)(env, (jsize)maxvectorsize);
 		x->inlet_msp_vecs[i] = MXJ_JNI_CALL(env,NewGlobalRef)(env, jobj);
 		MXJ_JNI_CALL(env,DeleteLocalRef)(env, jobj);
 		
@@ -2242,7 +2251,7 @@ void mxj_dsp_add64(t_maxjava *x, t_object *dsp64, short *count, double samplerat
 		}
 				
 		//Make MSPSignal float[] member
-		jobj =  MXJ_JNI_CALL(env,NewFloatArray)(env, maxvectorsize);
+		jobj =  MXJ_JNI_CALL(env,NewFloatArray)(env, (jsize)maxvectorsize);
 		x->outlet_msp_vecs[i] = MXJ_JNI_CALL(env,NewGlobalRef)(env, jobj);
 		MXJ_JNI_CALL(env,DeleteLocalRef)(env, jobj);
 		
@@ -2523,7 +2532,7 @@ void mxj_dspstate(t_maxjava *x, long n)
 	jboolean val;	
 	THREADENV(env);
 	
-	x->dsp_running = n;
+	x->dsp_running = (int)n;
 	val = (n)?JNI_TRUE:JNI_FALSE;
 	//call into java dspstate method
 	MXJ_JNI_CALL(env,CallVoidMethod)(env,x->javaInstance,x->dspstate_MID,val);
@@ -2584,24 +2593,29 @@ JNIEnv *jvm_new(long *exists) {
         //be generous 256 options ..
 		err = mxj_get_jvmopts(options,&numOptions, 256);
 
-		if (err != MAX_ERR_NONE)
+        if (err != MAX_ERR_NONE) {
+            error("Error with mxj_get_jvmopts: %d", err);
 			return NULL;
+        }
 	
  		#ifdef MAC_VERSION
 		if (g_java_jvm_version[0]) {
-			post("(mxj) attempting to to set java version to %s",g_java_jvm_version);
+			post("(mxj) attempting to set java version to %s",g_java_jvm_version);
 			setenv("JAVA_JVM_VERSION", (char*)g_java_jvm_version,1);
 		}
  		#endif // MAC_VERSION
 
-	    vmArgs.version = JNI_VERSION_1_4;
+	    vmArgs.version = JNI_VERSION_1_6;
 	    vmArgs.nOptions = numOptions;
 	    vmArgs.options = options;
-	    vmArgs.ignoreUnrecognized = JNI_FALSE;
+	    vmArgs.ignoreUnrecognized = JNI_TRUE;
 		
 		// classpath is in first option
 		ps = strstr(options[0].optionString, "=");
-		if (!ps) return NULL;
+        if (!ps) {
+            error("Cannot get classpath from first option");
+            return NULL;
+        }
 		
 		cp_post_system_classpath(ps);	
 		
@@ -2705,7 +2719,7 @@ JNIEnv *jvm_new(long *exists) {
         
 		post("MXJClassloader CLASSPATH:");
 		for(i = 0; i < props->len;i++) {
-			char buff[1024];
+			char buff[2048];
 			if (props->pptr[i]->id == MXJPROP_DYN_CLASS_DIR) {
 				strcpy(buff, (char *)(props->pptr[i])->prop);
 				post("   %s",buff);
@@ -2721,7 +2735,7 @@ JNIEnv *jvm_new(long *exists) {
         if(g_jvm==NULL){
 	    		for(i = 0; i < numOptions;i++)
 	    			sysmem_freeptr(options[i].optionString);		
-	    	
+            error("Cannot get_java_vm");
 	    	return NULL;
     	}
     
@@ -2786,6 +2800,7 @@ JNIEnv *jvm_new(long *exists) {
 		return env;
     }
 	
+    error("g_jvm already exists");
 	return NULL;
 }
 
@@ -2807,7 +2822,7 @@ short mxj_generate_default_options(JavaVMOption* options)
 	options[3].extraInfo = NULL;
 	
 	sprintf(options[1].optionString,"-Xincgc");
-	sprintf(options[2].optionString,"-Xms16m");
+	sprintf(options[2].optionString,"-Xms32m");
 	sprintf(options[3].optionString,"-Xmx256m");
 	
 	return 4;
@@ -2871,7 +2886,7 @@ short mxj_get_jvmopts(JavaVMOption* options, int *num_options, int max_opts)
 	len = (long)strlen(prop_val);
 	if (prop_val[len-1] == sep)
 		len--;
-	for (i=len-1;i>=0&&prop_val[i]!=sep;i--) {
+	for (i=(int)(len-1);i>=0&&prop_val[i]!=sep;i--) {
 		;
 	}
 	prop_val[i+1] = '\0';
@@ -2893,7 +2908,7 @@ short mxj_get_jvmopts(JavaVMOption* options, int *num_options, int max_opts)
 		t_ptr_size	i;
 
 		for (i=0; i<pathcount; i++) {
-			short	path = (short)(t_ptr_int)linklist_getindex(paths, i);
+			short	path = (short)(t_ptr_int)linklist_getindex(paths, (long)i);
 			short	jpath;
 			char	maxpath[MAX_PATH_CHARS];
 			char	fullpath[MAX_PATH_CHARS];
@@ -3125,7 +3140,7 @@ short mxj_get_jvmopts(JavaVMOption* options, int *num_options, int max_opts)
 	
 make_classpath:
 
-	options[0].optionString = (char*)sysmem_newptr(strlen(string_getptr(classpath)) + 256);
+	options[0].optionString = (char*)sysmem_newptr((long)(strlen(string_getptr(classpath)) + 256));
 	options[0].extraInfo = NULL;
 	sprintf(options[0].optionString,"-Djava.class.path=%s",string_getptr(classpath));
 	*num_options = op_idx;

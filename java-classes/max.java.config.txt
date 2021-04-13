@@ -52,10 +52,8 @@ max.jvm.option -Xmx256m
 ; your mxj code using JDB or some other debugger which supports ;
 ; the JDI wire protocol ;
 
-; max.jvm.option -Xdebug  ;
-; max.jvm.option -Xnoagent ;
-; max.jvm.option -Xrunjdwp:transport=dt_socket\,address=8074\,server=y\,suspend=n ; 
 ; max.jvm.option -XX:-UseSharedSpaces ;
+; max.jvm.option -agentlib:jdwp=transport=dt_socket\,server=y\,suspend=n\,address=8074 ;
 
 ; 1 = compatible mode (default in 64bit) ;
 ; 2 = hi performance mode (default in 32bit) ;
