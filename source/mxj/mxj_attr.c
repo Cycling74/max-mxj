@@ -214,41 +214,41 @@ t_mxj_attr* mxj_attr_new(JNIEnv *env,jclass clazz,t_mxj_attr_desc* ad)
 				
 				//now bind an auto setter function
 				if (a->j_f_type == J_INT)
-					a->setter = (method)mxj_attr_set_int;
+					a->setter = (mxj_attr_setter)mxj_attr_set_int;
 				else if (a->j_f_type == J_FLOAT)
-					a->setter = (method)mxj_attr_set_float;	
+					a->setter = (mxj_attr_setter)mxj_attr_set_float;
 				else if (a->j_f_type == J_STRING)
-					a->setter = (method)mxj_attr_set_string;
+					a->setter = (mxj_attr_setter)mxj_attr_set_string;
 				else if (a->j_f_type == J_DOUBLE)
-					a->setter = (method)mxj_attr_set_double;
+					a->setter = (mxj_attr_setter)mxj_attr_set_double;
 				else if (a->j_f_type == J_LONG)
-					a->setter = (method)mxj_attr_set_long;
+					a->setter = (mxj_attr_setter)mxj_attr_set_long;
 				else if (a->j_f_type == J_BOOL)
-					a->setter = (method)mxj_attr_set_bool;
+					a->setter = (mxj_attr_setter)mxj_attr_set_bool;
 				else if (a->j_f_type == J_CHAR)
-					a->setter = (method)mxj_attr_set_char;
+					a->setter = (mxj_attr_setter)mxj_attr_set_char;
 				else if (a->j_f_type == J_BYTE)
-					a->setter = (method)mxj_attr_set_byte;
+					a->setter = (mxj_attr_setter)mxj_attr_set_byte;
 				else if (a->j_f_type == J_SHORT)
-					a->setter = (method)mxj_attr_set_short;					
+					a->setter = (mxj_attr_setter)mxj_attr_set_short;
 				if (a->j_f_type == J_INT_ARRAY)
-					a->setter = (method)mxj_attr_set_int_array;
+					a->setter = (mxj_attr_setter)mxj_attr_set_int_array;
 				else if (a->j_f_type == J_FLOAT_ARRAY)
-					a->setter = (method)mxj_attr_set_float_array;	
+					a->setter = (mxj_attr_setter)mxj_attr_set_float_array;
 				else if (a->j_f_type == J_STRING_ARRAY)
-					a->setter = (method)mxj_attr_set_string_array;
+					a->setter = (mxj_attr_setter)mxj_attr_set_string_array;
 				else if (a->j_f_type == J_DOUBLE_ARRAY)
-					a->setter = (method)mxj_attr_set_double_array;
+					a->setter = (mxj_attr_setter)mxj_attr_set_double_array;
 				else if (a->j_f_type == J_LONG_ARRAY)
-					a->setter = (method)mxj_attr_set_long_array;
+					a->setter = (mxj_attr_setter)mxj_attr_set_long_array;
 				else if (a->j_f_type == J_BOOL_ARRAY)
-					a->setter = (method)mxj_attr_set_bool_array;
+					a->setter = (mxj_attr_setter)mxj_attr_set_bool_array;
 				else if (a->j_f_type == J_CHAR_ARRAY)
-					a->setter = (method)mxj_attr_set_char_array;
+					a->setter = (mxj_attr_setter)mxj_attr_set_char_array;
 				else if (a->j_f_type == J_BYTE_ARRAY)
-					a->setter = (method)mxj_attr_set_byte_array;
+					a->setter = (mxj_attr_setter)mxj_attr_set_byte_array;
 				else if (a->j_f_type == J_SHORT_ARRAY)
-					a->setter = (method)mxj_attr_set_short_array;
+					a->setter = (mxj_attr_setter)mxj_attr_set_short_array;
 			}
 			else {
 				error("how is a virtual attr settable without a setter?");
@@ -257,7 +257,7 @@ t_mxj_attr* mxj_attr_new(JNIEnv *env,jclass clazz,t_mxj_attr_desc* ad)
 		}	
 	}	// end is settable
 	else {
-		a->setter = (method)mxj_attr_cantset;
+		a->setter = (mxj_attr_setter)mxj_attr_cantset;
 	}
 			
 	return a;
