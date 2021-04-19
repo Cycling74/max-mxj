@@ -14,6 +14,8 @@ add_library(
 	${HEADERS}
 )
 
+set_property(TARGET ${PROJECT_NAME} PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+
 target_precompile_headers(${PROJECT_NAME} PRIVATE "${SRCDIR}/mxj_macho_prefix.h")
 target_compile_definitions(${PROJECT_NAME} PUBLIC MXJ_MSP=1)
 if (APPLE)
