@@ -20,6 +20,8 @@
 
 //#define LLPLUGDEBUG
 
+#include "mxj_common.h"
+
 #ifdef WIN_VERSION
 #include <jni.h>
 #include <tchar.h>
