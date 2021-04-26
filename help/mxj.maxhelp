@@ -2,14 +2,15 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 7,
-			"minor" : 0,
+			"major" : 8,
+			"minor" : 2,
 			"revision" : 0,
-			"architecture" : "x86",
+			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 204.0, 311.0, 700.0, 454.0 ],
+		"classnamespace" : "box",
+		"rect" : [ 100.0, 100.0, 700.0, 454.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -35,8 +36,10 @@
 		"digest" : "",
 		"tags" : "",
 		"style" : "",
+		"subpatcher_template" : "",
 		"showrootpatcherontab" : 0,
 		"showontab" : 0,
+		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontname" : "Arial",
@@ -46,13 +49,12 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 110.0, 154.0, 113.0, 20.0 ],
+					"patching_rect" : [ 110.0, 154.0, 113.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"filename" : "helpstarter.js",
 						"parameter_enable" : 0
 					}
 ,
-					"style" : "",
 					"text" : "js helpstarter.js mxj"
 				}
 
@@ -68,13 +70,14 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 7,
-							"minor" : 0,
+							"major" : 8,
+							"minor" : 2,
 							"revision" : 0,
-							"architecture" : "x86",
+							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
+						"classnamespace" : "box",
 						"rect" : [ 0.0, 26.0, 700.0, 428.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -101,21 +104,21 @@
 						"digest" : "",
 						"tags" : "",
 						"style" : "",
+						"subpatcher_template" : "",
 						"showontab" : 1,
+						"assistshowspatchername" : 0,
 						"boxes" : [  ],
 						"lines" : [  ]
 					}
 ,
-					"patching_rect" : [ 205.0, 205.0, 50.0, 20.0 ],
+					"patching_rect" : [ 205.0, 205.0, 50.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
 						"globalpatchername" : "",
-						"style" : "",
 						"tags" : ""
 					}
 ,
-					"style" : "",
 					"text" : "p ?",
 					"varname" : "q_tab"
 				}
@@ -132,14 +135,15 @@
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
-							"major" : 7,
-							"minor" : 0,
+							"major" : 8,
+							"minor" : 2,
 							"revision" : 0,
-							"architecture" : "x86",
+							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
-						"rect" : [ 204.0, 337.0, 700.0, 428.0 ],
+						"classnamespace" : "box",
+						"rect" : [ 100.0, 126.0, 700.0, 428.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -165,7 +169,9 @@
 						"digest" : "",
 						"tags" : "",
 						"style" : "",
+						"subpatcher_template" : "",
 						"showontab" : 1,
+						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
 									"fontname" : "Arial",
@@ -175,7 +181,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 12.0, 146.0, 590.0, 21.0 ],
-									"style" : "",
 									"text" : "Here are some examples of mxj externs.For more detailed info see java-doc in Max app directory",
 									"textcolor" : [ 0.501961, 0.501961, 0.501961, 1.0 ]
 								}
@@ -191,7 +196,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 357.0, 299.0, 75.0, 23.0 ],
-									"style" : "",
 									"text" : "port 7474"
 								}
 
@@ -205,7 +209,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 321.0, 378.0, 125.0, 23.0 ],
-									"style" : "",
 									"text" : "print udp @popup 1"
 								}
 
@@ -220,7 +223,6 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 321.0, 343.0, 203.0, 23.0 ],
-									"style" : "",
 									"text" : "mxj net.udp.recv @port 7777"
 								}
 
@@ -235,7 +237,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 468.0, 198.0, 75.0, 23.0 ],
-									"style" : "",
 									"text" : "port 7474"
 								}
 
@@ -250,7 +251,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 373.0, 199.0, 82.0, 23.0 ],
-									"style" : "",
 									"text" : "telephone?"
 								}
 
@@ -264,7 +264,6 @@
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 321.0, 199.0, 46.0, 23.0 ],
-									"style" : "",
 									"triscale" : 0.9
 								}
 
@@ -279,7 +278,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 321.0, 245.0, 337.0, 23.0 ],
-									"style" : "",
 									"text" : "mxj net.udp.send @address 127.0.0.1 @port 7777"
 								}
 
@@ -294,7 +292,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 49.0, 173.0, 76.0, 23.0 ],
-									"style" : "",
 									"text" : "viewsource"
 								}
 
@@ -309,8 +306,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 103.196259, 284.806702, 53.0, 23.0 ],
-									"style" : ""
+									"patching_rect" : [ 103.196258999999998, 284.806701999999973, 53.0, 23.0 ]
 								}
 
 							}
@@ -323,8 +319,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 103.196259, 313.076538, 52.0, 23.0 ],
-									"style" : "",
+									"patching_rect" : [ 103.196258999999998, 313.076538000000028, 52.0, 23.0 ],
 									"text" : "size $1"
 								}
 
@@ -337,8 +332,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 48.962616, 392.689636, 137.0, 23.0 ],
-									"style" : "",
+									"patching_rect" : [ 48.962615999999997, 392.689636000000007, 137.0, 23.0 ],
 									"text" : "print group @popup 1"
 								}
 
@@ -352,8 +346,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 88.210281, 253.373947, 78.0, 23.0 ],
-									"style" : "",
+									"patching_rect" : [ 88.210280999999995, 253.373946999999987, 78.0, 23.0 ],
 									"text" : "a b c d e f g"
 								}
 
@@ -368,8 +361,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 76.0, 198.771317, 53.0, 23.0 ],
-									"style" : ""
+									"patching_rect" : [ 76.0, 198.77131700000001, 53.0, 23.0 ]
 								}
 
 							}
@@ -382,8 +374,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 76.0, 224.065384, 65.0, 23.0 ],
-									"style" : "",
+									"patching_rect" : [ 76.0, 224.065383999999995, 65.0, 23.0 ],
 									"text" : "iterate $1"
 								}
 
@@ -395,8 +386,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
-									"patching_rect" : [ 17.981308, 318.310364, 28.0, 28.0 ],
-									"style" : ""
+									"parameter_enable" : 0,
+									"patching_rect" : [ 17.981307999999999, 318.310363999999993, 28.0, 28.0 ]
 								}
 
 							}
@@ -409,8 +400,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 48.962616, 355.68103, 117.0, 23.0 ],
-									"style" : "",
+									"patching_rect" : [ 49.962615999999997, 355.681030000000021, 99.0, 23.0 ],
 									"text" : "mxj list.Group 3"
 								}
 
@@ -435,8 +425,6 @@
 						"lines" : [ 							{
 								"patchline" : 								{
 									"destination" : [ "obj-12", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
 									"source" : [ "obj-10", 0 ]
 								}
 
@@ -444,8 +432,6 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-12", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
 									"source" : [ "obj-11", 0 ]
 								}
 
@@ -453,8 +439,6 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-7", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
 									"source" : [ "obj-12", 0 ]
 								}
 
@@ -462,8 +446,6 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-12", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
 									"source" : [ "obj-14", 0 ]
 								}
 
@@ -471,8 +453,6 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-19", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
 									"midpoints" : [ 477.5, 231.0, 330.5, 231.0 ],
 									"source" : [ "obj-16", 0 ]
 								}
@@ -481,8 +461,6 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-19", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
 									"midpoints" : [ 382.5, 231.0, 330.5, 231.0 ],
 									"source" : [ "obj-17", 0 ]
 								}
@@ -491,8 +469,6 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-19", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
 									"source" : [ "obj-18", 0 ]
 								}
 
@@ -500,8 +476,6 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-23", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
 									"source" : [ "obj-20", 0 ]
 								}
 
@@ -509,8 +483,6 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-22", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
 									"source" : [ "obj-23", 0 ]
 								}
 
@@ -518,8 +490,6 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-6", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
 									"source" : [ "obj-5", 0 ]
 								}
 
@@ -527,8 +497,6 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-12", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
 									"source" : [ "obj-6", 0 ]
 								}
 
@@ -536,8 +504,6 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-12", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
 									"source" : [ "obj-8", 0 ]
 								}
 
@@ -545,8 +511,6 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-10", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
 									"source" : [ "obj-9", 0 ]
 								}
 
@@ -554,17 +518,15 @@
  ]
 					}
 ,
-					"patching_rect" : [ 10.0, 85.0, 50.0, 20.0 ],
+					"patching_rect" : [ 10.0, 85.0, 50.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
 						"fontsize" : 13.0,
 						"globalpatchername" : "",
-						"style" : "",
 						"tags" : ""
 					}
 ,
-					"style" : "",
 					"text" : "p basic",
 					"varname" : "basic_tab"
 				}
@@ -590,27 +552,31 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "helpname.js",
-				"bootpath" : "/gitc74/repository/max/maxmsp-misc/help/resources",
-				"patcherrelativepath" : "../../../../../max/maxmsp-misc/help/resources",
+				"bootpath" : "~/Cycling/max/maxmsp-misc/help/resources",
+				"patcherrelativepath" : "../../max/maxmsp-misc/help/resources",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "helpdetails.js",
-				"bootpath" : "/gitc74/repository/max/maxmsp-misc/help/resources",
-				"patcherrelativepath" : "../../../../../max/maxmsp-misc/help/resources",
+				"bootpath" : "~/Cycling/max/maxmsp-misc/help/resources",
+				"patcherrelativepath" : "../../max/maxmsp-misc/help/resources",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "helpstarter.js",
-				"bootpath" : "/gitc74/repository/max/maxmsp-misc/help/resources",
-				"patcherrelativepath" : "../../../../../max/maxmsp-misc/help/resources",
+				"bootpath" : "~/Cycling/max/maxmsp-misc/help/resources",
+				"patcherrelativepath" : "../../max/maxmsp-misc/help/resources",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
+, 			{
+				"name" : "mxj.mxo",
+				"type" : "iLaX"
+			}
  ],
-		"embedsnapshot" : 0
+		"autosave" : 0
 	}
 
 }
