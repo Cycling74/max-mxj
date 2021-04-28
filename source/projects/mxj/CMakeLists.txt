@@ -16,6 +16,8 @@ add_library(
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
-#target_precompile_headers(${PROJECT_NAME} PRIVATE "${SRCDIR}/mxj_macho_prefix.h")
+if (NOT APPLE)
+	target_precompile_headers(${PROJECT_NAME} PRIVATE "${SRCDIR}/mxj_macho_prefix.h")
+endif ()
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/../../max-api/script/max-posttarget.cmake)
