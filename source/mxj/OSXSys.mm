@@ -32,6 +32,10 @@ bool OSXSys::is64BitRunning(){
 		case NSBundleExecutableArchitecturePPC64:
 			return true;
 			break;
+
+		case NSBundleExecutableArchitectureARM64:
+			return true;
+			break;
 			
 		default:
 			return false;

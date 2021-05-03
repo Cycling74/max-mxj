@@ -1,8 +1,13 @@
 cmake_minimum_required(VERSION 3.16)
 
 if (APPLE)
-	set(CMAKE_OSX_ARCHITECTURES "x86_64")
-	set(CMAKE_OSX_DEPLOYMENT_TARGET 10.9)
+	if (CMAKE_OSX_ARCHITECTURES STREQUAL "" 
+		OR CMAKE_OSX_ARCHITECTURES STREQUAL "i386")
+		set(CMAKE_OSX_ARCHITECTURES x86_64) # override the old max-api values permitting i386
+	endif ()
+	if (CMAKE_OSX_DEPLOYMENT_TARGET STREQUAL "")
+		set(CMAKE_OSX_DEPLOYMENT_TARGET 10.9)
+	endif ()
 endif ()
 
 if (APPLE)

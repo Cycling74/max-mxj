@@ -31,6 +31,14 @@
 int isVMLibrary(_TCHAR *vm);
 
 
+#ifdef C74_X64
+#define DEFAULT_OS_ARCH "x86_64"
+#elif defined(__aarch64__)
+#define DEFAULT_OS_ARCH "arm64"
+#else
+#define DEFAULT_OS_ARCH "i386"
+#endif
+
 #ifdef i386
 #define JAVA_ARCH "i386"
 #define JAVA_HOME_ARCH "i386"

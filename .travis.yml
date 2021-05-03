@@ -5,7 +5,7 @@ compiler:
 - clang
 sudo: false
 os: osx
-osx_image: xcode11.6
+osx_image: xcode12.3
 script:
 - mkdir build
 - cd build

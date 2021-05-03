@@ -9,7 +9,7 @@ set(C74_BUILD_MAX_EXTENSION TRUE)
 include(${CMAKE_CURRENT_SOURCE_DIR}/../../max-api/script/max-pretarget.cmake)
 
 if (APPLE)
-	set(CMAKE_OSX_ARCHITECTURES x86_64) # override the old max-api values permitting i386
+	set(CMAKE_OSX_ARCHITECTURES arm64) # override the old max-api values permitting i386
 endif ()
 
 include_directories(
