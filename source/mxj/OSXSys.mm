@@ -33,10 +33,12 @@ bool OSXSys::is64BitRunning(){
 			return true;
 			break;
 
+#if __MAC_OS_X_VERSION_MAX_ALLOWED > __MAC_10_15
 		case NSBundleExecutableArchitectureARM64:
 			return true;
 			break;
-			
+#endif
+
 		default:
 			return false;
 			break;
