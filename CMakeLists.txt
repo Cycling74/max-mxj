@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
 
+PROJECT(max-mxj)
+
 if (APPLE)
 	message(STATUS "Building mxj.mxo")
 	execute_process(
@@ -35,7 +37,7 @@ if (APPLE)
 	######################################################################
 
 
-	# Fetch the correct verion of the max-api
+	# Fetch the correct verion of the max-sdk
 	message(STATUS "Updating Git Submodules")
 	execute_process(
 		COMMAND				git submodule update --init --recursive
@@ -44,7 +46,7 @@ if (APPLE)
 
 
 	# Misc setup and subroutines
-	include(${CMAKE_CURRENT_SOURCE_DIR}/source/max-api/script/max-package.cmake)
+	include(${CMAKE_CURRENT_SOURCE_DIR}/source/max-sdk/source/script/max-package.cmake)
 
 
 	# Generate a project for every folder in the "source/projects" folder
