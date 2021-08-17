@@ -28,6 +28,8 @@ execute_process(
 
 message(STATUS "Iterating projects...")
 
+unset(CMAKE_LIBRARY_OUTPUT_DIRECTORY) # make sure that this doesn't interfere if set at a higher level
+
 # Misc setup and subroutines
 include(${CMAKE_CURRENT_SOURCE_DIR}/source/max-sdk-base/script/max-package.cmake)
 
