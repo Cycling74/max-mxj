@@ -29,7 +29,7 @@ execute_process(
 message(STATUS "Iterating projects...")
 
 # Misc setup and subroutines
-include(${CMAKE_CURRENT_SOURCE_DIR}/source/max-sdk/source/script/max-package.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/source/max-sdk/source/max-sdk-base/script/max-package.cmake)
 
 # Generate a project for every folder in the "source/projects" folder
 SUBDIRLIST(PROJECT_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/source/projects)

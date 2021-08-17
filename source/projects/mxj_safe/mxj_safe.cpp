@@ -3,6 +3,7 @@
 // Usage of this file and its contents is governed by the MIT License
 
 
+#include "c74_max.h"
 #include "c74_msp.h"
 
 using namespace c74::max;
@@ -92,7 +93,7 @@ void ext_main(void* r) {
 		class_register(CLASS_BOX, c);
 		mxj_class = c;
 
-		object_method_direct(void, (t_object*, t_symbol*, t_symbol*, t_symbol*),
+		object_method_direct(void, (void*, t_symbol*, t_symbol*, t_symbol*),
 							 gensym("max")->s_thing, gensym("objectfile"), gensym("mxj"), gensym("mxj_safe"), gensym("mxj"));
 
 
@@ -121,7 +122,7 @@ void ext_main(void* r) {
 		class_register(CLASS_BOX, c);
 		mxj_tilde_class = c;
 
-		object_method_direct(void, (t_object*, t_symbol*, t_symbol*, t_symbol*),
+		object_method_direct(void, (void*, t_symbol*, t_symbol*, t_symbol*),
 							 gensym("max")->s_thing, gensym("objectfile"), gensym("mxj~"), gensym("mxj_safe"), gensym("mxj~"));
 
 

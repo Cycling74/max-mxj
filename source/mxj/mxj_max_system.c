@@ -372,7 +372,7 @@ jobjectArray JNICALL mxj_get_search_path_forcontext(JNIEnv *env,jclass clazz)
 	if (!m) m = (method)gensym("__path_getsearchpath_forcontext__")->s_thing;
 	
 	if (m) {
-		m(&pathcount, &patharray); // get an array of shorts
+		CALL_METHOD(m, &pathcount, &patharray); // get an array of shorts
 		if (patharray && pathcount) {
 			MXJ_JNI_CALL(env, PushLocalFrame)(env, (jint)(pathcount+1));
 			checkException(env);
