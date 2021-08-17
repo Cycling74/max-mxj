@@ -6,7 +6,7 @@ if (NOT APPLE)
 endif ()
 
 set(C74_BUILD_MAX_EXTENSION TRUE)
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../max-sdk/source/max-sdk-base/script/max-pretarget.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../max-sdk-base/script/max-pretarget.cmake)
 
 if (APPLE)
 	if (CMAKE_OSX_ARCHITECTURES STREQUAL "" 
@@ -29,4 +29,4 @@ add_library(
 	${PROJECT_NAME}.cpp
 )
 
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../max-sdk/source/max-sdk-base/script/max-posttarget.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/../../max-sdk-base/script/max-posttarget.cmake)

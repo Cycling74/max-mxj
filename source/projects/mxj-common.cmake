@@ -91,7 +91,7 @@ else ()
 	list(FILTER SOURCES EXCLUDE REGEX ".*/JavaHomeOsx\\.h$")
 endif()
 
-set(MXJ_C74_SUPPORT "${CMAKE_CURRENT_SOURCE_DIR}/../../max-sdk/source/max-sdk-base/c74support")
+set(MXJ_C74_SUPPORT "${CMAKE_CURRENT_SOURCE_DIR}/../../max-sdk-base/c74support")
 #set(MXJ_C74SUPPORT_LINKER_FLAGS "@${C74SUPPORT}/max-includes/c74_linker_flags.txt")
 
 include_directories(${MXJ_C74_SUPPORT}/max-includes ${MXJ_C74_SUPPORT}/msp-includes)

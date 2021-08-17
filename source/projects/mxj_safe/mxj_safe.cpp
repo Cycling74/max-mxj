@@ -3,7 +3,6 @@
 // Usage of this file and its contents is governed by the MIT License
 
 
-#include "c74_max.h"
 #include "c74_msp.h"
 
 using namespace c74::max;
