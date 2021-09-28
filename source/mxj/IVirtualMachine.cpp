@@ -374,31 +374,39 @@ _TCHAR*	 IVirtualMachine::findLib() {
 	HKEY jreKey = NULL;
 	DWORD length = MAX_PATH;
 	_TCHAR keyName[MAX_PATH];
-	_TCHAR * jreKeyName;		
-	
+	_TCHAR * jreKeyNames[] = {
+		_T("SOFTWARE\\JavaSoft\\JRE"), // look for the new one first
+		_T("Software\\JavaSoft\\Java Runtime Environment"),
+		0
+	};
+	_TCHAR **jreKeyName = jreKeyNames;
+
 	/* Not found yet, try the registry, we will use the first vm >= 1.4 */
-	jreKeyName = _T("Software\\JavaSoft\\Java Runtime Environment");
-	if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, jreKeyName, 0, KEY_READ, &jreKey) == ERROR_SUCCESS) {
-		if(RegQueryValueEx(jreKey, _T("CurrentVersion"), NULL, NULL, (LPBYTE)&keyName, &length) == ERROR_SUCCESS) {
-			path = checkVMRegistryKey(jreKey, keyName);
-			if (path != NULL) {
-				RegCloseKey(jreKey);
-				return path;
-			}
-		}
-		j = 0;
-		length = MAX_PATH;
-		while (RegEnumKeyEx(jreKey, j++, keyName, &length, 0, 0, 0, 0) == ERROR_SUCCESS) {  
-			/*look for a 1.6 vm*/ 
-			if( _tcsncmp(_T("1.6"), keyName, 3) <= 0 ) {
+	while (*jreKeyName) {
+		jreKey = NULL;
+		if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, *jreKeyName, 0, KEY_READ, &jreKey) == ERROR_SUCCESS) {
+			if (RegQueryValueEx(jreKey, _T("CurrentVersion"), NULL, NULL, (LPBYTE)&keyName, &length) == ERROR_SUCCESS) {
 				path = checkVMRegistryKey(jreKey, keyName);
 				if (path != NULL) {
 					RegCloseKey(jreKey);
 					return path;
 				}
 			}
+			j = 0;
+			length = MAX_PATH;
+			while (RegEnumKeyEx(jreKey, j++, keyName, &length, 0, 0, 0, 0) == ERROR_SUCCESS) {
+				/*look for a 1.6 vm*/
+				if (_tcsncmp(_T("1.6"), keyName, 3) <= 0 ) {
+					path = checkVMRegistryKey(jreKey, keyName);
+					if (path != NULL) {
+						RegCloseKey(jreKey);
+						return path;
+					}
+				}
+			}
+			RegCloseKey(jreKey);
 		}
-		RegCloseKey(jreKey);
+		jreKeyName++;
 	}
 	return NULL;
 }

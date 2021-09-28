@@ -439,8 +439,6 @@ GetApplicationHome(char *buf, jint bufsize)
 /*
  * Helpers to look in the registry for a public JRE.
  */
-#define DOTRELEASE	JDK_MAJOR_VERSION "." JDK_MINOR_VERSION
-#define JRE_KEY		"Software\\JavaSoft\\Java Runtime Environment"
 
 static jboolean
 GetStringFromRegistry(HKEY key, const char *name, char *buf, jint bufsize)
@@ -457,57 +455,72 @@ GetStringFromRegistry(HKEY key, const char *name, char *buf, jint bufsize)
 	return JNI_FALSE;
 }
 
+static const char* JRE_Keys[] = {
+	"SOFTWARE\\JavaSoft\\JRE", // look for the new one first
+	"Software\\JavaSoft\\Java Runtime Environment",
+	0
+};
+
 static jboolean
 GetPublicJREHome(char *buf, jint bufsize)
 {
 	HKEY key, subkey;
 	char version[MAXPATHLEN];
+	const char **jrekey = JRE_Keys;
 
-	/* Find the current version of the JRE */
-	if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, JRE_KEY, 0, KEY_READ, &key) != 0) {
-		fprintf(stderr, "Error opening registry key '" JRE_KEY "'\n");
-		return JNI_FALSE;
-	}
+	while (*jrekey) {
+		/* Find the current version of the JRE */
+		if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, *jrekey, 0, KEY_READ, &key) != 0) {
+			if (debug) {
+				fprintf(stderr, "Error opening registry key '%s'\n", *jrekey);
+			}
+			jrekey++;
+			continue;
+		}
 
-	if (!GetStringFromRegistry(key, "CurrentVersion", version, sizeof(version))) {
-				fprintf(stderr, "Failed reading value of registry key:\n\t" JRE_KEY "\\CurrentVersion\n");
-		RegCloseKey(key);
-		return JNI_FALSE;
-	}
-/* currently don't require a minimum version...revisit-jkc
-	if (strcmp(version, DOTRELEASE) != 0) {
-		fprintf(stderr, "Registry key '" JRE_KEY "\\CurrentVersion'\nhas "
-				"value '%s', but '" DOTRELEASE "' is required.\n", version);
-		RegCloseKey(key);
-		return JNI_FALSE;
-	}
-*/
-	/* Find directory where the current version is installed. */
-	if (RegOpenKeyEx(key, version, 0, KEY_READ, &subkey) != 0) {
-				fprintf(stderr, "Error opening registry key '" JRE_KEY "\\%s'\n", version);
-		RegCloseKey(key);
-		return JNI_FALSE;
-	}
+		if (!GetStringFromRegistry(key, "CurrentVersion", version, sizeof(version))) {
+			if (debug) {
+				fprintf(stderr, "Failed reading value of registry key:\n\t%s\\CurrentVersion\n", *jrekey);
+			}
+			RegCloseKey(key);
+			jrekey++;
+			continue;
+		}
 
-	if (!GetStringFromRegistry(subkey, "JavaHome", buf, bufsize)) {
-				fprintf(stderr, "Failed reading value of registry key:\n\t" JRE_KEY "\\%s\\JavaHome\n", version);
+		/* Find directory where the current version is installed. */
+		if (RegOpenKeyEx(key, version, 0, KEY_READ, &subkey) != 0) {
+			if (debug) {
+				fprintf(stderr, "Error opening registry key '%s\\%s'\n", *jrekey, version);
+			}
+			RegCloseKey(key);
+			jrekey++;
+			continue;
+		}
+
+		if (!GetStringFromRegistry(subkey, "JavaHome", buf, bufsize)) {
+			if (debug) {
+				fprintf(stderr, "Failed reading value of registry key:\n\t%s\\%s\\JavaHome\n", *jrekey, version);
+			}
+			RegCloseKey(key);
+			RegCloseKey(subkey);
+			jrekey++;
+			continue;
+		}
+
+		if (debug) {
+			char micro[MAXPATHLEN];
+			if (!GetStringFromRegistry(subkey, "MicroVersion", micro, sizeof(micro))) {
+				ReportErrorMessage("Warning: Can't read MicroVersion\n", true);
+				micro[0] = '\0';
+			}
+			post("Version major.minor.micro = %s.%s\n", version, micro);
+		}
+
 		RegCloseKey(key);
 		RegCloseKey(subkey);
-		return JNI_FALSE;
+		return JNI_TRUE;
 	}
-
-	if (debug) {
-		char micro[MAXPATHLEN];
-				if (!GetStringFromRegistry(subkey, "MicroVersion", micro, sizeof(micro))) {
-						ReportErrorMessage("Warning: Can't read MicroVersion\n", true);
-			micro[0] = '\0';
-		}
-				post("Version major.minor.micro = %s.%s\n", version, micro);
-	}
-
-	RegCloseKey(key);
-	RegCloseKey(subkey);
-	return JNI_TRUE;
+	return JNI_FALSE;
 }
 
 /*
