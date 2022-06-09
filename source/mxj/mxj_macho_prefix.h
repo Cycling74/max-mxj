@@ -15,7 +15,7 @@
 #include "ext_path.h"
 
 #ifdef WIN_VERSION
-	#define MXJ_JNI_CREATE_JAVA_VM	g_ifn.CreateJavaVM
+	#define MXJ_JNI_CREATE_JAVA_VM	g_InvocationFunctions.CreateJavaVM
 #else
 	#define MXJ_JNI_CREATE_JAVA_VM	JNI_CreateJavaVM
 #endif

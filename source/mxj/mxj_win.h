@@ -41,8 +41,7 @@ long CreateExecutionEnvironment(
 					   char jrepath[],
 				       jint so_jrepath,
 				       char jvmpath[],
-				       jint so_jvmpath,
-				       char **_jvmtype);
+				       jint so_jvmpath);
 
 /*
  * Report an error message to stderr or a window as appropriate.  The

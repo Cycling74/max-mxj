@@ -185,14 +185,12 @@ void IVirtualMachine::startJava()
 
 void IVirtualMachine::startJVM()
 {
-
-
 #ifdef WIN_VERSION
 
 	// Find jvm dll lib path
 	_TCHAR * eclipseLibrary = findLib();
 
-	if(eclipseLibrary != NULL){
+	if (eclipseLibrary != NULL) {
 
 		//if we made it this far let's adjust the environment to fix for
 		// path problem issues any errors in this block we will simply not do the environment swap
@@ -205,25 +203,24 @@ void IVirtualMachine::startJVM()
 
 		pszOldVal = (LPTSTR) malloc(ENV_BUFSIZE*sizeof(TCHAR));
 
-		if(NULL == pszOldVal)
-		{
+		if (NULL == pszOldVal) {
 			// Logger::writeToLog("Out of memory for environment block swap");
-		}else{
+		}
+		else {
 			// Get path env
 			dwRet = GetEnvironmentVariable(VARNAME, pszOldVal, ENV_BUFSIZE);
 
-			if(dwRet == 0){
+			if (dwRet == 0) {
 				//variable doesn't exist
-
-			}else{
+			}
+			else {
 				//calculate the length of the updated path
 				string jvmLibPath(eclipseLibrary);
 				string newPath(jvmLibPath);
 				newPath.append(string(";"));
 				newPath.append(string(pszOldVal));
 
-				if (! SetEnvironmentVariable(VARNAME, newPath.data()))
-				{
+				if (!SetEnvironmentVariable(VARNAME, newPath.data())) {
 					logLastError(TEXT("SetEnvironmentVariable failed after adding jvm lib"));
 					//Logger::writeToLog("SetEnvironmentVariable failed");
 				}
@@ -232,18 +229,16 @@ void IVirtualMachine::startJVM()
 				//Logger::writeToLog(oldPath);
 
 			}
-
 			free(pszOldVal);
-
 		}
 
 		handle = LoadLibrary(eclipseLibrary);
-		if(handle == NULL){
+		if (handle == NULL) {
 			logLastError(TEXT("startJVM - loadlibrary call"));
 			return;
 		}
-
-	}else{
+	}
+	else {
 		return;
 	}
 
@@ -297,7 +292,6 @@ void IVirtualMachine::startJVM()
 
 	// launch the jvm
 	launchJVM();
-
 }
 
 
@@ -346,42 +340,43 @@ jstring IVirtualMachine::getSystemProperty(string propertyName)
 
 // Path to JRE found previously
 extern "C" {
-const char *getGlobal_jrepath();
-const char *getGlobal_jvmpath();
-const char *getGlobal_jvmtype();
+const char *getGlobal_JavaHomePath();
+const char *getGlobal_RuntimeLibPath();
 }
 
 /*
  * Find the VM shared library starting from the java executable
  */
 _TCHAR*	 IVirtualMachine::findLib() {
-
 	int	 j;
-
 	_TCHAR * path;				/* path to resulting jvm shared library */
 
 	// Did we found a JRE before ? embeded of system installed
-	const char *global_jvmpath = getGlobal_jvmpath();
-	if (global_jvmpath != NULL && *global_jvmpath != 0)
+	const char *global_RuntimeLibPath = getGlobal_RuntimeLibPath(); // if this isn't set, we have a problem
+	if (global_RuntimeLibPath != NULL && *global_RuntimeLibPath != 0)
 	{
-		size_t newsize = strlen(global_jvmpath) + 1;
+		size_t newsize = strlen(global_RuntimeLibPath) + 1;
 		path = new _TCHAR[newsize];
-		_tcscpy(path, A2T((char*)global_jvmpath));
+		_tcscpy(path, A2T((char*)global_RuntimeLibPath));
 		return path;
 	}
+	return NULL;
 
+#if 0
 	/* for looking in the registry */
 	HKEY jreKey = NULL;
 	DWORD length = MAX_PATH;
 	_TCHAR keyName[MAX_PATH];
 	_TCHAR * jreKeyNames[] = {
+		_T("SOFTWARE\\JavaSoft\\JDK"), // look for the new one first
+		_T("SOFTWARE\\JavaSoft\\Java Development Kit"),
 		_T("SOFTWARE\\JavaSoft\\JRE"), // look for the new one first
 		_T("Software\\JavaSoft\\Java Runtime Environment"),
 		0
 	};
 	_TCHAR **jreKeyName = jreKeyNames;
 
-	/* Not found yet, try the registry, we will use the first vm >= 1.4 */
+	/* Not found yet, try the registry, we will use the first vm >= 1.6 */
 	while (*jreKeyName) {
 		jreKey = NULL;
 		if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, *jreKeyName, 0, KEY_READ, &jreKey) == ERROR_SUCCESS) {
@@ -409,6 +404,7 @@ _TCHAR*	 IVirtualMachine::findLib() {
 		jreKeyName++;
 	}
 	return NULL;
+#endif
 }
 
 /*

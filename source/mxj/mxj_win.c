@@ -210,10 +210,8 @@ FreeKnownVMs()
 /*
  * Prototypes.
  */
-static jboolean GetPublicJREHome(char *path, jint pathsize);
-static jboolean GetJVMPath(const char *jrepath, const char *jvmtype,
-						   char *jvmpath, jint jvmpathsize);
-static jboolean GetJREPath(char *path, jint pathsize);
+static jboolean GetPublicJavaPaths(char *javaHomePath, jint javaHomePathSize, char *runtimeLibraryPath, jint runtimeLibraryPathSize);
+static jboolean GetJavaPaths(char *javaHomePath, jint javaHomePathSize, char *runtimeLibraryPath, jint runtimeLibraryPathSize);
 
 const char *
 GetArch()
@@ -267,37 +265,17 @@ CreateExecutionEnvironment(
 						   char jrepath[],
 						   jint so_jrepath,
 						   char jvmpath[],
-						   jint so_jvmpath,
-						   char **_jvmtype) {
+						   jint so_jvmpath) 
+{
 	struct stat s;
 
 	/* Find out where the JRE is that we will be using. */
-	if (!GetJREPath(jrepath, so_jrepath)) {
+	if (!GetJavaPaths(jrepath, so_jrepath, jvmpath, so_jvmpath)) {
 		ReportErrorMessage("could not find Java 2 Runtime Environment.",JNI_TRUE);
 		return 2;
 	}
 
-	/* Find the specified JVM type */
-	/*
-	 if (ReadKnownVMs(jrepath) < 1) {
-	 ReportErrorMessage("no known VMs. (check for corrupt jvm.cfg file)",
-	 JNI_TRUE);
-	 return 1;
-	 }
-	 *_jvmtype = knownVMs[0].name+1; //default. see launcher/java.c CheckJvmType()
-
-	 jvmpath[0] = '\0';
-	 if (!GetJVMPath(jrepath, *_jvmtype, jvmpath, so_jvmpath)) {
-	 char * message=NULL;
-
-	 const char * format = "Error: no `%s' JVM at `%s'.";
-	 message = (char *)malloc((strlen(format)+strlen(*_jvmtype)+
-	 strlen(jvmpath)) * sizeof(char));
-	 sprintf(message,format, *_jvmtype, jvmpath);
-	 ReportErrorMessage(message, JNI_TRUE);
-	 return 4;
-	 }jvmpath[0] = '\0';
-	 */
+#if 0
 	/* If we got here, jvmpath has been correctly initialized. */
 	// HACK...the above code is crashing when reading the config file.
 	// currently assuming we will load the following file. revisit. -jkc
@@ -314,9 +292,10 @@ CreateExecutionEnvironment(
 		*_jvmtype = _strdup("server");
 	}
 	else { *_jvmtype = _strdup("client"); }
+#endif
 
 	if (debug) {
-		post("Found "JVM_DLL" of type %s here: %s\n", *_jvmtype, jvmpath);
+		post("Found "JVM_DLL" here: %s\n", jvmpath);
 	}
 	return 0;
 }
@@ -326,28 +305,30 @@ CreateExecutionEnvironment(
  * or registry settings (installed in the computer programs)
  */
 jboolean
-GetJREPath(char *path, jint pathsize)
+GetJavaPaths(char *javaHomePath, jint javaHomePathSize, char *runtimeLibraryPath, jint runtimeLibraryPathSize)
 {
 	char javadll[MAXPATHLEN];
 	struct stat s;
 
-	if (GetApplicationHome(path, pathsize)) {
+	if (GetApplicationHome(javaHomePath, javaHomePathSize)) {
 		/* Is JRE co-located with the application? */
-		sprintf(javadll, "%s\\bin\\" JAVA_DLL, path);
+		sprintf(javadll, "%s\\bin\\" JAVA_DLL, javaHomePath);
 		if (stat(javadll, &s) == 0) {
+			strncpy_zero(runtimeLibraryPath, javadll, runtimeLibraryPathSize);
 			goto found;
 		}
 
 		/* Does this app ship a private JRE in <apphome>\jre directory? */
-		sprintf(javadll, "%s\\jre\\bin\\" JAVA_DLL, path);
+		sprintf(javadll, "%s\\jre\\bin\\" JAVA_DLL, javaHomePath);
 		if (stat(javadll, &s) == 0) {
-			strcat(path, "\\jre");
+			strcat(javaHomePath, "\\jre");
+			strncpy_zero(runtimeLibraryPath, javadll, runtimeLibraryPathSize);
 			goto found;
 		}
 	}
 
 	/* Look for a public JRE on this machine. */
-	if (GetPublicJREHome(path, pathsize)) {
+	if (GetPublicJavaPaths(javaHomePath, javaHomePathSize, runtimeLibraryPath, runtimeLibraryPathSize)) {
 		goto found;
 	}
 
@@ -356,30 +337,8 @@ GetJREPath(char *path, jint pathsize)
 
 found:
 	if (debug)
-		post("JRE path is %s\n", path);
+		post("JRE path is %s\n", javaHomePath);
 	return JNI_TRUE;
-}
-
-/*
- * Given a JRE location and a JVM type, construct what the name the
- * JVM shared library will be.	Return true, if such a library
- * exists, false otherwise.
- */
-static jboolean
-GetJVMPath(const char *jrepath, const char *jvmtype,
-		   char *jvmpath, jint jvmpathsize)
-{
-	struct stat s;
-	if (strchr(jvmtype, '/') || strchr(jvmtype, '\\')) {
-		sprintf(jvmpath, "%s\\" JVM_DLL, jvmtype);
-	} else {
-		sprintf(jvmpath, "%s\\bin\\%s\\" JVM_DLL, jrepath, jvmtype);
-	}
-	if (stat(jvmpath, &s) == 0) {
-		return JNI_TRUE;
-	} else {
-		return JNI_FALSE;
-	}
 }
 
 /*
@@ -456,16 +415,19 @@ GetStringFromRegistry(HKEY key, const char *name, char *buf, jint bufsize)
 }
 
 static const char* JRE_Keys[] = {
+	"SOFTWARE\\JavaSoft\\JDK", // look for the new one first
+	"SOFTWARE\\JavaSoft\\Java Development Kit",
 	"SOFTWARE\\JavaSoft\\JRE", // look for the new one first
-	"Software\\JavaSoft\\Java Runtime Environment",
+	"SOFTWARE\\JavaSoft\\Java Runtime Environment",
 	0
 };
 
 static jboolean
-GetPublicJREHome(char *buf, jint bufsize)
+GetPublicJavaPaths(char *javaHomePath, jint javaHomePathSize, char *runtimeLibraryPath, jint runtimeLibraryPathSize)
 {
 	HKEY key, subkey;
 	char version[MAXPATHLEN];
+	char rtlib[MAXPATHLEN];
 	const char **jrekey = JRE_Keys;
 
 	while (*jrekey) {
@@ -497,9 +459,21 @@ GetPublicJREHome(char *buf, jint bufsize)
 			continue;
 		}
 
-		if (!GetStringFromRegistry(subkey, "JavaHome", buf, bufsize)) {
+		if (!GetStringFromRegistry(subkey, "JavaHome", javaHomePath, javaHomePathSize)) {
 			if (debug) {
 				fprintf(stderr, "Failed reading value of registry key:\n\t%s\\%s\\JavaHome\n", *jrekey, version);
+			}
+			RegCloseKey(key);
+			RegCloseKey(subkey);
+			jrekey++;
+			continue;
+		}
+
+		// ensure that this path also contains a runtime dll, otherwise...
+		// TODO: should we search the javaHome for a runtime lib in this case if none is found?
+		if (!GetStringFromRegistry(subkey, "RuntimeLib", runtimeLibraryPath, runtimeLibraryPathSize)) {
+			if (debug) {
+				fprintf(stderr, "Failed reading value of registry key:\n\t%s\\%s\\RuntimeLib\n", *jrekey, version);
 			}
 			RegCloseKey(key);
 			RegCloseKey(subkey);
@@ -583,30 +557,24 @@ void PrintMachineDependentOptions() {
 	return;
 }
 
-
-
-
 // our stuff
 
-char g_jrepath[MAXPATHLEN], g_jvmpath[MAXPATHLEN];
-char *g_jvmtype=NULL;
-InvocationFunctions g_ifn;
+char g_JavaHomePath[MAXPATHLEN], g_RuntimeLibPath[MAXPATHLEN];
+InvocationFunctions g_InvocationFunctions;
 
-const char *getGlobal_jrepath() { return g_jrepath; }
-const char *getGlobal_jvmpath() { return g_jvmpath; }
-const char *getGlobal_jvmtype() { return g_jvmtype; }
+const char *getGlobal_JavaHomePath() { return g_JavaHomePath; }
+const char *getGlobal_RuntimeLibPath() { return g_RuntimeLibPath; }
 
 long mxj_platform_init()
 {
-	g_jrepath[0] = g_jvmpath[0] = 0;
-	g_jvmtype = NULL;
-	CreateExecutionEnvironment(g_jrepath, sizeof(g_jrepath), g_jvmpath, sizeof(g_jvmpath), &g_jvmtype);
-	g_ifn.CreateJavaVM = 0;
-	g_ifn.GetDefaultJavaVMInitArgs = 0;
+	g_JavaHomePath[0] = g_RuntimeLibPath[0] = 0;
+	CreateExecutionEnvironment(g_JavaHomePath, sizeof(g_JavaHomePath), g_RuntimeLibPath, sizeof(g_RuntimeLibPath));
+	g_InvocationFunctions.CreateJavaVM = 0;
+	g_InvocationFunctions.GetDefaultJavaVMInitArgs = 0;
 
-	AddJavaBinFolderToPath(g_jrepath);
+	AddJavaBinFolderToPath(g_JavaHomePath);
 
-	if (!LoadJavaVM(g_jvmpath, &g_ifn)) {
+	if (!LoadJavaVM(g_RuntimeLibPath, &g_InvocationFunctions)) {
 		return -1;
 	}
 	return 0;

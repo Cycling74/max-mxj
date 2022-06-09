@@ -81,7 +81,7 @@ bool awt_hack_required = false;
 #ifdef WIN_VERSION
 #include "mxj_win.h"
 
-extern InvocationFunctions g_ifn;
+extern InvocationFunctions g_InvocationFunctions;
 #endif
 
 // Debugging
