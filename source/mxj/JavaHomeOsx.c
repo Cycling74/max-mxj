@@ -109,10 +109,6 @@ static bool privateEmbeddedHomeDirectorySearched = false; // Search already done
 // (folder jre in max-mxj package)
 char *getEmbeddedHomeDirectory()
 {
-    //for osx we only look at embedded binaries for 64 bit
-#if !defined(__x86_64__)
-    return NULL;
-#else
     if (!privateEmbeddedHomeDirectorySearched) // Search embedded jre if not searched yet
     {
         privateEmbeddedHomeDirectorySearched = true;
@@ -161,7 +157,6 @@ char *getEmbeddedHomeDirectory()
         }
     }
     return privateEmbeddedHomeDirectory;
-#endif
 }
 
 
