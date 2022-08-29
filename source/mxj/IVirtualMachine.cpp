@@ -280,9 +280,10 @@ void IVirtualMachine::startJVM()
 	if(dylib!=NULL)
 	{
 
-		handle= dlopen(dylib,RTLD_NOW + RTLD_GLOBAL);
-		if(handle==NULL)
+		handle = dlopen(dylib, RTLD_NOW + RTLD_GLOBAL);
+		if (handle == NULL)
 		{
+			error("Cannot open dylib: %s", dlerror());
 			return;
 		}
 	}
