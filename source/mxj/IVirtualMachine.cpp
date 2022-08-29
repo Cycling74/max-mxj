@@ -254,9 +254,8 @@ void IVirtualMachine::startJVM()
 
 
 	char * baseDir = getJavaHome();
-	char * dylib = findLib(baseDir);
-	char * jli = getJavaJli();
-
+	char * dylib;
+	char * jli;
 
 	//we look to the environment for an embedded path
 	char * embeddedEnvironment = getenv("EMBEDDED_JVM_LIBRARY_PATH");
@@ -264,11 +263,14 @@ void IVirtualMachine::startJVM()
 
 	if(embeddedEnvironment!=NULL)
 		dylib = embeddedEnvironment;
+	else 
+		dylib = findLib(baseDir);
 
 	//embedded users must also provide the full path to the JLI library
 	if(embeddedJliEnvironment!=NULL)
 		jli = embeddedJliEnvironment;
-
+	else
+		jli = getJavaJli();
 
 	//the jvm can still launch if jli is not present
 	//in the case of Apple java 1.6 for example this will not result in a problem
