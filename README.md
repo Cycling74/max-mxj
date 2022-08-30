@@ -45,6 +45,8 @@ jre/Contents/Plugins
 jre/Contents/Resources
 jre/Contents/Frameworks
 
+If you want to use a zulu jre, you must extract its content to match the above structure.
+
 The JRE can be found here after installing a java internet plugin:
 "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/"
 Copy that folder and rename it "jre"
