@@ -105,6 +105,35 @@ static inline bool hasEnding(const char *fullString, const char *ending)
 static char *privateEmbeddedHomeDirectory        = NULL;
 static bool privateEmbeddedHomeDirectorySearched = false; // Search already done? avoid doing it several times
 
+/**
+ * @brief Get the Embedded Home Directory From Binary Path object
+ * @param mxjSuffix can be mxj mxj~ and mxj_safe objects
+ * @param fullName can be mxj mxj~ and mxj_safe objects binary path
+ * @param jreHomeToCheck jre path to check, should be either jre, or jre-x64 or jre-arm64
+ * @return char* directory found newly allocated (must be free later) or null
+ */
+char *getEmbeddedHomeDirectoryFromBinaryPath(const char *mxjSuffix, const char *fullName,const char * jreHomeToCheck)
+{
+    // Replace binary suffix in path by jre home relative path
+
+    const int maxxxLen = (int)(strlen(fullName) + strlen(jreHomeToCheck) + 1); // In case mxjSuffix is smaller than jreHome, take precautions
+    char      embeddedHome[maxxxLen];
+    memset(embeddedHome, 0, maxxxLen); // Clear it
+    // Set to fullName
+    strncpy(embeddedHome, fullName, maxxxLen - 1); // Keep last 0
+    // Remove mxj suffix
+    embeddedHome[strlen(fullName) - strlen(mxjSuffix)] = 0;
+    // Append jre home
+    strncat(embeddedHome, jreHomeToCheck, maxxxLen - 1); // Keep last 0
+
+    // Check for folder
+    if (fileExists(embeddedHome, true))
+    {
+        return strdup(embeddedHome);
+    }
+    return NULL;
+}
+
 // Function to retreive eventually the existence of embedded JRE home directory
 // (folder jre in max-mxj package)
 char *getEmbeddedHomeDirectory()
@@ -121,9 +150,6 @@ char *getEmbeddedHomeDirectory()
         {
             if (myPluginInfo.dli_fname != NULL)
             {
-                const char *jreHome = "jre/Contents/Home";
-
-                // Check all possible suffixes (call can be made from mxj, mxj~ and mxj_safe objects)
                 for (int q = 0; (mxjSuffixes[q] != NULL) && (privateEmbeddedHomeDirectory == NULL); ++q)
                 {
                     const char *mxjSuffix = mxjSuffixes[q];
@@ -132,22 +158,28 @@ char *getEmbeddedHomeDirectory()
                         const char *fullName = myPluginInfo.dli_fname; // Full binary path name
                         if (fullName != NULL)
                         {
-                            // Replace mxj suffix in path by jre home relative path
-
-                            const int maxxxLen = (int)(strlen(fullName) + strlen(jreHome) + 1); // In case mxjSuffix is smaller than jreHome, take precautions
-                            char      embeddedHome[maxxxLen];
-                            memset(embeddedHome, 0, maxxxLen); // Clear it
-                            // Set to fullName
-                            strncpy(embeddedHome, fullName, maxxxLen - 1); // Keep last 0
-                            // Remove mxj suffix
-                            embeddedHome[strlen(fullName) - strlen(mxjSuffix)] = 0;
-                            // Append jre home
-                            strncat(embeddedHome, jreHome, maxxxLen - 1); // Keep last 0
-
-                            // Check for folder
-                            if (fileExists(embeddedHome, true))
+                            char *res;
+                            // If a Universal jre exists or for a single architecture application, or Intel application under Rosetta
+                            res = getEmbeddedHomeDirectoryFromBinaryPath(mxjSuffix, fullName, "jre/Contents/Home");
+                            if (res==NULL)
                             {
-                                privateEmbeddedHomeDirectory = strdup(embeddedHome);
+                                // Mostly Java distribution are not universal so we have to embed both architectures separately
+                                // Use the same jre names as in open jdk downloads
+                                res = getEmbeddedHomeDirectoryFromBinaryPath(mxjSuffix, fullName, 
+                                #ifdef __x86_64__
+                                "jre/jre_x64/Contents/Home"
+                                #elif __aarch64__
+                                "jre/jre_aarch64/Contents/Home"
+                                #else
+                                // Should never happend, anyway it will cause a build error
+                                #endif
+                                );
+                            }
+
+                            //  Store result
+                            if (res!=NULL)
+                            {
+                                privateEmbeddedHomeDirectory = res;
                                 break;
                             }
                         }
