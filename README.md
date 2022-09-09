@@ -29,11 +29,20 @@ Use the badges above to go directly to the CI services.
 
 
 ## To build (Windows)
-Download the Windows x86 Java SE Development Kit 8 (from http://www.oracle.com and install it in the default location (C:\Program Files (x86)\Java). Rename 'C:\Program Files (x86)\Java\jdk1.8.0_xxx' to 'C:\Program Files (x86)\Java\jdk1.8.0'.
+Download the Windows x64 Java SE Development Kit 8 (from http://www.oracle.com and install it in the default location (C:\Program Files\Java).
 
 Download and install Cmake.
+Define variable JAVA_HOME with `rundll32.exe sysdm.cpl,EditEnvironmentVariables`
+* JAVA_HOME => "C:\Program Files\Java\jdk1.8.0_xxx"
 
-Build as on macOS.
+* after that, launch a new shell, then from max-mxj folder:
+* `mkdir build`
+* `cd build`
+* `set CUSTOM_FLAG="-DWIN64:Bool=True"`
+* `cmake -G "Visual Studio 15 2017 Win64" ..`  (update version according to your Visual studio version, Win64 is mandatory)
+* `cmake --build .` (or open the VS project in this build folder and build there)
+* `cmake --build . --config Release`
+
 
 ## MXJ rules for searching for Java:
 
