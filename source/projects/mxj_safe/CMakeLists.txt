@@ -11,7 +11,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/../../max-sdk-base/script/max-pretarget.cmak
 if (APPLE)
 	if (CMAKE_OSX_ARCHITECTURES STREQUAL "" 
 		OR CMAKE_OSX_ARCHITECTURES STREQUAL "i386")
-		set(CMAKE_OSX_ARCHITECTURES x86_64) # override the old max-api values permitting i386
+		set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64") # override the old max-api values permitting i386
 	endif ()
 	if (CMAKE_OSX_DEPLOYMENT_TARGET STREQUAL "")
 		set(CMAKE_OSX_DEPLOYMENT_TARGET 10.9)
