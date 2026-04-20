@@ -27,8 +27,8 @@ Download the Windows x86 Java SE Development Kit 8 (from http://www.oracle.com a
 Open the mxj or mxj~ project in Visual Studio 2013
 
 ## MXJ rules for searching for Java:
-On OSX, it searches in that order: embeded JRE, on system JDK, on system JRE
-The search for an embeded JRE is done in the application, in the folder MyApp.app/Contents/Resources/C74/packages/max-mxj/jre
+On OSX, it searches in that order: embedded JRE, on system JDK, on system JRE
+The search for an embedded JRE is done in the application, in the folder MyApp.app/Contents/Resources/C74/packages/max-mxj/jre
 The JRE must have the structure :
 jre/Contents/Home
 jre/Contents/MacOS
@@ -40,6 +40,6 @@ The JRE can be found here after installing a java internet plugin:
 "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/"
 Copy that folder and rename it "jre"
 
-On Windows, it searches in that order: embeded JRE, on system JDK, on system JRE
-The search for an embeded JRE is done in the application, it must be a folder named "jre" placed in the same folder as the application .exe 
+On Windows, it searches in that order: embedded JRE, on system JDK, on system JRE
+The search for an embedded JRE is done in the application, it must be a folder named "jre" placed in the same folder as the application .exe 
 
